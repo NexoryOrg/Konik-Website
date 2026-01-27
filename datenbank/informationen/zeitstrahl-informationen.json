@@ -1,0 +1,26 @@
+[
+    {
+        "year": "20. Mai 2020",
+        "title": "Projekt Konik-Pferde",
+        "desc": "Die ersten 3 Pferde (Helinga, Tek, Bernadin) haben den Nationalpark Schwarzwald erreicht und starten ein tolles Leben.",
+        "img": "datenbank/bilder/pferde/start-projekt.jpg"
+    },
+    {
+        "year": "24. Mai 2020",
+        "title": "Erstes Fohlen geboren",
+        "desc": "Das alle erste Fohlen Ronda genannt, der Herde im Nationalpark ist auf die Welt gekommen.",
+        "img": "datenbank/bilder/pferde/ronda.jpg"
+    },
+    {
+        "year": "24. Mai 2020",
+        "title": "\"Die Kleine\" auf der Welt",
+        "desc": "Das 2 Fohlen Brundhilde durfte das Licht der Welt erblicken.",
+        "img": "datenbank/bilder/pferde/brunhilde.jpg"
+    },
+    {
+        "year": "05. April 2022",
+        "title": "Nächstes Fohlen",
+        "desc": "2 Jahre später durfte schon ein weiteres Fohlen ,mit dem Namen Buran, durfte der Herde beitretten.",
+        "img": "datenbank/bilder/pferde/buran.jpg"
+    }
+]
