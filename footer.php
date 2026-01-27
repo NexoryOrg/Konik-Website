@@ -3,11 +3,11 @@
         <div class="footer-content">
 
             <div class="wrapper">
-                <a href="#" class="icon-footer instagram" aria-label="Instagram">
+                <a href="https://www.instagram.com/" class="icon-footer instagram" aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                     <span class="tooltip">Instagram</span>
                 </a>
-                <a href="#" class="icon-footer facebook" aria-label="Facebook">
+                <a href="https://www.facebook.com/" class="icon-footer facebook" aria-label="Facebook">
                     <i class="fa-brands fa-facebook-f"></i>
                     <span class="tooltip">Facebook</span>
                 </a>

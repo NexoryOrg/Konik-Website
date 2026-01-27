@@ -40,14 +40,14 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    color: white;
-    color: rgba(255, 255,255, 0.6);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255,255, 0.8);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .hero-overlay h1 {
     font-size: 4rem;
     margin: 0;
+    text-decoration: underline;
 }
 
 .hero-overlay p {
@@ -56,6 +56,7 @@ body {
 }
 
 .text-section {
+    width: 100%;
     max-width: 800px;
     margin: 40px auto;
     text-align: center;
@@ -70,6 +71,48 @@ body {
     margin-bottom: 20px;
 }
 
+.scroll-hint {
+     position: fixed;
+     bottom: 24px;
+    right: 24px;
+    z-index: 999;
+     transform: scale(1.25);
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+
+     opacity: 0.75;
+     pointer-events: none;
+
+     transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.scroll-hint.wiggle .arrow {
+     animation: wiggle 0.6s ease;
+}
+
+.scroll-hint.hidden {
+     opacity: 0;
+    transform: translateY(10px);
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+@keyframes wiggle {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(4px); }
+    60%  { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+}
+
 .info-button {
     padding: 12px 24px;
     background: var(--button-farbe);
@@ -82,4 +125,52 @@ body {
 .info-button:hover {
     transform: scale(1.075);
     background: var(--buttonhoverfarbe);
+}
+
+.überschrift-h2 {
+    text-align: center;
+    font-size: 2rem;
+    text-decoration: underline;
+    text-decoration-color: var(--wichtige-textfarbe);
+    margin-bottom: 1rem;
+}
+
+.map-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    font-family: 'Arial', sans-serif;
+}
+
+#map-placeholder {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+}
+
+#map-placeholder button {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: var(--button-farbe);
+    color: var(--textfarbe);
+    transition: all 0.3s ease;
+}
+
+#map-placeholder button:hover {
+    transform: scale(1.075);
+    background: var(--buttonhoverfarbe);
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 15px;
 }
