@@ -1,0 +1,38 @@
+[Wed Jan 28 19:09:47 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 19:09:55 2026] 127.0.0.1:45122 Accepted
+[Wed Jan 28 19:09:55 2026] 127.0.0.1:45134 Accepted
+[Wed Jan 28 19:09:55 2026] 127.0.0.1:45122 [200]: GET /galerie.php
+[Wed Jan 28 19:09:55 2026] 127.0.0.1:45122 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45134 [200]: GET /stil/galerie.css
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45134 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45144 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45144 [200]: GET /stil/navbar.css
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45144 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45160 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45164 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45168 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45180 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45160 [200]: GET /stil/footer.css
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45160 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45164 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45164 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45168 [200]: GET /funktionen/navbar.js
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45168 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45180 [200]: GET /funktionen/galerie.js
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:45180 Closing
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:33388 Accepted
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:33388 [200]: GET /datenbank/informationen/galerie-informationen.json
+[Wed Jan 28 19:09:56 2026] 127.0.0.1:33388 Closing
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33404 Accepted
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33404 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33404 Closing
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33420 Accepted
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33432 Accepted
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33440 Accepted
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33452 Accepted
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33420 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33420 Closing
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33432 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33432 Closing
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33440 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Jan 28 19:09:57 2026] 127.0.0.1:33440 Closing

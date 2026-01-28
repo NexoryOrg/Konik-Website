@@ -1,0 +1,36 @@
+[
+  {
+    "jahr": 2023,
+    "bilder": [
+      {"src": "datenbank/bilder/pferde/brunhilde.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"}
+    ]
+  },
+  {
+    "jahr": 2024,
+    "bilder": [
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/buran.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/ronda.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"},
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"}
+    ]
+  },
+  {
+    "jahr": 2025,
+    "bilder": [
+      {"src": "datenbank/bilder/pferde/start-projekt.jpg", "alt": "Beschreibung"}
+    ]
+  }
+]

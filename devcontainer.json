@@ -2,5 +2,5 @@
   "name": "PHP Codespace",
   "image": "mcr.microsoft.com/devcontainers/php:8.2",
   "forwardPorts": [8000],
-  "postStartCommand": "php -S 0.0.0.0:8000"
+  "postStartCommand": "bash start-dev.sh"
 }
