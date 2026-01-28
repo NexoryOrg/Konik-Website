@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="stil/galerie.css">
-    <link rel="stylesheet" href="stil/navbar.css">
-    <link rel="stylesheet" href="stil/footer.css">
-</head>
-<body>
+        <link rel="stylesheet" href="stil/galerie.css">
+        <link rel="stylesheet" href="stil/navbar.css">
+        <link rel="stylesheet" href="stil/footer.css">
+    </head>
+    <body>
 
-    <?php include 'navbar.php'; ?>
+        <?php include 'navbar.php'; ?>
 
-    <div class="galerie-container">
-        <div class="galerie"></div>
-    </div>
+        <div class="galerie-container">
+            <div class="galerie"></div>
+        </div>
 
-    <div class="lightbox" id="lightbox">
-        <span class="close" id="lightbox-close">&times;</span>
-        <img src="" alt="Lightbox Bild" id="lightbox-img">
-    </div>
+        <div class="lightbox" id="lightbox">
+            <span class="close" id="lightbox-close">&times;</span>
 
-    <?php include 'footer.php'; ?>
+            <div class="lightbox-info">
+                <span id="lightbox-jahr"></span>
+                <span id="lightbox-alt"></span>
+            </div>
 
-    <script src="funktionen/galerie.js"></script>
-</body>
+            <div class="lightbox-nav">
+                <div class="nav-left"></div>
+                <img src="" alt="" id="lightbox-img">
+                <div class="nav-right"></div>
+            </div>
+        </div>
+
+        <?php include 'footer.php'; ?>
+
+        <script src="funktionen/galerie.js"></script>
+    </body>
 </html>
