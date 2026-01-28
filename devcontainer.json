@@ -1,6 +1,19 @@
 {
-  "name": "PHP Codespace",
-  "image": "mcr.microsoft.com/devcontainers/php:8.2",
-  "forwardPorts": [8000],
-  "postStartCommand": "bash start-dev.sh"
+    "name": "PHP Codespace",
+    "image": "mcr.microsoft.com/devcontainers/php:8.2-bullseye",
+    "forwardPorts": [8000],
+    "postStartCommand": "bash start-dev.sh",
+    "features": {
+        "ghcr.io/devcontainers/features/mysql:1": {
+            "version": "8.0"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "felixfbecker.php-debug",
+                "bmewburn.vscode-intelephense-client"
+            ]
+        }
+    }
 }

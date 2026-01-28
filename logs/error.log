@@ -36,3 +36,292 @@
 [Wed Jan 28 19:09:57 2026] 127.0.0.1:33432 Closing
 [Wed Jan 28 19:09:57 2026] 127.0.0.1:33440 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
 [Wed Jan 28 19:09:57 2026] 127.0.0.1:33440 Closing
+[Wed Jan 28 19:15:30 2026] 127.0.0.1:33452 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:15:30 2026] 127.0.0.1:33452 Closing
+[Wed Jan 28 19:19:15 2026] 127.0.0.1:60536 Accepted
+[Wed Jan 28 19:19:15 2026] 127.0.0.1:60544 Accepted
+could not find driver[Wed Jan 28 19:19:15 2026] 127.0.0.1:60536 [200]: GET /mysql_db.php
+[Wed Jan 28 19:19:15 2026] 127.0.0.1:60536 Closing
+[Wed Jan 28 19:19:15 2026] 127.0.0.1:60558 Accepted
+[Wed Jan 28 19:22:12 2026] 127.0.0.1:60544 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:22:12 2026] 127.0.0.1:60544 Closing
+[Wed Jan 28 19:22:12 2026] 127.0.0.1:60558 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:22:12 2026] 127.0.0.1:60558 Closing
+[Wed Jan 28 19:24:47 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 19:24:54 2026] 127.0.0.1:48304 Accepted
+[Wed Jan 28 19:24:54 2026] 127.0.0.1:48306 Accepted
+could not find driver[Wed Jan 28 19:24:54 2026] 127.0.0.1:48304 [200]: GET /mysql_db.php
+[Wed Jan 28 19:24:54 2026] 127.0.0.1:48304 Closing
+[Wed Jan 28 19:24:54 2026] 127.0.0.1:48320 Accepted
+[Wed Jan 28 19:28:06 2026] 127.0.0.1:48306 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:28:06 2026] 127.0.0.1:48306 Closing
+[Wed Jan 28 19:28:06 2026] 127.0.0.1:48320 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:28:06 2026] 127.0.0.1:48320 Closing
+[Wed Jan 28 19:28:07 2026] 127.0.0.1:41844 Accepted
+[Wed Jan 28 19:28:07 2026] 127.0.0.1:41852 Accepted
+could not find driver[Wed Jan 28 19:28:07 2026] 127.0.0.1:41844 [200]: GET /mysql_db.php
+[Wed Jan 28 19:28:07 2026] 127.0.0.1:41844 Closing
+[Wed Jan 28 19:28:07 2026] 127.0.0.1:41862 Accepted
+could not find driver[Wed Jan 28 19:28:08 2026] 127.0.0.1:41852 [200]: GET /mysql_db.php
+[Wed Jan 28 19:28:08 2026] 127.0.0.1:41852 Closing
+could not find driver[Wed Jan 28 19:28:09 2026] 127.0.0.1:41862 [200]: GET /mysql_db.php
+[Wed Jan 28 19:28:09 2026] 127.0.0.1:41862 Closing
+[Wed Jan 28 19:28:09 2026] 127.0.0.1:41874 Accepted
+[Wed Jan 28 19:33:42 2026] 127.0.0.1:41874 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:33:42 2026] 127.0.0.1:41874 Closing
+[Wed Jan 28 19:36:57 2026] 127.0.0.1:33172 Accepted
+[Wed Jan 28 19:36:57 2026] 127.0.0.1:33176 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33172 [200]: GET /index.php
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33172 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33176 [200]: GET /stil/index.css
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33176 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33192 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33192 [200]: GET /stil/navbar.css
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33192 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33208 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33216 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33226 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33242 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33246 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33208 [200]: GET /stil/footer.css
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33208 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33216 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33216 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33226 [200]: GET /funktionen/navbar.js
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33226 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33242 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33242 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33246 [200]: GET /funktionen/index.js
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33246 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33248 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33256 Accepted
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33248 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33248 Closing
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33256 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Jan 28 19:36:58 2026] 127.0.0.1:33256 Closing
+[Wed Jan 28 19:36:59 2026] 127.0.0.1:33266 Accepted
+[Wed Jan 28 19:37:10 2026] 127.0.0.1:33266 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Jan 28 19:37:10 2026] 127.0.0.1:33266 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56236 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56236 [200]: GET /galerie.php
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56236 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56250 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56250 [200]: GET /stil/galerie.css
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56250 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56256 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56256 [200]: GET /stil/navbar.css
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56256 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56268 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56270 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56278 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56290 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56268 [200]: GET /stil/footer.css
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56268 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56270 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56270 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56278 [200]: GET /funktionen/galerie.js
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56278 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56290 [200]: GET /funktionen/navbar.js
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56290 Closing
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56292 Accepted
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56292 [200]: GET /datenbank/informationen/galerie-informationen.json
+[Wed Jan 28 19:37:18 2026] 127.0.0.1:56292 Closing
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56300 Accepted
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56300 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56300 Closing
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56304 Accepted
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56314 Accepted
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56328 Accepted
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56344 Accepted
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56304 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56304 Closing
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56314 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56314 Closing
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56328 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Wed Jan 28 19:37:19 2026] 127.0.0.1:56328 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:56344 [200]: GET /index.php
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:56344 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57324 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57324 [200]: GET /stil/index.css
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57324 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57338 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57342 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57352 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57366 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57368 Accepted
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57338 [200]: GET /stil/navbar.css
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57338 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57342 [200]: GET /stil/footer.css
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57342 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57352 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57352 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57366 [200]: GET /funktionen/navbar.js
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57366 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57368 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57368 Closing
+[Wed Jan 28 19:37:43 2026] 127.0.0.1:57374 Accepted
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57374 [200]: GET /funktionen/index.js
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57374 Closing
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57382 Accepted
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57392 Accepted
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57382 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57382 Closing
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57392 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Jan 28 19:37:44 2026] 127.0.0.1:57392 Closing
+[Wed Jan 28 19:37:53 2026] 127.0.0.1:59358 Accepted
+[Wed Jan 28 19:37:53 2026] 127.0.0.1:59358 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Jan 28 19:37:53 2026] 127.0.0.1:59358 Closing
+[Wed Jan 28 19:37:53 2026] 127.0.0.1:59374 Accepted
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:59374 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:59374 Closing
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:47284 Accepted
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:47290 Accepted
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:47284 [200]: GET /mysql_db.php
+[Wed Jan 28 19:39:15 2026] 127.0.0.1:47284 Closing
+[Wed Jan 28 19:39:16 2026] 127.0.0.1:47300 Accepted
+[Wed Jan 28 19:40:15 2026] Failed to listen on 0.0.0.0:8000 (reason: Address already in use)
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:47290 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:47290 Closing
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:47300 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:47300 Closing
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:56538 Accepted
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:56552 Accepted
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:56538 [200]: GET /mysql_db.php
+[Wed Jan 28 19:40:23 2026] 127.0.0.1:56538 Closing
+[Wed Jan 28 19:40:24 2026] 127.0.0.1:56568 Accepted
+[Wed Jan 28 19:42:42 2026] 127.0.0.1:56568 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:42:42 2026] 127.0.0.1:56568 Closing
+[Wed Jan 28 19:42:42 2026] 127.0.0.1:56552 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 19:42:42 2026] 127.0.0.1:56552 Closing
+[Wed Jan 28 20:48:10 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 20:48:14 2026] 127.0.0.1:41840 Accepted
+[Wed Jan 28 20:48:14 2026] 127.0.0.1:41842 Accepted
+[Wed Jan 28 20:48:14 2026] 127.0.0.1:41840 [200]: GET /mysql_db.php
+[Wed Jan 28 20:48:14 2026] 127.0.0.1:41840 Closing
+[Wed Jan 28 20:48:14 2026] 127.0.0.1:41858 Accepted
+[Wed Jan 28 20:49:59 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 20:50:01 2026] 127.0.0.1:49032 Accepted
+[Wed Jan 28 20:50:01 2026] 127.0.0.1:49048 Accepted
+[Wed Jan 28 20:50:01 2026] 127.0.0.1:49032 [200]: GET /mysql_db.php
+[Wed Jan 28 20:50:01 2026] 127.0.0.1:49032 Closing
+[Wed Jan 28 20:50:02 2026] 127.0.0.1:49052 Accepted
+[Wed Jan 28 20:50:22 2026] 127.0.0.1:49048 [200]: GET /mysql_db.php
+[Wed Jan 28 20:50:22 2026] 127.0.0.1:49048 Closing
+[Wed Jan 28 20:52:49 2026] 127.0.0.1:49052 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 20:52:49 2026] 127.0.0.1:49052 Closing
+[Wed Jan 28 22:37:30 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58190 Accepted
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58196 Accepted
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58190 [200]: GET /
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58190 Closing
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58196 [200]: GET /stil/index.css
+[Wed Jan 28 22:37:31 2026] 127.0.0.1:58196 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58198 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58198 [200]: GET /stil/navbar.css
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58198 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58212 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58214 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58222 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58234 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58250 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58212 [200]: GET /stil/footer.css
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58212 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58214 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58214 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58222 [200]: GET /funktionen/navbar.js
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58222 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58234 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58234 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58250 [200]: GET /funktionen/index.js
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58250 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58258 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58266 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58258 [404]: GET /favicon.ico - No such file or directory
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58258 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58266 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:58266 Closing
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:45564 Accepted
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:45564 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Jan 28 22:37:32 2026] 127.0.0.1:45564 Closing
+[Wed Jan 28 22:37:33 2026] 127.0.0.1:45576 Accepted
+[Wed Jan 28 22:37:38 2026] 127.0.0.1:45576 [200]: GET /mysql_db.php
+[Wed Jan 28 22:37:38 2026] 127.0.0.1:45576 Closing
+[Wed Jan 28 22:37:39 2026] 127.0.0.1:45580 Accepted
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:45580 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:45580 Closing
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:43004 Accepted
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:43010 Accepted
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:43004 [200]: GET /mysql_db.php
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:43004 Closing
+[Wed Jan 28 22:43:01 2026] 127.0.0.1:43014 Accepted
+[Wed Jan 28 22:43:47 2026] 127.0.0.1:43010 [200]: GET /mysql_db.php
+[Wed Jan 28 22:43:47 2026] 127.0.0.1:43010 Closing
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:43014 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:43014 Closing
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:46590 Accepted
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:46596 Accepted
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:46590 [200]: GET /mysql_db.php
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:46590 Closing
+[Wed Jan 28 22:44:02 2026] 127.0.0.1:60146 Accepted
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:60146 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:60146 Closing
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:46596 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:46596 Closing
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:47532 Accepted
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:47538 Accepted
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:47532 [200]: GET /mysql_db.php
+[Wed Jan 28 22:49:40 2026] 127.0.0.1:47532 Closing
+[Wed Jan 28 22:49:41 2026] 127.0.0.1:47550 Accepted
+[Wed Jan 28 22:51:01 2026] 127.0.0.1:47538 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:51:01 2026] 127.0.0.1:47538 Closing
+[Wed Jan 28 22:51:01 2026] 127.0.0.1:47550 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:51:01 2026] 127.0.0.1:47550 Closing
+[Wed Jan 28 22:51:02 2026] 127.0.0.1:43232 Accepted
+[Wed Jan 28 22:51:02 2026] 127.0.0.1:43244 Accepted
+[Wed Jan 28 22:51:02 2026] 127.0.0.1:43232 [200]: GET /mysql_db.php
+[Wed Jan 28 22:51:02 2026] 127.0.0.1:43232 Closing
+[Wed Jan 28 22:51:02 2026] 127.0.0.1:43256 Accepted
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:43244 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:43244 Closing
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:43256 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:43256 Closing
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:40948 Accepted
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:40960 Accepted
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:40948 [200]: GET /mysql_db.php
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:40948 Closing
+[Wed Jan 28 22:52:10 2026] 127.0.0.1:40970 Accepted
+[Wed Jan 28 22:52:21 2026] 127.0.0.1:40960 [200]: GET /mysql_db.php
+[Wed Jan 28 22:52:21 2026] 127.0.0.1:40960 Closing
+[Wed Jan 28 22:52:49 2026] 127.0.0.1:40970 [200]: GET /mysql_db.php
+[Wed Jan 28 22:52:49 2026] 127.0.0.1:40970 Closing
+[Wed Jan 28 22:52:49 2026] 127.0.0.1:41800 Accepted
+[Wed Jan 28 22:54:18 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 22:57:40 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 22:57:42 2026] 127.0.0.1:54312 Accepted
+[Wed Jan 28 22:57:42 2026] 127.0.0.1:54326 Accepted
+[Wed Jan 28 22:57:42 2026] 127.0.0.1:54312 [200]: GET /mysql_db.php
+[Wed Jan 28 22:57:42 2026] 127.0.0.1:54312 Closing
+[Wed Jan 28 22:57:43 2026] 127.0.0.1:54334 Accepted
+[Wed Jan 28 22:59:18 2026] 127.0.0.1:54334 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:59:18 2026] 127.0.0.1:54334 Closing
+[Wed Jan 28 22:59:18 2026] 127.0.0.1:54326 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 22:59:18 2026] 127.0.0.1:54326 Closing
+[Wed Jan 28 22:59:19 2026] 127.0.0.1:36338 Accepted
+[Wed Jan 28 22:59:19 2026] 127.0.0.1:36344 Accepted
+[Wed Jan 28 22:59:19 2026] 127.0.0.1:36338 [200]: GET /mysql_db.php
+[Wed Jan 28 22:59:19 2026] 127.0.0.1:36338 Closing
+[Wed Jan 28 22:59:19 2026] 127.0.0.1:36352 Accepted
+[Wed Jan 28 23:00:50 2026] 127.0.0.1:36344 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 23:00:50 2026] 127.0.0.1:36344 Closing
+[Wed Jan 28 23:00:50 2026] 127.0.0.1:36352 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 23:00:50 2026] 127.0.0.1:36352 Closing
+[Wed Jan 28 23:07:49 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Wed Jan 28 23:07:51 2026] 127.0.0.1:41434 Accepted
+[Wed Jan 28 23:07:51 2026] 127.0.0.1:41438 Accepted
+[Wed Jan 28 23:07:51 2026] 127.0.0.1:41434 [200]: GET /mysql_db.php
+[Wed Jan 28 23:07:51 2026] 127.0.0.1:41434 Closing
+[Wed Jan 28 23:07:51 2026] 127.0.0.1:41446 Accepted
+[Wed Jan 28 23:10:30 2026] 127.0.0.1:41446 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 23:10:30 2026] 127.0.0.1:41446 Closing
+[Wed Jan 28 23:10:30 2026] 127.0.0.1:41438 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Jan 28 23:10:30 2026] 127.0.0.1:41438 Closing
