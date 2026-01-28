@@ -22,13 +22,12 @@ session_start();
         </div>
         <div class="scroll-hint" id="scrollHint">
             <span class="text">Scroll</span>
-
             <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M12 5v14M12 19l-6-6M12 19l6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
             </svg>
         </div>
     </section>
@@ -36,8 +35,24 @@ session_start();
     <section>
         <h2 class="überschrift-h2">Informationen zu den Koniks</h2>
         <section class="text-section">
-            <p>Wildpferde an der Schwarzwald-Hochstraße</p>
-            <p><a href="zeitstrahl.php" class="info-button">Mehr Infos</a></p>
+            <div class="info-box">
+                <p>Im Nationalpark Schwarzwald werden seit einigen Jahren Konik-Pferde eingesetzt, um die offenen Bergweiden, die sogenannten Grinden, zu pflegen. Diese Grinden sind einzigartige Lebensräume hoch über dem Wald, die ohne Beweidung allmählich zuwachsen würden. Die robusten Tiere stammen aus Polen und sind eine ursprüngliche Pferderasse, in die noch Gene der ehemaligen Wildpferde (Tarpane) eingekreuzt wurden – daher ähneln sie stark den früher auch hier lebenden Wildpferden.</p>
+            </div>
+            <div class="info-box">
+                <h3>Lebensraum</h3>
+                <p>Die Koniks leben auf den höheren, offenen Heide- und Grasflächen im Nordschwarzwald, etwa rund um Zollstock/Hilseneck und in der Nähe des Schliffkopfs. Diese Grinden sind aufgrund ihrer speziellen Pflanzenwelt wichtig für viele seltene Tiere und Pflanzen. Ihre Beweidung hilft, die Flächen offen und vielfältig zu halten.</p>
+                <img class="lightbox-img" src="datenbank/bilder/pferde/start-projekt.jpg" alt="Der Lebensraum der Pferde" loading="lazy">
+            </div>
+            <div class="info-box">
+                <h3>Verhalten</h3>
+                <p>Koniks sind genügsam und anpassungsfähig. Sie leben meist in Herden mit einer Leitstute, sie grasen viel und verschieden – das heißt, sie fressen Gräser, Kräuter und auch Rinden oder junge Triebe. Durch ihr Fressverhalten tragen sie zur Strukturvielfalt der Vegetation bei, was wiederum anderen Arten zugutekommt, zum Beispiel Insekten, Vögeln oder Reptilien. Auch ihr Kot fördert den Nährstoffkreislauf und unterstützt Dung-organismen wie Käfer, was zusätzliche Nahrung für Vögel schafft.</p>
+                <img class="lightbox-img" src="datenbank/bilder/pferde/buran.jpg" alt="Verhalten der Koniks" loading="lazy">
+            </div>
+            <div class="info-box">
+                <h3>Schutz und Pflege</h3>
+                <p>Obwohl die Pferde wild wirken, werden sie regelmäßig betreut: Verantwortliche im Nationalpark überwachen ihre Gesundheit, kümmern sich um Hufpflege und steuern die Beweidungsdauer. Die Tiere gehören dem Zoo Karlsruhe, der eng mit dem Nationalpark zusammenarbeitet. Wichtig ist auch das richtige Zusammenleben mit Menschen: Besucherinnen und Besucher sollen Abstand halten, die Tiere nicht füttern oder stören, damit sie natürlich leben können</p>
+                <img class="lightbox-img" src="datenbank/bilder/pferde/brunhilde.jpg" alt="Schutz und Pflege der Pferde" loading="lazy">
+            </div>
         </section>
     </section>
 
@@ -51,6 +66,15 @@ session_start();
         </div>
     </section>
 
+    <div id="lightbox">
+        <button class="nav prev" aria-label="Vorheriges Bild">&#10094;</button>
+        <figure>
+            <img id="lightbox-img" alt="">
+            <figcaption id="caption"></figcaption>
+        </figure>
+        <button class="nav next" aria-label="Nächstes Bild">&#10095;</button>
+        <span id="close" aria-label="Schließen">&times;</span>
+    </div>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
