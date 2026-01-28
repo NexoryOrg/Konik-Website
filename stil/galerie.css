@@ -1,0 +1,92 @@
+:root {
+    --textfarbe: #e0e0e0;
+    --wichtige-textfarbe: #3274ED;
+    --kleiner-textfarbe: #333;
+    --button-farbe: #3274ED;
+    --buttonhoverfarbe: #6999F2;
+    --hintergrundfarbe: #1a1a1a;
+    --rahmenfarbe: #afababb4;
+    --kartenhintergrund: #2e2c2c;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--hintergrundfarbe);
+    margin: 0;
+    padding: 0;
+    color: var(--textfarbe);
+}
+
+.galerie-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.galerie {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.jahr-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--button-farbe);
+}
+
+.jahr-section .bilder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.jahr-section img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.jahr-section img:hover {
+    transform: scale(1.05);
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}

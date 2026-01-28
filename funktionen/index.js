@@ -1,11 +1,9 @@
-// Parallax Hero
 const hero = document.querySelector('.hero img');
 window.addEventListener('scroll', () => {
     const offset = window.scrollY;
     hero.style.transform = `translateY(${offset * 0.3}px)`;
 });
 
-// Scroll Hint
 const hint = document.getElementById('scrollHint');
 hint.addEventListener('click', () => {
     document.querySelector('.text-section').scrollIntoView({ behavior: 'smooth' });
@@ -21,7 +19,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Fade-in Info Boxes
 const boxes = document.querySelectorAll('.info-box');
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -29,8 +26,6 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.3 });
 boxes.forEach(box => observer.observe(box));
-
-// Map
 document.getElementById("load-map").addEventListener("click", function() {
     const mapDiv = document.getElementById("map");
     const placeholder = document.getElementById("map-placeholder");
@@ -47,7 +42,6 @@ document.getElementById("load-map").addEventListener("click", function() {
     map.flyTo([48.5606575, 8.2220008], 16, { duration: 2 });
 });
 
-// Lightbox mit Slide
 const images = document.querySelectorAll(".lightbox-img");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
