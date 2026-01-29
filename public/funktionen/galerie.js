@@ -13,9 +13,12 @@ fetch("datenbank/informationen/galerie-informationen.json")
 .then(res => res.json())
 .then(data => {
     const galerie = document.querySelector('.galerie');
+    const zeitstrahl = document.querySelector('.zeitstrahl');
+
     data.sort((a,b)=> b.jahr - a.jahr);
 
-    data.forEach(jahrData => {
+    data.forEach((jahrData, jahrIndex) => {
+        // --- Galerie-Sektion ---
         const section = document.createElement("div");
         section.className = "jahr-section";
         section.innerHTML = `<h2>${jahrData.jahr}</h2><div class="bilder"></div>`;
@@ -41,6 +44,29 @@ fetch("datenbank/informationen/galerie-informationen.json")
         });
 
         galerie.appendChild(section);
+
+        const punkt = document.createElement("div");
+        punkt.className = "zeitpunkt";
+        punkt.innerHTML = `<span>${jahrData.jahr}</span>`;
+
+        punkt.addEventListener("click", () => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        zeitstrahl.appendChild(punkt);
+    });
+
+    const jahreSections = document.querySelectorAll('.jahr-section');
+    const punkte = document.querySelectorAll('.zeitpunkt');
+
+    window.addEventListener('scroll', () => {
+        let index = 0;
+        jahreSections.forEach((section, i) => {
+            const top = section.getBoundingClientRect().top;
+            if(top < window.innerHeight / 2) index = i;
+        });
+        punkte.forEach(p => p.classList.remove('active'));
+        punkte[index].classList.add('active');
     });
 });
 

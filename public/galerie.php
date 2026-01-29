@@ -13,7 +13,12 @@
         <?php include 'navbar.php'; ?>
 
         <div class="galerie-container">
-            <div class="galerie"></div>
+            <div class="zeitstrahl-box">
+                <div class="zeitstrahl"></div>
+            </div>
+            <div class="galerie-box">
+                <div class="galerie"></div>
+            </div>
         </div>
 
         <div class="lightbox" id="lightbox">

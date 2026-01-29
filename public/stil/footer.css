@@ -88,7 +88,7 @@
     color: var(--kleiner-textfarbe);
 }
 
-.footer-dark a.datenschutz {
+.footer-dark a.link {
     position: relative;
     background-color: var(--hintergrundfarbe);
     color: var(--kleiner-textfarbe);
