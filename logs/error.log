@@ -254,3 +254,676 @@ start-dev.sh: line 39: php8.3: command not found
 [Thu Jan 29 09:56:24 2026] 127.0.0.1:51116 [200]: GET /mysql_db.php
 [Thu Jan 29 09:56:24 2026] 127.0.0.1:51116 Closing
 [Thu Jan 29 09:56:25 2026] 127.0.0.1:51138 Accepted
+[Thu Jan 29 10:00:20 2026] 127.0.0.1:51138 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:00:20 2026] 127.0.0.1:51138 Closing
+[Thu Jan 29 10:00:20 2026] 127.0.0.1:51128 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:00:20 2026] 127.0.0.1:51128 Closing
+[Thu Jan 29 10:04:51 2026] 127.0.0.1:46312 Accepted
+[Thu Jan 29 10:04:51 2026] 127.0.0.1:46316 Accepted
+[Thu Jan 29 10:04:52 2026] PHP Warning:  file_get_contents(bilder.json): Failed to open stream: No such file or directory in /workspaces/Konik-Website/public/mysql_db.php on line 57
+[Thu Jan 29 10:04:52 2026] PHP Warning:  foreach() argument must be of type array|object, null given in /workspaces/Konik-Website/public/mysql_db.php on line 64
+[Thu Jan 29 10:04:52 2026] 127.0.0.1:46312 [200]: GET /mysql_db.php
+[Thu Jan 29 10:04:52 2026] 127.0.0.1:46312 Closing
+[Thu Jan 29 10:04:52 2026] 127.0.0.1:41982 Accepted
+[Thu Jan 29 10:05:27 2026] 127.0.0.1:46316 [200]: GET /mysql_db.php
+[Thu Jan 29 10:05:27 2026] 127.0.0.1:46316 Closing
+[Thu Jan 29 10:07:14 2026] 127.0.0.1:41982 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:07:14 2026] 127.0.0.1:41982 Closing
+[Thu Jan 29 10:07:14 2026] 127.0.0.1:37036 Accepted
+[Thu Jan 29 10:07:14 2026] 127.0.0.1:37052 Accepted
+[Thu Jan 29 10:07:15 2026] PHP Warning:  file_get_contents(bilder.json): Failed to open stream: No such file or directory in /workspaces/Konik-Website/public/mysql_db.php on line 56
+[Thu Jan 29 10:07:15 2026] PHP Warning:  foreach() argument must be of type array|object, null given in /workspaces/Konik-Website/public/mysql_db.php on line 63
+[Thu Jan 29 10:07:15 2026] 127.0.0.1:37036 [200]: GET /mysql_db.php
+[Thu Jan 29 10:07:15 2026] 127.0.0.1:37036 Closing
+[Thu Jan 29 10:07:15 2026] 127.0.0.1:37064 Accepted
+[Thu Jan 29 10:07:29 2026] PHP Warning:  file_get_contents(public/datenbank/informationen/galerie-informationen.json): Failed to open stream: No such file or directory in /workspaces/Konik-Website/public/mysql_db.php on line 56
+[Thu Jan 29 10:07:29 2026] PHP Warning:  foreach() argument must be of type array|object, null given in /workspaces/Konik-Website/public/mysql_db.php on line 63
+[Thu Jan 29 10:07:29 2026] 127.0.0.1:37052 [200]: GET /mysql_db.php
+[Thu Jan 29 10:07:29 2026] 127.0.0.1:37052 Closing
+[Thu Jan 29 10:07:40 2026] 127.0.0.1:37064 [200]: GET /mysql_db.php
+[Thu Jan 29 10:07:40 2026] 127.0.0.1:37064 Closing
+[Thu Jan 29 10:07:40 2026] 127.0.0.1:40664 Accepted
+[Thu Jan 29 10:09:20 2026] 127.0.0.1:40664 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:09:20 2026] 127.0.0.1:40664 Closing
+[Thu Jan 29 10:11:55 2026] 127.0.0.1:36330 Accepted
+[Thu Jan 29 10:11:55 2026] 127.0.0.1:36334 Accepted
+[Thu Jan 29 10:11:56 2026] 127.0.0.1:36330 [200]: GET /mysql_db.php
+[Thu Jan 29 10:11:56 2026] 127.0.0.1:36330 Closing
+[Thu Jan 29 10:11:56 2026] 127.0.0.1:36350 Accepted
+[Thu Jan 29 10:13:13 2026] 127.0.0.1:36334 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:13:13 2026] 127.0.0.1:36334 Closing
+[Thu Jan 29 10:13:13 2026] 127.0.0.1:36350 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:13:13 2026] 127.0.0.1:36350 Closing
+[Thu Jan 29 10:13:14 2026] 127.0.0.1:48068 Accepted
+[Thu Jan 29 10:13:14 2026] 127.0.0.1:48084 Accepted
+[Thu Jan 29 10:13:14 2026] PHP Warning:  file_get_contents(bilder.json): Failed to open stream: No such file or directory in /workspaces/Konik-Website/public/mysql_db.php on line 55
+[Thu Jan 29 10:13:14 2026] PHP Warning:  foreach() argument must be of type array|object, null given in /workspaces/Konik-Website/public/mysql_db.php on line 65
+[Thu Jan 29 10:13:14 2026] 127.0.0.1:48068 [200]: GET /mysql_db.php
+[Thu Jan 29 10:13:14 2026] 127.0.0.1:48068 Closing
+[Thu Jan 29 10:13:14 2026] 127.0.0.1:48098 Accepted
+[Thu Jan 29 10:13:26 2026] 127.0.0.1:48084 [200]: GET /mysql_db.php
+[Thu Jan 29 10:13:26 2026] 127.0.0.1:48084 Closing
+[Thu Jan 29 10:13:28 2026] 127.0.0.1:48098 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:13:28 2026] 127.0.0.1:48098 Closing
+[Thu Jan 29 10:20:32 2026] 127.0.0.1:36602 Accepted
+[Thu Jan 29 10:20:32 2026] 127.0.0.1:36612 Accepted
+[Thu Jan 29 10:20:33 2026] 127.0.0.1:36602 [200]: GET /mysql_db.php
+[Thu Jan 29 10:20:33 2026] 127.0.0.1:36602 Closing
+[Thu Jan 29 10:20:33 2026] 127.0.0.1:36622 Accepted
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:36622 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:36622 Closing
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:36612 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:36612 Closing
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:46780 Accepted
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:46782 Accepted
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:46780 [200]: GET /mysql_db.php
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:46780 Closing
+[Thu Jan 29 10:22:49 2026] 127.0.0.1:46786 Accepted
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:46782 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:46782 Closing
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:46786 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:46786 Closing
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:47398 Accepted
+[Thu Jan 29 10:26:03 2026] 127.0.0.1:47404 Accepted
+[Thu Jan 29 10:26:04 2026] PHP Fatal error:  Uncaught Error: Undefined constant "pdo" in /workspaces/Konik-Website/public/mysql_db.php:25
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/mysql_db.php on line 25
+[Thu Jan 29 10:26:04 2026] 127.0.0.1:47398 [200]: GET /mysql_db.php - Uncaught Error: Undefined constant "pdo" in /workspaces/Konik-Website/public/mysql_db.php:25
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/mysql_db.php on line 25
+[Thu Jan 29 10:26:04 2026] 127.0.0.1:47398 Closing
+[Thu Jan 29 10:26:04 2026] 127.0.0.1:47410 Accepted
+[Thu Jan 29 10:26:21 2026] 127.0.0.1:47404 [200]: GET /mysql_db.php
+[Thu Jan 29 10:26:21 2026] 127.0.0.1:47404 Closing
+[Thu Jan 29 10:27:20 2026] 127.0.0.1:47410 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:27:20 2026] 127.0.0.1:47410 Closing
+[Thu Jan 29 10:28:47 2026] 127.0.0.1:36924 Accepted
+[Thu Jan 29 10:28:47 2026] 127.0.0.1:36934 Accepted
+[Thu Jan 29 10:28:48 2026] 127.0.0.1:36924 [200]: GET /mysql_db.php
+[Thu Jan 29 10:28:48 2026] 127.0.0.1:36924 Closing
+[Thu Jan 29 10:28:48 2026] 127.0.0.1:36944 Accepted
+[Thu Jan 29 10:29:35 2026] 127.0.0.1:36934 [200]: GET /mysql_db.php
+[Thu Jan 29 10:29:35 2026] 127.0.0.1:36934 Closing
+[Thu Jan 29 10:29:51 2026] 127.0.0.1:36944 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:29:51 2026] 127.0.0.1:36944 Closing
+[Thu Jan 29 10:29:52 2026] 127.0.0.1:56486 Accepted
+[Thu Jan 29 10:29:52 2026] 127.0.0.1:56502 Accepted
+[Thu Jan 29 10:29:52 2026] 127.0.0.1:56486 [200]: GET /mysql_db.php
+[Thu Jan 29 10:29:52 2026] 127.0.0.1:56486 Closing
+[Thu Jan 29 10:29:52 2026] 127.0.0.1:56504 Accepted
+[Thu Jan 29 10:30:02 2026] 127.0.0.1:56502 [200]: GET /mysql_db.php
+[Thu Jan 29 10:30:02 2026] 127.0.0.1:56502 Closing
+[Thu Jan 29 10:30:43 2026] 127.0.0.1:56504 [200]: GET /mysql_db.php
+[Thu Jan 29 10:30:43 2026] 127.0.0.1:56504 Closing
+[Thu Jan 29 10:30:43 2026] 127.0.0.1:49618 Accepted
+[Thu Jan 29 10:31:36 2026] 127.0.0.1:49618 [200]: GET /mysql_db.php
+[Thu Jan 29 10:31:36 2026] 127.0.0.1:49618 Closing
+[Thu Jan 29 10:31:36 2026] 127.0.0.1:52706 Accepted
+[Thu Jan 29 10:36:20 2026] 127.0.0.1:52706 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 10:36:20 2026] 127.0.0.1:52706 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59472 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59480 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59472 [200]: GET /
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59472 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59480 [200]: GET /stil/index.css
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59480 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59484 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59484 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59484 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59496 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59512 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59514 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59524 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59496 [200]: GET /stil/footer.css
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59496 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59530 Accepted
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59512 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59514 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59512 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59514 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59524 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59524 Closing
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59530 [200]: GET /funktionen/index.js
+[Thu Jan 29 10:44:42 2026] 127.0.0.1:59530 Closing
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59546 Accepted
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59562 Accepted
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59546 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59546 Closing
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59562 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:44:43 2026] 127.0.0.1:59562 Closing
+[Thu Jan 29 10:44:44 2026] 127.0.0.1:59564 Accepted
+[Thu Jan 29 10:44:45 2026] 127.0.0.1:59564 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:44:45 2026] 127.0.0.1:59564 Closing
+[Thu Jan 29 10:44:45 2026] 127.0.0.1:59570 Accepted
+[Thu Jan 29 10:44:45 2026] 127.0.0.1:59584 Accepted
+[Thu Jan 29 10:45:15 2026] 127.0.0.1:59570 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:45:15 2026] 127.0.0.1:59570 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:59584 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:59584 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37744 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37758 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37766 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37772 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37780 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37796 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37744 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37744 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37758 [200]: GET /stil/footer.css
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37758 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37766 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37766 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37772 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37772 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37780 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37780 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37796 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37796 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37806 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37820 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37836 Accepted
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37806 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37806 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37820 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37820 Closing
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37836 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:45:16 2026] 127.0.0.1:37836 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51198 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51202 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51198 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51198 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51210 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51202 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51202 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51210 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51210 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51212 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51224 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51234 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51238 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51254 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51212 [200]: GET /stil/footer.css
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51212 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51224 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51224 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51256 Accepted
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51234 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51234 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51238 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51238 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51254 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51254 Closing
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51256 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:45:54 2026] 127.0.0.1:51256 Closing
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51266 Accepted
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51276 Accepted
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51266 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51266 Closing
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51276 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:45:55 2026] 127.0.0.1:51276 Closing
+[Thu Jan 29 10:46:22 2026] 127.0.0.1:54480 Accepted
+[Thu Jan 29 10:46:22 2026] 127.0.0.1:54482 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54480 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54480 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54488 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54482 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54482 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54488 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54488 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54490 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54500 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54508 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54516 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54530 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54490 [200]: GET /stil/footer.css
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54490 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54500 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54500 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54508 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54508 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54516 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54516 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54534 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54530 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54530 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54534 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54534 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54540 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54544 Accepted
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54540 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54540 Closing
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54544 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:46:23 2026] 127.0.0.1:54544 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57678 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57694 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57678 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57678 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57694 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57694 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57700 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57700 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57700 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57706 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57708 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57722 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57736 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57752 Accepted
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57706 [200]: GET /stil/footer.css
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57706 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57708 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57708 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57722 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57722 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57736 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57736 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57752 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57752 Closing
+[Thu Jan 29 10:46:48 2026] 127.0.0.1:57766 Accepted
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57766 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57766 Closing
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57770 Accepted
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57780 Accepted
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57770 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57770 Closing
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57780 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:46:49 2026] 127.0.0.1:57780 Closing
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42194 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42196 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42194 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42194 Closing
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42196 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42196 Closing
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42204 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42204 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42204 Closing
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42210 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42220 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42222 Accepted
+[Thu Jan 29 10:46:55 2026] 127.0.0.1:42224 Accepted
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42232 Accepted
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42210 [200]: GET /stil/footer.css
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42210 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42220 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42220 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42222 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42222 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42224 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42224 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42232 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42232 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42236 Accepted
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42236 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42236 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42244 Accepted
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42256 Accepted
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42244 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42244 Closing
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42256 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:46:56 2026] 127.0.0.1:42256 Closing
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53220 Accepted
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53222 Accepted
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53220 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53220 Closing
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53222 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53222 Closing
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53234 Accepted
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53234 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:48:01 2026] 127.0.0.1:53234 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49962 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49970 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49972 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49984 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49990 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49962 [200]: GET /stil/footer.css
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49962 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49970 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49970 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49972 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49972 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49984 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49984 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49990 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49990 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49998 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49998 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:49998 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50012 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50028 Accepted
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50012 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50012 Closing
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50028 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:48:02 2026] 127.0.0.1:50028 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49570 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49582 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49570 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49570 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49590 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49582 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49582 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49590 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49590 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49600 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49614 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49630 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49632 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49638 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49600 [200]: GET /stil/footer.css
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49600 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49614 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49614 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49630 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49630 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49632 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49632 Closing
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49646 Accepted
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49638 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:48:13 2026] 127.0.0.1:49638 Closing
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49646 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49646 Closing
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49658 Accepted
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49672 Accepted
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49658 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49658 Closing
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49672 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:48:14 2026] 127.0.0.1:49672 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48554 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48568 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48554 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48554 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48568 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48568 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48570 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48570 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48570 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48580 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48590 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48594 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48604 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48580 [200]: GET /stil/footer.css
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48580 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48616 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48590 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48594 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48604 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48590 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48594 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48604 Closing
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48632 Accepted
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48616 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:49:02 2026] 127.0.0.1:48616 Closing
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48632 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48632 Closing
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48642 Accepted
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48646 Accepted
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48642 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48642 Closing
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48646 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:49:03 2026] 127.0.0.1:48646 Closing
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49360 Accepted
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49362 Accepted
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49360 [200]: GET /zeitstrahl.php
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49360 Closing
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49364 Accepted
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49362 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49362 Closing
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49364 [200]: GET /stil/navbar.css
+[Thu Jan 29 10:55:13 2026] 127.0.0.1:49364 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49368 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49378 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49390 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49392 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49400 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49368 [200]: GET /stil/footer.css
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49368 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49406 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49378 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49378 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49390 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49390 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49392 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49392 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49400 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49400 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49406 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49406 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49408 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49410 Accepted
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49408 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49408 Closing
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49410 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 10:55:14 2026] 127.0.0.1:49410 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41396 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41400 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41396 [200]: GET /zeitstrahl.php
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41396 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41416 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41416 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41416 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41400 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41400 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41422 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41426 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41430 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41434 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41422 [200]: GET /stil/footer.css
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41422 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41426 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41426 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41446 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41458 Accepted
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41430 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41434 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41430 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41434 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41446 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41446 Closing
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41458 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:02:54 2026] 127.0.0.1:41458 Closing
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41468 Accepted
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41482 Accepted
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41468 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41468 Closing
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41482 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 11:02:55 2026] 127.0.0.1:41482 Closing
+[Thu Jan 29 11:02:56 2026] 127.0.0.1:41492 Accepted
+[Thu Jan 29 11:02:56 2026] PHP Warning:  Undefined variable $mysqli in /workspaces/Konik-Website/public/galerie.php on line 24
+[Thu Jan 29 11:02:56 2026] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /workspaces/Konik-Website/public/galerie.php:24
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/galerie.php on line 24
+[Thu Jan 29 11:02:56 2026] 127.0.0.1:41492 [200]: GET /galerie.php - Uncaught Error: Call to a member function query() on null in /workspaces/Konik-Website/public/galerie.php:24
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/galerie.php on line 24
+[Thu Jan 29 11:02:56 2026] 127.0.0.1:41492 Closing
+[Thu Jan 29 11:02:56 2026] 127.0.0.1:41502 Accepted
+[Thu Jan 29 11:02:56 2026] 127.0.0.1:41514 Accepted
+[Thu Jan 29 11:03:33 2026] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::fetch_assoc() in /workspaces/Konik-Website/public/galerie.php:27
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/galerie.php on line 27
+[Thu Jan 29 11:03:33 2026] 127.0.0.1:41502 [200]: GET /galerie.php - Uncaught Error: Call to undefined method PDOStatement::fetch_assoc() in /workspaces/Konik-Website/public/galerie.php:27
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/galerie.php on line 27
+[Thu Jan 29 11:03:33 2026] 127.0.0.1:41502 Closing
+[Thu Jan 29 11:04:18 2026] 127.0.0.1:41514 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Jan 29 11:04:18 2026] 127.0.0.1:41514 Closing
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50946 Accepted
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50962 Accepted
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50946 [200]: GET /galerie.php
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50946 Closing
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50962 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50962 Closing
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50978 Accepted
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50978 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50978 Closing
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50984 Accepted
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50986 Accepted
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50984 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50984 Closing
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50986 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:04:19 2026] 127.0.0.1:50986 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51028 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51038 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51028 [200]: GET /galerie.php
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51028 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51038 [200]: GET /stil/galerie.css
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51038 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51048 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51048 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51048 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51056 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51072 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51086 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51102 Accepted
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51056 [200]: GET /stil/footer.css
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51056 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51072 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51072 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51086 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51086 Closing
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51102 [200]: GET /funktionen/galerie.js
+[Thu Jan 29 11:05:24 2026] 127.0.0.1:51102 Closing
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51114 Accepted
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51124 Accepted
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51136 Accepted
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51150 Accepted
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51114 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51114 Closing
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51124 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51124 Closing
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51136 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51136 Closing
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51150 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:05:25 2026] 127.0.0.1:51150 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36412 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36412 [200]: GET /index.php
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36412 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36426 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36426 [200]: GET /stil/index.css
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36426 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36436 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36436 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36436 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36446 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36460 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36474 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36488 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36498 Accepted
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36446 [200]: GET /stil/footer.css
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36446 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36460 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36460 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36474 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36474 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36488 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36488 Closing
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36498 [200]: GET /funktionen/index.js
+[Thu Jan 29 11:05:44 2026] 127.0.0.1:36498 Closing
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36506 Accepted
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36508 Accepted
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36506 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36506 Closing
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36508 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:05:45 2026] 127.0.0.1:36508 Closing
+[Thu Jan 29 11:05:46 2026] 127.0.0.1:36514 Accepted
+[Thu Jan 29 11:05:46 2026] 127.0.0.1:36514 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:05:46 2026] 127.0.0.1:36514 Closing
+[Thu Jan 29 11:05:46 2026] 127.0.0.1:36524 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36524 [200]: GET /zeitstrahl.php
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36524 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36534 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36534 [200]: GET /stil/zeitstrahl.css
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36534 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36548 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36562 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36564 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36566 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36572 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36548 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36548 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36562 [200]: GET /stil/footer.css
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36562 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36564 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36564 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36566 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36566 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36572 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36572 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36588 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36588 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:36588 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42414 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42426 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42428 Accepted
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42414 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42414 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42426 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42426 Closing
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42428 [200]: GET /funktionen/zeitstrahl.js
+[Thu Jan 29 11:05:51 2026] 127.0.0.1:42428 Closing
+[Thu Jan 29 11:05:52 2026] 127.0.0.1:42434 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42434 [200]: GET /galerie.php
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42434 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42448 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42448 [200]: GET /stil/galerie.css
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42448 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42456 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42456 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42456 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42462 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42466 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42482 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42488 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42462 [200]: GET /stil/footer.css
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42462 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42466 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42466 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42482 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42482 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42488 [200]: GET /funktionen/galerie.js
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42488 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42490 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42496 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42506 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42518 Accepted
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42490 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42490 Closing
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42496 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:05:53 2026] 127.0.0.1:42496 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42506 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42506 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42518 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42518 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42526 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42526 [200]: GET /index.php
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42526 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42540 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42540 [200]: GET /stil/index.css
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42540 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42552 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42552 [200]: GET /stil/navbar.css
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42552 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42554 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42570 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42574 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42580 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42554 [200]: GET /stil/footer.css
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42554 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42570 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42570 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42586 Accepted
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42574 [200]: GET /funktionen/navbar.js
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42574 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42580 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42580 Closing
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42586 [200]: GET /funktionen/index.js
+[Thu Jan 29 11:05:54 2026] 127.0.0.1:42586 Closing
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42598 Accepted
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42608 Accepted
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42598 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42598 Closing
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42608 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Jan 29 11:05:55 2026] 127.0.0.1:42608 Closing

@@ -1,43 +1,63 @@
+<?php
+$host = getenv('DB_HOST') ?: '';
+$port = getenv('DB_PORT') ?: 3306;
+$db   = getenv('DB_NAME') ?: '';
+$user = getenv('DB_USER') ?: '';
+$pass = getenv('DB_PASS') ?: '';
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
+        $user,
+        $pass,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_TIMEOUT => 10
+        ]
+    );
+
+} catch (PDOException $e) {
+    echo "❌ DB Verbindung fehlgeschlagen: " . $e->getMessage() . "<br>";
+}
+
+$stmt = $pdo->query("SELECT datum, titel, beschreibung, bild FROM zeitstrahl ORDER BY datum ASC");
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!doctype html>
 <html lang="de">
 <head>
     <meta charset="utf-8">
+    <title>Zeitstrahl</title>
     <link rel="stylesheet" href="stil/zeitstrahl.css">
     <link rel="stylesheet" href="stil/navbar.css">
     <link rel="stylesheet" href="stil/footer.css">
 </head>
-    <body>
+<body>
 
-        <?php include 'navbar.php'; ?>
+<?php include 'navbar.php'; ?>
 
-        <div class="timeline-wrapper">
-            <div class="timeline">
-                <?php
-                $jsonFile = 'datenbank/informationen/zeitstrahl-informationen.json';
-                $jsonData = file_get_contents($jsonFile);
-                $events = json_decode($jsonData, true);
-
-                if ($events === null) {
-                    echo "Fehler beim Laden der Events!";
-                    exit;
-                }
-
-                foreach($events as $index => $event): ?>
-                    <div class="timeline-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
-                        <div class="timeline-date"><?= $event['year'] ?></div>
-                        <div class="timeline-content">
-                            <img class="timeline-img" src="<?= $event['img'] ?>" alt="<?= $event['title'] ?>">
-                            <h3><?= $event['title'] ?></h3>
-                            <p><?= $event['desc'] ?></p>
-                        </div>
+<div class="timeline-wrapper">
+    <div class="timeline">
+        <?php if(empty($events)): ?>
+            <p>Keine Einträge im Zeitstrahl vorhanden.</p>
+        <?php else: ?>
+            <?php foreach($events as $index => $event): ?>
+                <div class="timeline-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
+                    <div class="timeline-date"><?= date('d M Y', strtotime($event['datum'])) ?></div>
+                    <div class="timeline-content">
+                        <img class="timeline-img" src="<?= htmlspecialchars($event['bild']) ?>" alt="<?= htmlspecialchars($event['titel']) ?>">
+                        <h3><?= htmlspecialchars($event['titel']) ?></h3>
+                        <p><?= htmlspecialchars($event['beschreibung']) ?></p>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
 
-        <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 
-        <script src="funktionen/zeitstrahl.js"></script>
-
-    </body>
-
+<script src="funktionen/zeitstrahl.js"></script>
+</body>
 </html>
