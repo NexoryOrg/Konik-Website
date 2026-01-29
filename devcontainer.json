@@ -2,10 +2,15 @@
     "name": "PHP Codespace",
     "image": "mcr.microsoft.com/devcontainers/php:8.2-bullseye",
     "forwardPorts": [8000],
+    "postCreateCommand": "bash init-dev.sh",
     "postStartCommand": "bash start-dev.sh",
     "features": {
         "ghcr.io/devcontainers/features/mysql:1": {
-            "version": "8.0"
+            "version": "8.2"
+        },
+        "ghcr.io/devcontainers/features/php:1": {
+            "version": "8.3",
+            "extensions": ["pdo_mysql"]
         }
     },
     "customizations": {

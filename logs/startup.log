@@ -1,0 +1,39 @@
+🚀 Starte PHP Server auf Port 8000 ...
+📄 Access-Log: logs/access.log
+❗ Error-Log:  logs/error.log
+🌐 ENV: development
+💡 PDO MySQL Treiber fehlt, wird installiert...
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+Get:3 https://dl.yarnpkg.com/debian stable InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:7 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease
+Err:3 https://dl.yarnpkg.com/debian stable InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 62D54FD4003F6525
+Reading package lists...
+W: GPG error: https://dl.yarnpkg.com/debian stable InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 62D54FD4003F6525
+E: The repository 'https://dl.yarnpkg.com/debian stable InRelease' is not signed.
+⚡ Initialisiere MySQL Datenbank...
+[Thu Jan 29 08:10:16 2026] PHP 8.0.30 Development Server (http://0.0.0.0:8000) started
+[Thu Jan 29 08:10:18 2026] 127.0.0.1:45960 Accepted
+[Thu Jan 29 08:10:18 2026] 127.0.0.1:45960 [200]: GET /mysql_db.php
+[Thu Jan 29 08:10:18 2026] 127.0.0.1:45960 Closing
+[Thu Jan 29 08:10:23 2026] 127.0.0.1:33566 Accepted
+[Thu Jan 29 08:10:23 2026] 127.0.0.1:33566 [200]: GET /mysql_db.php
+[Thu Jan 29 08:10:23 2026] 127.0.0.1:33566 Closing
+[Thu Jan 29 08:10:24 2026] 127.0.0.1:33578 Accepted
+[Thu Jan 29 08:10:24 2026] 127.0.0.1:33594 Accepted
+[Thu Jan 29 08:10:24 2026] 127.0.0.1:33578 [200]: GET /mysql_db.php
+[Thu Jan 29 08:10:24 2026] 127.0.0.1:33578 Closing
+[Thu Jan 29 08:10:25 2026] 127.0.0.1:33610 Accepted
+[Thu Jan 29 08:10:27 2026] 127.0.0.1:33614 Accepted
+[Thu Jan 29 08:10:27 2026] 127.0.0.1:33614 [200]: GET /mysql_db.php
+[Thu Jan 29 08:10:27 2026] 127.0.0.1:33614 Closing
+Terminated
+start-dev.sh: line 44: syntax error near unexpected token `else'
+start-dev.sh: line 44: `else'
