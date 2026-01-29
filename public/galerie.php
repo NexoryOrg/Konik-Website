@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/init.php';
+
 $host = getenv('DB_HOST') ?: '';
 $port = getenv('DB_PORT') ?: 3306;
 $db   = getenv('DB_NAME') ?: '';
@@ -17,21 +19,27 @@ try {
     );
 
 } catch (PDOException $e) {
-    echo "❌ DB Verbindung fehlgeschlagen: " . $e->getMessage() . "<br>";
+    error_log('DB error: ' . $e->getMessage());
+    echo "❌ DB Verbindung fehlgeschlagen.";
+    $pdo = null;
 }
 
-$stmt = $pdo->query("SELECT jahr, alt, src FROM galerie ORDER BY jahr DESC");
+if ($pdo) {
+    $stmt = $pdo->query("SELECT jahr, alt, src FROM galerie ORDER BY jahr DESC");
 
-$galerie = [];
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $jahr = $row['jahr'];
-    if (!isset($galerie[$jahr])) {
-        $galerie[$jahr] = [];
+    $galerie = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $jahr = $row['jahr'];
+        if (!isset($galerie[$jahr])) {
+            $galerie[$jahr] = [];
+        }
+        $galerie[$jahr][] = [
+            'src' => $row['src'],
+            'alt' => $row['alt']
+        ];
     }
-    $galerie[$jahr][] = [
-        'src' => $row['src'],
-        'alt' => $row['alt']
-    ];
+} else {
+    $galerie = [];
 }
 ?>
 
@@ -55,7 +63,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class="zeitstrahl-box">
             <div class="zeitstrahl">
                 <?php foreach($galerie as $jahr => $bilder): ?>
-                    <div class="zeitpunkt"><span><?= $jahr ?></span></div>
+                    <div class="zeitpunkt"><span><?= e($jahr) ?></span></div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -63,10 +71,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <div class="galerie">
                 <?php foreach($galerie as $jahr => $bilder): ?>
                     <div class="jahr-section">
-                        <h2><?= $jahr ?></h2>
+                        <h2><?= e($jahr) ?></h2>
                         <div class="bilder">
                             <?php foreach($bilder as $bild): ?>
-                                <img src="<?= $bild['src'] ?>" alt="<?= htmlspecialchars($bild['alt']) ?>" loading="lazy" onerror="this.src='datenbank/bilder/error.jpg'">
+                                <img src="<?= safe_src($bild['src']) ?>" alt="<?= e($bild['alt']) ?>" loading="lazy" onerror="this.src='datenbank/bilder/error.jpg'">
                             <?php endforeach; ?>
                         </div>
                     </div>
