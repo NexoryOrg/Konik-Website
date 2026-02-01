@@ -25,11 +25,11 @@ try {
 }
 
 if ($pdo) {
-    $stmt = $pdo->query("SELECT jahr, alt, src FROM galerie ORDER BY jahr DESC");
+    $stmt = $pdo->query("SELECT year, alt, src FROM galerie ORDER BY year DESC");
 
     $galerie = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $jahr = $row['jahr'];
+        $jahr = $row['year'];
         if (!isset($galerie[$jahr])) {
             $galerie[$jahr] = [];
         }
@@ -59,20 +59,20 @@ if ($pdo) {
 
     <?php include 'navbar.php'; ?>
 
-    <div class="galerie-container">
-        <div class="zeitstrahl-box">
-            <div class="zeitstrahl">
+    <div class="gallery-container">
+        <div class="timeline-box">
+            <div class="timeline">
                 <?php foreach($galerie as $jahr => $bilder): ?>
-                    <div class="zeitpunkt"><span><?= e($jahr) ?></span></div>
+                    <div class="timeline-dot"><span><?= e($jahr) ?></span></div>
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="galerie-box">
-            <div class="galerie">
+        <div class="gallery-box">
+            <div class="gallery">
                 <?php foreach($galerie as $jahr => $bilder): ?>
-                    <div class="jahr-section">
+                    <div class="year-section">
                         <h2><?= e($jahr) ?></h2>
-                        <div class="bilder">
+                        <div class="images">
                             <?php foreach($bilder as $bild): ?>
                                 <img src="<?= safe_src($bild['src']) ?>" alt="<?= e($bild['alt']) ?>" loading="lazy" onerror="this.src='datenbank/bilder/error.jpg'">
                             <?php endforeach; ?>
@@ -87,14 +87,14 @@ if ($pdo) {
         <span class="close" id="lightbox-close">&times;</span>
 
         <div class="lightbox-info">
-            <span id="lightbox-jahr"></span>
+            <span id="lightbox-year"></span>
             <span id="lightbox-alt"></span>
         </div>
 
         <div class="lightbox-nav">
-            <div class="nav-left"></div>
-            <img src="" alt="" id="lightbox-img">
-            <div class="nav-right"></div>
+            <div class="nav-prev"></div>
+            <img src="" alt="" id="lightbox-image">
+            <div class="nav-next"></div>
         </div>
     </div>
 

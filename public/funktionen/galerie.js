@@ -1,50 +1,50 @@
 const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
+const lightboxImg = document.getElementById("lightbox-image");
 const lightboxClose = document.getElementById("lightbox-close");
 const lightboxAlt = document.getElementById("lightbox-alt");
-const lightboxJahr = document.getElementById("lightbox-jahr");
-const navLeft = document.querySelector(".nav-left");
-const navRight = document.querySelector(".nav-right");
+const lightboxJahr = document.getElementById("lightbox-year");
+const navLeft = document.querySelector(".nav-prev");
+const navRight = document.querySelector(".nav-next");
 
-let alleBilder = [];
-let aktuellerIndex = 0;
+let allImages = [];
+let currentIndex = 0;
 
-// Alle Bilder aus dem DOM sammeln
-document.querySelectorAll('.jahr-section').forEach(section => {
-    const jahr = section.querySelector('h2').textContent;
+// Collect all images from the DOM
+document.querySelectorAll('.year-section').forEach(section => {
+    const year = section.querySelector('h2').textContent;
     section.querySelectorAll('img').forEach(img => {
-        const index = alleBilder.length;
-        alleBilder.push({ src: img.src, alt: img.alt, jahr: jahr });
+        const index = allImages.length;
+        allImages.push({ src: img.src, alt: img.alt, year: year });
         img.addEventListener('click', () => {
-            aktuellerIndex = index;
-            zeigeBild();
+            currentIndex = index;
+            showImage();
             lightbox.classList.add('active');
         });
     });
 });
 
-// Scroll für Zeitstrahl
-const jahreSections = document.querySelectorAll('.jahr-section');
-const punkte = document.querySelectorAll('.zeitpunkt');
+// Timeline scroll tracking
+const yearSections = document.querySelectorAll('.year-section');
+const dots = document.querySelectorAll('.timeline-dot');
 window.addEventListener('scroll', () => {
     let index = 0;
-    jahreSections.forEach((section, i) => {
+    yearSections.forEach((section, i) => {
         if(section.getBoundingClientRect().top < window.innerHeight / 2) index = i;
     });
-    punkte.forEach(p => p.classList.remove('active'));
-    punkte[index].classList.add('active');
+    dots.forEach(p => p.classList.remove('active'));
+    dots[index].classList.add('active');
 });
 
-// Lightbox-Funktion
-function zeigeBild() {
-    const bild = alleBilder[aktuellerIndex];
-    if(!bild) return;
+// Lightbox display function
+function showImage() {
+    const image = allImages[currentIndex];
+    if(!image) return;
     lightboxImg.classList.remove("show");
     setTimeout(() => {
-        lightboxImg.src = bild.src;
-        lightboxImg.alt = bild.alt;
-        lightboxAlt.textContent = bild.alt;
-        lightboxJahr.textContent = bild.jahr;
+        lightboxImg.src = image.src;
+        lightboxImg.alt = image.alt;
+        lightboxAlt.textContent = image.alt;
+        lightboxJahr.textContent = image.year;
         lightboxImg.classList.add("show");
     }, 50);
 }
@@ -54,8 +54,8 @@ lightbox.addEventListener("click", e => { if(e.target === lightbox) lightbox.cla
 
 document.addEventListener("keydown", e => {
     if(!lightbox.classList.contains("active")) return;
-    if(e.key === "ArrowRight") { aktuellerIndex = (aktuellerIndex + 1) % alleBilder.length; zeigeBild(); }
-    if(e.key === "ArrowLeft") { aktuellerIndex = (aktuellerIndex - 1 + alleBilder.length) % alleBilder.length; zeigeBild(); }
+    if(e.key === "ArrowRight") { currentIndex = (currentIndex + 1) % allImages.length; showImage(); }
+    if(e.key === "ArrowLeft") { currentIndex = (currentIndex - 1 + allImages.length) % allImages.length; showImage(); }
     if(e.key === "Escape") lightbox.classList.remove("active");
 });
 
@@ -64,17 +64,17 @@ lightbox.addEventListener("touchstart", e => startX = e.touches[0].clientX);
 lightbox.addEventListener("touchend", e => {
     const diff = startX - e.changedTouches[0].clientX;
     if(Math.abs(diff) > 50){
-        if(diff > 0) aktuellerIndex = (aktuellerIndex + 1) % alleBilder.length;
-        else aktuellerIndex = (aktuellerIndex - 1 + alleBilder.length) % alleBilder.length;
-        zeigeBild();
+        if(diff > 0) currentIndex = (currentIndex + 1) % allImages.length;
+        else currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+        showImage();
     }
 });
 
 navLeft.addEventListener("click", () => {
-    aktuellerIndex = (aktuellerIndex - 1 + alleBilder.length) % alleBilder.length;
-    zeigeBild();
+    currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+    showImage();
 });
 navRight.addEventListener("click", () => {
-    aktuellerIndex = (aktuellerIndex + 1) % alleBilder.length;
-    zeigeBild();
+    currentIndex = (currentIndex + 1) % allImages.length;
+    showImage();
 });

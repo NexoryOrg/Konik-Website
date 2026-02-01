@@ -20,7 +20,7 @@ try {
     echo "❌ DB Verbindung fehlgeschlagen: " . $e->getMessage() . "<br>";
 }
 
-$stmt = $pdo->query("SELECT datum, titel, beschreibung, bild FROM zeitstrahl ORDER BY datum ASC");
+$stmt = $pdo->query("SELECT date, title, des, image FROM timeline ORDER BY date ASC");
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -29,7 +29,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="utf-8">
     <title>Zeitstrahl</title>
-    <link rel="stylesheet" href="stil/zeitstrahl.css">
+    <link rel="stylesheet" href="stil/timeline.css">
     <link rel="stylesheet" href="stil/navbar.css">
     <link rel="stylesheet" href="stil/footer.css">
 </head>
@@ -44,11 +44,11 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php else: ?>
             <?php foreach($events as $index => $event): ?>
                 <div class="timeline-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
-                    <div class="timeline-date"><?= date('d M Y', strtotime($event['datum'])) ?></div>
+                    <div class="timeline-date"><?= date('d M Y', strtotime($event['date'])) ?></div>
                     <div class="timeline-content">
-                        <img class="timeline-img" src="<?= htmlspecialchars($event['bild']) ?>" alt="<?= htmlspecialchars($event['titel']) ?>">
-                        <h3><?= htmlspecialchars($event['titel']) ?></h3>
-                        <p><?= htmlspecialchars($event['beschreibung']) ?></p>
+                        <img class="timeline-img" src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>">
+                        <h3><?= htmlspecialchars($event['title']) ?></h3>
+                        <p><?= htmlspecialchars($event['des']) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -58,6 +58,6 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include 'footer.php'; ?>
 
-<script src="funktionen/zeitstrahl.js"></script>
+<script src="funktionen/timeline.js"></script>
 </body>
 </html>

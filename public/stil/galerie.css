@@ -17,13 +17,13 @@ body {
     color: var(--textfarbe);
 }
 
-.galerie-container {
+.gallery-container {
     display: flex;
     gap: 20px;
     padding: 120px 50px 50px 50px;
 }
 
-.zeitstrahl-box, .galerie-box {
+.timeline-box, .gallery-box {
     background-color: var(--kartenhintergrund);
     border: 1px solid var(--rahmenfarbe);
     border-radius: 12px;
@@ -31,28 +31,28 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.zeitstrahl-box {
+.timeline-box {
     width: 100px;
     display: flex;
     justify-content: center;
     padding-top: 20px;
 }
 
-.galerie-box {
+.gallery-box {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.zeitstrahl {
+.timeline {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.zeitstrahl::before {
+.timeline::before {
     content: '';
     position: absolute;
     top: 0;
@@ -64,14 +64,14 @@ body {
     border-radius: 2px;
 }
 
-.zeitpunkt {
+.timeline-dot {
     position: relative;
     margin: 30px 0;
     text-align: center;
     cursor: pointer;
 }
 
-.zeitpunkt::before {
+.timeline-dot::before {
     content: '';
     position: absolute;
     left: 50%;
@@ -84,31 +84,31 @@ body {
     z-index: 1;
 }
 
-.zeitpunkt span {
+.timeline-dot span {
     display: block;
     margin-top: 18px;
     color: var(--textfarbe);
     font-size: 0.85rem;
 }
 
-.zeitpunkt.active span {
+.timeline-dot.active span {
     color: var(--wichtige-textfarbe);
     font-weight: bold;
 }
 
-.jahr-section h2 {
+.year-section h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: var(--button-farbe);
 }
 
-.jahr-section .bilder {
+.year-section .images {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 10px;
 }
 
-.jahr-section img {
+.year-section img {
     width: 100%;
     height: 100px;
     object-fit: cover;
@@ -117,7 +117,7 @@ body {
     cursor: pointer;
 }
 
-.jahr-section img:hover {
+.year-section img:hover {
     transform: scale(1.05);
 }
 
@@ -180,7 +180,7 @@ body {
     justify-content: center;
 }
 
-.nav-left, .nav-right {
+.nav-prev, .nav-next {
     position: absolute;
     top: 0;
     width: 50%;
@@ -189,5 +189,5 @@ body {
     z-index: 2;
 }
 
-.nav-left { left: 0; }
-.nav-right { right: 0; }
+.nav-prev { left: 0; }
+.nav-next { right: 0; }

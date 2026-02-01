@@ -5,7 +5,7 @@
   <ul class="navbar-menu">
     <li><a href="index.php">Startseite</a></li>
     <li><a href="galerie.php">Galerie</a></li>
-    <li><a href="zeitstrahl.php">Zeitstrahl</a></li>
+    <li><a href="timeline.php">Zeitstrahl</a></li>
     <li><a href="kontakt.php">Kontakt</a></li>
   </ul>
   <div class="navbar-toggle" id="navbar-toggle">
