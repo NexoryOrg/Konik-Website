@@ -1,11 +1,3 @@
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-image");
-const lightboxClose = document.getElementById("lightbox-close");
-const lightboxAlt = document.getElementById("lightbox-alt");
-const lightboxJahr = document.getElementById("lightbox-year");
-const navLeft = document.querySelector(".nav-prev");
-const navRight = document.querySelector(".nav-next");
-
 let allImages = [];
 let currentIndex = 0;
 
@@ -35,46 +27,68 @@ window.addEventListener('scroll', () => {
     dots[index].classList.add('active');
 });
 
-// Lightbox display function
-function showImage() {
-    const image = allImages[currentIndex];
-    if(!image) return;
-    lightboxImg.classList.remove("show");
-    setTimeout(() => {
-        lightboxImg.src = image.src;
-        lightboxImg.alt = image.alt;
-        lightboxAlt.textContent = image.alt;
-        lightboxJahr.textContent = image.year;
-        lightboxImg.classList.add("show");
-    }, 50);
-}
+const images = document.querySelectorAll(".images img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const description = document.getElementById("description");
+const imageYear = document.getElementById("image-year");
+const closeBtn = document.getElementById("close");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
-lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
-lightbox.addEventListener("click", e => { if(e.target === lightbox) lightbox.classList.remove("active"); });
+let currentIndexGallery = 0;
 
-document.addEventListener("keydown", e => {
-    if(!lightbox.classList.contains("active")) return;
-    if(e.key === "ArrowRight") { currentIndex = (currentIndex + 1) % allImages.length; showImage(); }
-    if(e.key === "ArrowLeft") { currentIndex = (currentIndex - 1 + allImages.length) % allImages.length; showImage(); }
-    if(e.key === "Escape") lightbox.classList.remove("active");
-});
+if (images.length && lightbox && lightboxImage) {
+    images.forEach((img, index) => {
+        img.addEventListener("click", () => {
+            currentIndexGallery = index;
+            updateLightbox();
+            lightbox.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        });
+    });
 
-let startX = 0;
-lightbox.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-lightbox.addEventListener("touchend", e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if(Math.abs(diff) > 50){
-        if(diff > 0) currentIndex = (currentIndex + 1) % allImages.length;
-        else currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-        showImage();
+    function updateLightbox() {
+        lightboxImage.style.opacity = 0;
+        setTimeout(() => {
+            lightboxImage.src = images[currentIndexGallery].src;
+            description.textContent = images[currentIndexGallery].alt || "";
+            imageYear.textContent = allImages[currentIndexGallery].year || "";
+            lightboxImage.style.opacity = 1;
+        }, 150);
     }
-});
 
-navLeft.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-    showImage();
-});
-navRight.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % allImages.length;
-    showImage();
-});
+    function closeLightbox() {
+        lightbox.style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", e => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    if (nextBtn) nextBtn.addEventListener("click", () => {
+        currentIndexGallery = (currentIndexGallery + 1) % images.length;
+        updateLightbox();
+    });
+    if (prevBtn) prevBtn.addEventListener("click", () => {
+        currentIndexGallery = (currentIndexGallery - 1 + images.length) % images.length;
+        updateLightbox();
+    });
+
+    document.addEventListener("keydown", e => {
+        if (lightbox.style.display !== "flex") return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
+        if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
+    });
+
+    let startX = 0;
+    lightboxImage.addEventListener("touchstart", e => { startX = e.touches[0].clientX; });
+    lightboxImage.addEventListener("touchend", e => {
+        const endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50 && nextBtn) nextBtn.click();
+        if (endX - startX > 50 && prevBtn) prevBtn.click();
+    });
+}

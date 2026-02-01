@@ -1494,3 +1494,180 @@ Stack trace:
 [Sun Feb  1 19:15:25 2026] 127.0.0.1:52104 Accepted
 [Sun Feb  1 19:15:25 2026] 127.0.0.1:52104 [200]: GET /datenbank/bilder/pferde/buran.jpg
 [Sun Feb  1 19:15:25 2026] 127.0.0.1:52104 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41330 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41342 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41330 [200]: GET /galerie.php
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41330 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41342 [200]: GET /stil/galerie.css
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41342 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41354 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41362 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41368 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41376 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41388 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41354 [200]: GET /stil/navbar.css
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41354 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41362 [200]: GET /stil/footer.css
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41362 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41368 [200]: GET /funktionen/navbar.js
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41368 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41376 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41376 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41388 [200]: GET /funktionen/galerie.js
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41388 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41394 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41402 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41404 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41412 Accepted
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41394 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41394 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41402 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41402 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41404 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41404 Closing
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41412 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:18:44 2026] 127.0.0.1:41412 Closing
+[Sun Feb  1 19:19:19 2026] 127.0.0.1:34818 Accepted
+[Sun Feb  1 19:19:19 2026] 127.0.0.1:34826 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34818 [200]: GET /galerie.php
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34818 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34826 [200]: GET /stil/galerie.css
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34826 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34828 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34836 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34842 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34852 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34860 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34828 [200]: GET /stil/footer.css
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34828 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34836 [200]: GET /stil/navbar.css
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34836 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34842 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34842 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34852 [200]: GET /funktionen/navbar.js
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34852 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34860 [200]: GET /funktionen/galerie.js
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34860 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34874 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34884 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34892 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34902 Accepted
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34874 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34874 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34884 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34884 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34892 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34892 Closing
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34902 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Sun Feb  1 19:19:20 2026] 127.0.0.1:34902 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54936 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54936 [200]: GET /index.php
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54936 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54942 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54942 [200]: GET /stil/index.css
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54942 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54944 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54960 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54972 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54980 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54992 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55004 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54944 [200]: GET /stil/navbar.css
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54944 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54960 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54960 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54972 [200]: GET /stil/footer.css
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54972 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54980 [200]: GET /funktionen/navbar.js
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54992 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54980 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:54992 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55004 [200]: GET /funktionen/index.js
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55004 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55012 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55024 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55012 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55012 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55024 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55024 Closing
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55038 Accepted
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55038 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:19:28 2026] 127.0.0.1:55038 Closing
+[Sun Feb  1 19:21:01 2026] 127.0.0.1:46098 Accepted
+[Sun Feb  1 19:21:01 2026] 127.0.0.1:46108 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46098 [200]: GET /galerie.php
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46098 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46108 [200]: GET /stil/galerie.css
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46108 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46122 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46128 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46134 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46142 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46154 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46122 [200]: GET /stil/navbar.css
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46122 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46128 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46128 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46134 [200]: GET /stil/footer.css
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46134 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46142 [200]: GET /funktionen/navbar.js
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46142 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46154 [200]: GET /funktionen/galerie.js
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46154 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46164 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46170 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46186 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46192 Accepted
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46164 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46164 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46170 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46170 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46186 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46186 Closing
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46192 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Sun Feb  1 19:21:02 2026] 127.0.0.1:46192 Closing
+[Sun Feb  1 19:21:03 2026] 127.0.0.1:46204 Accepted
+[Sun Feb  1 19:21:03 2026] 127.0.0.1:46204 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:21:03 2026] 127.0.0.1:46204 Closing
+[Sun Feb  1 19:21:04 2026] 127.0.0.1:46218 Accepted
+[Sun Feb  1 19:21:04 2026] 127.0.0.1:46218 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:21:04 2026] 127.0.0.1:46218 Closing
+[Sun Feb  1 19:21:05 2026] 127.0.0.1:46228 Accepted
+[Sun Feb  1 19:21:05 2026] 127.0.0.1:46228 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Sun Feb  1 19:21:05 2026] 127.0.0.1:46228 Closing
+[Sun Feb  1 19:21:07 2026] 127.0.0.1:46236 Accepted
+[Sun Feb  1 19:21:07 2026] 127.0.0.1:46236 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:21:07 2026] 127.0.0.1:46236 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55200 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55214 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55214 [200]: GET /galerie.php
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55214 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55200 [200]: GET /stil/galerie.css
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55200 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55228 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55240 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55242 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55254 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55268 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55228 [200]: GET /stil/navbar.css
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55228 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55240 [200]: GET /stil/footer.css
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55240 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55242 [200]: GET /funktionen/navbar.js
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55242 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55254 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55254 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55268 [200]: GET /funktionen/galerie.js
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55268 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55274 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55290 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55296 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55304 Accepted
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55274 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55274 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55290 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55290 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55296 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55296 Closing
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55304 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Sun Feb  1 19:22:31 2026] 127.0.0.1:55304 Closing

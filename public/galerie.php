@@ -83,19 +83,17 @@ if ($pdo) {
         </div>
     </div>
 
-    <div class="lightbox" id="lightbox">
-        <span class="close" id="lightbox-close">&times;</span>
-
-        <div class="lightbox-info">
-            <span id="lightbox-year"></span>
-            <span id="lightbox-alt"></span>
-        </div>
-
-        <div class="lightbox-nav">
-            <div class="nav-prev"></div>
-            <img src="" alt="" id="lightbox-image">
-            <div class="nav-next"></div>
-        </div>
+    <div id="lightbox">
+        <button class="nav prev" aria-label="Previous image">&#10094;</button>
+        <figure>
+            <img id="lightbox-image" alt="">
+            <div class="lightbox-info">
+                <figcaption id="description"></figcaption>
+                <span id="image-year"></span>
+            </div>
+        </figure>
+        <button class="nav next" aria-label="Next image">&#10095;</button>
+        <span id="close" aria-label="Close">&times;</span>
     </div>
 
     <?php include 'footer.php'; ?>
