@@ -1671,3 +1671,180 @@ Stack trace:
 [Sun Feb  1 19:22:31 2026] 127.0.0.1:55296 Closing
 [Sun Feb  1 19:22:31 2026] 127.0.0.1:55304 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
 [Sun Feb  1 19:22:31 2026] 127.0.0.1:55304 Closing
+[Thu Feb  5 21:36:35 2026] PHP 8.3.6 Development Server (http://0.0.0.0:8000) started
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35696 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35712 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35696 [200]: GET /
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35696 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35712 [200]: GET /stil/index.css
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35712 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35722 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35730 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35736 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35752 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35764 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35774 Accepted
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35722 [200]: GET /stil/navbar.css
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35722 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35730 [200]: GET /stil/footer.css
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35730 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35736 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35736 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35752 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35752 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35764 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35764 Closing
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35774 [200]: GET /funktionen/index.js
+[Thu Feb  5 21:36:38 2026] 127.0.0.1:35774 Closing
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35782 Accepted
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35796 Accepted
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35782 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35782 Closing
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35796 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Thu Feb  5 21:36:39 2026] 127.0.0.1:35796 Closing
+[Thu Feb  5 21:36:41 2026] 127.0.0.1:35804 Accepted
+[Thu Feb  5 21:36:41 2026] 127.0.0.1:35804 [404]: GET /kontakt.php - No such file or directory
+[Thu Feb  5 21:36:41 2026] 127.0.0.1:35804 Closing
+[Thu Feb  5 21:36:41 2026] 127.0.0.1:35806 Accepted
+[Thu Feb  5 21:40:20 2026] 127.0.0.1:35806 Closed without sending a request; it was probably just an unused speculative preconnection
+[Thu Feb  5 21:40:20 2026] 127.0.0.1:35806 Closing
+[Thu Feb  5 21:41:45 2026] 127.0.0.1:39594 Accepted
+[Thu Feb  5 21:41:45 2026] 127.0.0.1:39600 Accepted
+[Thu Feb  5 21:41:45 2026] 127.0.0.1:39594 [404]: GET /kontakt.php - No such file or directory
+[Thu Feb  5 21:41:45 2026] 127.0.0.1:39594 Closing
+[Thu Feb  5 21:41:49 2026] 127.0.0.1:43650 Accepted
+[Thu Feb  5 21:41:49 2026] 127.0.0.1:39600 [200]: GET /
+[Thu Feb  5 21:41:49 2026] 127.0.0.1:39600 Closing
+[Thu Feb  5 21:41:51 2026] 127.0.0.1:43650 [200]: GET /contact.php
+[Thu Feb  5 21:41:51 2026] 127.0.0.1:43650 Closing
+[Thu Feb  5 21:41:51 2026] 127.0.0.1:43662 Accepted
+[Thu Feb  5 21:41:51 2026] 127.0.0.1:43662 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:41:51 2026] 127.0.0.1:43662 Closing
+[Thu Feb  5 21:42:12 2026] 127.0.0.1:59648 Accepted
+[Thu Feb  5 21:42:12 2026] 127.0.0.1:59656 Accepted
+[Thu Feb  5 21:42:12 2026] PHP Fatal error:  Uncaught Error: Undefined constant "navebar" in /workspaces/Konik-Website/public/contact.php:10
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/contact.php on line 10
+[Thu Feb  5 21:42:12 2026] 127.0.0.1:59648 [500]: GET /contact.php - Uncaught Error: Undefined constant "navebar" in /workspaces/Konik-Website/public/contact.php:10
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/contact.php on line 10
+[Thu Feb  5 21:42:12 2026] 127.0.0.1:59648 Closing
+[Thu Feb  5 21:42:15 2026] 127.0.0.1:59660 Accepted
+[Thu Feb  5 21:42:15 2026] PHP Fatal error:  Uncaught Error: Undefined constant "navebar" in /workspaces/Konik-Website/public/contact.php:10
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/contact.php on line 10
+[Thu Feb  5 21:42:15 2026] 127.0.0.1:59656 [500]: GET /contact.php - Uncaught Error: Undefined constant "navebar" in /workspaces/Konik-Website/public/contact.php:10
+Stack trace:
+#0 {main}
+  thrown in /workspaces/Konik-Website/public/contact.php on line 10
+[Thu Feb  5 21:42:15 2026] 127.0.0.1:59656 Closing
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50334 Accepted
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:59660 [200]: GET /contact.php
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:59660 Closing
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50334 [200]: GET /datenbank/bilder/logo/nationalpark-schwarzwald-logo.png
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50334 Closing
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50350 Accepted
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50354 Accepted
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50350 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50350 Closing
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50354 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:42:32 2026] 127.0.0.1:50354 Closing
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37886 Accepted
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37894 Accepted
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37886 [200]: GET /contact.php
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37886 Closing
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37894 [200]: GET /datenbank/bilder/logo/logo.png
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37894 Closing
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37898 Accepted
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37906 Accepted
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37898 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37898 Closing
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37906 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:43:00 2026] 127.0.0.1:37906 Closing
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44834 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44842 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44834 [200]: GET /contact.php
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44834 Closing
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44842 [200]: GET /stil/contact.css
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44842 Closing
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44852 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44866 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44872 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44888 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44892 Accepted
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44852 [200]: GET /stil/navbar.css
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44852 Closing
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44866 [200]: GET /stil/footer.css
+[Thu Feb  5 21:43:28 2026] 127.0.0.1:44866 Closing
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44872 [200]: GET /datenbank/bilder/logo/logo.png
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44872 Closing
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44888 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44888 Closing
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44892 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:43:29 2026] 127.0.0.1:44892 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37630 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37642 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37630 [200]: GET /contact.php?
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37630 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37642 [200]: GET /stil/contact.css
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37642 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37646 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37648 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37662 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37678 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37692 Accepted
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37646 [200]: GET /stil/navbar.css
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37646 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37648 [200]: GET /stil/footer.css
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37648 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37662 [200]: GET /datenbank/bilder/logo/logo.png
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37662 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37678 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37678 Closing
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37692 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:43:45 2026] 127.0.0.1:37692 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43808 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43816 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43808 [200]: GET /contact.php?
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43808 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43816 [200]: GET /stil/contact.css
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43816 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43820 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43824 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43828 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43834 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43838 Accepted
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43820 [200]: GET /stil/footer.css
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43820 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43824 [200]: GET /stil/navbar.css
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43824 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43828 [200]: GET /datenbank/bilder/logo/logo.png
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43828 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43834 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43834 Closing
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43838 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:44:43 2026] 127.0.0.1:43838 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53544 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53558 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53544 [200]: GET /contact.php?
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53544 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53558 [200]: GET /stil/contact.css
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53558 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53568 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53574 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53576 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53586 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53602 Accepted
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53568 [200]: GET /stil/navbar.css
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53568 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53574 [200]: GET /datenbank/bilder/logo/logo.png
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53574 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53576 [200]: GET /stil/footer.css
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53576 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53586 [200]: GET /funktionen/navbar.js
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53586 Closing
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53602 [404]: GET /funktionnen/contact.js - No such file or directory
+[Thu Feb  5 21:44:57 2026] 127.0.0.1:53602 Closing
