@@ -1,3 +1,15 @@
+:root {
+    --textfarbe: #e0e0e0;
+    --wichtige-textfarbe: #3274ED;
+    --kleiner-textfarbe: #333;
+    --button-farbe: #3274ED;
+    --buttonhoverfarbe: #6999F2;
+    --hintergrundfarbe: #1a1a1a;
+    --rahmenfarbe: #afababb4;
+    --kartenhintergrund: #2e2c2c;
+    --text-schatten: rgba(0,0,0,0.4);
+}
+
 .footer-dark {
     background-color: var(--hintergrundfarbe);
     color: var(--textfarbe);
