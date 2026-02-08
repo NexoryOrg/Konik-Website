@@ -20,10 +20,16 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--hintergrundfarbe);
     color: var(--textfarbe);
+    min-height: 100vh;
+    margin: 0;
+}
+
+.contact-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 200px);
+    padding: 120px 20px 50px 20px;
 }
 
 .contact-container {

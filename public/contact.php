@@ -11,21 +11,23 @@
 
     <?php include 'navbar.php'; ?>
 
-    <div class="contact-container">
-    <h2>Kontaktformular</h2>
-    <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required>
+    <div class="contact-wrapper">
+        <div class="contact-container">
+        <h2>Kontaktformular</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
 
-        <label for="email">E-Mail:</label>
-        <input type="email" id="email" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" required>
 
-        <label for="message">Nachricht:</label>
-        <textarea id="message" rows="5" required></textarea>
+            <label for="message">Nachricht:</label>
+            <textarea id="message" rows="5" required></textarea>
 
-        <button id="contact_button" type="submit">Absenden</button>
-        <div id="status"></div>
-    </form>
+            <button id="contact_button" type="submit">Absenden</button>
+            <div id="status"></div>
+        </form>
+        </div>
     </div>
 
     <?php include 'footer.php'; ?>
