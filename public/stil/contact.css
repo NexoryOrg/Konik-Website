@@ -7,40 +7,34 @@
     --hintergrundfarbe: #1a1a1a;
     --rahmenfarbe: #afababb4;
     --kartenhintergrund: #2e2c2c;
-    --text-schatten: rgba(0,0,0,0.4);
 }
-
+  
 body {
+    font-family: Arial, sans-serif;
     background-color: var(--hintergrundfarbe);
-    color: var(--textfarbe);
-}
-
+  }
 .contact-container {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 20px;
     background-color: var(--kartenhintergrund);
-    border: 1px solid var(--rahmenfarbe);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--text-schatten);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
     display: flex;
-    flex-direction: column;
-}
-
-
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
 .contact-container h2 {
     text-align: center;
-    text-decoration: underline var(--wichtige-textfarbe);
-}
-h2 {
-    text-align: center;
     margin-bottom: 20px;
-}
+  }
 label {
     font-weight: bold;
     display: block;
     margin-top: 10px;
-}
+  }
 input, textarea, button {
     width: 100%;
     margin-top: 5px;
@@ -59,16 +53,16 @@ button {
   }
 button:hover {
     background-color: var(--buttonhoverfarbe);
-}
+  }
 .success {
     color: green;
     text-align: center;
     margin-top: 15px;
     font-weight: bold;
-}
+  }
 .error {
     color: red;
     text-align: center;
     margin-top: 15px;
     font-weight: bold;
-}
+  }
