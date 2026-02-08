@@ -524,3 +524,54 @@
 [Sun Feb  8 19:03:33 2026] 127.0.0.1:34654 Closing
 [Sun Feb  8 19:03:33 2026] 127.0.0.1:34662 [200]: GET /funktionen/contact.js
 [Sun Feb  8 19:03:33 2026] 127.0.0.1:34662 Closing
+[Sun Feb  8 19:06:54 2026] 127.0.0.1:51570 Accepted
+[Sun Feb  8 19:06:54 2026] 127.0.0.1:51570 [200]: GET /index.php
+[Sun Feb  8 19:06:54 2026] 127.0.0.1:51570 Closing
+[Sun Feb  8 19:06:54 2026] 127.0.0.1:51578 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51578 [200]: GET /stil/index.css
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51578 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51582 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51598 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51612 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51614 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51620 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51632 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51582 [200]: GET /stil/navbar.css
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51582 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51598 [200]: GET /stil/footer.css
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51598 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51612 [200]: GET /datenbank/bilder/logo/logo.png
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51612 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51614 [200]: GET /funktionen/navbar.js
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51614 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51620 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51620 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51632 [200]: GET /funktionen/index.js
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51632 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51642 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51656 Accepted
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51642 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51642 Closing
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51656 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Sun Feb  8 19:06:55 2026] 127.0.0.1:51656 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51658 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51658 [200]: GET /galerie.php
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51658 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51668 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51668 [200]: GET /stil/galerie.css
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51668 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51684 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51696 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51700 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51706 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51720 Accepted
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51684 [200]: GET /stil/navbar.css
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51684 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51696 [200]: GET /datenbank/bilder/logo/logo.png
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51696 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51700 [200]: GET /funktionen/navbar.js
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51700 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51706 [200]: GET /stil/footer.css
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51706 Closing
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51720 [200]: GET /funktionen/galerie.js
+[Sun Feb  8 19:06:57 2026] 127.0.0.1:51720 Closing
