@@ -2,7 +2,10 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+=======
+>>>>>>> fe9246f204153e343b9890ecf3a8852ac48bd631
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stil/footer.css">
     <link rel="stylesheet" href="stil/contact.css">
