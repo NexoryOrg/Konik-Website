@@ -1014,3 +1014,24 @@ Stack trace:
 [Sun Feb  8 19:41:33 2026] 127.0.0.1:34670 Closing
 [Sun Feb  8 19:41:33 2026] 127.0.0.1:34686 [200]: GET /funktionen/contact.js
 [Sun Feb  8 19:41:33 2026] 127.0.0.1:34686 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39384 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39392 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39384 [200]: GET /contact.php
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39384 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39392 [200]: GET /stil/footer.css
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39392 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39404 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39408 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39410 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39412 Accepted
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39404 [200]: GET /stil/contact.css
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39404 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39408 [200]: GET /stil/navbar.css
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39410 [200]: GET /datenbank/bilder/logo/logo.png
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39408 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39410 Closing
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39412 [200]: GET /funktionen/navbar.js
+[Sun Feb  8 19:50:13 2026] 127.0.0.1:39412 Closing
+[Sun Feb  8 19:50:14 2026] 127.0.0.1:39422 Accepted
+[Sun Feb  8 19:50:14 2026] 127.0.0.1:39422 [200]: GET /funktionen/contact.js
+[Sun Feb  8 19:50:14 2026] 127.0.0.1:39422 Closing
