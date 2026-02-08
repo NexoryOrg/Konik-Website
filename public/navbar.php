@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="logo-container">
-    <a href="index.php"><img src="datenbank/bilder/logo/nationalpark-schwarzwald-logo.png" alt="Logo" class="logo"></a>
+    <a href="index.php"><img src="datenbank/bilder/logo/logo.png" alt="Logo" class="logo"></a>
   </div>
   <ul class="navbar-menu">
     <li><a href="index.php">Startseite</a></li>

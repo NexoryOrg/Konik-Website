@@ -1,33 +1,107 @@
 :root {
     --textfarbe: #e0e0e0;
     --wichtige-textfarbe: #3274ED;
-    --kleiner-textfarbe: #333;
+    --kleiner-textfarbe: #aaa;
     --button-farbe: #3274ED;
     --buttonhoverfarbe: #6999F2;
     --hintergrundfarbe: #1a1a1a;
-    --rahmenfarbe: #afababb4;
+    --rahmenfarbe: #555;
     --kartenhintergrund: #2e2c2c;
-    --text-schatten: rgba(0,0,0,0.4);
+    --input-hintergrund: #3a3838;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--hintergrundfarbe);
     color: var(--textfarbe);
+    min-height: 100vh;
+    margin: 0;
 }
 
-.contact-section {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 20px;
+.contact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 120px 20px 50px 20px;
+}
+
+.contact-container {
     background-color: var(--kartenhintergrund);
-    border: 1px solid var(--rahmenfarbe);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--text-schatten);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    width: 100%;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contact-section h1 {
+.contact-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+.contact-container h2 {
     text-align: center;
-    text-decoration: underline var(--wichtige-textfarbe);
+    margin-bottom: 25px;
+    color: var(--wichtige-textfarbe);
+    font-size: 1.8rem;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+    color: var(--kleiner-textfarbe);
+}
+
+input, textarea {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--rahmenfarbe);
+    background-color: var(--input-hintergrund);
+    color: var(--textfarbe);
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--wichtige-textfarbe);
+    box-shadow: 0 0 8px rgba(50, 116, 237, 0.5);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--button-farbe);
+    color: var(--textfarbe);
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--buttonhoverfarbe);
+    transform: translateY(-2px);
 }

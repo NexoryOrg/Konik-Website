@@ -1,30 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="stil/contact.css">
-        <link rel="stylesheet" href="stil/navbar.css">
-        <link rel="stylesheet" href="stil/footer.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stil/footer.css">
+    <link rel="stylesheet" href="stil/contact.css">
+    <link rel="stylesheet" href="stil/navbar.css">
+</head>
+<body>
 
     <?php include 'navbar.php'; ?>
 
-    <section class="contact-section">
-        <h1>Kontaktieren Sie uns</h1>
-        <form action="send.php" method="post" class="contact-form">
+    <div class="contact-wrapper">
+        <div class="contact-container">
+        <h2>Kontaktformular</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
 
             <label for="email">E-Mail:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" required>
 
             <label for="message">Nachricht:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea id="message" rows="5" required></textarea>
 
-            <button type="submit">Absenden</button>
+            <button id="contact_button" type="submit">Absenden</button>
+            <div id="status"></div>
         </form>
-    </section>
+        </div>
+    </div>
 
     <?php include 'footer.php'; ?>
 
-    </body>
-</html>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="funktionen/contact.js"></script>
+
+</body>

@@ -6,6 +6,8 @@ require_once __DIR__ . '/init.php';
 <html lang="de">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="stil/index.css">
   <link rel="stylesheet" href="stil/navbar.css">
   <link rel="stylesheet" href="stil/footer.css">
