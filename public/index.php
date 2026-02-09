@@ -7,12 +7,6 @@ require_once __DIR__ . '/init.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
-<<<<<<< HEAD
-=======
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Startseite</title>
->>>>>>> 8215e57c529b66844d022c86062e3708296ea9c7
   <link rel="stylesheet" href="stil/index.css">
   <link rel="stylesheet" href="stil/navbar.css">
   <link rel="stylesheet" href="stil/footer.css">
