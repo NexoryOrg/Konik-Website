@@ -2,12 +2,10 @@
     --textfarbe: #e0e0e0;
     --wichtige-textfarbe: #3274ED;
     --kleiner-textfarbe: #aaa;
-    --button-farbe: #3274ED;
-    --buttonhoverfarbe: #6999F2;
     --hintergrundfarbe: #1a1a1a;
-    --rahmenfarbe: #555;
     --kartenhintergrund: #2e2c2c;
     --input-hintergrund: #3a3838;
+    --rahmenfarbe: #555;
 }
 
 * {
@@ -17,91 +15,139 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--hintergrundfarbe);
+    background: var(--hintergrundfarbe);
     color: var(--textfarbe);
-    min-height: 100vh;
-    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.contact-wrapper {
+.contact-wrapper,
+.faq-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 200px);
-    padding: 120px 20px 50px 20px;
+    padding: 120px 20px 50px;
+}
+
+.contact-container,
+.faq-container {
+    background: var(--kartenhintergrund);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
 }
 
 .contact-container {
-    background-color: var(--kartenhintergrund);
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    width: 100%;
     max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-container:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
-}
-
-.contact-container h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--wichtige-textfarbe);
-    font-size: 1.8rem;
+    width: 100%;
 }
 
 label {
-    font-weight: 600;
-    margin-top: 15px;
     display: block;
+    margin-top: 15px;
     color: var(--kleiner-textfarbe);
 }
 
 input, textarea {
     width: 100%;
     margin-top: 8px;
-    padding: 12px 14px;
+    padding: 12px;
     border-radius: 10px;
     border: 1px solid var(--rahmenfarbe);
-    background-color: var(--input-hintergrund);
+    background: var(--input-hintergrund);
     color: var(--textfarbe);
-    font-size: 1rem;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 input:focus, textarea:focus {
     border-color: var(--wichtige-textfarbe);
-    box-shadow: 0 0 8px rgba(50, 116, 237, 0.5);
+    box-shadow: 0 0 10px rgba(50,116,237,0.4);
     outline: none;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
 button {
+    margin-top: 20px;
     width: 100%;
     padding: 14px;
     border-radius: 12px;
     border: none;
-    background-color: var(--button-farbe);
-    color: var(--textfarbe);
-    font-weight: bold;
-    font-size: 1rem;
-    margin-top: 20px;
+    background: var(--wichtige-textfarbe);
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: var(--buttonhoverfarbe);
+    background: #2558c2;
     transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+
+.section-separator {
+    height: 4px;
+    width: 60%;
+    margin: 50px auto;
+    background: linear-gradient(to right, transparent, var(--wichtige-textfarbe), transparent);
+    border-radius: 2px;
+}
+
+.faq-container {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.faq-container h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-decoration: underline var(--wichtige-textfarbe);
+}
+
+.faq-item {
+    background: var(--input-hintergrund);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.arrow {
+    font-size: x-large;
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--wichtige-textfarbe);
+}
+.faq-item.active .arrow {
+    transform: rotate(45deg);
+    color: #55aaff;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background-color: var(--hintergrundfarbe);
+    padding: 0 20px;
+    border-radius: 12px 12px;
+    transition: max-height .4s ease, opacity .3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+.faq-item.active .arrow {
+    transform: rotate(45deg);
 }
