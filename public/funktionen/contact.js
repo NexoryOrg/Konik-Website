@@ -49,3 +49,28 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+const openFaqs = JSON.parse(localStorage.getItem("openFaqs")) || [];
+
+faqItems.forEach(item => {
+    const id = item.dataset.id;
+    if (openFaqs.includes(id)) {
+        item.classList.add("active");
+    }
+
+    item.addEventListener("click", () => {
+        item.classList.toggle("active");
+
+        const updatedOpenFaqs = [];
+
+        faqItems.forEach(i => {
+            if (i.classList.contains("active")) {
+                updatedOpenFaqs.push(i.dataset.id);
+            }
+        });
+
+        localStorage.setItem("openFaqs", JSON.stringify(updatedOpenFaqs));
+    });
+});
