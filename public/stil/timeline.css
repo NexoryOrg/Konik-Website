@@ -7,6 +7,7 @@
     --hintergrundfarbe: #1a1a1a;
     --rahmenfarbe: #afababb4;
     --kartenhintergrund: #2e2c2c;
+    --text-schatten: rgba(0,0,0,0.4);
 }
 
 body {

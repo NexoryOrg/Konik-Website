@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [Sun Feb  8 17:38:19 2026] 127.0.0.1:56908 Accepted
 [Sun Feb  8 17:38:19 2026] 127.0.0.1:56924 Accepted
 [Sun Feb  8 17:38:20 2026] 127.0.0.1:56908 [200]: GET /contact.php?
@@ -2301,3 +2302,5 @@ Stack trace:
 [Mon Feb  9 17:25:33 2026] 127.0.0.1:50584 Closing
 [Mon Feb  9 17:25:33 2026] 127.0.0.1:50596 [200]: GET /datenbank/bilder/pferde/buran.jpg
 [Mon Feb  9 17:25:33 2026] 127.0.0.1:50596 Closing
+=======
+>>>>>>> 8215e57c529b66844d022c86062e3708296ea9c7

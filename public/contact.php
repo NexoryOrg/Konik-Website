@@ -2,8 +2,15 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+=======
+
+    <title>Kontakt</title>
+
+>>>>>>> 8215e57c529b66844d022c86062e3708296ea9c7
     <link rel="stylesheet" href="stil/footer.css">
     <link rel="stylesheet" href="stil/contact.css">
     <link rel="stylesheet" href="stil/navbar.css">
