@@ -28,9 +28,11 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
   
     <title>Zeitstrahl</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stil/timeline.css">
     <link rel="stylesheet" href="stil/navbar.css">
     <link rel="stylesheet" href="stil/footer.css">

@@ -5,11 +5,21 @@ require_once __DIR__ . '/init.php';
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
-  <link rel="stylesheet" href="stil/index.css">
-  <link rel="stylesheet" href="stil/navbar.css">
-  <link rel="stylesheet" href="stil/footer.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self'; 
+                style-src 'self' https://cdnjs.cloudflare.com https://unpkg.com; 
+                script-src 'self' https://unpkg.com; 
+                font-src 'self' https://cdnjs.cloudflare.com https://unpkg.com;">
+
+    <title>Startseite</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="stil/index.css">
+    <link rel="stylesheet" href="stil/navbar.css">
+    <link rel="stylesheet" href="stil/footer.css">
 </head>
 <body>
 
@@ -77,11 +87,9 @@ require_once __DIR__ . '/init.php';
         <span id="close" aria-label="Close">&times;</span>
     </div>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <?php include 'footer.php'; ?>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="funktionen/index.js"></script>
 </body>
 </html>
