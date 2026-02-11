@@ -18,12 +18,12 @@ require_once __DIR__ . '/init.php';
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stil/index.css">
-    <link rel="stylesheet" href="stil/navbar.css">
-    <link rel="stylesheet" href="stil/footer.css">
+    <link rel="stylesheet" href="!navebar/navbar.css">
+    <link rel="stylesheet" href="!footer/footer.css">
 </head>
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include '!navebar/navbar.php'; ?>
 
     <section class="hero">
         <img src="datenbank/bilder/hintergrund/pferde.jpeg" alt="Wildpferde auf einer Wiese">
@@ -87,7 +87,7 @@ require_once __DIR__ . '/init.php';
         <span id="close" aria-label="Close">&times;</span>
     </div>
 
-    <?php include 'footer.php'; ?>
+    <?php include '!footer/footer.php'; ?>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="funktionen/index.js"></script>

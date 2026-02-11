@@ -3287,3 +3287,310 @@ Stack trace:
 [Tue Feb 10 19:45:39 2026] 127.0.0.1:36200 Closing
 [Tue Feb 10 19:45:39 2026] 127.0.0.1:36204 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
 [Tue Feb 10 19:45:39 2026] 127.0.0.1:36204 Closing
+[Wed Feb 11 16:55:19 2026] PHP 8.3.6 Development Server (http://0.0.0.0:8000) started
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56474 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56488 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56488 [200]: GET /
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56488 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56474 [200]: GET /stil/index.css
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56474 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56492 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56500 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56504 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56518 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56492 [200]: GET /stil/footer.css
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56492 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56500 [200]: GET /stil/navbar.css
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56500 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56504 [200]: GET /funktionen/navbar.js
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56504 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56518 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56520 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56532 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56520 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56540 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56532 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56556 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56540 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56556 [200]: GET /funktionen/index.js
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56520 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56532 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56518 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56540 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56556 Closing
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56564 Accepted
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56564 [404]: GET /favicon.ico - No such file or directory
+[Wed Feb 11 16:55:22 2026] 127.0.0.1:56564 Closing
+[Wed Feb 11 16:56:00 2026] 127.0.0.1:52624 Accepted
+[Wed Feb 11 16:56:00 2026] 127.0.0.1:52624 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 16:56:00 2026] 127.0.0.1:52624 Closing
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39700 Accepted
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39704 Accepted
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39704 [200]: GET /
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39704 Closing
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39700 [200]: GET /navebar/navbar.css
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39700 Closing
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39708 Accepted
+[Wed Feb 11 16:59:19 2026] 127.0.0.1:39714 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39728 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39708 [200]: GET /stil/index.css
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39708 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39714 [200]: GET /footer/footer.css
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39714 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39728 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39728 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39730 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39736 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39748 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39730 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39730 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39736 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39736 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39748 [200]: GET /funktionen/index.js
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39748 Closing
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39758 Accepted
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39758 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 16:59:20 2026] 127.0.0.1:39758 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34432 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34446 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34432 [200]: GET /
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34432 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34446 [200]: GET /stil/index.css
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34446 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34456 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34470 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34486 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34498 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34456 [200]: GET /navebar/navbar.css
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34456 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34470 [200]: GET /footer/footer.css
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34470 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34486 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34486 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34498 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34498 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34514 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34528 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34538 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34540 Accepted
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34514 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34514 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34528 [200]: GET /funktionen/index.js
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34528 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34538 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34538 Closing
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34540 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:00:16 2026] 127.0.0.1:34540 Closing
+[Wed Feb 11 17:00:17 2026] 127.0.0.1:34546 Accepted
+[Wed Feb 11 17:00:17 2026] 127.0.0.1:34546 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:00:17 2026] 127.0.0.1:34546 Closing
+[Wed Feb 11 17:01:17 2026] 127.0.0.1:60422 Accepted
+[Wed Feb 11 17:01:17 2026] 127.0.0.1:60432 Accepted
+[Wed Feb 11 17:01:17 2026] 127.0.0.1:60422 [200]: GET /
+[Wed Feb 11 17:01:17 2026] 127.0.0.1:60422 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60432 [200]: GET /stil/index.css
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60432 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60444 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60458 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60470 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60444 [404]: GET /navebar/navbar.css - No such file or directory
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60444 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60458 [404]: GET /footer/footer.css - No such file or directory
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60458 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60470 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60470 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60486 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60492 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60494 Accepted
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60486 [200]: GET /funktionen/index.js
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60486 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60492 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60492 Closing
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60494 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:01:18 2026] 127.0.0.1:60494 Closing
+[Wed Feb 11 17:01:19 2026] 127.0.0.1:60136 Accepted
+[Wed Feb 11 17:01:19 2026] 127.0.0.1:60136 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:01:19 2026] 127.0.0.1:60136 Closing
+[Wed Feb 11 17:01:24 2026] 127.0.0.1:60138 Accepted
+[Wed Feb 11 17:01:24 2026] 127.0.0.1:60148 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60138 [200]: GET /timeline.php
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60138 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60148 [200]: GET /stil/timeline.css
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60148 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60160 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60176 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60182 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60188 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60160 [404]: GET /navebar/navbar.css - No such file or directory
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60160 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60176 [404]: GET /footer/footer.css - No such file or directory
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60176 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60182 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60182 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60188 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60188 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60198 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60208 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60216 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60220 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60224 Accepted
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60198 [200]: GET /funktionen/timeline.js
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60198 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60208 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60208 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60216 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60216 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60220 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60220 Closing
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60224 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:01:25 2026] 127.0.0.1:60224 Closing
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36372 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36384 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36372 [200]: GET /
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36372 Closing
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36384 [200]: GET /stil/index.css
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36384 Closing
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36398 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36402 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36406 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36418 Accepted
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36398 [200]: GET /!navebar/navbar.css
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36398 Closing
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36402 [200]: GET /!footer/footer.css
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36402 Closing
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36406 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:02:30 2026] 127.0.0.1:36406 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36418 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36418 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36422 Accepted
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36430 Accepted
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36432 Accepted
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36448 Accepted
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36422 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36422 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36430 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36430 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36432 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36432 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36448 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36448 Closing
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36450 Accepted
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36450 [200]: GET /funktionen/index.js
+[Wed Feb 11 17:02:31 2026] 127.0.0.1:36450 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58960 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58976 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58960 [200]: GET /galerie.php
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58960 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58976 [200]: GET /stil/galerie.css
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58976 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58992 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59000 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59012 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59024 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58992 [200]: GET /!navebar/navbar.css
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:58992 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59000 [200]: GET /!footer/footer.css
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59000 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59012 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59012 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59024 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59024 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59026 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59040 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59046 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59056 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59058 Accepted
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59026 [200]: GET /funktionen/galerie.js
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59026 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59040 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59040 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59046 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59046 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59056 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59056 Closing
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59058 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Wed Feb 11 17:02:55 2026] 127.0.0.1:59058 Closing
+[Wed Feb 11 17:02:56 2026] 127.0.0.1:59074 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59080 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59074 [200]: GET /timeline.php
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59074 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59080 [200]: GET /stil/timeline.css
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59080 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59086 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59096 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59112 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59118 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59086 [200]: GET /!navebar/navbar.css
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59086 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59096 [200]: GET /!footer/footer.css
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59096 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59112 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59112 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59118 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59118 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59120 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59134 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59150 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59162 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59172 Accepted
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59120 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59120 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59134 [200]: GET /datenbank/bilder/pferde/ronda.jpg
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59134 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59150 [200]: GET /datenbank/bilder/pferde/brunhilde.jpg
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59150 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59162 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59162 Closing
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59172 [200]: GET /funktionen/timeline.js
+[Wed Feb 11 17:02:57 2026] 127.0.0.1:59172 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43456 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43456 [200]: GET /contact.php
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43456 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43464 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43464 [200]: GET /!footer/footer.css
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43464 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43476 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43492 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43498 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43512 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43476 [200]: GET /!navebar/navbar.css
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43476 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43492 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43492 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43498 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43498 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43512 [200]: GET /stil/contact.css
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43512 Closing
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43520 Accepted
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43520 [200]: GET /funktionen/contact.js
+[Wed Feb 11 17:02:58 2026] 127.0.0.1:43520 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43524 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43524 [200]: GET /index.php
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43524 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43538 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43538 [200]: GET /stil/index.css
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43538 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43546 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43558 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43562 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43578 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43546 [200]: GET /!footer/footer.css
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43546 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43558 [200]: GET /!navebar/navbar.css
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43558 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43562 [404]: GET /navbar.js - No such file or directory
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43562 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43578 [200]: GET /datenbank/bilder/logo/logo.png
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43578 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43586 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43590 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43596 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43598 Accepted
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43586 [200]: GET /datenbank/bilder/hintergrund/pferde.jpeg
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43586 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43590 [200]: GET /funktionen/index.js
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43590 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43596 [200]: GET /datenbank/bilder/pferde/start-projekt.jpg
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43596 Closing
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43598 [200]: GET /datenbank/bilder/pferde/buran.jpg
+[Wed Feb 11 17:03:05 2026] 127.0.0.1:43598 Closing

@@ -34,12 +34,12 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stil/timeline.css">
-    <link rel="stylesheet" href="stil/navbar.css">
-    <link rel="stylesheet" href="stil/footer.css">
+    <link rel="stylesheet" href="!navebar/navbar.css">
+    <link rel="stylesheet" href="!footer/footer.css">
 </head>
 <body>
 
-<?php include 'navbar.php'; ?>
+<?php include '!navebar/navbar.php'; ?>
 
 <div class="timeline-wrapper">
     <div class="timeline">
@@ -60,7 +60,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include '!footer/footer.php'; ?>
 
 <script src="funktionen/timeline.js"></script>
 </body>

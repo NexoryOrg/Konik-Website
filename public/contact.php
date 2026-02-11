@@ -8,13 +8,13 @@
     <title>Kontakt</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="stil/footer.css">
+    <link rel="stylesheet" href="!footer/footer.css">
     <link rel="stylesheet" href="stil/contact.css">
-    <link rel="stylesheet" href="stil/navbar.css">
+    <link rel="stylesheet" href="!navebar/navbar.css">
 </head>
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include '!navebar/navbar.php'; ?>
 
     <div class="contact-wrapper">
         <div class="contact-container">
@@ -75,7 +75,7 @@
 
     <div class="section-separator"></div>
 
-    <?php include 'footer.php'; ?>
+    <?php include '!footer/footer.php'; ?>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="funktionen/contact.js"></script>
