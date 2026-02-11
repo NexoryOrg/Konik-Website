@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="logo-container">
-    <a href="index.php"><img src="datenbank/bilder/logo/logo.png" alt="Logo" class="logo"></a>
+    <a href="index.php"><img src="./datenbank/bilder/logo/logo.png" alt="Logo" class="logo"></a>
   </div>
   <ul class="navbar-menu">
     <li><a href="index.php">Startseite</a></li>
@@ -15,4 +15,4 @@
   </div>
 </nav>
 
-<script src="funktionen/navbar.js"></script>
+<script src="navbar.js"></script>

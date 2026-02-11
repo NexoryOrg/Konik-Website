@@ -47,18 +47,21 @@ if ($pdo) {
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
+
 
     <title>Galerie</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="stil/galerie.css">
-    <link rel="stylesheet" href="stil/navbar.css">
-    <link rel="stylesheet" href="stil/footer.css">
+    <link rel="stylesheet" href="!navebar/navbar.css">
+    <link rel="stylesheet" href="!footer/footer.css">
 </head>
 <body>
 
 
-    <?php include 'navbar.php'; ?>
+    <?php include '!navebar/navbar.php'; ?>
 
     <div class="gallery-container">
         <div class="timeline-box">
@@ -97,7 +100,7 @@ if ($pdo) {
         <span id="close" aria-label="Close">&times;</span>
     </div>
 
-    <?php include 'footer.php'; ?>
+    <?php include '!footer/footer.php'; ?>
 
     <script src="funktionen/galerie.js"></script>
 </body>
