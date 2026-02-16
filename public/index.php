@@ -13,7 +13,8 @@ require_once __DIR__ . '/init.php';
                 script-src 'self' https://unpkg.com; 
                 font-src 'self' https://cdnjs.cloudflare.com https://unpkg.com;">
 
-    <title>Startseite</title>
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
