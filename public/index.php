@@ -8,10 +8,14 @@ require_once __DIR__ . '/init.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" 
-        content="default-src 'self'; 
-                style-src 'self' https://cdnjs.cloudflare.com https://unpkg.com; 
-                script-src 'self' https://unpkg.com; 
-                font-src 'self' https://cdnjs.cloudflare.com https://unpkg.com;">
+        content="
+        default-src 'self';
+        style-src 'self' https://cdnjs.cloudflare.com https://unpkg.com;
+        script-src 'self' https://unpkg.com;
+        font-src 'self' https://cdnjs.cloudflare.com https://unpkg.com;
+        img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org;
+        connect-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org;
+        ">
 
     <title>Home</title>
     <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">

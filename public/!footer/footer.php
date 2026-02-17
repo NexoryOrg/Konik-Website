@@ -29,8 +29,8 @@
             </div>
 
             <p class="copyright">Konik-Website © 2025</p>
-            <a class="link" href="public/contact.php">Kontakt</a>
-            <a class="link" href="public/datenschutz.php">Impressum & Datenschutz</a>
+            <a class="link" href="public/contact.php">Contact</a>
+            <a class="link" href="public/imprint.php">Imprint & Privacy Policy</a>
         </div>
     </div>
 </footer>
