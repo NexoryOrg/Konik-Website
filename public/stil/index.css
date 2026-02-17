@@ -234,6 +234,7 @@ body {
 }
 
 #map {
+    display: none;
     height: 400px;
     width: 100%;
     border-radius: 15px;
