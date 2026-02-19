@@ -133,10 +133,11 @@ button:hover {
 }
 
 .faq-answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
     opacity: 0;
+    padding: 0 0;
 }
 
 .faq-answer-content {
@@ -147,6 +148,7 @@ button:hover {
 }
 
 .faq-item.active .faq-answer {
-    grid-template-rows: 1fr;
+    max-height: 500px;
     opacity: 1;
+    padding: 20px 0;
 }
