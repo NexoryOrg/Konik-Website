@@ -9,11 +9,11 @@
     <li><a href="contact.php">Contact</a></li>
   </ul>
   <div class="navbar-toggle" id="navbar-toggle">
-    <span><a href="index.php">Home</a></span>
-    <span><a href="galerie.php">Galerie</a></span>
-    <span><a href="timeline.php">Timeline</a></span>
-    <spam><a href="contact.php">Contact</a></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
+
 </nav>
 
 <script src="navbar.js"></script>

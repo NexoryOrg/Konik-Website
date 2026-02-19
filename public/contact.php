@@ -91,7 +91,6 @@
     <div class="section-separator"></div>
 
     <?php include '!footer/footer.php'; ?>
-    <?php include 'footer.php'; ?>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="funktionen/contact.js"></script>
