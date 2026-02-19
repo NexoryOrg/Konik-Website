@@ -9,6 +9,10 @@
     --kartenhintergrund: #2e2c2c;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: var(--hintergrundfarbe);
@@ -36,6 +40,8 @@ body {
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    top: 120px;
+    height: fit-content;
 }
 
 .gallery-box {
