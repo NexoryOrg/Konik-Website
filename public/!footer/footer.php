@@ -3,7 +3,7 @@
         <div class="footer-content">
 
             <div class="wrapper">
-                <a href="https://www.instagram.com/" class="icon-footer" aria-label="instagram">
+                <a href="https://www.instagram.com/" class="icon-footer instagram" aria-label="instagram">
                     <svg width="24" height="24" viewBox="0 0 24 24">
                         <defs>
                             <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -19,7 +19,7 @@
                     </svg>
                     <span class="tooltip">Instagram</span>
                 </a>
-                <a href="https://www.facebook.com/" class="icon-footer" aria-label="facebook">
+                <a href="https://www.facebook.com/" class="icon-footer facebook" aria-label="facebook">
                     <svg width="24" height="24" viewBox="0 0 24 24">
                         <path fill="#1877F2"
                             d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.1V12h2.4V9.8c0-2.37 1.41-3.68 3.57-3.68 1.03 0 2.1.18 2.1.18v2.3h-1.18c-1.16 0-1.52.72-1.52 1.46V12h2.58l-.41 2.88h-2.17v6.99A10 10 0 0022 12z"/>

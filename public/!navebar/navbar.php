@@ -14,6 +14,7 @@
     <span><a href="timeline.php">Timeline</a></span>
     <spam><a href="contact.php">Contact</a></span>
   </div>
+
 </nav>
 
 <script src="navbar.js"></script>
