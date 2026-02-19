@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [Mon Feb 16 20:15:11 2026] PHP 8.3.6 Development Server (http://0.0.0.0:8000) started
 [Mon Feb 16 20:15:56 2026] 127.0.0.1:36456 Accepted
 [Mon Feb 16 20:15:56 2026] 127.0.0.1:36456 [200]: GET /
@@ -4139,3 +4140,5 @@ Stack trace:
 [Thu Feb 19 19:03:58 2026] 127.0.0.1:45744 Accepted
 [Thu Feb 19 19:03:58 2026] 127.0.0.1:45744 [200]: GET /datenbank/bilder/logo/logo.png
 [Thu Feb 19 19:03:58 2026] 127.0.0.1:45744 Closing
+=======
+>>>>>>> 7982a46915822ed7104842cafe7a4013bcd4a5c7
