@@ -96,5 +96,7 @@ require_once __DIR__ . '/init.php';
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="funktionen/index.js"></script>
+    <script src="!navebar/navbar.js"></script>
+    
 </body>
 </html>
