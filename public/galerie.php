@@ -103,5 +103,7 @@ if ($pdo) {
     <?php include '!footer/footer.php'; ?>
 
     <script src="funktionen/galerie.js"></script>
+    <script src="!navebar/navbar.js"></script>
+    
 </body>
 </html>

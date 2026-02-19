@@ -15,5 +15,3 @@
   </div>
 
 </nav>
-
-<script src="navbar.js"></script>
