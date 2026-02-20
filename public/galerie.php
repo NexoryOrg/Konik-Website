@@ -60,50 +60,62 @@ if ($pdo) {
 </head>
 <body>
 
+<?php include '!navebar/navbar.php'; ?>
 
-    <?php include '!navebar/navbar.php'; ?>
+<div class="gallery-container">
 
-    <div class="gallery-container">
-        <div class="timeline-box">
-            <div class="timeline">
-                <?php foreach($galerie as $jahr => $bilder): ?>
-                    <div class="timeline-dot"><span><?= e($jahr) ?></span></div>
-                <?php endforeach; ?>
-            </div>
+    <!-- TIMELINE -->
+    <div class="timeline-box">
+        <div class="timeline">
+            <?php foreach($galerie as $jahr => $bilder): ?>
+                <div class="timeline-dot" data-year="<?= e($jahr) ?>">
+                    <span><?= e($jahr) ?></span>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <div class="gallery-box">
-            <div class="gallery">
-                <?php foreach($galerie as $jahr => $bilder): ?>
-                    <div class="year-section">
-                        <h2><?= e($jahr) ?></h2>
-                        <div class="images">
-                            <?php foreach($bilder as $bild): ?>
-                                <img src="<?= safe_src($bild['src']) ?>" alt="<?= e($bild['alt']) ?>" loading="lazy" onerror="this.src='datenbank/bilder/error.jpg'">
-                            <?php endforeach; ?>
-                        </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-box">
+        <div class="gallery">
+            <?php foreach($galerie as $jahr => $bilder): ?>
+                <div class="year-section" id="year-<?= e($jahr) ?>">
+                    <h2><?= e($jahr) ?></h2>
+                    <div class="images">
+                        <?php foreach($bilder as $bild): ?>
+                            <img 
+                                src="<?= safe_src($bild['src']) ?>" 
+                                alt="<?= e($bild['alt']) ?>" 
+                                loading="lazy"
+                                onerror="this.src='datenbank/bilder/error.jpg'"
+                            >
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
-    <div id="lightbox">
-        <button class="nav prev" aria-label="Previous image">&#10094;</button>
-        <figure>
-            <img id="lightbox-image" alt="">
-            <div class="lightbox-info">
-                <figcaption id="description"></figcaption>
-                <span id="image-year"></span>
-            </div>
-        </figure>
-        <button class="nav next" aria-label="Next image">&#10095;</button>
-        <span id="close" aria-label="Close">&times;</span>
-    </div>
+</div>
 
-    <?php include '!footer/footer.php'; ?>
+<!-- LIGHTBOX -->
+<div id="lightbox">
+    <button class="nav prev" aria-label="Previous image">&#10094;</button>
+    <figure>
+        <img id="lightbox-image" alt="">
+        <div class="lightbox-info">
+            <figcaption id="description"></figcaption>
+            <span id="image-year"></span>
+        </div>
+    </figure>
+    <button class="nav next" aria-label="Next image">&#10095;</button>
+    <span id="close" aria-label="Close">&times;</span>
+</div>
 
-    <script src="funktionen/galerie.js"></script>
-    <script src="!navebar/navbar.js"></script>
-    
+<?php include '!footer/footer.php'; ?>
+
+<script src="funktionen/galerie.js"></script>
+<script src="!navebar/navbar.js"></script>
+
 </body>
 </html>

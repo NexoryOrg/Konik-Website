@@ -48,6 +48,8 @@ require_once __DIR__ . '/init.php';
         </div>
     </section>
 
+    <div class="section-separator"></div>
+
     <section>
         <h2 class="section-heading">Informationen zu den Koniks</h2>
         <section class="text-section">
@@ -71,6 +73,8 @@ require_once __DIR__ . '/init.php';
             </div>
         </section>
     </section>
+
+    <div class="section-separator"></div>
 
     <section>
         <h2 class="section-heading">Anfahrt zum Nationalpark</h2>
@@ -97,6 +101,6 @@ require_once __DIR__ . '/init.php';
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="funktionen/index.js"></script>
     <script src="!navebar/navbar.js"></script>
-    
+
 </body>
 </html>
