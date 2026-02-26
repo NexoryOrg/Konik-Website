@@ -1,23 +1,51 @@
 :root {
-    --textfarbe: #1e1e1e;
-    --wichtige-textfarbe: #2e8b57;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #2e7d32;
     --kleiner-textfarbe: #000000;
-    --button-farbe: #2e8b57;
-    --buttonhoverfarbe: #1c5d3b;
-    --hintergrundfarbe: #fefef7;
-    --rahmenfarbe: #a3c9a8;
-    --kartenhintergrund: #ffffff;       
-    --text-schatten: rgba(0,0,0,0.2);
+    --button-farbe: #2e7d32;
+    --buttonhoverfarbe: #1b5e20;
+    --hintergrundfarbe: #ffffff;
+    --rahmenfarbe: #81c784;
+    --kartenhintergrund: #2e7d32;       
+    --text-schatten: rgba(0,0,0,0.4);
     --timeline-linie: #2e8b57;
 }
 
+
 body {
-    font-family: Arial, sans-serif;
-    background: var(--hintergrundfarbe);
-    color: var(--textfarbe);
-    margin: 0;
-    padding-top: 80px;
-    text-align: center;
+    position: relative;
+    background: #f7f9f7;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 25%, rgba(46,125,50,0.06), transparent 20%),
+                radial-gradient(circle at 75% 70%, rgba(101,212,90,0.06), transparent 20%);
+    background-size: 200% 200%;
+    animation: particleMove 60s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes particleMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(230, 255, 230,0.15), rgba(255,255,255,0.05));
+    z-index: -1;
+    pointer-events: none;
 }
 
 .timeline-wrapper {

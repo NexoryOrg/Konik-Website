@@ -19,9 +19,37 @@
 }
 
 body {
-    background: var(--hintergrundfarbe);
-    color: var(--textfarbe);
-    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #8ecf8e, #77c577, #73b473, #5ab15a);
+    background-size: 400% 400%;
+    animation: gradientShift 25s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: radial-gradient(circle at 25% 30%, rgba(28,136,18,0.08), transparent 25%),
+                radial-gradient(circle at 75% 70%, rgba(28,136,18,0.08), transparent 25%);
+    background-size: 200% 200%;
+    animation: patternMove 60s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes patternMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
 }
 
 .contact-wrapper,
@@ -35,14 +63,14 @@ body {
 
 .contact-container,
 .faq-container {
-    background: var(--kartenhintergrund);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
     border: 1px solid var(--rahmenfarbe);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    padding: 40px 30px;
+    transition: all 0.4s ease;
 }
 
 .contact-container {
@@ -54,6 +82,12 @@ body {
     width: 80%;
     max-width: 800px;
     text-align: center;
+}
+
+.contact-container:hover,
+.faq-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.12);
 }
 
 label {
@@ -133,6 +167,28 @@ button:hover {
 .faq-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.faq-item h3 {
+    display: inline-block;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.faq-item h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 3px;
+    background-color: var(--button-farbe);
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.faq-item.active h3::after {
+    width: 100%;
 }
 
 .faq-question {

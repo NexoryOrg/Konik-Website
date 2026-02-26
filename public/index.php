@@ -59,17 +59,17 @@ require_once __DIR__ . '/init.php';
                 <div class="info-box">
                     <h3>Lebensraum</h3>
                     <p>Die Koniks leben auf den höheren, offenen Heide- und Grasflächen im Nordschwarzwald, etwa rund um Zollstock/Hilseneck und in der Nähe des Schliffkopfs. Diese Grinden sind aufgrund ihrer speziellen Pflanzenwelt wichtig für viele seltene Tiere und Pflanzen. Ihre Beweidung hilft, die Flächen offen und vielfältig zu halten.</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/start-projekt.jpg" alt="Der Lebensraum der Pferde" loading="lazy">
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/start-projekt.jpg" alt="Der Lebensraum der Pferde" loading="lazy">
                 </div>
                 <div class="info-box">
                     <h3>Verhalten</h3>
                     <p>Koniks sind genügsam und anpassungsfähig. Sie leben meist in Herden mit einer Leitstute, sie grasen viel und verschieden – das heißt, sie fressen Gräser, Kräuter und auch Rinden oder junge Triebe. Durch ihr Fressverhalten tragen sie zur Strukturvielfalt der Vegetation bei, was wiederum anderen Arten zugutekommt, zum Beispiel Insekten, Vögeln oder Reptilien. Auch ihr Kot fördert den Nährstoffkreislauf und unterstützt Dung-organismen wie Käfer, was zusätzliche Nahrung für Vögel schafft.</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/buran.jpg" alt="Verhalten der Koniks" loading="lazy">
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2022/buran.jpg" alt="Verhalten der Koniks" loading="lazy">
                 </div>
                 <div class="info-box">
                     <h3>Schutz und Pflege</h3>
                     <p>Obwohl die Pferde wild wirken, werden sie regelmäßig betreut: Verantwortliche im Nationalpark überwachen ihre Gesundheit, kümmern sich um Hufpflege und steuern die Beweidungsdauer. Die Tiere gehören dem Zoo Karlsruhe, der eng mit dem Nationalpark zusammenarbeitet. Wichtig ist auch das richtige Zusammenleben mit Menschen: Besucherinnen und Besucher sollen Abstand halten, die Tiere nicht füttern oder stören, damit sie natürlich leben können</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/brunhilde.jpg" alt="Schutz und Pflege der Pferde" loading="lazy">
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/brunhilde.jpg" alt="Schutz und Pflege der Pferde" loading="lazy">
                 </div>
             </section>
         </section>

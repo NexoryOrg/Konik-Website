@@ -63,26 +63,26 @@ krsort($galerie);
         </div>
     </div>
 
-</div>
+    </div>
 
-<!-- LIGHTBOX -->
-<div id="lightbox">
-    <button class="nav prev" aria-label="Previous image">&#10094;</button>
-    <figure>
-        <img id="lightbox-image" alt="">
-        <div class="lightbox-info">
-            <figcaption id="description"></figcaption>
-            <span id="image-year"></span>
-        </div>
-    </figure>
-    <button class="nav next" aria-label="Next image">&#10095;</button>
-    <span id="close" aria-label="Close">&times;</span>
-</div>
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button class="nav prev" aria-label="Previous image">&#10094;</button>
+        <figure>
+            <img id="lightbox-image" alt="">
+            <div class="lightbox-info">
+                <figcaption id="description"></figcaption>
+                <span id="image-year"></span>
+            </div>
+        </figure>
+        <button class="nav next" aria-label="Next image">&#10095;</button>
+        <span id="close" aria-label="Close">&times;</span>
+    </div>
 
-<?php include '!footer/footer.php'; ?>
+    <?php include '!footer/footer.php'; ?>
 
-<script src="funktionen/galerie.js"></script>
-<script src="!navebar/navbar.js"></script>
+    <script src="funktionen/galerie.js"></script>
+    <script src="!navebar/navbar.js"></script>
 
-</body>
+    </body>
 </html>
