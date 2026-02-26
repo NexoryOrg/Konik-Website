@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
     --textfarbe: #e0e0e0;
     --wichtige-textfarbe: #3274ED;
@@ -136,4 +137,159 @@
     .tooltip {
         display: none;
     }
+=======
+:root {
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #1c8812;
+    --kleiner-textfarbe: #000000;
+    --hintergrundfarbe: #ffffff;
+    --kartenhintergrund: #2e2c2c;
+    --input-hintergrund: #555;
+    --rahmenfarbe: #555;
+    --button-farbe: #1c8812;
+    --text-schatten: rgba(0, 0, 0, 0.4);
+}
+
+.footer-dark {
+    background-color: var(--hintergrundfarbe);
+    color: var(--textfarbe);
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    border-top: 1.5px solid var(--rahmenfarbe);
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-dark .wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-dark .icon-footer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    text-decoration: none;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    transition: all 0.3s ease;
+}
+
+.footer-dark .icon-footer i {
+    font-size: 20px;
+    color: var(--wichtige-textfarbe);
+    transition: all 0.3s ease;
+}
+
+.footer-dark .icon-footer:hover {
+    background: rgba(28, 136, 18, 0.15);
+    border: 1px solid var(--wichtige-textfarbe);
+    transform: translateY(-4px);
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.08),
+        0 0 12px rgba(28, 136, 18, 0.25);
+}
+
+.footer-dark .icon-footer:hover i {
+    color: var(--wichtige-textfarbe);
+    transform: scale(1.1);
+}
+
+.footer-dark .icon-footer.instagram:hover {
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+    border: none;
+}
+
+.footer-dark .icon-footer.facebook:hover {
+    background: rgba(24, 119, 242, 0.75);
+    border: none;
+}
+
+.footer-dark .tooltip {
+    visibility: hidden;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: nowrap;
+    font-size: 12px;
+    z-index: 10;
+    background: #111;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.footer-dark .icon-footer:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.footer-dark p.copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--kleiner-textfarbe);
+}
+
+.footer-dark a.link {
+    position: relative;
+    background-color: var(--hintergrundfarbe);
+    color: var(--kleiner-textfarbe);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.footer-dark a.datenschutz::after {
+    content: "";
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    display: block;
+    transition: width 0.3s;
+}
+
+.footer-dark a.datenschutz:hover::after {
+    width: 100%;
+}
+
+.footer-dark a.datenschutz:hover {
+    opacity: 0.8;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .footer-dark .wrapper {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (hover: none) {
+    .tooltip {
+        display: none;
+    }
+>>>>>>> d678723 (- footer optisch verbessert)
 }
