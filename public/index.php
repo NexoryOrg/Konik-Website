@@ -96,6 +96,8 @@ require_once __DIR__ . '/init.php';
             <span id="close" aria-label="Close">&times;</span>
         </div>
 
+        <div class="section-separator"></div>
+
         <?php include '!footer/footer.php'; ?>
 
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

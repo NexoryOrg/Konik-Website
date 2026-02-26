@@ -1,13 +1,13 @@
 :root {
-    --textfarbe: #e0e0e0;
-    --wichtige-textfarbe: #3274ED;
-    --kleiner-textfarbe: #333;
-    --button-farbe: #3274ED;
-    --buttonhoverfarbe: #6999F2;
-    --hintergrundfarbe: #1a1a1a;
-    --rahmenfarbe: #afababb4;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #1c8812;
+    --kleiner-textfarbe: #000000;
+    --hintergrundfarbe: #ffffff;
     --kartenhintergrund: #2e2c2c;
-    --text-schatten: rgba(0,0,0,0.4);
+    --input-hintergrund: #555;
+    --rahmenfarbe: #555;
+    --button-farbe: #1c8812;
+    --text-schatten: rgba(0, 0, 0, 0.4);
 }
 
 .footer-dark {
@@ -38,34 +38,49 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
-    background: #2e2c2c;
-    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
     text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    transition: all 0.3s ease;
 }
 
 .footer-dark .icon-footer i {
-    font-size: 22px;
-    color: #fff;
-    transition: transform 0.2s, color 0.2s;
+    font-size: 20px;
+    color: var(--wichtige-textfarbe);
+    transition: all 0.3s ease;
 }
 
 .footer-dark .icon-footer:hover {
-    transform: scale(1.1);
+    background: rgba(28, 136, 18, 0.15);
+    border: 1px solid var(--wichtige-textfarbe);
+    transform: translateY(-4px);
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.08),
+        0 0 12px rgba(28, 136, 18, 0.25);
 }
 
 .footer-dark .icon-footer:hover i {
+    color: var(--wichtige-textfarbe);
     transform: scale(1.1);
 }
 
 .footer-dark .icon-footer.instagram:hover {
     background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+    border: none;
 }
 
 .footer-dark .icon-footer.facebook:hover {
-    background: #1877f2;
+    background: rgba(24, 119, 242, 0.75);
+    border: none;
 }
 
 .footer-dark .tooltip {

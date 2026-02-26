@@ -1,14 +1,19 @@
 :root {
-    --textfarbe: #fff;
-    --rahmenfarbe: #444;
-    --button-farbe: #2196F3;
-    --hintergrundfarbe: #1a1a1a;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #1c8812;
+    --kleiner-textfarbe: #000000;
+    --hintergrundfarbe: #ffffff;
+    --kartenhintergrund: #2e7d32;
+    --input-hintergrund: #555;
+    --rahmenfarbe: #555;
+    --button-farbe: #1c8812;
+    --shadownfarbe: rgba(0, 0, 0, 0.4);
 }
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #121212;
+    background: var(--hintergrundfarbe);
 }
 
 .navbar {
@@ -18,7 +23,7 @@ body {
     transform: translateX(-50%);
     width: 90%;
     max-width: 1200px;
-    background-color: rgba(26, 26, 26, 0.95);
+    background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     color: var(--textfarbe);
     display: flex;
@@ -38,7 +43,6 @@ body {
     object-fit: cover;
     border: 2px solid var(--rahmenfarbe);
 }
-
 
 .navbar-menu {
     display: flex;
@@ -79,70 +83,80 @@ body {
 }
 
 @media (max-width: 768px) {
-  .navbar {
-      padding: 15px 20px;
-      border-radius: 0 0 10px 10px;
-  }
+    .navbar {
+        padding: 15px 20px;
+        border-radius: 0 0 10px 10px;
+    }
 
-  .navbar-toggle {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1100;
-  }
+    .navbar-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1100;
+    }
 
-  .navbar-toggle span {
-      display: block;
-      width: 28px;
-      height: 3px;
-      background-color: var(--textfarbe);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-  }
+    .navbar-toggle span {
+        display: block;
+        width: 28px;
+        height: 3px;
+        background-color: var(--wichtige-textfarbe);
+        transition: transform 0.3s, opacity 0.3s;
+    }
 
-  .navbar-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--hintergrundfarbe);
-      flex-direction: column;
-      display: none;
-      border-radius: 0 0 10px 10px;
-      max-height: 70vh;
-      overflow-y: auto;
-      box-shadow: 0 4px 12px var(--rahmenfarbe);
-      padding: 0;
-      margin: 0;
+    .navbar-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
 
-      justify-content: center;
-      align-items: center; 
-      text-align: center;
-  }
+    .navbar-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
 
-  .navbar-menu.active {
-      display: flex;
-      animation: slideDown 0.3s ease forwards;
-  }
+    .navbar-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
 
-  .navbar-menu li a {
-      padding: 18px 0;
-      width: 100%;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--textfarbe);
-      text-align: center;
-      border-bottom: 1px solid var(--rahmenfarbe);
-      transition: color 0.3s;
-  }
+    .navbar-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--hintergrundfarbe);
+        flex-direction: column;
+        display: none;
+        border-radius: 0 0 10px 10px;
+        max-height: 70vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 12px var(--rahmenfarbe);
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+        align-items: center; 
+        text-align: center;
+    }
 
-  .navbar-menu li a:hover {
-      color: var(--button-farbe);
-  }
+    .navbar-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
 
-  @keyframes slideDown {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-  }
+    .navbar-menu li a {
+        padding: 18px 0;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--textfarbe);
+        text-align: center;
+        border-bottom: 1px solid var(--rahmenfarbe);
+        transition: color 0.3s;
+    }
+
+    .navbar-menu li a:hover {
+        color: var(--button-farbe);
+    }
+
+    @keyframes slideDown {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
 }
