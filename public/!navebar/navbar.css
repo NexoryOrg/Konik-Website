@@ -1,19 +1,19 @@
 :root {
-    --textfarbe: #000000;
-    --wichtige-textfarbe: #1c8812;
-    --kleiner-textfarbe: #000000;
-    --hintergrundfarbe: #ffffff;
-    --kartenhintergrund: #2e7d32;
-    --input-hintergrund: #555;
-    --rahmenfarbe: #555;
-    --button-farbe: #1c8812;
-    --shadownfarbe: rgba(0, 0, 0, 0.4);
+    --textfarbe1: #000000;
+    --wichtige-textfarbe1: #1c8812;
+    --kleiner-textfarbe1: #000000;
+    --hintergrundfarbe1: #ffffff;
+    --kartenhintergrund1: #2e7d32;
+    --input-hintergrund1: #555;
+    --rahmenfarbe1: #555;
+    --button-farbe1: #1c8812;
+    --shadownfarbe1: rgba(0, 0, 0, 0.4);
 }
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: var(--hintergrundfarbe);
+    background: var(--hintergrundfarbe1);
 }
 
 .navbar {
@@ -25,13 +25,13 @@ body {
     max-width: 1200px;
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    color: var(--textfarbe);
+    color: var(--textfarbe1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     z-index: 1000;
-    box-shadow: 0 2px 8px var(--rahmenfarbe);
+    box-shadow: 0 2px 8px var(--rahmenfarbe1);
     border-radius: 10px;
     transition: background 0.3s;
 }
@@ -41,7 +41,7 @@ body {
     width: 50px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--rahmenfarbe);
+    border: 2px solid var(--rahmenfarbe1);
 }
 
 .navbar-menu {
@@ -55,7 +55,7 @@ body {
 
 .navbar-menu li a {
     text-decoration: none;
-    color: var(--textfarbe);
+    color: var(--textfarbe1);
     font-weight: 500;
     position: relative;
     padding: 8px 0;
@@ -69,7 +69,7 @@ body {
     bottom: 0;
     width: 0;
     height: 3px;
-    background-color: var(--button-farbe);
+    background-color: var(--button-farbe1);
     border-radius: 2px;
     transition: width 0.3s;
 }
@@ -100,7 +100,7 @@ body {
         display: block;
         width: 28px;
         height: 3px;
-        background-color: var(--wichtige-textfarbe);
+        background-color: var(--wichtige-textfarbe1);
         transition: transform 0.3s, opacity 0.3s;
     }
 
@@ -121,13 +121,13 @@ body {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--hintergrundfarbe);
+        background: var(--hintergrundfarbe1);
         flex-direction: column;
         display: none;
         border-radius: 0 0 10px 10px;
         max-height: 70vh;
         overflow-y: auto;
-        box-shadow: 0 4px 12px var(--rahmenfarbe);
+        box-shadow: 0 4px 12px var(--rahmenfarbe1);
         padding: 0;
         margin: 0;
         justify-content: center;
@@ -145,14 +145,14 @@ body {
         width: 100%;
         font-size: 1rem;
         font-weight: 500;
-        color: var(--textfarbe);
+        color: var(--textfarbe1);
         text-align: center;
-        border-bottom: 1px solid var(--rahmenfarbe);
+        border-bottom: 1px solid var(--rahmenfarbe1);
         transition: color 0.3s;
     }
 
     .navbar-menu li a:hover {
-        color: var(--button-farbe);
+        color: var(--button-farbe1);
     }
 
     @keyframes slideDown {

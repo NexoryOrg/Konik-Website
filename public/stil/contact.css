@@ -1,12 +1,15 @@
 :root {
-    --textfarbe: #e0e0e0;
-    --wichtige-textfarbe: #3274ED;
-    --kleiner-textfarbe: #aaa;
-    --hintergrundfarbe: #1a1a1a;
-    --kartenhintergrund: #2e2c2c;
-    --input-hintergrund: #3a3838;
-    --rahmenfarbe: #555;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #239b18;
+    --kleiner-textfarbe: #000000;
+    --hintergrundfarbe: #ffffff;
+    --kartenhintergrund: rgba(255, 255, 255, 0.25);
+    --input-hintergrund: rgb(255, 255, 255);
+    --rahmenfarbe: rgb(209, 202, 202);
+    --button-farbe: #1c8812;
+    --text-schatten: rgba(0, 0, 0, 0.4);
 }
+
 
 * {
     box-sizing: border-box;
@@ -32,14 +35,24 @@ body {
 .contact-container,
 .faq-container {
     background: var(--kartenhintergrund);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 40px 30px;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0, 0.15);
+    border: 1px solid var(--rahmenfarbe);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
 }
 
 .contact-container {
     max-width: 420px;
     width: 100%;
+}
+
+.faq-container {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
 }
 
 label {
@@ -51,17 +64,18 @@ label {
 input, textarea {
     width: 100%;
     margin-top: 8px;
-    padding: 12px;
-    border-radius: 10px;
+    padding: 14px;
+    border-radius: 12px;
     border: 1px solid var(--rahmenfarbe);
     background: var(--input-hintergrund);
     color: var(--textfarbe);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: inset 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
 }
 
 input:focus, textarea:focus {
     border-color: var(--wichtige-textfarbe);
-    box-shadow: 0 0 10px rgba(50,116,237,0.4);
+    box-shadow: 0 0 12px rgba(28,136,18,0.25);
     outline: none;
 }
 
@@ -69,17 +83,24 @@ button {
     margin-top: 20px;
     width: 100%;
     padding: 14px;
-    border-radius: 12px;
+    border-radius: 14px;
     border: none;
-    background: var(--wichtige-textfarbe);
-    color: white;
+    background: var(--button-farbe);
+    color: #fff;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 button:hover {
-    background: #2558c2;
-    transform: translateY(-2px);
-    transition: all 0.2s ease;
+    background: rgba(28,136,18,0.85);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 
+        0 8px 20px rgba(28,136,18,0.25),
+        0 0 12px rgba(28,136,18,0.35);
 }
 
 .section-separator {
@@ -90,12 +111,6 @@ button:hover {
     border-radius: 2px;
 }
 
-.faq-container {
-    width: 80%;
-    max-width: 800px;
-    text-align: center;
-}
-
 .faq-container h2 {
     margin-bottom: 30px;
     font-size: 2rem;
@@ -104,10 +119,19 @@ button:hover {
 
 .faq-item {
     background: var(--input-hintergrund);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 14px;
     margin-bottom: 15px;
     cursor: pointer;
+    border: 1px solid var(--rahmenfarbe);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .faq-question {
@@ -117,38 +141,46 @@ button:hover {
 }
 
 .faq-question h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 600;
+    color: var(--textfarbe);
 }
 
 .arrow {
     font-size: x-large;
-    display: inline-block;
-    transition: transform 0.3s ease, color 0.3s ease;
     color: var(--wichtige-textfarbe);
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    text-shadow: 0 0 4px rgba(28,136,18,0.4);
 }
+
+.faq-item:hover .arrow {
+    text-shadow: 0 0 6px rgba(28,136,18,0.5), 0 0 12px rgba(28,136,18,0.25);
+}
+
 .faq-item.active .arrow {
     transform: rotate(45deg);
-    color: #55aaff;
+    color: var(--wichtige-textfarbe);
+    text-shadow: 0 0 6px rgba(28, 121, 48, 0.5), 0 0 10px rgba(85,170,255,0.3);
 }
 
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
     opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
     padding: 0 0;
 }
 
-.faq-answer-content {
-    overflow: hidden;
-    background-color: var(--hintergrundfarbe);
-    padding: 20px;
-    border-radius: 12px;
-}
-
 .faq-item.active .faq-answer {
-    max-height: 500px;
+    max-height: 600px;
     opacity: 1;
     padding: 20px 0;
+}
+
+.faq-answer-content {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--rahmenfarbe);
+    box-shadow: inset 0 4px 12px rgba(0,0,0,0.05);
 }
