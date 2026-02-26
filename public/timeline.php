@@ -1,27 +1,30 @@
 <?php
-$host = getenv('DB_HOST') ?: '';
-$port = getenv('DB_PORT') ?: 3306;
-$db   = getenv('DB_NAME') ?: '';
-$user = getenv('DB_USER') ?: '';
-$pass = getenv('DB_PASS') ?: '';
+$jsonFile = __DIR__ . '/datenbank/json/timeline.json';
+$events = [];
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
-        $user,
-        $pass,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_TIMEOUT => 10
-        ]
-    );
+if (file_exists($jsonFile)) {
+    $data = file_get_contents($jsonFile);
+    $eventsData = json_decode($data, true);
 
-} catch (PDOException $e) {
-    echo "❌ DB Verbindung fehlgeschlagen: " . $e->getMessage() . "<br>";
+    if ($eventsData) {
+        foreach ($eventsData as $date => $entries) {
+            foreach ($entries as $entry) {
+                $events[] = [
+                    'date' => $date,
+                    'title' => $entry['alt'] ?? '',
+                    'des' => $entry['des'] ?? '',
+                    'image' => $entry['src'] ?? ''
+                ];
+            }
+        }
+
+        usort($events, function($a, $b) {
+            $da = DateTime::createFromFormat('d.m.Y', $a['date']);
+            $db = DateTime::createFromFormat('d.m.Y', $b['date']);
+            return $da <=> $db;
+        });
+    }
 }
-
-$stmt = $pdo->query("SELECT date, title, des, image FROM timeline ORDER BY date ASC");
-$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -29,10 +32,8 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
-    
         <title>Timeline</title>
         <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="stil/timeline.css">
         <link rel="stylesheet" href="!navebar/navbar.css">
@@ -49,7 +50,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php else: ?>
                     <?php foreach($events as $index => $event): ?>
                         <div class="timeline-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
-                            <div class="timeline-date"><?= date('d M Y', strtotime($event['date'])) ?></div>
+                            <div class="timeline-date"><?= htmlspecialchars($event['date']) ?></div>
                             <div class="timeline-content">
                                 <img class="timeline-img" src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>">
                                 <h3><?= htmlspecialchars($event['title']) ?></h3>

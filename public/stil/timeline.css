@@ -1,13 +1,13 @@
 :root {
-    --textfarbe: #1e1e1e;
-    --wichtige-textfarbe: #2e8b57;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #2e7d32;
     --kleiner-textfarbe: #000000;
-    --button-farbe: #2e8b57;
-    --buttonhoverfarbe: #1c5d3b;
-    --hintergrundfarbe: #fefef7;
-    --rahmenfarbe: #a3c9a8;
-    --kartenhintergrund: #ffffff;       
-    --text-schatten: rgba(0,0,0,0.2);
+    --button-farbe: #2e7d32;
+    --buttonhoverfarbe: #1b5e20;
+    --hintergrundfarbe: #ffffff;
+    --rahmenfarbe: #81c784;
+    --kartenhintergrund: #2e7d32;       
+    --text-schatten: rgba(0,0,0,0.4);
     --timeline-linie: #2e8b57;
 }
 
