@@ -23,7 +23,6 @@ window.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        // Button während dem Senden deaktivieren
         btn.disabled = true;
         btn.textContent = "Sending...";
 
