@@ -1,12 +1,13 @@
 :root {
     --textfarbe2: #000000;
-    --wichtige-textfarbe2: #1c8812;
+    --wichtige-textfarbe: #2e7d32;
     --kleiner-textfarbe2: #000000;
     --hintergrundfarbe2: #ffffff;
-    --kartenhintergrund2: #2e2c2c;
-    --input-hintergrund2: #555;
-    --rahmenfarbe2: #555;
-    --button-farbe2: #1c8812;
+    --kartenhintergrund2: #2e7d32;
+    --input-hintergrund2: #a5d6a7;
+    --rahmenfarbe2: #81c784;
+    --rahmenfarbe2: #81c784;
+    --button-farbe2: #2e7d32;
     --text-schatten2: rgba(0, 0, 0, 0.4);
 }
 
