@@ -1,0 +1,22 @@
+{
+    "2020": [
+        {
+            "src": "datenbank/bilder/pferde/2020/brunhilde.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2022": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ]
+}
