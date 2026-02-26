@@ -8,6 +8,7 @@
     --rahmenfarbe: rgb(209, 202, 202);
     --button-farbe: #1c8812;
     --text-schatten: rgba(0, 0, 0, 0.4);
+    --hover-farbe: rgba(28,136,18,0.85)
 }
 
 
@@ -96,7 +97,7 @@ button {
 }
 
 button:hover {
-    background: rgba(28,136,18,0.85);
+    background: var(--hover-farbe);
     transform: translateY(-4px) scale(1.03);
     box-shadow: 
         0 8px 20px rgba(28,136,18,0.25),

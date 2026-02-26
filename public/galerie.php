@@ -1,121 +1,88 @@
 <?php
-require_once __DIR__ . '/init.php';
+$jsonDatei = __DIR__ . '/datenbank/json/galerie.json';
 
-$host = getenv('DB_HOST') ?: '';
-$port = getenv('DB_PORT') ?: 3306;
-$db   = getenv('DB_NAME') ?: '';
-$user = getenv('DB_USER') ?: '';
-$pass = getenv('DB_PASS') ?: '';
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
-        $user,
-        $pass,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_TIMEOUT => 10
-        ]
-    );
-
-} catch (PDOException $e) {
-    error_log('DB error: ' . $e->getMessage());
-    echo "❌ DB Verbindung fehlgeschlagen.";
-    $pdo = null;
+if (!file_exists($jsonDatei)) {
+    die("JSON-Datei nicht gefunden!");
 }
 
-if ($pdo) {
-    $stmt = $pdo->query("SELECT year, alt, src FROM galerie ORDER BY year DESC");
+$galerie = json_decode(file_get_contents($jsonDatei), true);
 
-    $galerie = [];
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $jahr = $row['year'];
-        if (!isset($galerie[$jahr])) {
-            $galerie[$jahr] = [];
-        }
-        $galerie[$jahr][] = [
-            'src' => $row['src'],
-            'alt' => $row['alt']
-        ];
-    }
-} else {
-    $galerie = [];
-}
+
+krsort($galerie);
 ?>
 
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie</title>
+    <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
 
-        <title>Galerie</title>
-        <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="stil/galerie.css">
+    <link rel="stylesheet" href="!navebar/navbar.css">
+    <link rel="stylesheet" href="!footer/footer.css">
+</head>
+<body>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="stil/galerie.css">
-        <link rel="stylesheet" href="!navebar/navbar.css">
-        <link rel="stylesheet" href="!footer/footer.css">
-    </head>
-    <body>
+<?php include '!navebar/navbar.php'; ?>
 
-        <?php include '!navebar/navbar.php'; ?>
+<div class="gallery-container">
 
-        <div class="gallery-container">
-
-            <!-- TIMELINE -->
-            <div class="timeline-box">
-                <div class="timeline">
-                    <?php foreach($galerie as $jahr => $bilder): ?>
-                        <div class="timeline-dot" data-year="<?= e($jahr) ?>">
-                            <span><?= e($jahr) ?></span>
-                        </div>
-                    <?php endforeach; ?>
+    <!-- TIMELINE -->
+    <div class="timeline-box">
+        <div class="timeline">
+            <?php foreach($galerie as $jahr => $bilder): ?>
+                <div class="timeline-dot" data-year="<?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?>">
+                    <span><?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
-            </div>
-
-            <!-- GALLERY -->
-            <div class="gallery-box">
-                <div class="gallery">
-                    <?php foreach($galerie as $jahr => $bilder): ?>
-                        <div class="year-section" id="year-<?= e($jahr) ?>">
-                            <h2><?= e($jahr) ?></h2>
-                            <div class="images">
-                                <?php foreach($bilder as $bild): ?>
-                                    <img 
-                                        src="<?= safe_src($bild['src']) ?>" 
-                                        alt="<?= e($bild['alt']) ?>" 
-                                        loading="lazy"
-                                        onerror="this.src='datenbank/bilder/error.jpg'"
-                                    >
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
+    </div>
 
-        <!-- LIGHTBOX -->
-        <div id="lightbox">
-            <button class="nav prev" aria-label="Previous image">&#10094;</button>
-            <figure>
-                <img id="lightbox-image" alt="">
-                <div class="lightbox-info">
-                    <figcaption id="description"></figcaption>
-                    <span id="image-year"></span>
+    <!-- GALLERY -->
+    <div class="gallery-box">
+        <div class="gallery">
+            <?php foreach($galerie as $jahr => $bilder): ?>
+                <div class="year-section" id="year-<?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?>">
+                    <h2><?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?></h2>
+                    <div class="images">
+                        <?php foreach($bilder as $bild): ?>
+                            <img 
+                                src="<?= htmlspecialchars($bild['src'], ENT_QUOTES, 'UTF-8') ?>" 
+                                alt="<?= htmlspecialchars($bild['alt'], ENT_QUOTES, 'UTF-8') ?>" 
+                                loading="lazy"
+                                onerror="this.src='datenbank/bilder/error.jpg'"
+                            >
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </figure>
-            <button class="nav next" aria-label="Next image">&#10095;</button>
-            <span id="close" aria-label="Close">&times;</span>
+            <?php endforeach; ?>
         </div>
+    </div>
 
-        <?php include '!footer/footer.php'; ?>
+</div>
 
-    <script src="funktionen/galerie.js"></script>
-    <script src="!navebar/navbar.js"></script>
+<!-- LIGHTBOX -->
+<div id="lightbox">
+    <button class="nav prev" aria-label="Previous image">&#10094;</button>
+    <figure>
+        <img id="lightbox-image" alt="">
+        <div class="lightbox-info">
+            <figcaption id="description"></figcaption>
+            <span id="image-year"></span>
+        </div>
+    </figure>
+    <button class="nav next" aria-label="Next image">&#10095;</button>
+    <span id="close" aria-label="Close">&times;</span>
+</div>
 
-    </body>
+<?php include '!footer/footer.php'; ?>
+
+<script src="funktionen/galerie.js"></script>
+<script src="!navebar/navbar.js"></script>
+
+</body>
 </html>

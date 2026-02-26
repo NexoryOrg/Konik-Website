@@ -1,12 +1,12 @@
 :root {
-    --textfarbe: #e0e0e0;
-    --wichtige-textfarbe: #3274ED;
-    --kleiner-textfarbe: #333;
-    --button-farbe: #3274ED;
-    --buttonhoverfarbe: #6999F2;
-    --hintergrundfarbe: #1a1a1a;
-    --rahmenfarbe: #afababb4;
-    --kartenhintergrund: #2e2c2c;
+    --textfarbe: #000000;
+    --wichtige-textfarbe: #2e7d32;
+    --kleiner-textfarbe: #000000;
+    --button-farbe: #2e7d32;
+    --hover-farbe: rgba(28,136,18,0.85);
+    --hintergrundfarbe: #ffffff;
+    --rahmenfarbe: #81c784;
+    --kartenhintergrund: #2e7d32;
 }
 
 html {
