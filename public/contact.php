@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com;">
 
         <title>Contact</title>
         <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
@@ -21,17 +21,17 @@
         <div class="contact-wrapper">
             <div class="contact-container">
                 <h2>Kontaktformular</h2>
-                <form>
+                <form id="contactForm">
                     <label>Name</label>
-                    <input type="text" required>
+                    <input type="text" id="name" required>
 
                     <label>E-Mail</label>
-                    <input type="email" required>
+                    <input type="email" id="email" required>
 
                     <label>Nachricht</label>
-                    <textarea required></textarea>
+                    <textarea id="message" required></textarea>
 
-                    <button type="submit">Absenden</button>
+                    <button type="submit" id="contact_button">Absenden</button>
                 </form>
             </div>
         </div>
