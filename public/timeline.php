@@ -53,7 +53,7 @@ if (file_exists($jsonFile)) {
                             <div class="timeline-date"><?= htmlspecialchars($event['date']) ?></div>
                             <div class="timeline-content">
                                 <img class="timeline-img" src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>">
-                                <h3><?= htmlspecialchars($event['title']) ?></h3>
+                                <h3 class="timeline-title"><?= htmlspecialchars($event['title']) ?></h3>
                                 <p><?= htmlspecialchars($event['des']) ?></p>
                             </div>
                         </div>

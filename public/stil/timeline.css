@@ -127,6 +127,35 @@ body::after {
     text-align: center;
 }
 
+.timeline-title {
+    position: relative;
+    display: inline-block;
+    color: var(--kleiner-textfarbe);
+    padding-bottom: 5px;
+}
+
+.timeline-title {
+    position: relative;
+    display: inline-block;
+    color: var(--kleiner-textfarbe);
+    padding-bottom: 5px;
+}
+
+.timeline-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: var(--kleiner-textfarbe);
+    transition: width 0.3s ease;
+}
+
+.timeline-item:hover .timeline-title::after {
+    width: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .timeline::after { left: 20px; }
     .timeline-item {
