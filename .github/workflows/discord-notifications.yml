@@ -1,0 +1,166 @@
+# .github/workflows/discord-embeds.yml
+name: Discord Notifications
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, closed]
+  issues:
+    types: [opened, edited, closed, reopened]
+  issue_comment:
+    types: [created, edited, deleted]
+
+jobs:
+  discord_notify:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Pull Request Embed
+      - name: Build Pull Request Embed
+        if: github.event_name == 'pull_request'
+        id: build_pr
+        run: |
+          PR_TITLE=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
+          PR_URL=$(jq -r '.pull_request.html_url' $GITHUB_EVENT_PATH)
+          PR_NUMBER=$(jq -r '.pull_request.number' $GITHUB_EVENT_PATH)
+          PR_USER=$(jq -r '.pull_request.user.login' $GITHUB_EVENT_PATH)
+          PR_BRANCH=$(jq -r '.pull_request.head.ref' $GITHUB_EVENT_PATH)
+          PR_ACTION=$(jq -r '.action' $GITHUB_EVENT_PATH)
+
+          # Farben: grün=open/reopened, rot=closed, gelb=edited
+          if [[ "$PR_ACTION" == "opened" || "$PR_ACTION" == "reopened" ]]; then
+            COLOR=3066993
+          elif [[ "$PR_ACTION" == "closed" ]]; then
+            COLOR=15158332
+          else
+            COLOR=9807270
+          fi
+
+          EMBED=$(jq -n \
+            --arg title "Pull Request #$PR_NUMBER" \
+            --arg desc "$PR_TITLE" \
+            --arg url "$PR_URL" \
+            --arg user "$PR_USER" \
+            --arg branch "$PR_BRANCH" \
+            --arg action "$PR_ACTION" \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --argjson color $COLOR \
+            '[
+              {
+                "title": $title,
+                "description": $desc,
+                "url": $url,
+                "color": $color,
+                "author": {
+                  "name": $user,
+                  "url": ("https://github.com/" + $user),
+                  "icon_url": ("https://github.com/" + $user + ".png")
+                },
+                "fields": [
+                  {"name":"Action","value":$action,"inline":true},
+                  {"name":"Branch","value":$branch,"inline":true}
+                ],
+                "footer":{"text":$repo}
+              }
+            ]')
+
+          echo "embeds=$EMBED" >> $GITHUB_OUTPUT
+
+      - name: Notify Pull Request
+        if: github.event_name == 'pull_request'
+        uses: Ilshidur/action-discord@0.4.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ steps.build_pr.outputs.embeds }}
+
+      # Issue Embed
+      - name: Build Issue Embed
+        if: github.event_name == 'issues'
+        id: build_issue
+        run: |
+          ISSUE_TITLE=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
+          ISSUE_URL=$(jq -r '.issue.html_url' $GITHUB_EVENT_PATH)
+          ISSUE_NUMBER=$(jq -r '.issue.number' $GITHUB_EVENT_PATH)
+          ISSUE_USER=$(jq -r '.issue.user.login' $GITHUB_EVENT_PATH)
+          ISSUE_ACTION=$(jq -r '.action' $GITHUB_EVENT_PATH)
+
+          if [[ "$ISSUE_ACTION" == "opened" || "$ISSUE_ACTION" == "reopened" ]]; then
+            COLOR=3066993
+          elif [[ "$ISSUE_ACTION" == "closed" ]]; then
+            COLOR=15158332
+          else
+            COLOR=9807270
+          fi
+
+          EMBED=$(jq -n \
+            --arg title "Issue #$ISSUE_NUMBER" \
+            --arg desc "$ISSUE_TITLE" \
+            --arg url "$ISSUE_URL" \
+            --arg user "$ISSUE_USER" \
+            --arg action "$ISSUE_ACTION" \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --argjson color $COLOR \
+            '[
+              {
+                "title": $title,
+                "description": $desc,
+                "url": $url,
+                "color": $color,
+                "author": {
+                  "name": $user,
+                  "url": ("https://github.com/" + $user),
+                  "icon_url": ("https://github.com/" + $user + ".png")
+                },
+                "fields": [{"name":"Action","value":$action,"inline":true}],
+                "footer":{"text":$repo}
+              }
+            ]')
+
+          echo "embeds=$EMBED" >> $GITHUB_OUTPUT
+
+      - name: Notify Issue
+        if: github.event_name == 'issues'
+        uses: Ilshidur/action-discord@0.4.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ steps.build_issue.outputs.embeds }}
+
+      # Issue Comment Embed
+      - name: Build Issue Comment Embed
+        if: github.event_name == 'issue_comment'
+        id: build_comment
+        run: |
+          COMMENT_BODY=$(jq -r '.comment.body' $GITHUB_EVENT_PATH)
+          COMMENT_URL=$(jq -r '.comment.html_url' $GITHUB_EVENT_PATH)
+          COMMENT_USER=$(jq -r '.comment.user.login' $GITHUB_EVENT_PATH)
+          ISSUE_NUMBER=$(jq -r '.issue.number' $GITHUB_EVENT_PATH)
+
+          EMBED=$(jq -n \
+            --arg title "Comment on Issue #$ISSUE_NUMBER" \
+            --arg desc "$COMMENT_BODY" \
+            --arg url "$COMMENT_URL" \
+            --arg user "$COMMENT_USER" \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --argjson color 9807270 \
+            '[
+              {
+                "title": $title,
+                "description": $desc,
+                "url": $url,
+                "color": $color,
+                "author": {
+                  "name": $user,
+                  "url": ("https://github.com/" + $user),
+                  "icon_url": ("https://github.com/" + $user + ".png")
+                },
+                "footer":{"text":$repo}
+              }
+            ]')
+
+          echo "embeds=$EMBED" >> $GITHUB_OUTPUT
+
+      - name: Notify Issue Comment
+        if: github.event_name == 'issue_comment'
+        uses: Ilshidur/action-discord@0.4.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ steps.build_comment.outputs.embeds }}
