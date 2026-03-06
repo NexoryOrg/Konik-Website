@@ -1,7 +1,9 @@
-# .github/workflows/discord-embeds.yml
 name: Discord Notifications
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, edited, reopened, closed]
   issues:
@@ -14,7 +16,63 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # Pull Request Embed
+      - name: Build Push Embed
+        if: github.event_name == 'push'
+        id: build_push
+        run: |
+          HEAD=$(jq -r '.head_commit' $GITHUB_EVENT_PATH)
+          if [ "$HEAD" == "null" ]; then
+            echo "No commits in this push."
+            echo "embeds=[]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          COMMIT_MSG=$(jq -r '.head_commit.message' $GITHUB_EVENT_PATH)
+          COMMIT_URL=$(jq -r '.head_commit.url' $GITHUB_EVENT_PATH)
+          COMMIT_AUTHOR=$(jq -r '.head_commit.author.username' $GITHUB_EVENT_PATH)
+          ADDITIONS=$(jq -r '.head_commit.added | length' $GITHUB_EVENT_PATH)
+          DELETIONS=$(jq -r '.head_commit.removed | length' $GITHUB_EVENT_PATH)
+
+          REPO=$GITHUB_REPOSITORY
+          BRANCH=${GITHUB_REF#refs/heads/}
+
+          EMBED=$(jq -c -n \
+            --arg title "Push to $BRANCH" \
+            --arg desc "$COMMIT_MSG" \
+            --arg url "$COMMIT_URL" \
+            --arg author "$COMMIT_AUTHOR" \
+            --arg repo "$REPO" \
+            --argjson color 3447003 \
+            --argjson additions $ADDITIONS \
+            --argjson deletions $DELETIONS \
+            '[
+              {
+                "title": $title,
+                "description": $desc,
+                "url": $url,
+                "color": $color,
+                "author": {
+                  "name": $author,
+                  "url": ("https://github.com/" + $author),
+                  "icon_url": ("https://github.com/" + $author + ".png")
+                },
+                "fields": [
+                  {"name":"Additions","value":($additions|tostring),"inline":true},
+                  {"name":"Deletions","value":($deletions|tostring),"inline":true}
+                ],
+                "footer":{"text":$repo}
+              }
+            ]')
+
+          echo "embeds=$EMBED" >> $GITHUB_OUTPUT
+
+      - name: Notify Push
+        if: github.event_name == 'push'
+        uses: Ilshidur/action-discord@0.4.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ steps.build_push.outputs.embeds }}
+
       - name: Build Pull Request Embed
         if: github.event_name == 'pull_request'
         id: build_pr
@@ -26,7 +84,6 @@ jobs:
           PR_BRANCH=$(jq -r '.pull_request.head.ref' $GITHUB_EVENT_PATH)
           PR_ACTION=$(jq -r '.action' $GITHUB_EVENT_PATH)
 
-          # Farben: grün=open/reopened, rot=closed, gelb=edited
           if [[ "$PR_ACTION" == "opened" || "$PR_ACTION" == "reopened" ]]; then
             COLOR=3066993
           elif [[ "$PR_ACTION" == "closed" ]]; then
@@ -35,7 +92,7 @@ jobs:
             COLOR=9807270
           fi
 
-          EMBED=$(jq -n \
+          EMBED=$(jq -c -n \
             --arg title "Pull Request #$PR_NUMBER" \
             --arg desc "$PR_TITLE" \
             --arg url "$PR_URL" \
@@ -72,7 +129,6 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: ${{ steps.build_pr.outputs.embeds }}
 
-      # Issue Embed
       - name: Build Issue Embed
         if: github.event_name == 'issues'
         id: build_issue
@@ -91,7 +147,7 @@ jobs:
             COLOR=9807270
           fi
 
-          EMBED=$(jq -n \
+          EMBED=$(jq -c -n \
             --arg title "Issue #$ISSUE_NUMBER" \
             --arg desc "$ISSUE_TITLE" \
             --arg url "$ISSUE_URL" \
@@ -124,7 +180,6 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: ${{ steps.build_issue.outputs.embeds }}
 
-      # Issue Comment Embed
       - name: Build Issue Comment Embed
         if: github.event_name == 'issue_comment'
         id: build_comment
@@ -134,7 +189,7 @@ jobs:
           COMMENT_USER=$(jq -r '.comment.user.login' $GITHUB_EVENT_PATH)
           ISSUE_NUMBER=$(jq -r '.issue.number' $GITHUB_EVENT_PATH)
 
-          EMBED=$(jq -n \
+          EMBED=$(jq -c -n \
             --arg title "Comment on Issue #$ISSUE_NUMBER" \
             --arg desc "$COMMENT_BODY" \
             --arg url "$COMMENT_URL" \
