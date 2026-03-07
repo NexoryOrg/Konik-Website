@@ -1,5 +1,4 @@
 window.addEventListener("DOMContentLoaded", () => {
-
     const btn = document.getElementById("contact_button");
     if (!btn) {
         console.error("Button nicht gefunden!");
@@ -20,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         btn.disabled = true;
@@ -34,18 +33,34 @@ window.addEventListener("DOMContentLoaded", () => {
         };
         console.log("Template Parameter:", templateParams);
 
-        emailjs.send("service_kd8fsfe", "template_nvlnvt9", templateParams)
-        .then(() => {
+        try {
+            await emailjs.send("service_kd8fsfe", "template_nvlnvt9", templateParams);
             form.reset();
             btn.textContent = "Email gesendet!";
+            
+            const infoMsg = document.getElementById("info-msg");
+            if (infoMsg) {
+                infoMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                infoMsg.hidden = true;
+            }
+
             btn.disabled = false;
-        })
-        .catch((error) => {
+            btn.textContent = "Absenden";
+        } catch (error) {
             console.error("Fehler beim Senden der E-Mail:", error);
-            alert("Fehler beim Senden der E-Mail. Details in Konsole.");
+            
+            const errorMsg = document.getElementById("error-msg");
+            if (errorMsg) {
+                document.getElementById("error-text").textContent = "Die E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.";
+                errorMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                errorMsg.hidden = true;
+            }
+            
             btn.textContent = "Absenden";
             btn.disabled = false;
-        });
+        }
     });
 });
 
