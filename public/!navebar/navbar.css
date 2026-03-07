@@ -83,25 +83,27 @@ body {
 }
 
 @media (max-width: 768px) {
+
     .navbar {
-        padding: 15px 20px;
-        border-radius: 0 0 10px 10px;
+        padding: 14px 20px;
+        border-radius: 14px 14px 0 0;
+        backdrop-filter: blur(12px);
     }
 
     .navbar-toggle {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 6px;
         cursor: pointer;
         z-index: 1100;
     }
 
     .navbar-toggle span {
-        display: block;
         width: 28px;
         height: 3px;
+        border-radius: 2px;
         background-color: var(--wichtige-textfarbe1);
-        transition: transform 0.3s, opacity 0.3s;
+        transition: all 0.3s ease;
     }
 
     .navbar-toggle.active span:nth-child(1) {
@@ -118,45 +120,64 @@ body {
 
     .navbar-menu {
         position: absolute;
-        top: 100%;
+        top: calc(100% - 1px);
         left: 0;
         right: 0;
-        background: var(--hintergrundfarbe1);
+
+        display: flex;
         flex-direction: column;
-        display: none;
-        border-radius: 0 0 10px 10px;
-        max-height: 70vh;
-        overflow-y: auto;
-        box-shadow: 0 4px 12px var(--rahmenfarbe1);
+
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+
+        border-radius: 0 0 14px 14px;
+
+        max-height: 0;
+        overflow: hidden;
+
+        transition: max-height 0.35s ease;
+
+        box-shadow: 0 6px 20px var(--shadownfarbe1);
+
         padding: 0;
         margin: 0;
-        justify-content: center;
-        align-items: center; 
+
+        align-items: center;
         text-align: center;
     }
 
     .navbar-menu.active {
-        display: flex;
-        animation: slideDown 0.3s ease forwards;
+        max-height: 400px;
+    }
+
+    .navbar-menu li {
+        width: 100%;
     }
 
     .navbar-menu li a {
-        padding: 18px 0;
+        display: block;
         width: 100%;
-        font-size: 1rem;
+
+        padding: 18px 0;
+
+        font-size: 1.05rem;
         font-weight: 500;
+        letter-spacing: 0.3px;
+
         color: var(--textfarbe1);
-        text-align: center;
-        border-bottom: 1px solid var(--rahmenfarbe1);
-        transition: color 0.3s;
+
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+
+        transition: all 0.25s ease;
+    }
+
+    .navbar-menu li:last-child a {
+        border-bottom: none;
     }
 
     .navbar-menu li a:hover {
+        background: rgba(0,0,0,0.04);
         color: var(--button-farbe1);
     }
 
-    @keyframes slideDown {
-        0% { opacity: 0; transform: translateY(-10px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
 }
