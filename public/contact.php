@@ -18,9 +18,19 @@
 
         <?php include '!navebar/navbar.php'; ?>
 
+        <div class="info-msg" id="info-msg" hidden="true">
+            <h3>Message send!</h3>
+            <p>Your message has been sent successfully. <br>We will get back to you as soon as possible.</p>
+        </div>
+
+        <div class="error-msg" id="error-msg" hidden="true">
+            <h3>Error!</h3>
+            <p id="error-text">Your message was not send!</p>
+        </div>
+
         <div class="contact-wrapper">
             <div class="contact-container">
-                <h2>Kontaktformular</h2>
+                <h2>contact form</h2>
                 <form id="contactForm">
                     <label>Name</label>
                     <input type="text" id="name" required>
@@ -28,10 +38,10 @@
                     <label>E-Mail</label>
                     <input type="email" id="email" required>
 
-                    <label>Nachricht</label>
+                    <label>Message</label>
                     <textarea id="message" required></textarea>
 
-                    <button type="submit" id="contact_button">Absenden</button>
+                    <button type="submit" id="contact_button">Send</button>
                 </form>
             </div>
         </div>
