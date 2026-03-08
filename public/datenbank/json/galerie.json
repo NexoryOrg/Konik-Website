@@ -1,7 +1,31 @@
 {
-    "2020": [
+    "2023": [
         {
             "src": "datenbank/bilder/pferde/2020/brunhilde.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
             "alt": "Bild aus 2022"
         },
         {
@@ -16,6 +40,378 @@
     "2022": [
         {
             "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2021": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2019": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2018": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2017": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2016": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        }
+    ],
+    "2015": [
+        {
+            "src": "datenbank/bilder/pferde/2022/buran.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/ronda.jpg",
+            "alt": "Bild aus 2022"
+        },
+        {
+            "src": "datenbank/bilder/pferde/2020/start-projekt.jpg",
             "alt": "Bild aus 2022"
         }
     ]
