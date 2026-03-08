@@ -580,3 +580,134 @@ body::after {
     #image-year { font-size: 0.8rem; }
     .year-section .images { gap: 10px; }
 }
+.timeline-box {
+    position: sticky;
+    top: 120px;
+    align-self: flex-start;
+    z-index: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-container {
+        flex-direction: column;
+        padding: 100px 20px 20px;
+    }
+    .timeline-box {
+        width: 100%;
+        position: relative;
+        top: auto;
+        align-self: auto;
+        order: -1;
+    }
+    .timeline {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+    .timeline-dot {
+        margin: 0 20px;
+    }
+    .timeline-dot span {
+        margin-top: 5px;
+        font-size: 0.8rem;
+    }
+    .timeline::before {
+        left: 0;
+        top: auto;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        transform: translateX(0);
+    }
+    .timeline-dot::before {
+        top: -8px;
+        left: auto;
+    }
+}
+
+
+.timeline-dot.active::before {
+    background-color: var(--wichtige-textfarbe);
+    box-shadow: 0 0 12px rgba(46,125,50,0.8);
+}
+
+.year-section {
+    scroll-margin-top: 130px;
+}
+
+
+.timeline {
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.timeline-box {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.timeline {
+    align-items: flex-start;
+}
+
+.timeline-dot {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.timeline-dot::before {
+    left: 0;
+    transform: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-dot span {
+    display: inline-block;
+    margin: 0 0 0 24px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.timeline-dot.active span {
+    color: var(--wichtige-textfarbe);
+    font-weight: bold;
+}
+
+.timeline::before {
+    left: 8px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .timeline-box {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+    .timeline {
+        align-items: center;
+    }
+    .timeline-dot {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+        text-align: center;
+    }
+    .timeline-dot::before {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    .timeline-dot span {
+        margin: 20px 0 0 0;
+    }
+    .timeline::before {
+        left: 0;
+    }
+}
+
