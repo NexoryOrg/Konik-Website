@@ -9,7 +9,7 @@
     --button-farbe: #2e7d32;
     --buttonhoverfarbe: #1b5e20;
     --text-schatten: rgba(0,0,0,0.4);
-    --hero-overlay-gradient: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    --hero-overlay-gradient: rgba(0,0,0,0,0.7);
 }
 
 * {

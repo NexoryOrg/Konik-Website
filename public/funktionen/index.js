@@ -41,28 +41,15 @@ if (loadMapBtn) {
         if (mapDiv && placeholder) {
             mapDiv.style.display = "block";
             placeholder.style.display = "none";
-            
-            // Small delay so the container becomes visible
-            setTimeout(() => {
-                const map = L.map('map').setView([48.5606575, 8.2220008], 13);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors',
-                    maxZoom: 19
-                }).addTo(map);
-                
-                const popup = L.popup({
-                    closeButton: true,
-                    className: 'map-popup'
-                }).setContent('<div style="font-size: 1.1rem; font-weight: 600; color: #2e7d32; text-align: center; padding: 5px;"><b>Black Forest National Park Center</b><br><span style="font-size: 0.9rem; color: #666;">Bad Liebenzell-Unterreichenbach</span></div>');
-                
-                L.marker([48.5606575, 8.2220008], {
-                    title: 'Nationalparkzentrum Schwarzwald'
-                }).addTo(map).bindPopup(popup).openPopup();
-                
-                // Resize is important for hidden containers
-                map.invalidateSize();
-                map.flyTo([48.5606575, 8.2220008], 15, { duration: 2 });
-            }, 50);
+
+            const map = L.map('map').setView([48.5606575, 8.2220008], 19);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+            L.marker([48.5606575, 8.2220008]).addTo(map)
+                .bindPopup('<b>Nationalparkzentrum Schwarzwald</b>').openPopup();
+            map.flyTo([48.5606575, 8.2220008], 16, { duration: 2 });
         }
     });
 }
