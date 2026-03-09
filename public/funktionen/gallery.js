@@ -8,7 +8,7 @@ const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
 const yearSections = document.querySelectorAll('.year-section');
-const dots = document.querySelectorAll('.timeline-dot');
+const dots = document.querySelectorAll('.history-dot');
 
 let currentIndex = 0;
 
@@ -122,7 +122,7 @@ function updateActiveDot() {
     dots.forEach(dot => dot.classList.remove('active'));
     if (dots[current]) {
         dots[current].classList.add('active');
-        const container = document.querySelector('.timeline-box');
+        const container = document.querySelector('.history-box');
         if (container && container.scrollHeight > container.clientHeight) {
             dots[current].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }

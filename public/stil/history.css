@@ -8,7 +8,7 @@
     --rahmenfarbe: #81c784;
     --kartenhintergrund: #2e7d32;       
     --text-schatten: rgba(0,0,0,0.4);
-    --timeline-linie: #2e8b57;
+    --history-line: #2e8b57;
 }
 
 
@@ -49,53 +49,53 @@ body::after {
     pointer-events: none;
 }
 
-.timeline-wrapper {
+.history-wrapper {
     max-width: 900px;
     margin: 40px auto;
 }
 
-.timeline {
+.history {
     position: relative;
     padding: 40px 0;
 }
 
-.timeline::after {
+.history::after {
     content: '';
     position: absolute;
     width: 4px;
-    background-color: var(--timeline-linie);
+    background-color: var(--history-line);
     top: 0;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.timeline-item {
+.history-item {
     position: relative;
     width: 50%;
     padding: 20px 40px;
     box-sizing: border-box;
 }
 
-.timeline-item.left { left: 0; }
-.timeline-item.right { left: 50%; }
+.history-item.left { left: 0; }
+.history-item.right { left: 50%; }
 
-.timeline-item::after {
+.history-item::after {
     content: '';
     position: absolute;
     width: 20px;
     height: 20px;
     background-color: var(--kartenhintergrund);
-    border: 4px solid var(--timeline-linie);
+    border: 4px solid var(--history-line);
     top: 25px;
     border-radius: 50%;
     z-index: 1;
 }
 
-.timeline-item.left::after { right: -10px; }
-.timeline-item.right::after { left: -10px; }
+.history-item.left::after { right: -10px; }
+.history-item.right::after { left: -10px; }
 
-.timeline-content {
+.history-content {
     background-color: var(--kartenhintergrund);
     padding: 20px;
     border-radius: 10px;
@@ -104,45 +104,45 @@ body::after {
     cursor: pointer;
 }
 
-.timeline-content:hover {
+.history-content:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.timeline-content img.timeline-img {
+.history-content img.history-img {
     width: 100%;
     height: auto;
     border-radius: 6px;
     transition: transform 0.3s ease;
 }
 
-.timeline-content img.timeline-img:hover {
+.history-content img.history-img:hover {
     transform: scale(1.05);
     opacity: 0.95;
 }
 
-.timeline-date {
+.history-date {
     font-weight: bold;
     margin-bottom: 10px;
     color: var(--wichtige-textfarbe);
     text-align: center;
 }
 
-.timeline-title {
+.history-title {
     position: relative;
     display: inline-block;
     color: var(--kleiner-textfarbe);
     padding-bottom: 5px;
 }
 
-.timeline-title {
+.history-title {
     position: relative;
     display: inline-block;
     color: var(--kleiner-textfarbe);
     padding-bottom: 5px;
 }
 
-.timeline-title::after {
+.history-title::after {
     content: "";
     position: absolute;
     left: 0;
@@ -153,20 +153,20 @@ body::after {
     transition: width 0.3s ease;
 }
 
-.timeline-item:hover .timeline-title::after {
+.history-item:hover .history-title::after {
     width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-    .timeline::after { left: 20px; }
-    .timeline-item {
+    .history::after { left: 20px; }
+    .history-item {
         width: 100%;
         padding-left: 60px;
         padding-right: 20px;
         margin-bottom: 30px;
     }
-    .timeline-item.left, .timeline-item.right { left: 0; }
-    .timeline-item::after { left: 20px; }
+    .history-item.left, .history-item.right { left: 0; }
+    .history-item::after { left: 20px; }
 
     .gallery img {
         width: calc((100% - 20px) / 2);

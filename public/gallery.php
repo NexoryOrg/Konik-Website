@@ -7,14 +7,14 @@ header('Vary: Accept-Encoding');
 header('Cache-Control: max-age=3600, public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+3600) . ' GMT');
 
-$jsonDatei = __DIR__ . '/datenbank/json/galerie.json';
+$jsonFile = __DIR__ . '/datenbank/json/gallery.json';
 
-if (!file_exists($jsonDatei)) {
-    die("JSON-Datei nicht gefunden!");
+if (!file_exists($jsonFile)) {
+    die("JSON file not found!");
 }
 
-$galerie = json_decode(file_get_contents($jsonDatei), true);
-krsort($galerie);
+$gallery = json_decode(file_get_contents($jsonFile), true);
+krsort($gallery);
 
 function minify_output($buffer) {
     $buffer = preg_replace('/<!--([\s\S]*?)-->/', '', $buffer);
@@ -32,24 +32,25 @@ register_shutdown_function(function() {
 ?>
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galerie</title>
+    <title>Gallery</title>
     <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="stil/galerie.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stil/gallery.css">
     <link rel="stylesheet" href="!navebar/navbar.css">
     <link rel="stylesheet" href="!footer/footer.css">
 <?php
-if (!empty($galerie)) {
-    $firstYear = array_key_first($galerie);
-    if (!empty($galerie[$firstYear])) {
-        $firstImg = htmlspecialchars($galerie[$firstYear][0]['src'], ENT_QUOTES, 'UTF-8');
+if (!empty($gallery)) {
+    $firstYear = array_key_first($gallery);
+    if (!empty($gallery[$firstYear])) {
+        $firstImg = htmlspecialchars($gallery[$firstYear][0]['src'], ENT_QUOTES, 'UTF-8');
         echo "    <link rel=\"preload\" as=\"image\" href=\"{$firstImg}\">\n";
     }
 }
@@ -61,12 +62,12 @@ if (!empty($galerie)) {
 
 <div class="gallery-container">
 
-    <!-- TIMELINE -->
-    <div class="timeline-box">
-        <div class="timeline">
-            <?php foreach($galerie as $jahr => $bilder): ?>
-                <div class="timeline-dot" data-year="<?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?>">
-                    <span><?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?></span>
+    <!-- HISTORY -->
+    <div class="history-box">
+        <div class="history">
+            <?php foreach($gallery as $year => $images): ?>
+                <div class="history-dot" data-year="<?= htmlspecialchars($year, ENT_QUOTES, 'UTF-8') ?>">
+                    <span><?= htmlspecialchars($year, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -75,15 +76,15 @@ if (!empty($galerie)) {
     <!-- GALLERY -->
     <div class="gallery-box">
         <div class="gallery">
-            <?php foreach($galerie as $jahr => $bilder): ?>
-                <div class="year-section" id="year-<?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?>">
-                    <h2><?= htmlspecialchars($jahr, ENT_QUOTES, 'UTF-8') ?></h2>
+            <?php foreach($gallery as $year => $images): ?>
+                <div class="year-section" id="year-<?= htmlspecialchars($year, ENT_QUOTES, 'UTF-8') ?>">
+                    <h2><?= htmlspecialchars($year, ENT_QUOTES, 'UTF-8') ?></h2>
                     <div class="images">
-                        <?php foreach($bilder as $bild): ?>
+                        <?php foreach($images as $image): ?>
                             <img 
-                                data-src="<?= htmlspecialchars($bild['src'], ENT_QUOTES, 'UTF-8') ?>" 
+                                data-src="<?= htmlspecialchars($image['src'], ENT_QUOTES, 'UTF-8') ?>" 
                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" 
-                                alt="<?= htmlspecialchars($bild['alt'], ENT_QUOTES, 'UTF-8') ?>" 
+                                alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES, 'UTF-8') ?>" 
                                 loading="lazy"
                                 onerror="this.src='datenbank/bilder/error.jpg'"
                             >
@@ -112,7 +113,7 @@ if (!empty($galerie)) {
 
     <?php include '!footer/footer.php'; ?>
 
-    <script defer src="funktionen/galerie.js"></script>
+    <script defer src="funktionen/gallery.js"></script>
     <script defer src="!navebar/navbar.js"></script>
 
     </body>

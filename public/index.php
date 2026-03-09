@@ -3,11 +3,12 @@ require_once __DIR__ . '/init.php';
 ?>
 
 <!doctype html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https:; script-src 'self' https://unpkg.com 'unsafe-inline'; font-src 'self' data: https:; img-src 'self' data: blob: https:; connect-src 'self' https:;">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
         <title>Home</title>
         <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
@@ -23,13 +24,13 @@ require_once __DIR__ . '/init.php';
         <?php include '!navebar/navbar.php'; ?>
 
         <section class="hero">
-            <img src="datenbank/bilder/hintergrund/pferde.jpeg" alt="Wildpferde auf einer Wiese">
+            <img src="datenbank/bilder/hintergrund/pferde.jpeg" alt="Wild horses in a meadow">
             <div class="hero-content">
-                <h1>Wildpferde</h1>
-                <p>Nationalpark Schwarzwald</p>
+                <h1>Wild Horses</h1>
+                <p>Black Forest National Park</p>
             </div>
             <div class="scroll-arrow" id="scrollArrow">
-                <span class="text">Scroll</span>
+                <span class="text">Scroll down</span>
                 <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <path d="M12 5v14M12 19l-6-6M12 19l6-6"
                         stroke="currentColor"
@@ -43,25 +44,25 @@ require_once __DIR__ . '/init.php';
         <div class="section-separator"></div>
 
         <section>
-            <h2 class="section-heading">Informationen zu den Koniks</h2>
+            <h2 class="section-heading">About the Koniks</h2>
             <section class="text-section">
                 <div class="info-box">
-                    <p>Im Nationalpark Schwarzwald werden seit einigen Jahren Konik-Pferde eingesetzt, um die offenen Bergweiden, die sogenannten Grinden, zu pflegen. Diese Grinden sind einzigartige Lebensräume hoch über dem Wald, die ohne Beweidung allmählich zuwachsen würden. Die robusten Tiere stammen aus Polen und sind eine ursprüngliche Pferderasse, in die noch Gene der ehemaligen Wildpferde (Tarpane) eingekreuzt wurden – daher ähneln sie stark den früher auch hier lebenden Wildpferden.</p>
+                    <p>In the Black Forest National Park, Konik horses have been used for several years to maintain the open mountain pastures known as "Grinden." These Grinden are unique habitats high above the forest that would gradually overgrow without grazing. The hardy animals come from Poland and are an original horse breed that still carries genes of the former wild horses (Tarpans) – which is why they closely resemble the wild horses that once roamed here.</p>
                 </div>
                 <div class="info-box">
-                    <h3>Lebensraum</h3>
-                    <p>Die Koniks leben auf den höheren, offenen Heide- und Grasflächen im Nordschwarzwald, etwa rund um Zollstock/Hilseneck und in der Nähe des Schliffkopfs. Diese Grinden sind aufgrund ihrer speziellen Pflanzenwelt wichtig für viele seltene Tiere und Pflanzen. Ihre Beweidung hilft, die Flächen offen und vielfältig zu halten.</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/start-projekt.jpg" alt="Der Lebensraum der Pferde" loading="lazy">
+                    <h3>Habitat</h3>
+                    <p>The Koniks live on the higher, open heath and grasslands in the northern Black Forest, around Zollstock/Hilseneck and near the Schliffkopf. These Grinden are important for many rare animals and plants due to their special flora. Their grazing helps keep the areas open and diverse.</p>
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/start-projekt.jpg" alt="The horses' habitat" loading="lazy">
                 </div>
                 <div class="info-box">
-                    <h3>Verhalten</h3>
-                    <p>Koniks sind genügsam und anpassungsfähig. Sie leben meist in Herden mit einer Leitstute, sie grasen viel und verschieden – das heißt, sie fressen Gräser, Kräuter und auch Rinden oder junge Triebe. Durch ihr Fressverhalten tragen sie zur Strukturvielfalt der Vegetation bei, was wiederum anderen Arten zugutekommt, zum Beispiel Insekten, Vögeln oder Reptilien. Auch ihr Kot fördert den Nährstoffkreislauf und unterstützt Dung-organismen wie Käfer, was zusätzliche Nahrung für Vögel schafft.</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2022/buran.jpg" alt="Verhalten der Koniks" loading="lazy">
+                    <h3>Behavior</h3>
+                    <p>Koniks are thrifty and adaptable. They usually live in herds led by a dominant mare; they graze a lot and vary what they eat – that means they consume grasses, herbs and even bark or young shoots. Their feeding behavior contributes to the structural diversity of the vegetation, which in turn benefits other species such as insects, birds or reptiles. Their droppings also promote nutrient cycles and support dung organisms like beetles, providing additional food for birds.</p>
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2022/buran.jpg" alt="Konik behavior" loading="lazy">
                 </div>
                 <div class="info-box">
-                    <h3>Schutz und Pflege</h3>
-                    <p>Obwohl die Pferde wild wirken, werden sie regelmäßig betreut: Verantwortliche im Nationalpark überwachen ihre Gesundheit, kümmern sich um Hufpflege und steuern die Beweidungsdauer. Die Tiere gehören dem Zoo Karlsruhe, der eng mit dem Nationalpark zusammenarbeitet. Wichtig ist auch das richtige Zusammenleben mit Menschen: Besucherinnen und Besucher sollen Abstand halten, die Tiere nicht füttern oder stören, damit sie natürlich leben können</p>
-                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/brunhilde.jpg" alt="Schutz und Pflege der Pferde" loading="lazy">
+                    <h3>Protection and Care</h3>
+                    <p>Although the horses appear wild, they are regularly looked after: park officials monitor their health, attend to hoof care and manage the duration of grazing. The animals belong to Karlsruhe Zoo, which works closely with the national park. It is also important to interact correctly with people: visitors should keep their distance, not feed or disturb the animals so that they can live naturally.</p>
+                    <img class="gallery-thumb" src="datenbank/bilder/pferde/2020/brunhilde.jpg" alt="Protection and care of the horses" loading="lazy">
                 </div>
             </section>
         </section>
@@ -69,10 +70,10 @@ require_once __DIR__ . '/init.php';
         <div class="section-separator"></div>
 
         <section>
-            <h2 class="section-heading">Anfahrt zum Nationalpark</h2>
+            <h2 class="section-heading">Getting to the National Park</h2>
             <div class="map-container">
                 <div id="map-placeholder">
-                    <button id="load-map">📍 Standort anzeigen</button>
+                    <button id="load-map">📍 Show location</button>
                 </div>
                 <div id="map" style="display:none;"></div>
             </div>
