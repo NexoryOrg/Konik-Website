@@ -8,7 +8,7 @@ const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
 const yearSections = document.querySelectorAll('.year-section');
-const dots = document.querySelectorAll('.timeline-dot');
+const dots = document.querySelectorAll('.history-dot');
 
 let currentIndex = 0;
 
@@ -24,7 +24,21 @@ if ('IntersectionObserver' in window) {
         });
     }, { rootMargin: '200px' });
     lazyImages.forEach(img => io.observe(img));
+} else {const lazyImages = document.querySelectorAll('img[data-src]');
+if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                obs.unobserve(img);
+            }
+        });
+    }, { rootMargin: '200px' });
+    lazyImages.forEach(img => io.observe(img));
 } else {
+    lazyImages.forEach(img => img.src = img.dataset.src);
+}
     lazyImages.forEach(img => img.src = img.dataset.src);
 }
 
@@ -122,16 +136,5 @@ function updateActiveDot() {
     dots.forEach(dot => dot.classList.remove('active'));
     if (dots[current]) {
         dots[current].classList.add('active');
-        const container = document.querySelector('.timeline-box');
-        if (container && container.scrollHeight > container.clientHeight) {
-            dots[current].scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        if (window.innerWidth <= 768) {
-            dots[current].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        }
     }
-}
-
-window.addEventListener('scroll', updateActiveDot);
-window.addEventListener('resize', updateActiveDot);
-updateActiveDot();
+});

@@ -1,21 +1,21 @@
 window.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("contact_button");
     if (!btn) {
-        console.error("Button nicht gefunden!");
+        console.error("Submit button not found!");
         return;
     }
 
     if (!window.emailjs) {
-        console.error("EmailJS ist nicht geladen!");
+        console.error("EmailJS not loaded!");
         return;
     }
 
     emailjs.init("i5L8uctnUoYlZ1CCX");
-    console.log("EmailJS geladen:", emailjs);
+    console.log("EmailJS loaded:", emailjs);
 
     const form = document.getElementById("contactForm");
     if (!form) {
-        console.error("Formular nicht gefunden!");
+        console.error("Form not found!");
         return;
     }
 
@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
         try {
             await emailjs.send("service_kd8fsfe", "template_nvlnvt9", templateParams);
             form.reset();
-            btn.textContent = "Email gesendet!";
+            btn.textContent = "Message sent!";
             
             const infoMsg = document.getElementById("info-msg");
             if (infoMsg) {
@@ -46,19 +46,19 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
             btn.disabled = false;
-            btn.textContent = "Absenden";
+            btn.textContent = "Send";
         } catch (error) {
-            console.error("Fehler beim Senden der E-Mail:", error);
+            console.error("Error sending email:", error);
             
             const errorMsg = document.getElementById("error-msg");
             if (errorMsg) {
-                document.getElementById("error-text").textContent = "Die E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.";
+                document.getElementById("error-text").textContent = "The email could not be sent. Please try again later.";
                 errorMsg.hidden = false;
                 await new Promise(resolve => setTimeout(resolve, 3000));
                 errorMsg.hidden = true;
             }
             
-            btn.textContent = "Absenden";
+            btn.textContent = "Send";
             btn.disabled = false;
         }
     });

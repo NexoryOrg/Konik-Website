@@ -15,7 +15,7 @@
     background-color: var(--hintergrundfarbe2);
     color: var(--textfarbe2);
     padding: 40px 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     border-top: 1.5px solid var(--rahmenfarbe2);
     text-align: center;
 }

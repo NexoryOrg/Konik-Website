@@ -4,8 +4,8 @@
   </div>
   <ul class="navbar-menu">
     <li><a href="index.php">Home</a></li>
-    <li><a href="galerie.php">Galerie</a></li>
-    <li><a href="timeline.php">Timeline</a></li>
+    <li><a href="gallery.php">Gallery</a></li>
+    <li><a href="history.php">History</a></li>
     <li><a href="contact.php">Contact</a></li>
   </ul>
   <div class="navbar-toggle" id="navbar-toggle">

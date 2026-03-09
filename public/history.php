@@ -7,7 +7,7 @@ header('Vary: Accept-Encoding');
 header('Cache-Control: max-age=3600, public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+3600) . ' GMT');
 
-$jsonFile = __DIR__ . '/datenbank/json/timeline.json';
+$jsonFile = __DIR__ . '/datenbank/json/history.json';
 $events = [];
 
 function minify_output($buffer) {
@@ -50,16 +50,17 @@ if (file_exists($jsonFile)) {
 ?>
 
 <!doctype html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self';">
-        <title>Timeline</title>
+        <title>History</title>
         <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="stil/timeline.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="stil/history.css">
         <link rel="stylesheet" href="!navebar/navbar.css">
         <link rel="stylesheet" href="!footer/footer.css">
 <?php
@@ -73,17 +74,17 @@ if (!empty($events) && !empty($events[0]['image'])) {
 
         <?php include '!navebar/navbar.php'; ?>
 
-        <div class="timeline-wrapper">
-            <div class="timeline">
+        <div class="history-wrapper">
+            <div class="history">
                 <?php if(empty($events)): ?>
-                    <p>Keine Einträge im Zeitstrahl vorhanden.</p>
+                    <p>No entries available in the history.</p>
                 <?php else: ?>
                     <?php foreach($events as $index => $event): ?>
-                        <div class="timeline-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
-                            <div class="timeline-date"><?= htmlspecialchars($event['date']) ?></div>
-                            <div class="timeline-content">
-                                <img class="timeline-img" data-src="<?= htmlspecialchars($event['image']) ?>" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="<?= htmlspecialchars($event['title']) ?>">
-                                <h3 class="timeline-title"><?= htmlspecialchars($event['title']) ?></h3>
+                        <div class="history-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
+                            <div class="history-date"><?= htmlspecialchars($event['date']) ?></div>
+                            <div class="history-content">
+                                <img class="history-img" data-src="<?= htmlspecialchars($event['image']) ?>" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="<?= htmlspecialchars($event['title']) ?>">
+                                <h3 class="history-title"><?= htmlspecialchars($event['title']) ?></h3>
                                 <p><?= htmlspecialchars($event['des']) ?></p>
                             </div>
                         </div>
@@ -94,7 +95,7 @@ if (!empty($events) && !empty($events[0]['image'])) {
 
         <?php include '!footer/footer.php'; ?>
 
-        <script defer src="funktionen/timeline.js"></script>
+        <script defer src="funktionen/history.js"></script>
         <script defer src="!navebar/navbar.js"></script>
 
     </body>
