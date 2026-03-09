@@ -12,7 +12,7 @@
     <span></span>
     <span></span>
     <span></span>
-    <spam></span>
+    <span></span>
   </div>
 
 </nav>
