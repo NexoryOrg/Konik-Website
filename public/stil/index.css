@@ -9,7 +9,7 @@
     --button-farbe: #2e7d32;
     --buttonhoverfarbe: #1b5e20;
     --text-schatten: rgba(0,0,0,0.4);
-    --hero-overlay-gradient: rgba(0,0,0,0,0.7);
+    --hero-overlay-gradient: rgba(0,0,0,0.7);
 }
 
 * {
@@ -238,36 +238,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #a5d6a7, #2e7d32);
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, #81c784 0%, #2e7d32 100%);
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     position: relative;
+    flex-direction: column;
+    gap: 20px;
 }
 #map-placeholder::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(46,125,50,0.5);
+    background: radial-gradient(circle at 50% 50%, rgba(46,125,50,0.3), rgba(0,0,0,0.4));
     border-radius: 15px;
 }
 #map-placeholder button {
     position: relative;
-    padding: 15px 35px;
-    font-size: 1.1rem;
-    border: none;
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid rgba(255,255,255,0.3);
     border-radius: 12px;
     cursor: pointer;
     background-color: var(--button-farbe);
-    color: var(--kleiner-textfarbe);
+    color: white;
     transition: all 0.3s ease;
     z-index: 2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    letter-spacing: 0.5px;
 }
 #map-placeholder button:hover {
-    transform: scale(1.075);
+    transform: translateY(-3px);
     background: var(--buttonhoverfarbe);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    border-color: rgba(255,255,255,0.5);
+}
+#map-placeholder button:active {
+    transform: translateY(-1px);
 }
 
 #map {
@@ -275,6 +282,25 @@ body {
     height: 400px;
     width: 100%;
     border-radius: 15px;
+    z-index: 10;
+}
+
+#map .leaflet-container {
+    border-radius: 15px;
+}
+
+#map .leaflet-marker-icon {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+#map .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    background: white;
+}
+
+#map .leaflet-popup-tip {
+    background: white;
 }
 
 #lightbox {
@@ -326,6 +352,44 @@ body {
 @media (max-width: 600px) {
     .nav { font-size: 2.3rem; }
     #close { font-size: 2.5rem; right: 20px; }
+    
+    .map-container {
+        max-width: 95%;
+        height: 300px;
+    }
+    
+    #map-placeholder {
+        height: 300px;
+    }
+    
+    #map {
+        height: 300px;
+    }
+    
+    #map-placeholder button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-container {
+        max-width: 100%;
+        height: 250px;
+    }
+    
+    #map-placeholder {
+        height: 250px;
+    }
+    
+    #map {
+        height: 250px;
+    }
+    
+    #map-placeholder button {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
 }
 
 .section-separator {

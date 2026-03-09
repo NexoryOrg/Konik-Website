@@ -16,7 +16,7 @@ if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SER
 }
 
 // Content Security Policy (konservativ, bei Bedarf anpassen)
-$csp = "default-src 'self'; img-src 'self' data:; script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline';";
+$csp = "default-src 'self'; img-src 'self' data: blob: https:; script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline'; font-src 'self' data: https:; connect-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://unpkg.com;";
 header("Content-Security-Policy: $csp");
 
 // Session-Härtung

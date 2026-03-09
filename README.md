@@ -1,2 +1,2 @@
 # Konik-Website
-Dieses Projekt beinhaltet die Entwicklung einer Website über die Wildpferde aus dem Nationalpark Schwarzwald. Ziel ist es, die Informationen über Lebensraum,Verhalten und Schutz dieser besonderen Tiere anschaulich und benutzerfreundlich darzustellen.
+This project involves developing a website about the wild horses of the Black Forest National Park. The aim is to present information about the habitat, behavior, and protection of these special animals in a clear and user-friendly way.
