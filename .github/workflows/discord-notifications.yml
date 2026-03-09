@@ -30,21 +30,50 @@ jobs:
           COMMIT_MSG=$(jq -r '.head_commit.message' $GITHUB_EVENT_PATH)
           COMMIT_URL=$(jq -r '.head_commit.url' $GITHUB_EVENT_PATH)
           COMMIT_AUTHOR=$(jq -r '.head_commit.author.username' $GITHUB_EVENT_PATH)
-          ADDITIONS=$(jq -r '.head_commit.added | length' $GITHUB_EVENT_PATH)
-          DELETIONS=$(jq -r '.head_commit.removed | length' $GITHUB_EVENT_PATH)
+          ADDITIONS=$(jq -r '[.commits[].added[]?] | length' $GITHUB_EVENT_PATH)
+          DELETIONS=$(jq -r '[.commits[].removed[]?] | length' $GITHUB_EVENT_PATH)
 
           REPO=$GITHUB_REPOSITORY
           BRANCH=${GITHUB_REF#refs/heads/}
+          
+          # Formatiere Dateien mit Emojis
+          ADDED_FILES=$(jq -r '[.commits[].added[]? | "✅ " + .] | join("\n")' $GITHUB_EVENT_PATH)
+          REMOVED_FILES=$(jq -r '[.commits[].removed[]? | "❌ " + .] | join("\n")' $GITHUB_EVENT_PATH)
+          MODIFIED_FILES=$(jq -r '[.commits[].modified[]? | "📝 " + .] | join("\n")' $GITHUB_EVENT_PATH)
+          
+          FILES_LIST=""
+          if [ ! -z "$ADDED_FILES" ] && [ "$ADDED_FILES" != "" ]; then
+            FILES_LIST="**Hinzugefügt:**\n$ADDED_FILES\n"
+          fi
+          if [ ! -z "$MODIFIED_FILES" ] && [ "$MODIFIED_FILES" != "" ]; then
+            FILES_LIST="${FILES_LIST}**Bearbeitet:**\n$MODIFIED_FILES\n"
+          fi
+          if [ ! -z "$REMOVED_FILES" ] && [ "$REMOVED_FILES" != "" ]; then
+            FILES_LIST="${FILES_LIST}**Gelöscht:**\n$REMOVED_FILES"
+          fi
+          
+          # Limitiere auf 1024 Zeichen für Discord Field
+          if [ ${#FILES_LIST} -gt 1024 ]; then
+            FILES_LIST=$(echo -e "$FILES_LIST" | head -10)
+            FILES_LIST="${FILES_LIST}... (und mehr)"
+          fi
+          
+          # Escape für JSON
+          FILES_LIST=$(printf '%s\n' "$FILES_LIST" | jq -Rs .)
+          
+          FILES_SUMMARY="✅ $ADDITIONS hinzugefügt | ❌ $DELETIONS gelöscht"
 
-          EMBED=$(jq -c -n \
+          EMBED=$(jq -n \
             --arg title "Push to $BRANCH" \
             --arg desc "$COMMIT_MSG" \
             --arg url "$COMMIT_URL" \
             --arg author "$COMMIT_AUTHOR" \
             --arg repo "$REPO" \
-            --argjson color 3447003 \
+            --arg files "$FILES_LIST" \
+            --arg summary "$FILES_SUMMARY" \
             --argjson additions $ADDITIONS \
             --argjson deletions $DELETIONS \
+            --argjson color 3447003 \
             '[
               {
                 "title": $title,
@@ -57,12 +86,12 @@ jobs:
                   "icon_url": ("https://github.com/" + $author + ".png")
                 },
                 "fields": [
-                  {"name":"Additions","value":($additions|tostring),"inline":true},
-                  {"name":"Deletions","value":($deletions|tostring),"inline":true}
+                  {"name":"Dateien","value": $summary,"inline": false},
+                  {"name":"Änderungen","value": $files,"inline": false}
                 ],
-                "footer":{"text":$repo}
+                "footer":{"text":($repo + " • " + ($additions|tostring) + " additions, " + ($deletions|tostring) + " deletions")}
               }
-            ]')
+            ]' | jq -c .)
 
           echo "embeds=$EMBED" >> $GITHUB_OUTPUT
 
