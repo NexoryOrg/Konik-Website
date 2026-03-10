@@ -1,14 +1,18 @@
 <?php
 session_start();
 
+// Handle Logout
 if (isset($_GET['logout'])) {
     session_destroy();
     header('Location: upload-admin.php');
     exit;
 }
 
+// Einfache Authentifizierung (sollte später verbessert werden)
 if (!isset($_SESSION['admin']) && !isset($_GET['token'])) {
+    // Zeige Login-Seite (vereinfacht)
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['password'])) {
+        // Verwende eine Umgebungsvariable oder .env Datei für das Passwort
         $adminPassword = getenv('ADMIN_PASSWORD') ?: 'admin'; // ÄNDERE DIES!
         if ($_POST['password'] === $adminPassword) {
             $_SESSION['admin'] = true;
@@ -52,11 +56,12 @@ if (!isset($_SESSION['admin']) && !isset($_GET['token'])) {
     }
 }
 
+// Admin ist authentifiziert
 $pendingDir = __DIR__ . '/datenbank/bilder/uploads/pending/';
 $uploadsDir = __DIR__ . '/datenbank/bilder/uploads/';
-$historyJsonFile = __DIR__ . '/datenbank/json/history.json';
 $galleryJsonFile = __DIR__ . '/datenbank/json/gallery.json';
 
+// Handle Approve
 if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
     $filename = basename($_GET['approve']);
     $jsonFile = $pendingDir . $filename . '.json';
@@ -66,12 +71,14 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
         $source = $pendingDir . $filename;
         $destination = $uploadsDir . $filename;
         
+        // Verschiebe Bild
         if (rename($source, $destination)) {
-            $historyData = json_decode(file_get_contents($historyJsonFile), true) ?: [];
-            $date = $metadata['date'];
+            // Nur in gallery.json hinzufügen (NICHT in history.json)
+            $year = substr($metadata['date'], -4);
+            $galleryData = json_decode(file_get_contents($galleryJsonFile), true) ?: [];
             
-            if (!isset($historyData[$date])) {
-                $historyData[$date] = [];
+            if (!isset($galleryData[$year])) {
+                $galleryData[$year] = [];
             }
             
             $entry = [
@@ -80,21 +87,11 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
                 'des' => $metadata['description']
             ];
             
-            $historyData[$date][] = $entry;
-            
-            file_put_contents($historyJsonFile, json_encode($historyData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-            
-            $year = substr($date, -4);
-            $galleryData = json_decode(file_get_contents($galleryJsonFile), true) ?: [];
-            
-            if (!isset($galleryData[$year])) {
-                $galleryData[$year] = [];
-            }
-            
             $galleryData[$year][] = $entry;
             
             file_put_contents($galleryJsonFile, json_encode($galleryData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             
+            // Lösche JSON Metadata
             unlink($jsonFile);
             
             header('Location: upload-admin.php');
@@ -103,6 +100,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
     }
 }
 
+// Handle Reject
 if (isset($_GET['reject']) && isset($_SESSION['admin'])) {
     $filename = basename($_GET['reject']);
     $jsonFile = $pendingDir . $filename . '.json';
@@ -115,6 +113,7 @@ if (isset($_GET['reject']) && isset($_SESSION['admin'])) {
     exit;
 }
 
+// Hole pending uploads
 $pending = [];
 if (is_dir($pendingDir)) {
     $files = scandir($pendingDir);
@@ -133,6 +132,7 @@ if (is_dir($pendingDir)) {
     }
 }
 
+// Sortiere nach Timestamp (neueste zuerst)
 usort($pending, function($a, $b) {
     return $b['metadata']['timestamp'] - $a['metadata']['timestamp'];
 });
