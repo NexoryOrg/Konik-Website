@@ -93,22 +93,9 @@ if (!empty($events) && !empty($events[0]['image'])) {
             </div>
         </div>
 
-        <div class="upload-section">
-            <h3>📸 Neue Fotos hinzufügen</h3>
-            <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
-                <input type="date" id="eventDate" name="eventDate" required>
-                <input type="text" id="eventTitle" name="eventTitle" placeholder="Titel (z.B. 'Schneetag im Wald')" required>
-                <textarea id="eventDes" name="eventDes" placeholder="Beschreibung des Events..." required></textarea>
-                <input type="file" id="eventImage" name="eventImage" accept="image/*" required>
-                <button type="submit">Foto hochladen & zur Überprüfung senden</button>
-            </form>
-            <div id="uploadMessage"></div>
-        </div>
-
         <?php include '!footer/footer.php'; ?>
 
         <script defer src="funktionen/history.js"></script>
-        <script defer src="funktionen/upload.js"></script>
         <script defer src="!navebar/navbar.js"></script>
 
     </body>
