@@ -158,69 +158,6 @@ body::after {
     width: 100%;
 }
 
-.upload-section {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 15px;
-    background: #f0f8f0;
-    border-radius: 8px;
-    border: 2px dashed var(--button-farbe);
-}
-
-.upload-section h3 {
-    color: var(--button-farbe);
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-}
-
-.upload-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.upload-form input, .upload-form textarea, .upload-form button {
-    padding: 8px;
-    border: 1px solid var(--button-farbe);
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.upload-form button {
-    background-color: var(--button-farbe);
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-.upload-form button:hover {
-    background-color: var(--buttonhoverfarbe);
-}
-
-.upload-form textarea {
-    resize: vertical;
-    min-height: 60px;
-}
-
-#uploadMessage {
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 4px;
-    display: none;
-    font-size: 0.9rem;
-}
-
-#uploadMessage.success {
-    background-color: #c8e6c9;
-    color: #2e7d32;
-}
-
-#uploadMessage.error {
-    background-color: #ffcdd2;
-    color: #c62828;
-}
-
 @media screen and (max-width: 768px) {
     .history::after { left: 20px; }
     .history-item {
