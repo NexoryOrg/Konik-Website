@@ -10,6 +10,17 @@ if (function_exists('ob_end_clean')) {
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 
+// Error Handler um JSON Fehler auszugeben
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    http_response_code(500);
+    die(json_encode(['success' => false, 'message' => 'Error: ' . $errstr]));
+});
+
+set_exception_handler(function($exception) {
+    http_response_code(500);
+    die(json_encode(['success' => false, 'message' => 'Error: ' . $exception->getMessage()]));
+});
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     die(json_encode(['success' => false, 'message' => 'Method not allowed']));
@@ -41,12 +52,10 @@ if (!$dateObj) {
 }
 $formattedDate = $dateObj->format('d.m.Y');
 
-$allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-$finfo = finfo_open(FILEINFO_MIME_TYPE);
-$fileMime = finfo_file($finfo, $file['tmp_name']);
-finfo_close($finfo);
+$allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
+$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-if (!in_array($fileMime, $allowedMimes)) {
+if (!in_array($ext, $allowedExtensions)) {
     die(json_encode(['success' => false, 'message' => 'Nur Bilder (JPEG, PNG, GIF, WebP) erlaubt']));
 }
 
@@ -54,7 +63,6 @@ if ($file['size'] > 10 * 1024 * 1024) {
     die(json_encode(['success' => false, 'message' => 'Dateigröße zu groß (max. 10MB)']));
 }
 
-$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 $filename = md5(uniqid()) . '.' . $ext;
 $tempPath = $tempDir . $filename;
 $finalPath = $uploadDir . $filename;
