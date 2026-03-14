@@ -1,0 +1,15 @@
+{
+    "approved": 0,
+    "rejected": 1,
+    "approved_items": [],
+    "rejected_items": [
+        {
+            "filename": "9141b2751fc7009a073192006f8ad216.png",
+            "title": "sfsfg",
+            "date": "27.02.2026",
+            "description": "sgsg",
+            "email": "segseg@mails",
+            "img": "\/datenbank\/bilder\/uploads\/pending\/9141b2751fc7009a073192006f8ad216.png"
+        }
+    ]
+}

@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(uploadForm);
         
         try {
-            const response = await fetch('upload-handler.php', {
+            const scriptElements = Array.from(document.getElementsByTagName('script'));
+            const uploadScript = scriptElements.find(el => el.src && el.src.endsWith('/upload/upload.js'));
+            const uploadHandlerUrl = uploadScript ? new URL('upload-handler.php', uploadScript.src).toString() : '/upload/upload-handler.php';
+
+            const response = await fetch(uploadHandlerUrl, {
                 method: 'POST',
                 body: formData
             });
