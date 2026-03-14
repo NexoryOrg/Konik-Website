@@ -3,21 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <base href="/">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com;">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
         <title>Contact</title>
-        <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
+        <link rel="icon" type="image/png" href="../datenbank/bilder/logo/logo.png">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="!footer/footer.css">
-        <link rel="stylesheet" href="stil/footer.css">
-        <link rel="stylesheet" href="stil/contact.css">
-        <link rel="stylesheet" href="!navebar/navbar.css">
+        <link rel="stylesheet" href="../footer/footer.css">
+        <link rel="stylesheet" href="../contact/contact.css">
+        <link rel="stylesheet" href="../navebar/navbar.css">
     </head>
     <body>
 
-        <?php include '!navebar/navbar.php'; ?>
+        <?php include __DIR__ . '/../navebar/navbar.php'; ?>
 
         <div class="info-msg" id="info-msg" hidden="true">
             <h3>Message sent!</h3>
@@ -98,11 +98,11 @@
 
         <div class="section-separator"></div>
 
-        <?php include '!footer/footer.php'; ?>
+        <?php include __dir__. '/../footer/footer.php'; ?>
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-        <script src="funktionen/contact.js"></script>
-        <script src="!navebar/navbar.js"></script>
+        <script src="../contact/contact.js"></script>
+        <script src="../navebar/navbar.js"></script>
 
     </body>
 </html>

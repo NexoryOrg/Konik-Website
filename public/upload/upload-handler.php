@@ -10,7 +10,6 @@ if (function_exists('ob_end_clean')) {
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 
-// Error Handler um JSON Fehler auszugeben
 set_error_handler(function($errno, $errstr, $errfile, $errline) {
     http_response_code(500);
     die(json_encode(['success' => false, 'message' => 'Error: ' . $errstr]));
@@ -26,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die(json_encode(['success' => false, 'message' => 'Method not allowed']));
 }
 
-$uploadDir = __DIR__ . '/datenbank/bilder/uploads/';
-$tempDir = __DIR__ . '/datenbank/bilder/uploads/pending/';
+$uploadDir = __DIR__ . '/../datenbank/bilder/uploads/';
+$tempDir = __DIR__ . '/../datenbank/bilder/uploads/pending/';
 
 if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 if (!is_dir($tempDir)) mkdir($tempDir, 0755, true);
@@ -38,6 +37,7 @@ if (empty($_POST['eventDate']) || empty($_POST['eventTitle']) || empty($_FILES['
 }
 
 $eventDate = trim($_POST['eventDate']);
+$eventEmail = trim($_POST['uploaderEmail']);
 $eventTitle = trim($_POST['eventTitle']);
 $eventDes = trim($_POST['eventDes'] ?? '');
 $file = $_FILES['eventImage'];
@@ -74,6 +74,7 @@ if (!move_uploaded_file($file['tmp_name'], $tempPath)) {
 $metadata = [
     'filename' => $filename,
     'originalName' => basename($file['name']),
+    'email' => $eventEmail,
     'date' => $formattedDate,
     'title' => $eventTitle,
     'description' => $eventDes,
