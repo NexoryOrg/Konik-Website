@@ -212,7 +212,7 @@ $approvedItems = $stats['approved_items'] ?? [];
 $rejectedItems = $stats['rejected_items'] ?? [];
 
 
-$json_file = '' . __DIR__ . '/../../datenbank/json/timeline.json';
+$json_file = '' . __DIR__ . '/../../datenbank/json/history.json';
 $upload_dir = '' . __DIR__ . '/../../datenbank/json/history/';
 
 if (!file_exists($json_file)) file_put_contents($json_file, json_encode([]));
