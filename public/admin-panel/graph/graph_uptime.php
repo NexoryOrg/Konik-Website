@@ -34,7 +34,6 @@ if (empty($hours)) {
 $labels = array_keys($hours);
 $values = [];
 foreach ($hours as $hour => $stats) {
-    // Wenn mindestens ein check online, betrachten wir die Stunde als online.
     $online = ($stats['up'] / max($stats['total'], 1)) >= 0.5 ? 100 : 0;
     $values[] = $online;
 }
@@ -98,6 +97,5 @@ echo $axis;
 echo $line;
 echo $markerDots;
 echo $labelMarks;
-echo '<text x="' . ($w / 2) . '" y="25" fill="#0D4C3B" font-family="Arial" font-size="18" text-anchor="middle">Uptime status last ' . $count . ' hours</text>';
 echo '</svg>';
 exit;
