@@ -156,6 +156,40 @@ h1 {
     text-align: center;
 }
 
+.dashboard-trends {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.trend-card {
+    background: #ffffff;
+    border: 1px solid #e2efe2;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 14px;
+    text-align: left;
+}
+
+.trend-card h3 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #2e7d32;
+}
+
+.trend-pre {
+    background: #f4fbf4;
+    border: 1px solid #d7ebd7;
+    border-radius: 8px;
+    padding: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    line-height: 1.15;
+    color: #1a3f1a;
+    overflow-x: auto;
+}
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
