@@ -156,7 +156,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
 
             unlink($jsonFile);
             
-            header('Location: upload-admin.php');
+            header('Location: admin-panel.php');
             exit;
         }
     }
@@ -191,7 +191,7 @@ if (isset($_GET['reject']) && isset($_SESSION['admin'])) {
     ];
     saveStats($statsFile, $stats);
     
-    header('Location: upload-admin.php');
+    header('Location: admin-panel.php');
     exit;
 }
 
