@@ -1,24 +1,26 @@
-{
-    "01.01.2020": [
-        {
-            "src": "../datenbank/bilder/pferde/2020/brunhilde.jpg",
-            "alt": "Image from 2022",
-            "des": "Description..."
-        }
-    ],
-    "02.02.2020":
-    [
-        {
-            "src": "../datenbank/bilder/pferde/2020/ronda.jpg",
-            "alt": "Image from 2022",
-            "des": "Description..."
-        }
-    ],
-    "01.01.2022": [
-        {
-            "src": "../datenbank/bilder/pferde/2022/buran.jpg",
-            "alt": "Image from 2022",
-            "des": "Description..."
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "date": "2020-01-01",
+        "title": "Brunhilde Event",
+        "description": "Description...",
+        "src": "../datenbank/bilder/pferde/2020/brunhilde.jpg",
+        "alt": "Image from 2020"
+    },
+    {
+        "id": 2,
+        "date": "2020-02-02",
+        "title": "Ronda Event",
+        "description": "Description...",
+        "src": "../datenbank/bilder/pferde/2020/ronda.jpg",
+        "alt": "Image from 2020"
+    },
+    {
+        "id": 3,
+        "date": "2020-03-03",
+        "title": "Ronda Event",
+        "description": "Description...",
+        "src": "../datenbank/bilder/pferde/2022/buran.jpg",
+        "alt": "Image from 2020"
+    }
+]
