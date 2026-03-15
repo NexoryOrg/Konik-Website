@@ -1,4 +1,21 @@
+//fetch emailjs data
+let emailjsConfig;
+fetch("../datenbank/data/user.json")
+.then(response => response.json())
+.then(data => {
+    const email_js = data.emailjs.emailjs_data[0];
+
+    service_id = email_js.service_id;
+    template_id = email_js.template_id;
+    public_key = email_js.public_key;
+
+}).catch(error => {
+    console.error("Error fetching emailjs data:", error);
+});
+
+
 window.addEventListener("DOMContentLoaded", () => {
+    console.log(service_id, template_id, public_key);
     const btn = document.getElementById("contact_button");
     if (!btn) {
         console.error("Submit button not found!");
@@ -10,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    emailjs.init("i5L8uctnUoYlZ1CCX");
+    emailjs.init(public_key);
     console.log("EmailJS loaded:", emailjs);
 
     const form = document.getElementById("contactForm");
@@ -34,7 +51,7 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log("Template Parameter:", templateParams);
 
         try {
-            await emailjs.send("service_kd8fsfe", "template_nvlnvt9", templateParams);
+            await emailjs.send(service_id, template_id, templateParams);
             form.reset();
             btn.textContent = "Message sent!";
             
