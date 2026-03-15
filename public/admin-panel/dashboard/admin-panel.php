@@ -60,17 +60,10 @@ if (!isset($_SESSION['admin'])) {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <base href="/">
             <title>Admin Login</title>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-            <style>
-                body { font-family: 'Poppins', sans-serif; background: #f7f9f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-                .login-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); width: min(420px, 95%); }
-                .login-box h1 { color: #2e7d32; text-align: center; margin-bottom: 16px; }
-                .login-box input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #2e7d32; border-radius: 5px; }
-                .login-box button { width: 100%; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; }
-                .login-box button:hover { background: #1b5e20; }
-                .error { color: #c62828; margin-bottom: 10px; text-align: center; }
-            </style>
+            <link rel="stylesheet" href="../admin-panel/password_managment/login.css">
         </head>
         <body>
             <div class="login-box">
@@ -142,7 +135,6 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
             
             file_put_contents($galleryJsonFile, json_encode($galleryData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             
-            // Update stats on approval
             $stats['approved'] = ($stats['approved'] ?? 0) + 1;
             $stats['approved_items'][] = [
                 'filename' => $filename,
@@ -179,7 +171,6 @@ if (isset($_GET['reject']) && isset($_SESSION['admin'])) {
     }
     if (file_exists($jsonFile)) unlink($jsonFile);
 
-    // Update stats on rejection
     $stats['rejected'] = ($stats['rejected'] ?? 0) + 1;
     $stats['rejected_items'][] = [
         'filename' => $filename,
@@ -213,7 +204,6 @@ if (is_dir($pendingDir)) {
     }
 }
 
-// Sortiere nach Timestamp (neueste zuerst)
 usort($pending, function($a, $b) {
     return $b['metadata']['timestamp'] - $a['metadata']['timestamp'];
 });
@@ -227,10 +217,10 @@ $rejectedItems = $stats['rejected_items'] ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <base href="/">
     <title>Admin Managmant</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin-panel.css">
+    <link rel="stylesheet" href="/admin-panel/dashboard/admin-panel.css">
 </head>
 <body>
 
@@ -240,11 +230,11 @@ $rejectedItems = $stats['rejected_items'] ?? [];
                 <a href="admin-panel.php"><img src="../datenbank/bilder/logo/logo.png" alt="Logo"></a>
             </div>
             <ul class="navbar-menu" id="navbar-menu">
-                <li><a href="#infos">Dashboard</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#" id="settings-open">Settings</a></li>
-                <li><a href="<?= '?' . http_build_query(['logout' => 1]); ?>">Logout</a></li>
+                <li><a href="../admin-panel/dashboard/admin-panel.php#infos">Dashboard</a></li>
+                <li><a href="../admin-panel/dashboard/admin-panel.php#gallery">Gallery</a></li>
+                <li><a href=../admin-panel/dashboard/admin-panel.php#timeline">Timeline</a></li>
+                <li><a href="../admin-panel/dashboard/admin-panel.php#" id="settings-open">Settings</a></li>
+                <li><a href="../admin-panel/dashboard/admin-panel.php<?= '?' . http_build_query(['logout' => 1]); ?>">Logout</a></li>
             </ul>
             <div class="navbar-toggle" id="navbar-toggle">
                 <span></span>
@@ -259,6 +249,17 @@ $rejectedItems = $stats['rejected_items'] ?? [];
             <div class="container">
                 <h1>Welcome to the Admin Dashboard</h1>
                 <p class="centered-text">Use this panel to manage gallery uploads, timeline events, and user settings.</p>
+            </div>
+
+            <div class="dashboard-trends">
+                <div class="trend-card">
+                    <h3>Uptime checks (7 last days)</h3>
+                    <img src="/admin-panel/graph/graph_uptime.php" alt="Uptime chart" style="width:100%; height:auto; max-height:320px;">
+                </div>
+                <div class="trend-card">
+                    <h3>Visits (7 last days)</h3>
+                    <img src="/admin-panel/graph/graph_visitors.php" alt="Visitors chart" style="width:100%; height:auto; max-height:320px;">
+                </div>
             </div>
 
             <div class="dashboard-grid">
@@ -376,12 +377,12 @@ $rejectedItems = $stats['rejected_items'] ?? [];
         <div class="modal-content">
             <h2>Passwort ändern</h2>
             <p>Klicke hier, um auf der neuen Seite dein Passwort sicher zu aktualisieren.</p>
-            <a href="change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Zur Passwortänderung</a>
+            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Zur Passwortänderung</a>
             <button id="close-modal" class="btn secondary">Schließen</button>
         </div>
     </div>
 
-    <script src="admin-panel.js"></script>
+    <script src="/admin-panel/dashboard/admin-panel.js"></script>
 
 </body>
 </html>

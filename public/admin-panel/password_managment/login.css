@@ -1,0 +1,167 @@
+body {
+    font-family: 'Poppins',sans-serif;
+    background: #f7f9f7;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+    width: min(420px, 95%);
+    border: 1px solid #dfece1;
+}
+
+.login-box h1 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border: 1px solid #c8e6c8;
+    border-radius: 10px;
+    background: #f7fdf7;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.16);
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.login-box button:hover {
+    background: #1f5a1f;
+    transform: translateY(-1px);
+}
+
+.error {
+    color: #c62828;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* --- change-password --- */
+.change-card {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #dfece1;
+    border-radius: 14px;
+    box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+    padding: 26px;
+    text-align: center;
+}
+
+.change-card h1 {
+    color: #2e7d32;
+    margin-bottom: 16px;
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.change-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.change-card .settings-form {
+    width: 100%;
+    max-width: 380px;
+}
+
+.change-card label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #2f6f2f;
+    text-align: left;
+}
+
+.change-card input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border: 1px solid #c8e6c8;
+    border-radius: 10px;
+    background: #f7fdf7;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+
+.change-card input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.16);
+}
+
+.change-card button {
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.change-card button:hover {
+    background: #1f5a1f;
+    transform: translateY(-1px);
+}
+
+.alert {
+    margin-bottom: 14px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.alert.error {
+    background: #ffe6e6;
+    color: #9f1f1f;
+    border: 1px solid #f2a2a2;
+}
+
+.alert.success {
+    background: #e6f8e6;
+    color: #1d6a1d;
+    border: 1px solid #8fce8f;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: #2e7d32;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

@@ -21,7 +21,11 @@ require_once __DIR__ . '/../init.php';
     </head>
     <body>
 
-        <?php include __DIR__ . '/../navebar/navbar.php'; ?>
+        <?php 
+        include __DIR__ . '/../track.php'; 
+
+        include __DIR__ . '/../navebar/navbar.php';
+        ?>
 
         <section class="hero">
             <img src="../datenbank/bilder/hintergrund/pferde.jpeg" alt="Wild horses in a meadow">
