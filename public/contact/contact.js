@@ -15,7 +15,6 @@ fetch("../datenbank/data/user.json")
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    console.log(service_id, template_id, public_key);
     const btn = document.getElementById("contact_button");
     if (!btn) {
         console.error("Submit button not found!");
@@ -48,7 +47,6 @@ window.addEventListener("DOMContentLoaded", () => {
             message: document.getElementById("message").value,
             time: new Date().toLocaleString()
         };
-        console.log("Template Parameter:", templateParams);
 
         try {
             await emailjs.send(service_id, template_id, templateParams);
