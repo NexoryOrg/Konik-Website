@@ -77,10 +77,50 @@ passwordModal?.addEventListener('click', (e) => {
     }
 });
 
-const timelineForm = document.getElementById('timeline-form');
-if (timelineForm) {
-    timelineForm.addEventListener('submit', e => {
-        e.preventDefault();
-        alert('Timeline entry submission is a placeholder and will be implemented later.');
+
+const form = document.getElementById('timeline-form');
+const list = document.getElementById('timeline-list');
+
+async function loadEvents() {
+    const res = await fetch('admin-panel.php');
+    const events = await res.json();
+    list.innerHTML = '';
+
+    events.forEach(event => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${event.date} - ${event.title}</strong>
+            <p>${event.description}</p>
+            ${event.src ? `<img src="${event.src}" alt="${event.alt}" width="100">` : ''}
+            <button data-id="${event.id}" class="delete-btn">Delete</button>
+        `;
+        list.appendChild(li);
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            await fetch('admin-panel.php', {
+                method: 'POST',
+                body: new URLSearchParams({ action: 'delete', id })
+            });
+            loadEvents();
+        });
     });
 }
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    formData.append('action', 'add');
+
+    await fetch('admin-panel.php', {
+        method: 'POST',
+        body: formData
+    });
+
+    form.reset();
+    loadEvents();
+});
+
+loadEvents();

@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const imgs = document.querySelectorAll('img.history-img[data-src]');
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries, obs) => {

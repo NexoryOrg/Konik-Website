@@ -1,3 +1,17 @@
+:root {
+    --background: #f5f7f5;
+    --surface: #ffffff;
+    --text: #333333;
+    --primary: #2e7d32;
+    --primary-strong: #1b5e20;
+    --primary-soft: rgba(46, 125, 50, 0.12);
+    --border: #d5eed5;
+    --muted: #4f5d4f;
+    --danger: #f44336;
+    --danger-strong: #da190b;
+    --success: #4caf50;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,20 +20,19 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f5f7f5;
-    color: #333;
+    background: var(--background);
+    color: var(--text);
     padding-top: 120px;
 }
 
-/* --- Navbar --- */
 .navbar {
     width: 100%;
-    background: #ffffff;
+    background: var(--surface);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    border-bottom: 1px solid #d5eed5;
+    border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 14px rgba(10, 70, 12, 0.12);
 }
 
@@ -44,21 +57,21 @@ body {
 
 .navbar-menu li a {
     text-decoration: none;
-    color: #1b5e20;
+    color: var(--primary-strong);
     font-weight: 600;
     padding: 10px 14px;
     border-radius: 8px;
     transition: all 0.2s ease;
-    background: rgba(46, 125, 50, 0.12);
+    background: var(--primary-soft);
     border: 1px solid transparent;
     letter-spacing: 0.03em;
 }
 
 .navbar-menu li a:hover,
 .navbar-menu li a.active {
-    background: #2e7d32;
+    background: var(--primary);
     color: #ffffff;
-    border-color: #1a5f1a;
+    border-color: var(--primary-strong);
     box-shadow: 0 3px 8px rgba(30, 100, 30, 0.35);
 }
 
@@ -83,7 +96,7 @@ input, select, textarea {
 }
 
 .btn {
-    background: #2e7d32;
+    background: var(--primary);
     color: #fff;
     border: none;
     padding: 12px;
@@ -93,7 +106,7 @@ input, select, textarea {
 }
 
 .btn:hover {
-    background: #1b5e20;
+    background: var(--primary-strong);
 }
 
 .success-message {
@@ -106,7 +119,6 @@ input, select, textarea {
     text-align: center;
 }
 
-/* Hamburger für mobile */
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -121,11 +133,22 @@ input, select, textarea {
     border-radius: 3px;
 }
 
-/* --- Container --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.container h1 {
+    color: #2e7d32;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.container p {
+    line-height: 1.6;
+    color: #4f5d4f;
+    padding-bottom: 10px;
 }
 
 .section {
@@ -175,7 +198,7 @@ h1 {
 .trend-card h3 {
     margin-bottom: 12px;
     font-size: 1rem;
-    color: #2e7d32;
+    color: var(--primary);
 }
 
 .trend-pre {
@@ -216,7 +239,7 @@ h1 {
 .dashboard-card .stat {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1c5f1c;
+    color: var(--primary-strong);
 }
 
 .dashboard-card .icon {
@@ -280,7 +303,6 @@ h1 {
     color: #3d7d3d;
 }
 
-/* --- Logout --- */
 .logout {
     text-align: right;
     margin-bottom: 20px;
@@ -296,7 +318,6 @@ h1 {
     text-decoration: underline;
 }
 
-/* --- Pending Grid --- */
 .pending-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
