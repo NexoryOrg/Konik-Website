@@ -210,6 +210,57 @@ usort($pending, function($a, $b) {
 
 $approvedItems = $stats['approved_items'] ?? [];
 $rejectedItems = $stats['rejected_items'] ?? [];
+
+
+$json_file = '' . __DIR__ . '/../../datenbank/json/timeline.json';
+$upload_dir = '' . __DIR__ . '/../../datenbank/json/history/';
+
+if (!file_exists($json_file)) file_put_contents($json_file, json_encode([]));
+$events = json_decode(file_get_contents($json_file), true);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+
+    if ($action === 'add') {
+        $image_path = '';
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+            $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $image_name = time() . '.' . $ext;
+            $image_path = $upload_dir . $image_name;
+            move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+        }
+
+        $new_event = [
+            'id' => time(),
+            'date' => $_POST['date'],
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+            'src' => $image_path,
+            'alt' => $_POST['title']
+        ];
+
+        $events[] = $new_event;
+        file_put_contents($json_file, json_encode($events, JSON_PRETTY_PRINT));
+        echo json_encode($new_event);
+        exit;
+    }
+
+    if ($action === 'delete') {
+        $id = (int)$_POST['id'];
+        foreach ($events as $key => $e) {
+            if ($e['id'] === $id) {
+                if (!empty($e['src']) && file_exists($e['src'])) unlink($e['src']); // Bild löschen
+                unset($events[$key]);
+            }
+        }
+        $events = array_values($events);
+        file_put_contents($json_file, json_encode($events, JSON_PRETTY_PRINT));
+        echo json_encode(['success' => true]);
+        exit;
+    }
+}
+
+echo json_encode($events);
 ?>
 
 <!DOCTYPE html>
@@ -361,13 +412,17 @@ $rejectedItems = $stats['rejected_items'] ?? [];
             <div class="container">
                 <h2>Timeline Management</h2>
                 <p class="centered-text">Add and manage key events for the project timeline.</p>
-                <form id="timeline-form" class="settings-form">
+
+                <form id="timeline-form" class="settings-form" enctype="multipart/form-data">
                     <input type="text" name="title" placeholder="Event title" required>
                     <input type="date" name="date" required>
                     <textarea name="description" rows="3" placeholder="Description" required></textarea>
+                    <input type="file" name="image" accept="image/*">
                     <button type="submit" class="btn">Add Event</button>
                 </form>
-                <small class="centered-text">Feature placeholder: future update will save via AJAX.</small>
+
+                <ul id="timeline-list">
+                </ul>
             </div>
         </section>
 
