@@ -17,7 +17,9 @@ function updateActiveNav() {
     const links = document.querySelectorAll('.navbar-menu li a');
     const hash = window.location.hash || '#infos';
     links.forEach(link => {
-        if (link.getAttribute('href') === hash) {
+        const href = link.getAttribute('href');
+        const hrefHash = href ? (href.includes('#') ? href.substr(href.indexOf('#')) : '') : '';
+        if (hrefHash === hash) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -58,6 +60,8 @@ if (settingsOpenBtn && passwordModal) {
     settingsOpenBtn.addEventListener('click', (e) => {
         e.preventDefault();
         passwordModal.classList.remove('hidden');
+        window.location.hash = '#settings';
+        updateActiveNav();
     });
 }
 
