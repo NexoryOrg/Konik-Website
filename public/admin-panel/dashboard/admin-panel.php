@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$userDataFile = __DIR__ . '/../datenbank/data/user.json';
+$userDataFile = __DIR__ . '/../../datenbank/data/user.json';
 $users = ['admin' => 'admin'];
 if (file_exists($userDataFile)) {
     $userData = json_decode(file_get_contents($userDataFile), true);
@@ -81,11 +81,11 @@ if (!isset($_SESSION['admin'])) {
         exit;
     }
 
-$pendingDir = __DIR__ . '/../datenbank/bilder/uploads/pending/';
-$uploadsDir = __DIR__ . '/../datenbank/bilder/uploads/';
-$rejectedDir = __DIR__ . '/../datenbank/bilder/uploads/rejected/';
-$galleryJsonFile = __DIR__ . '/../datenbank/json/gallery.json';
-$statsFile = __DIR__ . '/../datenbank/data/stats.json';
+$pendingDir = __DIR__ . '/../../datenbank/bilder/uploads/pending/';
+$uploadsDir = __DIR__ . '/../../datenbank/bilder/uploads/';
+$rejectedDir = __DIR__ . '/../../datenbank/bilder/uploads/rejected/';
+$galleryJsonFile = __DIR__ . '/../../datenbank/json/gallery.json';
+$statsFile = __DIR__ . '/../../datenbank/data/stats.json';
 $stats = [
     'approved' => 0,
     'rejected' => 0,
@@ -126,7 +126,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
             }
             
             $entry = [
-                'src' => 'datenbank/bilder/uploads/' . $filename,
+                'src' => '/datenbank/bilder/uploads/' . $filename,
                 'alt' => $metadata['title'],
                 'des' => $metadata['description']
             ];
@@ -230,11 +230,11 @@ $rejectedItems = $stats['rejected_items'] ?? [];
                 <a href="admin-panel.php"><img src="../datenbank/bilder/logo/logo.png" alt="Logo"></a>
             </div>
             <ul class="navbar-menu" id="navbar-menu">
-                <li><a href="../admin-panel/dashboard/admin-panel.php#infos">Dashboard</a></li>
-                <li><a href="../admin-panel/dashboard/admin-panel.php#gallery">Gallery</a></li>
-                <li><a href=../admin-panel/dashboard/admin-panel.php#timeline">Timeline</a></li>
-                <li><a href="../admin-panel/dashboard/admin-panel.php#" id="settings-open">Settings</a></li>
-                <li><a href="../admin-panel/dashboard/admin-panel.php<?= '?' . http_build_query(['logout' => 1]); ?>">Logout</a></li>
+                <li><a href="/admin-panel/dashboard/admin-panel.php#infos">Dashboard</a></li>
+                <li><a href="/admin-panel/dashboard/admin-panel.php#gallery">Gallery</a></li>
+                <li><a href="/admin-panel/dashboard/admin-panel.php#timeline">Timeline</a></li>
+                <li><a href="#" id="settings-open">Settings</a></li>
+                <li><a href="/admin-panel/dashboard/admin-panel.php?logout=1">Logout</a></li>
             </ul>
             <div class="navbar-toggle" id="navbar-toggle">
                 <span></span>
@@ -253,11 +253,11 @@ $rejectedItems = $stats['rejected_items'] ?? [];
 
             <div class="dashboard-trends">
                 <div class="trend-card">
-                    <h3>Uptime checks (7 last days)</h3>
+                    <h3>Uptime checks (24 hours)</h3>
                     <img src="/admin-panel/graph/graph_uptime.php" alt="Uptime chart" style="width:100%; height:auto; max-height:320px;">
                 </div>
                 <div class="trend-card">
-                    <h3>Visits (7 last days)</h3>
+                    <h3>Visits (7 points)</h3>
                     <img src="/admin-panel/graph/graph_visitors.php" alt="Visitors chart" style="width:100%; height:auto; max-height:320px;">
                 </div>
             </div>
@@ -305,8 +305,8 @@ $rejectedItems = $stats['rejected_items'] ?? [];
                                     <p><strong>Uploaded:</strong> <?= date('d.m.Y H:i', $item['metadata']['timestamp']) ?></p>
                                     <p><strong>Uploader Email:</strong> <?= htmlspecialchars($item['metadata']['email']) ?></p>
                                     <div class="pending-actions">
-                                        <a href="<?= '?' . http_build_query(['approve' => $item['filename']]) ?>" class="approve">✓ Approve</a>
-                                        <a href="<?= '?' . http_build_query(['reject' => $item['filename']]) ?>" class="reject">✕ Reject</a>
+                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['approve' => $item['filename']]) ?>" class="approve">✓ Approve</a>
+                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['reject' => $item['filename']]) ?>" class="reject">✕ Reject</a>
                                     </div>
                                 </div>
                             </div>
