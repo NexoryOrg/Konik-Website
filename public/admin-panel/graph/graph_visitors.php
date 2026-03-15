@@ -70,9 +70,6 @@ echo $grid;
 echo $axis;
 echo $line;
 echo $markerDots;
-
 echo $labelMarks;
-
-echo '<text x="' . ($w / 2) . '" y="25" fill="#0D4C3B" font-family="Arial" font-size="18" text-anchor="middle">Visitors (last 7 points)</text>';
 echo '</svg>';
 exit;
