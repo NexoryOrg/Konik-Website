@@ -261,12 +261,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($events);
-
-$data = file_get_contents("php://input");
-
-file_put_contents("/../../datenbank/json/history.json", $data);
-
-echo json_encode(["status"=>"saved"]);
 ?>
 
 <!DOCTYPE html>
