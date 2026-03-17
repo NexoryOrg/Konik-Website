@@ -78,49 +78,188 @@ passwordModal?.addEventListener('click', (e) => {
 });
 
 
-const form = document.getElementById('timeline-form');
-const list = document.getElementById('timeline-list');
+const list = document.getElementById("timeline-list");
+const addBtn = document.getElementById("add-event");
+
+let events = [];
 
 async function loadEvents() {
-    const res = await fetch('admin-panel.php');
-    const events = await res.json();
-    list.innerHTML = '';
 
-    events.forEach(event => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <strong>${event.date} - ${event.title}</strong>
-            <p>${event.description}</p>
-            ${event.src ? `<img src="${event.src}" alt="${event.alt}" width="100">` : ''}
-            <button data-id="${event.id}" class="delete-btn">Delete</button>
-        `;
-        list.appendChild(li);
-    });
+    const res = await fetch("/../../datenbank/json/history.json");
+    events = await res.json();
 
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const id = btn.dataset.id;
-            await fetch('admin-panel.php', {
-                method: 'POST',
-                body: new URLSearchParams({ action: 'delete', id })
-            });
-            loadEvents();
-        });
-    });
+    render();
+
 }
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    formData.append('action', 'add');
+function render() {
 
-    await fetch('admin-panel.php', {
-        method: 'POST',
-        body: formData
+    list.innerHTML = "";
+
+    events.forEach(event => {
+
+        const li = document.createElement("li");
+
+        li.dataset.id = event.id;
+
+        li.innerHTML = `
+            <div class="event">
+
+            <div>
+
+            <input class="title" value="${event.title}" placeholder="Title">
+
+            <input class="date" type="date" value="${event.date}">
+
+            <textarea class="desc" placeholder="Description">${event.description}</textarea>
+
+            <input class="image-input" type="file">
+
+            <div class="event-actions">
+
+            <button class="save">save</button>
+
+            <button class="delete">Delete</button>
+            </div>
+
+            </div>
+
+            <div>
+
+            <img class="preview" src="${event.src || ""}">
+
+            </div>
+
+            </div>
+            `;
+
+        list.appendChild(li);
+
     });
 
-    form.reset();
-    loadEvents();
+}
+
+addBtn.onclick = () => {
+
+    const id = Date.now();
+
+    events.push({
+
+        id,
+        title: "New Event",
+        date: "2024-01-01",
+        description: "",
+        src: "",
+        alt: ""
+
+    });
+
+    render();
+    save();
+
+};
+
+list.addEventListener("input", e => {
+
+    const li = e.target.closest("li");
+    const id = li.dataset.id;
+
+    const event = events.find(e => e.id == id);
+
+    event.title = li.querySelector(".title").value;
+    event.date = li.querySelector(".date").value;
+    event.description = li.querySelector(".desc").value;
+
+    save();
+
 });
+
+list.addEventListener("click", e => {
+
+    if (e.target.classList.contains("delete")) {
+
+        const li = e.target.closest("li");
+        const id = li.dataset.id;
+
+        events = events.filter(ev => ev.id != id);
+
+        render();
+        save();
+
+    }
+
+});
+
+list.addEventListener("change", e => {
+
+    if (e.target.classList.contains("image-input")) {
+
+        const file = e.target.files[0];
+
+        const li = e.target.closest("li");
+        const img = li.querySelector(".preview");
+
+        const reader = new FileReader();
+
+        reader.onload = function(ev) {
+
+            img.src = ev.target.result;
+
+            const id = li.dataset.id;
+            const event = events.find(e => e.id == id);
+
+            event.src = ev.target.result;
+
+            save();
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+});
+
+new Sortable(list, {
+
+    animation: 150,
+    handel: ".title",
+
+    onEnd() {
+
+        const newOrder = [];
+
+        document.querySelectorAll("#timeline-list li").forEach(li => {
+
+            const id = li.dataset.id;
+
+            const event = events.find(e => e.id == id);
+
+            newOrder.push(event);
+
+        });
+
+        events = newOrder;
+
+        save();
+
+    }
+
+});
+
+async function save() {
+
+    await fetch("save-history.php", {
+
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(events)
+
+    });
+
+}
 
 loadEvents();
