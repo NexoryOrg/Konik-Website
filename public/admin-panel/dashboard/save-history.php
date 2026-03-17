@@ -1,7 +1,9 @@
 <?php
 $data = file_get_contents("php://input");
 
-file_put_contents("/../../datenbank/json/history.json", $data);
+$file = __DIR__ . "/../../datenbank/json/history.json";
 
-echo json_encode(["status"=>"saved"]);
+file_put_contents($file, $data);
+
+echo json_encode(["status" => "saved"]);
 ?>
