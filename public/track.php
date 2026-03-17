@@ -18,7 +18,6 @@ if (!isset($data[$hour]) || !is_numeric($data[$hour])) {
 
 $data[$hour]++;
 
-// Nur die letzten 24 Stunden behalten
 $data = array_slice($data, -24, 24, true);
 
 file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
