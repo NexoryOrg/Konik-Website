@@ -261,6 +261,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($events);
+
+$data = file_get_contents("php://input");
+
+file_put_contents("/../../datenbank/json/history.json", $data);
+
+echo json_encode(["status"=>"saved"]);
 ?>
 
 <!DOCTYPE html>
@@ -408,23 +414,15 @@ echo json_encode($events);
             </div>
         </section>
 
-        <section class="section" id="timeline">
-            <div class="container">
-                <h2>Timeline Management</h2>
-                <p class="centered-text">Add and manage key events for the project timeline.</p>
+    <section class="section" id="timeline-admin">
 
-                <form id="timeline-form" class="settings-form" enctype="multipart/form-data">
-                    <input type="text" name="title" placeholder="Event title" required>
-                    <input type="date" name="date" required>
-                    <textarea name="description" rows="3" placeholder="Description" required></textarea>
-                    <input type="file" name="image" accept="image/*">
-                    <button type="submit" class="btn">Add Event</button>
-                </form>
+        <h2>Timeline Admin</h2>
 
-                <ul id="timeline-list">
-                </ul>
-            </div>
-        </section>
+        <button id="add-event">+ Add Event</button>
+
+        <ul id="timeline-list"></ul>
+
+    </section>
 
     </main>
 
@@ -437,6 +435,7 @@ echo json_encode($events);
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="/admin-panel/dashboard/admin-panel.js"></script>
 
 </body>
