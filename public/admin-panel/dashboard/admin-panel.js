@@ -154,29 +154,36 @@ addBtn.onclick = () => {
 
     });
 
-    render();
-    save();
 
 };
 
-list.addEventListener("input", e => {
+list.addEventListener("click", e => {
 
-    const li = e.target.closest("li");
-    const id = li.dataset.id;
+    if (e.target.classList.contains("save")) {
 
-    const event = events.find(e => e.id == id);
+        const li = e.target.closest("li");
+        const id = li.dataset.id;
 
-    event.title = li.querySelector(".title").value;
-    event.date = li.querySelector(".date").value;
-    event.description = li.querySelector(".desc").value;
+        const event = events.find(ev => ev.id == id);
 
-    save();
+        event.title = li.querySelector(".title").value;
+        event.date = li.querySelector(".date").value;
+        event.description = li.querySelector(".desc").value;
+
+        save();
+
+        alert("Gespeichert!");
+    }
 
 });
 
 list.addEventListener("click", e => {
 
     if (e.target.classList.contains("delete")) {
+
+        const confirmDelete = confirm("Event wirklich löschen?");
+
+        if (!confirmDelete) return;
 
         const li = e.target.closest("li");
         const id = li.dataset.id;
@@ -185,7 +192,6 @@ list.addEventListener("click", e => {
 
         render();
         save();
-
     }
 
 });
@@ -210,8 +216,6 @@ list.addEventListener("change", e => {
 
             event.src = ev.target.result;
 
-            save();
-
         };
 
         reader.readAsDataURL(file);
@@ -223,7 +227,7 @@ list.addEventListener("change", e => {
 new Sortable(list, {
 
     animation: 150,
-    handel: ".title",
+    handle: ".title",
 
     onEnd() {
 
@@ -241,23 +245,20 @@ new Sortable(list, {
 
         events = newOrder;
 
-        save();
-
     }
 
 });
 
 async function save() {
 
-    await fetch("save-history.php", {
+    console.log("Saving:", events);
 
+    await fetch("../admin-panel/dashboard/save-history.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-
         body: JSON.stringify(events)
-
     });
 
 }
