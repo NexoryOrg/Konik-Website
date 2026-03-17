@@ -10,7 +10,6 @@ if (file_exists($file)) {
     }
 }
 
-// status query: 1 = online, 0 = offline
 $status = 1;
 if (isset($_GET['status'])) {
     $status = ($_GET['status'] === '0') ? 0 : 1;
@@ -19,7 +18,6 @@ if (isset($_GET['status'])) {
 $time = date("Y-m-d H:i");
 $data[$time] = $status;
 
-// Keep last 48 hours for history
 $data = array_slice($data, -48 * 60, 48 * 60, true);
 
 file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
