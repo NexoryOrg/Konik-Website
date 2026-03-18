@@ -1,6 +1,6 @@
 <?php
 
-$file = __DIR__ . "/datenbank/data/uptime.json";
+$file = __DIR__ . '/datenbank/data/uptime.json';
 
 $defaultScheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $defaultHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
@@ -97,3 +97,9 @@ if (!is_dir($dir)) {
 file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES), LOCK_EX);
 
 header('Content-Type: application/json; charset=UTF-8');
+echo json_encode([
+    'ok' => true,
+    'url' => $checkUrl,
+    'timestamp' => $key,
+    'status' => $status,
+], JSON_UNESCAPED_SLASHES);
