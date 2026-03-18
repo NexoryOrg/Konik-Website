@@ -37,9 +37,25 @@ $axis = '<line x1="' . $padding . '" y1="' . ($padding) . '" x2="' . $padding . 
 $axis .= '<line x1="' . $padding . '" y1="' . ($h - $padding) . '" x2="' . ($w - $padding) . '" y2="' . ($h - $padding) . '" stroke="#B9C9E6" stroke-width="1"/>';
 
 $grid = '';
-for ($i = 0; $i <= 5; $i++) {
-    $y = $h - $padding - ($i * ($plotH / 5));
-    $value = round($maxValue * $i / 5);
+$gridLines = 6;
+if ($maxValue <= 5) {
+    $gridLines = (int)$maxValue + 1;
+    if ($gridLines < 2) {
+        $gridLines = 2;
+    }
+}
+
+for ($i = 0; $i < $gridLines; $i++) {
+    $position = $gridLines - 1 > 0 ? $i / ($gridLines - 1) : 0;
+    $y = $h - $padding - ($position * $plotH);
+    $value = (int) round($maxValue * $position);
+    if ($value < 0) {
+        $value = 0;
+    }
+    if ($value > $maxValue) {
+        $value = $maxValue;
+    }
+
     $grid .= '<line x1="' . $padding . '" y1="' . $y . '" x2="' . ($w - $padding) . '" y2="' . $y . '" stroke="#D7E6EB" stroke-width="1" stroke-dasharray="2,2"/>';
     $grid .= '<text x="12" y="' . ($y + 4) . '" fill="#364F5C" font-family="Arial" font-size="12">' . $value . '</text>';
 }
