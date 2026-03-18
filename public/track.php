@@ -1,5 +1,5 @@
 <?php
-$file = __DIR__ . "../datenbank/data/visitors.json";
+$file = __DIR__ . "/datenbank/data/visitors.json";
 
 $data = [];
 
