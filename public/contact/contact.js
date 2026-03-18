@@ -1,20 +1,23 @@
-//fetch emailjs data
-let emailjsConfig;
-fetch("../datenbank/data/user.json")
-.then(response => response.json())
-.then(data => {
-    const email_js = data.emailjs.emailjs_data[0];
+async function loadEmailConfig() {
+    const response = await fetch('/datenbank/data/user.json', { cache: 'no-store' });
+    if (!response.ok) {
+        throw new Error('EmailJS config request failed');
+    }
 
-    service_id = email_js.service_id;
-    template_id = email_js.template_id;
-    public_key = email_js.public_key;
+    const data = await response.json();
+    const emailJs = data?.emailjs?.emailjs_data?.[0];
+    if (!emailJs?.service_id || !emailJs?.template_id || !emailJs?.public_key) {
+        throw new Error('EmailJS configuration is missing required keys');
+    }
 
-}).catch(error => {
-    console.error("Error fetching emailjs data:", error);
-});
+    return {
+        serviceId: emailJs.service_id,
+        templateId: emailJs.template_id,
+        publicKey: emailJs.public_key
+    };
+}
 
-
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const btn = document.getElementById("contact_button");
     if (!btn) {
         console.error("Submit button not found!");
@@ -26,7 +29,21 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    emailjs.init(public_key);
+    let emailConfig;
+    try {
+        emailConfig = await loadEmailConfig();
+    } catch (error) {
+        console.error('Error fetching emailjs data:', error);
+        const errorMsg = document.getElementById('error-msg');
+        if (errorMsg) {
+            document.getElementById('error-text').textContent = 'Email service configuration missing. Please try again later.';
+            errorMsg.hidden = false;
+        }
+        btn.disabled = true;
+        return;
+    }
+
+    emailjs.init(emailConfig.publicKey);
     console.log("EmailJS loaded:", emailjs);
 
     const form = document.getElementById("contactForm");
@@ -49,7 +66,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            await emailjs.send(service_id, template_id, templateParams);
+            await emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams);
             form.reset();
             btn.textContent = "Message sent!";
             
