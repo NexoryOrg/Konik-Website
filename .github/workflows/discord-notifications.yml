@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - testbereich
   pull_request:
     types: [opened, edited, reopened, closed]
   issues:

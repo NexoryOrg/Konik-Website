@@ -11,8 +11,8 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
+    - name: 'Auto-assign issue or pull request'
+      uses: pozil/auto-assign-issue@v2
       with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: LUCA-PYTHON
