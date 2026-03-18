@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/init.php';
+require_once __DIR__ . '/../init.php';
 ?>
 
 <!doctype html>
@@ -7,7 +7,6 @@ require_once __DIR__ . '/init.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' data: https:; img-src 'self' data: blob: https:; connect-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://unpkg.com;">
 
         <title>Imprint & Privacy</title>
         <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
