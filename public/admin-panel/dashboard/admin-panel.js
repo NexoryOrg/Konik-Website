@@ -84,12 +84,15 @@ const addBtn = document.getElementById("add-event");
 let events = [];
 
 async function loadEvents() {
-
-    const res = await fetch("/../../datenbank/json/history.json");
-    events = await res.json();
+    const res = await fetch("/datenbank/json/history.json");
+    if (!res.ok) {
+        console.error('Failed to load history', res.statusText);
+        events = [];
+    } else {
+        events = await res.json();
+    }
 
     render();
-
 }
 
 function render() {
@@ -140,21 +143,16 @@ function render() {
 }
 
 addBtn.onclick = () => {
-
     const id = Date.now();
-
     events.push({
-
         id,
         title: "New Event",
         date: "2024-01-01",
         description: "",
         src: "",
         alt: ""
-
     });
-
-
+    render();
 };
 
 list.addEventListener("click", async e => {
@@ -196,24 +194,69 @@ list.addEventListener("click", async e => {
     }
 });
 
-list.addEventListener("click", e => {
+const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+const cancelDeleteButton = document.getElementById('cancel-delete');
+const confirmDeleteButton = document.getElementById('confirm-delete');
+let deleteTargetId = null;
 
-    if (e.target.classList.contains("delete")) {
+list.addEventListener('click', e => {
+    if (e.target.classList.contains('delete')) {
+        e.preventDefault();
 
-        const confirmDelete = confirm("Event wirklich löschen?");
+        const li = e.target.closest('li');
+        deleteTargetId = li?.dataset?.id || null;
 
-        if (!confirmDelete) return;
+        if (!deleteTargetId) {
+            return;
+        }
 
-        const li = e.target.closest("li");
-        const id = li.dataset.id;
+        if (confirmDeleteModal) {
+            confirmDeleteModal.classList.remove('hidden');
+        }
+    }
+});
 
-        events = events.filter(ev => ev.id != id);
+if (cancelDeleteButton && confirmDeleteModal) {
+    cancelDeleteButton.addEventListener('click', () => {
+        deleteTargetId = null;
+        confirmDeleteModal.classList.add('hidden');
+    });
+}
+
+if (confirmDeleteButton && confirmDeleteModal) {
+    confirmDeleteButton.addEventListener('click', async () => {
+        if (!deleteTargetId) {
+            return;
+        }
+
+        events = events.filter(ev => ev.id != deleteTargetId);
+        deleteTargetId = null;
 
         render();
-        save();
-    }
+        await save();
 
-});
+        if (confirmDeleteModal) {
+            confirmDeleteModal.classList.add('hidden');
+        }
+
+        const infoMsg = document.getElementById('info-msg');
+        if (infoMsg) {
+            document.getElementById('succes-h1').textContent = 'Deleted!';
+            document.getElementById('succes-text').textContent = 'The event has been deleted.';
+            infoMsg.hidden = false;
+            setTimeout(() => { infoMsg.hidden = true; }, 3000);
+        }
+    });
+}
+
+if (confirmDeleteModal) {
+    confirmDeleteModal.addEventListener('click', (e) => {
+        if (e.target === confirmDeleteModal) {
+            deleteTargetId = null;
+            confirmDeleteModal.classList.add('hidden');
+        }
+    });
+}
 
 list.addEventListener("change", e => {
 
@@ -269,10 +312,9 @@ new Sortable(list, {
 });
 
 async function save() {
-
     console.log("Saving:", events);
 
-    await fetch("../admin-panel/dashboard/save-history.php", {
+    const res = await fetch("/admin-panel/dashboard/save-history.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -280,6 +322,9 @@ async function save() {
         body: JSON.stringify(events)
     });
 
+    if (!res.ok) {
+        console.error('Save-history failed', res.statusText);
+    }
 }
 
 loadEvents();

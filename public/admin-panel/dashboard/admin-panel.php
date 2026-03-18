@@ -418,13 +418,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p id="error-text">Something went wrong!</p>
         </div>
 
-        <div class="modal-overlay" id="modal-overlay">
-            <div class="modal-content">
-                <h2 id="modal-title"></h2>
-                <form id="event-form">
-            </div>
-        </div>
-
         <h2>Timeline Admin</h2>
 
         <button id="add-event">+ Add Event</button>
@@ -437,10 +430,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div id="password-modal" class="modal hidden">
         <div class="modal-content">
-            <h2>Passwort ändern</h2>
-            <p>Klicke hier, um auf der neuen Seite dein Passwort sicher zu aktualisieren.</p>
-            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Zur Passwortänderung</a>
-            <button id="close-modal" class="btn secondary">Schließen</button>
+            <h2>Change Password</h2>
+            <p>Click here to securely update your password on the external page.</p>
+            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Change Password</a>
+            <button id="close-modal" class="btn secondary">Close</button>
+        </div>
+    </div>
+
+    <div id="confirm-delete-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Delete Entry</h2>
+            <p>Are you sure you want to delete this event?</p>
+            <div class="modal-actions" style="margin-top: 1rem; text-align: right;">
+                <button id="cancel-delete" class="btn secondary">Cancel</button>
+                <button id="confirm-delete" class="btn danger">Delete</button>
+            </div>
         </div>
     </div>
 
