@@ -110,6 +110,25 @@ input, select, textarea {
     background: var(--primary-strong);
 }
 
+.btn.secondary {
+    background: #9e9e9e;
+    color: #ffffff;
+}
+
+.btn.secondary:hover {
+    background: #7f7f7f;
+}
+
+.btn.danger {
+    background: var(--danger);
+    color: #ffffff;
+}
+
+.btn.danger:hover {
+    background: var(--danger-strong);
+}
+
+
 .success-message {
     color: #2e7d32;
     text-align: center;
