@@ -21,7 +21,6 @@ register_shutdown_function(function() {
     }
 });
 
-// JSON laden
 if (file_exists($jsonFile)) {
     $data = file_get_contents($jsonFile);
     $eventsData = json_decode($data, true);

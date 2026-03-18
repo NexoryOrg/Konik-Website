@@ -1,5 +1,5 @@
 <?php
-$file = __DIR__ . "/../datenbank/data/uptime.json";
+$file = __DIR__ . "../datenbank/data/uptime.json";
 
 $data = [];
 if (file_exists($file)) {

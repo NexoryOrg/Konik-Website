@@ -632,6 +632,32 @@ h1 {
     transform: translateY(-2px);
 }
 
+.info-msg,
+.error-msg {
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.info-msg:not([hidden]),
+.error-msg:not([hidden]) {
+  display: block;
+}
+
+.info-msg {
+  border: 2px var(--success-strong) solid;
+}
+
+.error-msg {
+  border: 2px var(--danger-strong) solid;
+}
+
 @media (max-width: 768px) {
     .section {
         padding: 16px;
