@@ -157,24 +157,43 @@ addBtn.onclick = () => {
 
 };
 
-list.addEventListener("click", e => {
+list.addEventListener("click", async e => {
 
     if (e.target.classList.contains("save")) {
 
-        const li = e.target.closest("li");
-        const id = li.dataset.id;
+        try {
+            const li = e.target.closest("li");
+            const id = li.dataset.id;
 
-        const event = events.find(ev => ev.id == id);
+            const event = events.find(ev => ev.id == id);
 
-        event.title = li.querySelector(".title").value;
-        event.date = li.querySelector(".date").value;
-        event.description = li.querySelector(".desc").value;
+            event.title = li.querySelector(".title").value;
+            event.date = li.querySelector(".date").value;
+            event.description = li.querySelector(".desc").value;
 
-        save();
+            save();
 
-        alert("Gespeichert!");
+            const infoMsg = document.getElementById("info-msg");
+            if (infoMsg) {
+                document.getElementById("succes-h1").textContent = "Saved!";
+                document.getElementById("succes-text").textContent = "Your event has been saved.";
+                infoMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                infoMsg.hidden = true;
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+
+            const errorMsg = document.getElementById("error-msg");
+            if (errorMsg) {
+                document.getElementById("error-text").textContent = "Your event could not be saved. Please try again.";
+                errorMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                errorMsg.hidden = true;
+            }
+        }
     }
-
 });
 
 list.addEventListener("click", e => {
