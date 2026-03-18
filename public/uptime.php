@@ -97,11 +97,3 @@ if (!is_dir($dir)) {
 file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES), LOCK_EX);
 
 header('Content-Type: application/json; charset=UTF-8');
-
-echo json_encode([
-    'checked_at' => date('c'),
-    'target' => $checkUrl,
-    'status' => $status,
-    'hour' => $key,
-    'uptime_data_points' => count($data),
-]);
