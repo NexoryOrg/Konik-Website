@@ -117,6 +117,7 @@ if (!empty($gallery)) {
     <div class="upload-section">
         <h3>📸 Neue Fotos hinzufügen</h3>
         <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="<?= e(csrf_token()) ?>">
             <input type="date" id="eventDate" name="eventDate" required>
             <input type="email" id="uploaderEmail" name="uploaderEmail" placeholder="Deine E-Mail (für Rückfragen)" required>
             <input type="text" id="eventTitle" name="eventTitle" placeholder="Titel (z.B. 'Schneetag im Wald')" required>
