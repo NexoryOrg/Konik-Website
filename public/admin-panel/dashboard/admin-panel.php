@@ -2,55 +2,126 @@
 require_once __DIR__ . '/../../init.php';
 
 $userDataFile = __DIR__ . '/../../datenbank/data/user.json';
-$users = ['admin' => 'admin'];
-if (file_exists($userDataFile)) {
-    $userData = json_decode(file_get_contents($userDataFile), true);
-    if (json_last_error() === JSON_ERROR_NONE && isset($userData['users']) && is_array($userData['users'])) {
-        $users = [];
-        foreach ($userData['users'] as $u) {
-            if (!empty($u['username']) && isset($u['password'])) {
-                $users[$u['username']] = $u['password'];
-            }
+
+function isHashedPassword($password) {
+    return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;
+}
+
+function parseUsersFromFile($file) {
+    $users = [];
+    if (!file_exists($file)) {
+        return $users;
+    }
+
+    $data = json_decode(file_get_contents($file), true);
+    if (json_last_error() !== JSON_ERROR_NONE || !isset($data['users']) || !is_array($data['users'])) {
+        return $users;
+    }
+
+    foreach ($data['users'] as $row) {
+        if (!empty($row['username']) && isset($row['password'])) {
+            $users[(string)$row['username']] = (string)$row['password'];
         }
     }
+
+    return $users;
+}
+
+function normalizeUsers($usersArray) {
+    $normalized = [];
+    foreach ($usersArray as $username => $password) {
+        $username = trim((string)$username);
+        if ($username === '') {
+            continue;
+        }
+        $stored = (string)$password;
+        if (!isHashedPassword($stored)) {
+            $stored = password_hash($stored, PASSWORD_DEFAULT);
+        }
+        $normalized[$username] = $stored;
+    }
+
+    return $normalized;
+}
+
+function verifyUserPassword($storedPassword, $plainPassword) {
+    $storedPassword = (string)$storedPassword;
+    if (isHashedPassword($storedPassword)) {
+        return password_verify($plainPassword, $storedPassword);
+    }
+
+    return hash_equals($storedPassword, $plainPassword);
 }
 
 function saveUsers($file, $usersArray) {
-    $payload = ['users' => array_map(fn($k, $v) => ['username' => $k, 'password' => $v], array_keys($usersArray), $usersArray)];
-    file_put_contents($file, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    $safeUsers = normalizeUsers($usersArray);
+    $payload = ['users' => array_map(fn($k, $v) => ['username' => $k, 'password' => $v], array_keys($safeUsers), $safeUsers)];
+    file_put_contents($file, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
 }
 
+$users = parseUsersFromFile($userDataFile);
+if (empty($users)) {
+    $users = ['admin' => password_hash('admin', PASSWORD_DEFAULT)];
+}
+
+$normalizedUsers = normalizeUsers($users);
+if ($normalizedUsers !== $users || !file_exists($userDataFile)) {
+    saveUsers($userDataFile, $normalizedUsers);
+}
+$users = $normalizedUsers;
+
+$csrfToken = csrf_token();
+
 if (isset($_GET['logout'])) {
+    if (!csrf_validate($_GET['csrf'] ?? '')) {
+        http_response_code(403);
+        exit('Invalid request token');
+    }
     session_destroy();
     header('Location: admin-panel.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    if (!csrf_validate($_POST['csrf_token'] ?? '')) {
+        $error = 'Invalid request token';
+    }
+
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
-    if ($username && isset($users[$username]) && $users[$username] === $password) {
-        $_SESSION['admin'] = $username;
-    } else {
-        $error = 'Invalid username or password';
+    if (!isset($error)) {
+        if ($username && isset($users[$username]) && verifyUserPassword($users[$username], $password)) {
+            if (password_needs_rehash($users[$username], PASSWORD_DEFAULT)) {
+                $users[$username] = password_hash($password, PASSWORD_DEFAULT);
+                saveUsers($userDataFile, $users);
+            }
+            session_regenerate_id(true);
+            $_SESSION['admin'] = $username;
+        } else {
+            $error = 'Invalid username or password';
+        }
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['saveSettings']) && isset($_SESSION['admin'])) {
-    $newUser = trim($_POST['new_user'] ?? '');
-    $newPass = trim($_POST['new_password'] ?? '');
-    $editUser = trim($_POST['edit_user'] ?? '');
-    $editPass = trim($_POST['edit_password'] ?? '');
+    if (!csrf_validate($_POST['csrf_token'] ?? '')) {
+        $message = 'Invalid request token';
+    } else {
+        $newUser = trim($_POST['new_user'] ?? '');
+        $newPass = trim($_POST['new_password'] ?? '');
+        $editUser = trim($_POST['edit_user'] ?? '');
+        $editPass = trim($_POST['edit_password'] ?? '');
 
-    if ($newUser && $newPass) {
-        $users[$newUser] = $newPass;
-    }
-    if ($editUser && $editPass && isset($users[$editUser])) {
-        $users[$editUser] = $editPass;
-    }
+        if ($newUser && $newPass) {
+            $users[$newUser] = $newPass;
+        }
+        if ($editUser && $editPass && isset($users[$editUser])) {
+            $users[$editUser] = $editPass;
+        }
 
-    saveUsers($userDataFile, $users);
-    $message = 'Settings saved';
+        saveUsers($userDataFile, $users);
+        $message = 'Settings saved';
+    }
 }
 
 if (!isset($_SESSION['admin'])) {
@@ -68,8 +139,9 @@ if (!isset($_SESSION['admin'])) {
         <body>
             <div class="login-box">
                 <h1>Admin Login</h1>
-                <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+                <?php if (isset($error)) echo "<p class='error'>" . e($error) . "</p>"; ?>
                 <form method="POST">
+                    <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
                     <input type="text" name="username" placeholder="Username" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="submit" name="login">Login</button>
@@ -108,7 +180,7 @@ function saveStats($file, $statsArray) {
     file_put_contents($file, json_encode($statsArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
-if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
+if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET['csrf'] ?? '')) {
     $filename = basename($_GET['approve']);
     $jsonFile = $pendingDir . $filename . '.json';
     
@@ -154,7 +226,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin'])) {
     }
 }
 
-if (isset($_GET['reject']) && isset($_SESSION['admin'])) {
+if (isset($_GET['reject']) && isset($_SESSION['admin']) && csrf_validate($_GET['csrf'] ?? '')) {
     $filename = basename($_GET['reject']);
     $jsonFile = $pendingDir . $filename . '.json';
     $imageFile = $pendingDir . $filename;
@@ -221,6 +293,12 @@ $events = json_decode(file_get_contents($json_file), true);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
+    if ($action !== '' && !csrf_validate($_POST['csrf_token'] ?? '')) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Invalid request token']);
+        exit;
+    }
+
     if ($action === 'add') {
         $image_path = '';
         if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -283,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="/admin-panel/dashboard/admin-panel.php#gallery">Gallery</a></li>
                 <li><a href="/admin-panel/dashboard/admin-panel.php#timeline">Timeline</a></li>
                 <li><a href="#" id="settings-open">Settings</a></li>
-                <li><a href="/admin-panel/dashboard/admin-panel.php?logout=1">Logout</a></li>
+                <li><a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['logout' => 1, 'csrf' => $csrfToken]) ?>">Logout</a></li>
             </ul>
             <div class="navbar-toggle" id="navbar-toggle">
                 <span></span>
@@ -354,8 +432,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <p><strong>Uploaded:</strong> <?= date('d.m.Y H:i', $item['metadata']['timestamp']) ?></p>
                                     <p><strong>Uploader Email:</strong> <?= htmlspecialchars($item['metadata']['email']) ?></p>
                                     <div class="pending-actions">
-                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['approve' => $item['filename']]) ?>" class="approve">✓ Approve</a>
-                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['reject' => $item['filename']]) ?>" class="reject">✕ Reject</a>
+                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['approve' => $item['filename'], 'csrf' => $csrfToken]) ?>" class="approve">✓ Approve</a>
+                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['reject' => $item['filename'], 'csrf' => $csrfToken]) ?>" class="reject">✕ Reject</a>
                                     </div>
                                 </div>
                             </div>
@@ -449,6 +527,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script>
+        window.ADMIN_CSRF_TOKEN = <?= json_encode($csrfToken, JSON_UNESCAPED_SLASHES) ?>;
+    </script>
     <script src="/admin-panel/dashboard/admin-panel.js"></script>
 
 </body>

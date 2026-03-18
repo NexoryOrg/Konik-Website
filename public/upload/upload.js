@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const formData = new FormData(uploadForm);
+        if (!formData.get('csrf_token')) {
+            uploadMessage.textContent = 'Fehler: Sicherheits-Token fehlt. Bitte Seite neu laden.';
+            uploadMessage.className = 'error';
+            uploadMessage.style.display = 'block';
+            return;
+        }
         
         try {
             const scriptElements = Array.from(document.getElementsByTagName('script'));
@@ -16,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const response = await fetch(uploadHandlerUrl, {
                 method: 'POST',
+                credentials: 'same-origin',
                 body: formData
             });
 

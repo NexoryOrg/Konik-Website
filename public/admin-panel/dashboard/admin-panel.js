@@ -83,13 +83,34 @@ const addBtn = document.getElementById("add-event");
 
 let events = [];
 
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function safeImageSource(value) {
+    const src = String(value ?? "").trim();
+    if (src === "") {
+        return "";
+    }
+    if (src.startsWith("/") || src.startsWith("../") || src.startsWith("data:image/")) {
+        return src;
+    }
+    return "";
+}
+
 async function loadEvents() {
     const res = await fetch("/datenbank/json/history.json");
     if (!res.ok) {
         console.error('Failed to load history', res.statusText);
         events = [];
     } else {
-        events = await res.json();
+        const loaded = await res.json();
+        events = Array.isArray(loaded) ? loaded : [];
     }
 
     render();
@@ -105,16 +126,21 @@ function render() {
 
         li.dataset.id = event.id;
 
+        const title = escapeHtml(event.title);
+        const date = escapeHtml(event.date);
+        const description = escapeHtml(event.description);
+        const imageSource = escapeHtml(safeImageSource(event.src));
+
         li.innerHTML = `
             <div class="event">
 
             <div>
 
-            <input class="title" value="${event.title}" placeholder="Title">
+            <input class="title" value="${title}" placeholder="Title">
 
-            <input class="date" type="date" value="${event.date}">
+            <input class="date" type="date" value="${date}">
 
-            <textarea class="desc" placeholder="Description">${event.description}</textarea>
+            <textarea class="desc" placeholder="Description">${description}</textarea>
 
             <input class="image-input" type="file">
 
@@ -129,7 +155,7 @@ function render() {
 
             <div>
 
-            <img class="preview" src="${event.src || ""}">
+            <img class="preview" src="${imageSource}">
 
             </div>
 
@@ -314,10 +340,13 @@ new Sortable(list, {
 async function save() {
     console.log("Saving:", events);
 
+    const csrfToken = window.ADMIN_CSRF_TOKEN || '';
+
     const res = await fetch("/admin-panel/dashboard/save-history.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
         },
         body: JSON.stringify(events)
     });

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/init.php';
 
 $file = __DIR__ . '/datenbank/data/uptime.json';
 
@@ -20,6 +21,16 @@ if (!filter_var($checkUrl, FILTER_VALIDATE_URL)) {
     exit;
 }
 
+$checkHost = strtolower((string)parse_url($checkUrl, PHP_URL_HOST));
+$defaultHostOnly = strtolower((string)parse_url($defaultUrl, PHP_URL_HOST));
+$checkScheme = strtolower((string)parse_url($checkUrl, PHP_URL_SCHEME));
+if ($checkHost === '' || $defaultHostOnly === '' || !in_array($checkScheme, ['http', 'https'], true) || $checkHost !== $defaultHostOnly) {
+    http_response_code(403);
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode(['error' => 'Host not allowed for uptime check']);
+    exit;
+}
+
 function checkServer(string $url): int
 {
     if (function_exists('curl_version')) {
@@ -29,7 +40,7 @@ function checkServer(string $url): int
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 15,
             CURLOPT_NOBODY => true,
-            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_SSL_VERIFYHOST => 2,
         ]);

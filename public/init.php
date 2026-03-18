@@ -16,19 +16,40 @@ $csp = "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; img-src 'se
 header("Content-Security-Policy: $csp");
 
 $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] ?? '') == 443;
-session_set_cookie_params([
+$cookieParams = [
     'lifetime' => 0,
     'path' => '/',
-    'domain' => $_SERVER['HTTP_HOST'] ?? '',
     'secure' => $secure,
     'httponly' => true,
     'samesite' => 'Lax'
-]);
+];
+
+$rawHost = (string)($_SERVER['HTTP_HOST'] ?? '');
+$cookieHost = (string)parse_url(($secure ? 'https' : 'http') . '://' . $rawHost, PHP_URL_HOST);
+
+if ($cookieHost !== '' && strpos($cookieHost, ':') === false && filter_var($cookieHost, FILTER_VALIDATE_IP) === false && substr_count($cookieHost, '.') >= 1) {
+    $cookieParams['domain'] = $cookieHost;
+}
+
+session_set_cookie_params($cookieParams);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
     if (empty($_SESSION['initiated'])) {
         session_regenerate_id(true);
         $_SESSION['initiated'] = true;
+    }
+}
+
+if (empty($_SESSION['csrf_token'])) {
+    try {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    } catch (Exception $e) {
+        $fallbackBytes = function_exists('openssl_random_pseudo_bytes') ? openssl_random_pseudo_bytes(32) : false;
+        if ($fallbackBytes !== false) {
+            $_SESSION['csrf_token'] = bin2hex($fallbackBytes);
+        } else {
+            $_SESSION['csrf_token'] = hash('sha256', uniqid((string)mt_rand(), true));
+        }
     }
 }
 
@@ -42,6 +63,16 @@ function safe_src($s) {
     if (preg_match('#^\s*(?:[a-z0-9]+:|//)#i', $s)) return 'datenbank/bilder/error.jpg';
     $s = str_replace(['..\\','../','..'], '', $s);
     return e($s);
+}
+
+function csrf_token() {
+    return (string)($_SESSION['csrf_token'] ?? '');
+}
+
+function csrf_validate($token) {
+    $token = (string)$token;
+    $sessionToken = (string)($_SESSION['csrf_token'] ?? '');
+    return $token !== '' && $sessionToken !== '' && hash_equals($sessionToken, $token);
 }
 
 ?>
