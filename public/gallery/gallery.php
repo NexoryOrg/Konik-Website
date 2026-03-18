@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../init.php';
+
 if (!ob_start('ob_gzhandler')) {
     ob_start();
 }
