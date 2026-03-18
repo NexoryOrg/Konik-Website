@@ -259,8 +259,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
-echo json_encode($events);
 ?>
 
 <!DOCTYPE html>
@@ -409,6 +407,23 @@ echo json_encode($events);
         </section>
 
     <section class="section" id="timeline-admin">
+
+        <div class="info-msg" id="info-msg" hidden>
+            <h3 id="succes-h1">Success</h3>
+            <p id="succes-text">Your Events is done!</p>
+        </div>
+
+        <div class="error-msg" id="error-msg" hidden>
+            <h3>Error!</h3>
+            <p id="error-text">Something went wrong!</p>
+        </div>
+
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-content">
+                <h2 id="modal-title"></h2>
+                <form id="event-form">
+            </div>
+        </div>
 
         <h2>Timeline Admin</h2>
 
