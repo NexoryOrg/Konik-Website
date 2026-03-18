@@ -1,8 +1,11 @@
 <?php
+require_once __DIR__ . '/../init.php';
+
 if (!ob_start('ob_gzhandler')) { ob_start(); }
 header('Vary: Accept-Encoding');
-header('Cache-Control: max-age=3600, public');
-header('Expires: ' . gmdate('D, d M Y H:i:s', time()+3600) . ' GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
 
 $jsonFile = __DIR__ . '/../datenbank/json/history.json';
 $events = [];
@@ -48,13 +51,6 @@ if (file_exists($jsonFile)) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self';
-    style-src 'self' https://cdnjs.cloudflare.com;
-    font-src 'self' https://cdnjs.cloudflare.com;
-    img-src 'self' data:;
-">
 <title>History</title>
 <base href="/">
 <link rel="icon" type="image/png" href="/datenbank/bilder/logo/logo.png">

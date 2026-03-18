@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../../init.php';
 
 if (!isset($_SESSION['admin'])) {
     header('Location: ../admin-panel/dashboard/admin-panel.php');

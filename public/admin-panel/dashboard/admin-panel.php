@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../../init.php';
 
 $userDataFile = __DIR__ . '/../../datenbank/data/user.json';
 $users = ['admin' => 'admin'];
