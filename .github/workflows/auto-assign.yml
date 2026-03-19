@@ -1,19 +1,36 @@
-name: Auto Assign
+name: Auto Assignment
+
 on:
   issues:
     types: [opened]
   pull_request:
     types: [opened]
+
+concurrency:
+  group: auto-assign-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  run:
+  auto-assign:
+    name: Auto-assign PRs and Issues
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
+
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
+      - name: Auto-assign issue to maintainer
+        if: github.event_name == 'issues'
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: LUCA-PYTHON
+          numOfAssignee: 1
+
+      - name: Auto-assign PR to maintainer
+        if: github.event_name == 'pull_request'
+        uses: pozil/auto-assign-issue@v1
+        with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: LUCA-PYTHON
           numOfAssignee: 1
