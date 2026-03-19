@@ -37,14 +37,6 @@ The project focuses on clear information architecture, easy navigation, and a ma
 - A local web server (for example Apache via XAMPP/WAMP)
 - Write permissions for required data and log directories
 
-### Quick Start
-
-1. Clone the repository.
-2. Place the project in your local web server's document root.
-3. Ensure PHP is enabled and the site is reachable via localhost.
-4. Verify write permissions for `logs/` and relevant subdirectories in `public/datenbank/`.
-5. Open the homepage in your browser and test core pages.
-
 ## Security Notes
 
 - Never store production secrets (for example webhooks or tokens) in the repository.
