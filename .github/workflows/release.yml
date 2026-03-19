@@ -73,4 +73,5 @@ jobs:
           curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
-        if: success() && secrets.DISCORD_WEBHOOK != ''
+          if: success()
+          continue-on-error: true
