@@ -1,4 +1,13 @@
 <?php
+$configuredTimezone = trim((string)getenv('APP_TIMEZONE'));
+if ($configuredTimezone === '') {
+    $configuredTimezone = 'Europe/Berlin';
+}
+if (!@date_default_timezone_set($configuredTimezone)) {
+    date_default_timezone_set('UTC');
+}
+$tz = new DateTimeZone(date_default_timezone_get());
+
 $dataFile = __DIR__ . '/../../datenbank/data/visitors.json';
 if (!file_exists($dataFile)) {
     header('Content-Type: image/svg+xml; charset=UTF-8');
@@ -13,6 +22,8 @@ if (!is_array($data) || count($data) === 0) {
     echo '<svg width="600" height="140" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="140" fill="#242933"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16">No visitor data available</text></svg>';
     exit;
 }
+
+ksort($data);
 
 $last = array_slice($data, -7, 7, true);
 $labels = array_keys($last);
@@ -71,10 +82,18 @@ foreach ($points as $p) {
 $labelMarks = '';
 foreach ($labels as $i => $label) {
     $x = $padding + ($count === 1 ? $plotW / 2 : $i * ($plotW / max($count - 1, 1)));
-    $labelText = date('H:i', strtotime($label));
-    if ($labelText === '00:00' && $label !== date('Y-m-d H:i', strtotime($label))) {
-        $labelText = substr($label, 11, 5);
+    $labelDate = DateTimeImmutable::createFromFormat('Y-m-d H:i', (string)$label, $tz);
+    if ($labelDate === false) {
+        $labelTs = strtotime((string)$label);
+        if ($labelTs !== false) {
+            $labelDate = (new DateTimeImmutable('@' . $labelTs))->setTimezone($tz);
+        }
     }
+
+    $labelText = $labelDate instanceof DateTimeImmutable
+        ? $labelDate->format('H:i')
+        : substr((string)$label, 11, 5);
+
     $labelMarks .= '<text x="' . $x . '" y="' . ($h - $padding + 24) . '" fill="#364F5C" font-family="Arial" font-size="12" text-anchor="middle">' . htmlspecialchars($labelText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</text>';
 }
 
