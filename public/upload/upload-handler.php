@@ -11,13 +11,13 @@ header('Content-Type: application/json; charset=utf-8');
 
 set_error_handler(function() {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Interner Serverfehler']);
+    echo json_encode(['success' => false, 'message' => 'Internal server error']);
     exit;
 });
 
 set_exception_handler(function() {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Interner Serverfehler']);
+    echo json_encode(['success' => false, 'message' => 'Internal server error']);
     exit;
 });
 
@@ -41,7 +41,7 @@ if ($origin !== '') {
 
 if (!csrf_validate($_POST['csrf_token'] ?? '')) {
     http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Ungültige Anfrage']);
+    echo json_encode(['success' => false, 'message' => 'Invalid request']);
     exit;
 }
 
@@ -57,7 +57,7 @@ if (!is_dir($tempDir)) {
 
 if (empty($_POST['eventDate']) || empty($_POST['eventTitle']) || empty($_FILES['eventImage'])) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Fehlende erforderliche Felder']);
+    echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     exit;
 }
 
@@ -69,32 +69,32 @@ $file = $_FILES['eventImage'];
 
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $eventDate)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Ungültiges Datumformat']);
+    echo json_encode(['success' => false, 'message' => 'Invalid date format']);
     exit;
 }
 
 $dateObj = DateTime::createFromFormat('Y-m-d', $eventDate);
 if (!$dateObj) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Ungültiges Datum']);
+    echo json_encode(['success' => false, 'message' => 'Invalid date']);
     exit;
 }
 
 if ($eventEmail !== '' && !filter_var($eventEmail, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Ungültige E-Mail-Adresse']);
+    echo json_encode(['success' => false, 'message' => 'Invalid email address']);
     exit;
 }
 
 if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK || !isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Fehler beim Hochladen der Datei']);
+    echo json_encode(['success' => false, 'message' => 'Error uploading file']);
     exit;
 }
 
 if (($file['size'] ?? 0) > 10 * 1024 * 1024) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Dateigröße zu groß (max. 10MB)']);
+    echo json_encode(['success' => false, 'message' => 'File size too large (max 10MB)']);
     exit;
 }
 
@@ -114,7 +114,7 @@ if (class_exists('finfo')) {
 }
 if (!isset($allowedMimeToExt[$mime]) || @getimagesize($file['tmp_name']) === false) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Nur gültige Bilddateien sind erlaubt']);
+    echo json_encode(['success' => false, 'message' => 'Only valid image files are allowed']);
     exit;
 }
 
@@ -127,7 +127,7 @@ try {
 $tempPath = $tempDir . $filename;
 if (!move_uploaded_file($file['tmp_name'], $tempPath)) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Fehler beim Hochladen der Datei']);
+    echo json_encode(['success' => false, 'message' => 'Error uploading file']);
     exit;
 }
 
@@ -147,6 +147,6 @@ file_put_contents($tempDir . $filename . '.json', json_encode($metadata, JSON_PR
 
 echo json_encode([
     'success' => true,
-    'message' => 'Bild erfolgreich hochgeladen und wird überprüft. Es wird bald der Galerie hinzugefügt!'
+    'message' => 'Image uploaded successfully and is under review. It will be added to the gallery soon!'
 ]);
 exit;
