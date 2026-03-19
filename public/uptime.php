@@ -1,37 +1,47 @@
 <?php
-require_once __DIR__ . '/init.php';
+$configuredTimezone = trim((string)getenv('APP_TIMEZONE'));
+if ($configuredTimezone === '') {
+    $configuredTimezone = 'Europe/Berlin';
+}
+if (!@date_default_timezone_set($configuredTimezone)) {
+    date_default_timezone_set('UTC');
+}
+
+$isCli = PHP_SAPI === 'cli';
+if (!$isCli) {
+    require_once __DIR__ . '/init.php';
+}
 
 $file = __DIR__ . '/datenbank/data/uptime.json';
 
-$defaultScheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$defaultHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$defaultUrl = $defaultScheme . '://' . $defaultHost . '/home/index.php';
+function respondJson(array $payload, int $statusCode, bool $isCli): void
+{
+    if (!$isCli) {
+        http_response_code($statusCode);
+        header('Content-Type: application/json; charset=UTF-8');
+    }
 
-$checkUrl = null;
-if (isset($_GET['url'])) {
-    $checkUrl = filter_var(trim($_GET['url']), FILTER_SANITIZE_URL);
-}
-if (empty($checkUrl)) {
-    $checkUrl = $defaultUrl;
-}
-if (!filter_var($checkUrl, FILTER_VALIDATE_URL)) {
-    http_response_code(400);
-    header('Content-Type: application/json; charset=UTF-8');
-    echo json_encode(['error' => 'Invalid URL for uptime check']);
+    echo json_encode($payload, JSON_UNESCAPED_SLASHES);
+    if ($isCli) {
+        echo PHP_EOL;
+    }
     exit;
 }
 
-$checkHost = strtolower((string)parse_url($checkUrl, PHP_URL_HOST));
-$defaultHostOnly = strtolower((string)parse_url($defaultUrl, PHP_URL_HOST));
-$checkScheme = strtolower((string)parse_url($checkUrl, PHP_URL_SCHEME));
-if ($checkHost === '' || $defaultHostOnly === '' || !in_array($checkScheme, ['http', 'https'], true) || $checkHost !== $defaultHostOnly) {
-    http_response_code(403);
-    header('Content-Type: application/json; charset=UTF-8');
-    echo json_encode(['error' => 'Host not allowed for uptime check']);
-    exit;
+function getCliOption(array $argv, string $name): ?string
+{
+    $prefix = '--' . $name . '=';
+    foreach ($argv as $arg) {
+        if (strpos($arg, $prefix) === 0) {
+            $value = trim((string)substr($arg, strlen($prefix)));
+            return $value === '' ? null : $value;
+        }
+    }
+
+    return null;
 }
 
-function checkServer(string $url): int
+function checkServer(string $url): array
 {
     if (function_exists('curl_version')) {
         $ch = curl_init();
@@ -39,66 +49,143 @@ function checkServer(string $url): int
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 15,
-            CURLOPT_NOBODY => true,
-            CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 5,
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_HTTPHEADER => [
+                'Range: bytes=0-0',
+                'Accept: */*',
+            ],
+            CURLOPT_USERAGENT => 'Konik-Uptime/1.0',
         ]);
 
         $content = curl_exec($ch);
         $err = curl_error($ch);
-        $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $http = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $responseMs = (int)round((float)curl_getinfo($ch, CURLINFO_TOTAL_TIME) * 1000);
         curl_close($ch);
 
         if ($content === false || $err) {
-            return 0;
+            return [
+                'status' => 0,
+                'http_code' => $http,
+                'response_ms' => $responseMs,
+                'error' => $err !== '' ? $err : 'request_failed',
+            ];
         }
 
-        return ($http >= 200 && $http < 400) ? 1 : 0;
+        return [
+            'status' => ($http >= 200 && $http < 400) ? 1 : 0,
+            'http_code' => $http,
+            'response_ms' => $responseMs,
+            'error' => null,
+        ];
     }
 
-    $ctx = stream_context_create(['http' => ['method' => 'HEAD', 'timeout' => 15]]);
-    $headers = @get_headers($url, 1, $ctx);
-    if (!$headers || !isset($headers[0])) {
-        return 0;
+    $start = microtime(true);
+    $ctx = stream_context_create([
+        'http' => [
+            'method' => 'GET',
+            'timeout' => 15,
+            'ignore_errors' => true,
+            'header' => "Range: bytes=0-0\r\nUser-Agent: Konik-Uptime/1.0\r\n",
+        ],
+        'ssl' => [
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+        ],
+    ]);
+
+    $stream = @fopen($url, 'rb', false, $ctx);
+    if ($stream !== false) {
+        @fread($stream, 1);
+        @fclose($stream);
     }
 
-    preg_match('/\s(\d{3})\s/', $headers[0], $m);
-    $code = isset($m[1]) ? (int)$m[1] : 0;
-    return ($code >= 200 && $code < 400) ? 1 : 0;
+    $headers = $http_response_header ?? [];
+    $http = 0;
+    if (isset($headers[0]) && preg_match('/\s(\d{3})\s/', $headers[0], $m)) {
+        $http = (int)$m[1];
+    }
+
+    $responseMs = (int)round((microtime(true) - $start) * 1000);
+    return [
+        'status' => ($http >= 200 && $http < 400) ? 1 : 0,
+        'http_code' => $http,
+        'response_ms' => $responseMs,
+        'error' => $stream === false ? 'request_failed' : null,
+    ];
+}
+
+$defaultScheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$defaultHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$envTarget = trim((string)getenv('UPTIME_TARGET_URL'));
+$defaultUrl = $envTarget !== '' ? $envTarget : ($defaultScheme . '://' . $defaultHost . '/home/index.php');
+
+$checkUrl = null;
+if ($isCli) {
+    $checkUrl = getCliOption($argv ?? [], 'url');
+    if ($checkUrl === null && isset($argv[1]) && strpos((string)$argv[1], '--') !== 0) {
+        $checkUrl = trim((string)$argv[1]);
+    }
+} elseif (isset($_GET['url'])) {
+    $checkUrl = trim((string)$_GET['url']);
+}
+
+if (empty($checkUrl)) {
+    $checkUrl = $defaultUrl;
+}
+
+$checkUrl = filter_var((string)$checkUrl, FILTER_SANITIZE_URL);
+if (!filter_var($checkUrl, FILTER_VALIDATE_URL)) {
+    respondJson(['error' => 'Invalid URL for uptime check'], 400, $isCli);
+}
+
+$requiredToken = trim((string)getenv('UPTIME_CHECK_TOKEN'));
+if (!$isCli && $requiredToken !== '') {
+    $providedToken = (string)($_GET['token'] ?? '');
+    if ($providedToken === '' || !hash_equals($requiredToken, $providedToken)) {
+        respondJson(['error' => 'Unauthorized uptime check'], 403, false);
+    }
+}
+
+if (!$isCli) {
+    $checkHost = strtolower((string)parse_url($checkUrl, PHP_URL_HOST));
+    $defaultHostOnly = strtolower((string)parse_url($defaultUrl, PHP_URL_HOST));
+    $checkScheme = strtolower((string)parse_url($checkUrl, PHP_URL_SCHEME));
+    if ($checkHost === '' || $defaultHostOnly === '' || !in_array($checkScheme, ['http', 'https'], true) || $checkHost !== $defaultHostOnly) {
+        respondJson(['error' => 'Host not allowed for uptime check'], 403, false);
+    }
 }
 
 $data = [];
 if (file_exists($file)) {
     $json = @file_get_contents($file);
-    $parsed = json_decode($json, true);
+    $parsed = json_decode((string)$json, true);
     if (is_array($parsed)) {
         $data = $parsed;
     }
 }
 
 $now = new DateTimeImmutable('now', new DateTimeZone(date_default_timezone_get()));
-$currentHour = (int)$now->format('U') - ((int)$now->format('i') * 60 + (int)$now->format('s'));
-$status = checkServer($checkUrl);
+$sampleKey = $now->format('Y-m-d H:i');
+$hourKey = $now->format('Y-m-d H:00');
 
-$lastHour = null;
-if (!empty($data)) {
-    end($data);
-    $lastKey = key($data);
-    $lastHour = strtotime($lastKey);
-}
+$result = checkServer($checkUrl);
+$status = (int)$result['status'];
+$data[$sampleKey] = $status;
 
-if ($lastHour !== null && $lastHour < $currentHour) {
-    $nextHour = $lastHour + 3600;
-    while ($nextHour < $currentHour) {
-        $data[date('Y-m-d H:00', $nextHour)] = 0;
-        $nextHour += 3600;
+$retentionHours = 24;
+$cutoffTs = $now->modify('-' . $retentionHours . ' hours')->getTimestamp();
+foreach ($data as $timestamp => $value) {
+    $ts = strtotime((string)$timestamp);
+    if ($ts === false || $ts < $cutoffTs) {
+        unset($data[$timestamp]);
     }
 }
-
-$key = date('Y-m-d H:00', $currentHour);
-$data[$key] = $status;
-$data = array_slice($data, -24, 24, true);
+ksort($data);
 
 $dir = dirname($file);
 if (!is_dir($dir)) {
@@ -107,10 +194,25 @@ if (!is_dir($dir)) {
 
 file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES), LOCK_EX);
 
-header('Content-Type: application/json; charset=UTF-8');
-echo json_encode([
+$hourStats = ['up' => 0, 'total' => 0];
+foreach ($data as $timestamp => $value) {
+    if (strpos((string)$timestamp, $hourKey) === 0) {
+        $hourStats['total']++;
+        $hourStats['up'] += ((int)$value === 1) ? 1 : 0;
+    }
+}
+
+$hourAvailability = $hourStats['total'] > 0
+    ? round(($hourStats['up'] / $hourStats['total']) * 100, 2)
+    : null;
+
+respondJson([
     'ok' => true,
     'url' => $checkUrl,
-    'timestamp' => $key,
+    'timestamp' => $sampleKey,
     'status' => $status,
-], JSON_UNESCAPED_SLASHES);
+    'http_code' => (int)$result['http_code'],
+    'response_ms' => (int)$result['response_ms'],
+    'error' => $result['error'],
+    'hour_availability' => $hourAvailability,
+], 200, $isCli);
