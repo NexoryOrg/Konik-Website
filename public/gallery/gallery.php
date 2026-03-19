@@ -115,15 +115,15 @@ if (!empty($gallery)) {
     </div>
 
     <div class="upload-section">
-        <h3>📸 Neue Fotos hinzufügen</h3>
+        <h3>📸 Add New Photos</h3>
         <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
             <input type="hidden" id="csrf_token" name="csrf_token" value="<?= e(csrf_token()) ?>">
             <input type="date" id="eventDate" name="eventDate" required>
-            <input type="email" id="uploaderEmail" name="uploaderEmail" placeholder="Deine E-Mail (für Rückfragen)" required>
-            <input type="text" id="eventTitle" name="eventTitle" placeholder="Titel (z.B. 'Schneetag im Wald')" required>
-            <textarea id="eventDes" name="eventDes" placeholder="Beschreibung des Events..." required></textarea>
+            <input type="email" id="uploaderEmail" name="uploaderEmail" placeholder="Your email (for follow-up questions)" required>
+            <input type="text" id="eventTitle" name="eventTitle" placeholder="Title (e.g. 'Snowy day in the forest')" required>
+            <textarea id="eventDes" name="eventDes" placeholder="Event description..." required></textarea>
             <input type="file" id="eventImage" name="eventImage" accept="image/*" required>
-            <button type="submit">Foto hochladen & zur Überprüfung senden</button>
+            <button type="submit">Upload photo & send for review</button>
         </form>
         <div id="uploadMessage"></div>
     </div>
