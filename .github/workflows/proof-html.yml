@@ -1,11 +1,41 @@
-name: Proof HTML
+name: HTML Validation
+
 on:
   push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**.html'
+      - '**.php'
+  pull_request:
+    paths:
+      - '**.html'
+      - '**.php'
   workflow_dispatch:
+
 jobs:
-  build:
+  validate-html:
+    name: Validate HTML Structure
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
     steps:
-      - uses: anishathalye/proof-html@v1.1.0
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run HTML validation
+        uses: anishathalye/proof-html@v1.1.0
         with:
-          directory: ./
+          directory: ./public
+          error_exit_code: 1
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-validation-report
+          path: proof-html-report.json
+          retention-days: 30
