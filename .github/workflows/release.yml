@@ -1,0 +1,77 @@
+name: Release Management
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          git log $(git describe --tags --abbrev=0)..HEAD --oneline > CHANGELOG_latest.md || echo "Initial Release" > CHANGELOG_latest.md
+          cat CHANGELOG_latest.md
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: CHANGELOG_latest.md
+          draft: false
+          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify Release
+        run: |
+          RELEASE_TAG=$(echo $GITHUB_REF | cut -d'/' -f3)
+          EMBED=$(cat <<EOF
+          {
+            "content": "🚀 **New Release** | \`${{ github.repository }}\`",
+            "embeds": [
+              {
+                "title": "📦 Version $RELEASE_TAG Released",
+                "url": "${{ github.server_url }}/${{ github.repository }}/releases/tag/$RELEASE_TAG",
+                "color": 43B581,
+                "fields": [
+                  {
+                    "name": "Repository",
+                    "value": "\`${{ github.repository }}\`",
+                    "inline": true
+                  },
+                  {
+                    "name": "Commit",
+                    "value": "\`${{ github.sha }}\`",
+                    "inline": true
+                  }
+                ],
+                "footer": {
+                  "text": "NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+                },
+                "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+              }
+            ]
+          }
+          EOF
+          )
+
+          curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+            -H "Content-Type: application/json" \
+            -d "$EMBED"
+          if: success()
+          continue-on-error: true
