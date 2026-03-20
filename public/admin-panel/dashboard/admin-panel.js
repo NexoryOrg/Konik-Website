@@ -78,7 +78,7 @@ passwordModal?.addEventListener('click', (e) => {
 });
 
 
-const list = document.getElementById("timeline-list");
+const list = document.getElementById("history-list");
 const addBtn = document.getElementById("add-event");
 const addEventModal = document.getElementById("add-event-modal");
 const addEventForm = document.getElementById("add-event-form");
@@ -210,7 +210,7 @@ function showError(text) {
     }, 3000);
 }
 
-async function uploadTimelineImage(file) {
+async function uploadhistoryImage(file) {
     const csrfToken = window.ADMIN_CSRF_TOKEN || "";
     const payload = new FormData();
     payload.append("image", file);
@@ -276,7 +276,7 @@ if (addEventForm) {
         }
 
         try {
-            const src = await uploadTimelineImage(imageFile);
+            const src = await uploadhistoryImage(imageFile);
             const id = getNextEventId();
 
             events.push({
@@ -443,12 +443,12 @@ list.addEventListener("change", async e => {
         img.src = localPreview;
 
         try {
-            const uploadedSrc = await uploadTimelineImage(file);
+            const uploadedSrc = await uploadhistoryImage(file);
             const id = li.dataset.id;
             const event = events.find(item => item.id == id);
             if (event) {
                 event.src = uploadedSrc;
-                event.alt = event.title || "Timeline image";
+                event.alt = event.title || "history image";
             }
             URL.revokeObjectURL(localPreview);
             img.src = uploadedSrc;
@@ -471,7 +471,7 @@ new Sortable(list, {
 
         const newOrder = [];
 
-        document.querySelectorAll("#timeline-list li").forEach(li => {
+        document.querySelectorAll("#history-list li").forEach(li => {
 
             const id = li.dataset.id;
 
