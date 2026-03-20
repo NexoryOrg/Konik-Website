@@ -30,6 +30,42 @@ if (!is_array($decoded)) {
 	exit;
 }
 
+function normalizeTimelineImageSrc($src) {
+	$src = trim((string)$src);
+	if ($src === '') {
+		return '';
+	}
+
+	if (!preg_match('#^/datenbank/bilder/history/[A-Za-z0-9._-]+$#', $src)) {
+		return '';
+	}
+
+	return $src;
+}
+
+function timelineImageSrcToFile($src) {
+	$normalizedSrc = normalizeTimelineImageSrc($src);
+	if ($normalizedSrc === '') {
+		return '';
+	}
+
+	$filename = basename($normalizedSrc);
+	if ($filename === '' || $filename === '.' || $filename === '..') {
+		return '';
+	}
+
+	return __DIR__ . '/../../datenbank/bilder/history/' . $filename;
+}
+
+$file = __DIR__ . '/../../datenbank/json/history.json';
+$existingEvents = [];
+if (file_exists($file)) {
+	$existingDecoded = json_decode((string)file_get_contents($file), true);
+	if (is_array($existingDecoded)) {
+		$existingEvents = $existingDecoded;
+	}
+}
+
 $safeEvents = [];
 foreach ($decoded as $item) {
 	if (!is_array($item)) {
@@ -62,7 +98,33 @@ foreach ($decoded as $item) {
 	];
 }
 
-$file = __DIR__ . '/../../datenbank/json/history.json';
+$existingSrcSet = [];
+foreach ($existingEvents as $event) {
+	if (!is_array($event)) {
+		continue;
+	}
+	$src = normalizeTimelineImageSrc($event['src'] ?? '');
+	if ($src !== '') {
+		$existingSrcSet[$src] = true;
+	}
+}
+
+$newSrcSet = [];
+foreach ($safeEvents as $event) {
+	$src = normalizeTimelineImageSrc($event['src'] ?? '');
+	if ($src !== '') {
+		$newSrcSet[$src] = true;
+	}
+}
+
+$removedSrc = array_diff_key($existingSrcSet, $newSrcSet);
+foreach (array_keys($removedSrc) as $src) {
+	$path = timelineImageSrcToFile($src);
+	if ($path !== '' && is_file($path)) {
+		@unlink($path);
+	}
+}
+
 file_put_contents($file, json_encode($safeEvents, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
 
 echo json_encode(['status' => 'saved']);
