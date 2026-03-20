@@ -18,6 +18,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Discord webhook
+        run: |
+          if [ -z "${{ secrets.DISCORD_WEBHOOK }}" ]; then
+            echo "DISCORD_WEBHOOK is not available in this workflow context."
+            echo "For pull_request events from forks, GitHub does not expose repository secrets."
+            exit 1
+          fi
 
       - name: Check Discord webhook
         run: |
@@ -40,9 +50,18 @@ jobs:
           COMMIT_SHA=$(jq -r '.head_commit.id' $GITHUB_EVENT_PATH | cut -c1-7)
           COMMIT_URL=$(jq -r '.head_commit.url' $GITHUB_EVENT_PATH)
           COMMIT_AUTHOR=$(jq -r '.head_commit.author.username' $GITHUB_EVENT_PATH)
-          ADDITIONS=$(jq -r '[.commits[].added[]?] | length' $GITHUB_EVENT_PATH)
-          DELETIONS=$(jq -r '[.commits[].removed[]?] | length' $GITHUB_EVENT_PATH)
-          MODIFICATIONS=$(jq -r '[.commits[].modified[]?] | length' $GITHUB_EVENT_PATH)
+          BEFORE_SHA=$(jq -r '.before' $GITHUB_EVENT_PATH)
+          AFTER_SHA=$(jq -r '.after' $GITHUB_EVENT_PATH)
+
+          if [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            CHANGED_FILES=$(git diff --name-status "$BEFORE_SHA" "$AFTER_SHA")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-status -r "$AFTER_SHA")
+          fi
+
+          ADDITIONS=$(printf '%s\n' "$CHANGED_FILES" | awk '$1 == "A" { count++ } END { print count + 0 }')
+          DELETIONS=$(printf '%s\n' "$CHANGED_FILES" | awk '$1 == "D" { count++ } END { print count + 0 }')
+          MODIFICATIONS=$(printf '%s\n' "$CHANGED_FILES" | awk '$1 != "" && $1 != "A" && $1 != "D" { count++ } END { print count + 0 }')
 
           REPO=$GITHUB_REPOSITORY
           BRANCH=${GITHUB_REF#refs/heads/}
