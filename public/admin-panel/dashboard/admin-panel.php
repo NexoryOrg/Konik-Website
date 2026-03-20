@@ -486,16 +486,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <section class="section" id="timeline-admin">
 
-        <div class="info-msg" id="info-msg" hidden>
-            <h3 id="succes-h1">Success</h3>
-            <p id="succes-text">Your Events is done!</p>
-        </div>
-
-        <div class="error-msg" id="error-msg" hidden>
-            <h3>Error!</h3>
-            <p id="error-text">Something went wrong!</p>
-        </div>
-
         <h2>Timeline Admin</h2>
 
         <button id="add-event">+ Add Event</button>
@@ -505,6 +495,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 
     </main>
+
+    <div class="info-msg" id="info-msg" hidden>
+        <h3 id="succes-h1">Success</h3>
+        <p id="succes-text">Your Event is done!</p>
+    </div>
+
+    <div class="error-msg" id="error-msg" hidden>
+        <h3>Error!</h3>
+        <p id="error-text">Something went wrong!</p>
+    </div>
 
     <div id="password-modal" class="modal hidden">
         <div class="modal-content">
@@ -523,6 +523,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button id="cancel-delete" class="btn secondary">Cancel</button>
                 <button id="confirm-delete" class="btn danger">Delete</button>
             </div>
+        </div>
+    </div>
+
+    <div id="add-event-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Add Timeline Event</h2>
+            <form id="add-event-form">
+                <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+                <div class="form-group">
+                    <label for="event-title">Title</label>
+                    <input type="text" id="event-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Date (YYYY-MM-DD)</label>
+                    <input type="date" id="event-date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description</label>
+                    <textarea id="event-description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="event-image">Image</label>
+                    <input type="file" id="event-image" name="image" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn">Add Event</button>
+            </form>
         </div>
     </div>
 
