@@ -150,13 +150,11 @@ if (empty($hours)) {
 
 $labels = array_keys($hours);
 $values = [];
-$lastAvailability = $statusAtWindowStart === 1 ? 100.0 : 0.0;
 foreach ($hours as $hour => $stats) {
     if ((int)$stats['total_seconds'] > 0) {
         $availability = ($stats['up_seconds'] / $stats['total_seconds']) * 100;
-        $lastAvailability = $availability;
     } else {
-        $availability = $lastAvailability;
+        $availability = 0.0;
     }
     $values[] = $availability;
 }
@@ -196,26 +194,27 @@ foreach ($points as $p) {
     $markerDots .= '<circle cx="' . $p['x'] . '" cy="' . $p['y'] . '" r="4" fill="#FFFFFF" stroke="#26B76D" stroke-width="2" />';
 }
 
-$hourTicks = '';
-for ($i = 0; $i < $count; $i++) {
-    if ($i % 2 !== 0) {
-        continue;
-    }
-    $x = $padding + ($count === 1 ? $plotW / 2 : $i * ($plotW / max($count - 1, 1)));
-    $hourTicks .= '<line x1="' . $x . '" y1="' . ($h - $padding) . '" x2="' . $x . '" y2="' . ($h - $padding + 6) . '" stroke="#A6BDD0" stroke-width="1"/>';
-}
-
 $labelMarks = '';
+$targetTicks = 7;
+$tickStep = max(1, (int)ceil(max($count - 1, 1) / ($targetTicks - 1)));
 foreach ($labels as $i => $label) {
-    if ($i % 2 !== 0) {
+    if ($i % $tickStep !== 0 && $i !== $count - 1) {
         continue;
     }
+
     $x = $padding + ($count === 1 ? $plotW / 2 : $i * ($plotW / max($count - 1, 1)));
     $labelDate = DateTimeImmutable::createFromFormat('Y-m-d H:i', (string)$label, $tz);
+    if ($labelDate === false) {
+        $labelTs = strtotime((string)$label);
+        if ($labelTs !== false) {
+            $labelDate = (new DateTimeImmutable('@' . $labelTs))->setTimezone($tz);
+        }
+    }
+
     $labelText = $labelDate instanceof DateTimeImmutable
-        ? $labelDate->format('H')
-        : substr((string)$label, 11, 2);
-    $labelMarks .= '<text x="' . $x . '" y="' . ($h - $padding + 24) . '" fill="#364F5C" font-family="Arial" font-size="12" text-anchor="middle">' . htmlspecialchars($labelText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</text>';
+        ? $labelDate->format('H:i')
+        : substr((string)$label, 11, 5);
+    $labelMarks .= '<text x="' . $x . '" y="' . ($h - $padding + 24) . '" fill="#364F5C" font-family="Arial" font-size="11" text-anchor="middle">' . htmlspecialchars($labelText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</text>';
 }
 
 header('Content-Type: image/svg+xml; charset=UTF-8');
@@ -224,7 +223,6 @@ echo '<svg xmlns="http://www.w3.org/2000/svg" width="' . $w . '" height="' . $h 
 echo '<rect width="100%" height="100%" fill="#F8FFFB" />';
 echo $grid;
 echo $axis;
-echo $hourTicks;
 echo $line;
 echo $markerDots;
 echo $labelMarks;
