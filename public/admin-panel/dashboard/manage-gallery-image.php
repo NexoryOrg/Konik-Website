@@ -39,9 +39,9 @@ if (!preg_match('/^[A-Za-z0-9._-]+$/', $filename)) {
     exit;
 }
 
-$galleryFile = __DIR__ . '/../../datenbank/json/gallery.json';
-$statsFile = __DIR__ . '/../../datenbank/data/stats.json';
-$uploadImageFile = __DIR__ . '/../../datenbank/bilder/uploads/' . $filename;
+$galleryFile = __DIR__ . '/../../database/json/gallery.json';
+$statsFile = __DIR__ . '/../../database/data/stats.json';
+$uploadImageFile = __DIR__ . '/../../database/images/uploads/' . $filename;
 
 $galleryData = [];
 if (file_exists($galleryFile)) {

@@ -93,7 +93,7 @@ if ($extension === '') {
     exit;
 }
 
-$uploadDir = __DIR__ . '/../../datenbank/bilder/history/';
+$uploadDir = __DIR__ . '/../../database/images/history/';
 if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Could not prepare upload directory']);
@@ -113,7 +113,7 @@ if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
     exit;
 }
 
-$publicSrc = '/datenbank/bilder/history/' . $filename;
+$publicSrc = '/database/images/history/' . $filename;
 
 echo json_encode([
     'success' => true,

@@ -8,7 +8,7 @@
             "date": "01.01.2020",
             "description": "...",
             "email": "tet@maio.de",
-            "img": "\/datenbank\/bilder\/uploads\/b99d7f5e1c51e03c863226846247b1fc.jpg"
+            "img": "\/database\/images\/uploads\/b99d7f5e1c51e03c863226846247b1fc.jpg"
         },
         {
             "filename": "6864b81fe51644025b13411a55bff509.jpg",
@@ -16,7 +16,7 @@
             "date": "03.03.2020",
             "description": "...",
             "email": "test@mail.de",
-            "img": "\/datenbank\/bilder\/uploads\/6864b81fe51644025b13411a55bff509.jpg"
+            "img": "\/database\/images\/uploads\/6864b81fe51644025b13411a55bff509.jpg"
         },
         {
             "filename": "8011e2783419c035edd40faa24f74c5f.jpg",
@@ -24,7 +24,7 @@
             "date": "02.02.2020",
             "description": "...",
             "email": "test@mail.de",
-            "img": "\/datenbank\/bilder\/uploads\/8011e2783419c035edd40faa24f74c5f.jpg"
+            "img": "\/database\/images\/uploads\/8011e2783419c035edd40faa24f74c5f.jpg"
         }
     ],
     "rejected_items": []

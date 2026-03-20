@@ -25,7 +25,7 @@ The project focuses on clear information architecture, easy navigation, and a ma
 - `public/contact/` Contact form
 - `public/admin-panel/` Admin area including charts and password management
 - `public/upload/` Upload logic
-- `public/datenbank/` Data and file storage
+- `public/database/` Data and file storage
 - `logs/` Runtime and monitoring logs
 - `.github/workflows/` CI/CD workflows
 

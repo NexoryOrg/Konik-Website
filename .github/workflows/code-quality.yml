@@ -40,7 +40,7 @@ jobs:
 
       - name: Run PHPCS
         run: |
-          phpcs --standard=PSR12 public/ --ignore=public/datenbank/ || true
+          phpcs --standard=PSR12 public/ --ignore=public/database/ || true
 
   js-lint:
     name: JavaScript Code Quality

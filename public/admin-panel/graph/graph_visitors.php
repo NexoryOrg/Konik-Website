@@ -8,7 +8,7 @@ if (!@date_default_timezone_set($configuredTimezone)) {
 }
 $tz = new DateTimeZone(date_default_timezone_get());
 
-$dataFile = __DIR__ . '/../../datenbank/data/visitors.json';
+$dataFile = __DIR__ . '/../../database/data/visitors.json';
 if (!file_exists($dataFile)) {
     header('Content-Type: image/svg+xml; charset=UTF-8');
     echo '<svg width="600" height="140" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="140" fill="#242933"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16">Visitor data file not found</text></svg>';

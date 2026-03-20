@@ -12,7 +12,7 @@ if (!$isCli) {
     require_once __DIR__ . '/init.php';
 }
 
-$file = __DIR__ . '/datenbank/data/uptime.json';
+$file = __DIR__ . '/database/data/uptime.json';
 
 function respondJson(array $payload, int $statusCode, bool $isCli): void
 {

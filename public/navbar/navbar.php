@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="logo-container">
-    <a href="/home/index.php"><img src="/datenbank/bilder/logo/logo.png" alt="Logo" class="logo"></a>
+    <a href="/home/index.php"><img src="/database/images/logo/logo.png" alt="Logo" class="logo"></a>
   </div>
   <ul class="navbar-menu">
     <li><a href="/home/index.php">Home</a></li>

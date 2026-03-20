@@ -4,9 +4,9 @@ Allow: /
 
 Disallow: /admin-panel/
 Disallow: /upload/
-Disallow: /datenbank/
+Disallow: /database/
 Disallow: /logs/
 
 Disallow: /public/admin-panel/
 Disallow: /public/upload/
-Disallow: /public/datenbank/
+Disallow: /public/database/

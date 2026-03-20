@@ -1,5 +1,5 @@
 async function loadEmailConfig() {
-    const response = await fetch('/datenbank/data/user.json', { cache: 'no-store' });
+    const response = await fetch('/database/data/user.json', { cache: 'no-store' });
     if (!response.ok) {
         throw new Error('EmailJS config request failed');
     }

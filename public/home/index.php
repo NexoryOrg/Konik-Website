@@ -10,12 +10,12 @@ require_once __DIR__ . '/../init.php';
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <base href="/">
         <title>Home</title>
-        <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
+        <link rel="icon" type="image/png" href="database/images/logo/logo.png">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../home/index.css">
-        <link rel="stylesheet" href="../navebar/navbar.css">
+        <link rel="stylesheet" href="../navbar/navbar.css">
         <link rel="stylesheet" href="../footer/footer.css">
     </head>
     <body>
@@ -23,11 +23,11 @@ require_once __DIR__ . '/../init.php';
         <?php 
         include __DIR__ . '/../track.php'; 
 
-        include __DIR__ . '/../navebar/navbar.php';
+        include __DIR__ . '/../navbar/navbar.php';
         ?>
 
         <section class="hero">
-            <img src="../datenbank/bilder/hintergrund/pferde.jpeg" alt="Wild horses in a meadow">
+            <img src="../database/images/background/pferde.jpeg" alt="Wild horses in a meadow">
             <div class="hero-content">
                 <h1>Wild Horses</h1>
                 <p>Black Forest National Park</p>
@@ -55,17 +55,17 @@ require_once __DIR__ . '/../init.php';
                 <div class="info-box">
                     <h3>Habitat</h3>
                     <p>The Koniks live on the higher, open heath and grasslands in the northern Black Forest, around Zollstock/Hilseneck and near the Schliffkopf. These Grinden are important for many rare animals and plants due to their special flora. Their grazing helps keep the areas open and diverse.</p>
-                    <img class="gallery-thumb" src="../datenbank/bilder/pferde/2020/start-projekt.jpg" alt="The horses' habitat" loading="lazy">
+                    <img class="gallery-thumb" src="../database/images/horses/2020/start-projekt.jpg" alt="The horses' habitat" loading="lazy">
                 </div>
                 <div class="info-box">
                     <h3>Behavior</h3>
                     <p>Koniks are thrifty and adaptable. They usually live in herds led by a dominant mare; they graze a lot and vary what they eat – that means they consume grasses, herbs and even bark or young shoots. Their feeding behavior contributes to the structural diversity of the vegetation, which in turn benefits other species such as insects, birds or reptiles. Their droppings also promote nutrient cycles and support dung organisms like beetles, providing additional food for birds.</p>
-                    <img class="gallery-thumb" src="../datenbank/bilder/pferde/2022/buran.jpg" alt="Konik behavior" loading="lazy">
+                    <img class="gallery-thumb" src="../database/images/horses/2022/buran.jpg" alt="Konik behavior" loading="lazy">
                 </div>
                 <div class="info-box">
                     <h3>Protection and Care</h3>
                     <p>Although the horses appear wild, they are regularly looked after: park officials monitor their health, attend to hoof care and manage the duration of grazing. The animals belong to Karlsruhe Zoo, which works closely with the national park. It is also important to interact correctly with people: visitors should keep their distance, not feed or disturb the animals so that they can live naturally.</p>
-                    <img class="gallery-thumb" src="../datenbank/bilder/pferde/2020/brunhilde.jpg" alt="Protection and care of the horses" loading="lazy">
+                    <img class="gallery-thumb" src="../database/images/horses/2020/brunhilde.jpg" alt="Protection and care of the horses" loading="lazy">
                 </div>
             </section>
         </section>
@@ -98,7 +98,7 @@ require_once __DIR__ . '/../init.php';
 
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="../home/index.js"></script>
-        <script src="../navebar/navbar.js"></script>
+        <script src="../navbar/navbar.js"></script>
 
     </body>
 </html>

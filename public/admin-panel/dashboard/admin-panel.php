@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../init.php';
 
-$userDataFile = __DIR__ . '/../../datenbank/data/user.json';
+$userDataFile = __DIR__ . '/../../database/data/user.json';
 
 function isHashedPassword($password) {
     return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;
@@ -153,11 +153,11 @@ if (!isset($_SESSION['admin'])) {
         exit;
     }
 
-$pendingDir = __DIR__ . '/../../datenbank/bilder/uploads/pending/';
-$uploadsDir = __DIR__ . '/../../datenbank/bilder/uploads/';
-$rejectedDir = __DIR__ . '/../../datenbank/bilder/uploads/rejected/';
-$galleryJsonFile = __DIR__ . '/../../datenbank/json/gallery.json';
-$statsFile = __DIR__ . '/../../datenbank/data/stats.json';
+$pendingDir = __DIR__ . '/../../database/images/uploads/pending/';
+$uploadsDir = __DIR__ . '/../../database/images/uploads/';
+$rejectedDir = __DIR__ . '/../../database/images/uploads/rejected/';
+$galleryJsonFile = __DIR__ . '/../../database/json/gallery.json';
+$statsFile = __DIR__ . '/../../database/data/stats.json';
 $stats = [
     'approved' => 0,
     'rejected' => 0,
@@ -198,7 +198,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
             }
             
             $entry = [
-                'src' => '/datenbank/bilder/uploads/' . $filename,
+                'src' => '/database/images/uploads/' . $filename,
                 'alt' => $metadata['title'],
                 'des' => $metadata['description']
             ];
@@ -214,7 +214,7 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
                 'date' => $metadata['date'] ?? '',
                 'description' => $metadata['description'] ?? '',
                 'email' => $metadata['email'] ?? '',
-                'img' => '/datenbank/bilder/uploads/' . $filename
+                'img' => '/database/images/uploads/' . $filename
             ];
             saveStats($statsFile, $stats);
 
@@ -236,7 +236,7 @@ if (isset($_GET['reject']) && isset($_SESSION['admin']) && csrf_validate($_GET['
         $metadata = json_decode(file_get_contents($jsonFile), true) ?? [];
     }
 
-    $rejectImagePath = '/datenbank/bilder/uploads/rejected/' . $filename;
+    $rejectImagePath = '/database/images/uploads/rejected/' . $filename;
 
     if (file_exists($imageFile)) {
         rename($imageFile, $rejectedDir . $filename);
@@ -269,7 +269,7 @@ if (is_dir($pendingDir)) {
                 $pending[] = [
                     'filename' => $baseFile,
                     'metadata' => $metadata,
-                    'imageUrl' => '/datenbank/bilder/uploads/pending/' . $baseFile
+                    'imageUrl' => '/database/images/uploads/pending/' . $baseFile
                 ];
             }
         }
@@ -283,8 +283,8 @@ usort($pending, function($a, $b) {
 $approvedItems = $stats['approved_items'] ?? [];
 $rejectedItems = $stats['rejected_items'] ?? [];
 
-$json_file = '' . __DIR__ . '/../../datenbank/json/history.json';
-$upload_dir = '' . __DIR__ . '/../../datenbank/json/history/';
+$json_file = '' . __DIR__ . '/../../database/json/history.json';
+$upload_dir = '' . __DIR__ . '/../../database/json/history/';
 
 if (!file_exists($json_file)) file_put_contents($json_file, json_encode([]));
 $events = json_decode(file_get_contents($json_file), true);
@@ -353,7 +353,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="admin-panel.php"><img src="../datenbank/bilder/logo/logo.png" alt="Logo"></a>
+                <a href="admin-panel.php"><img src="../database/images/logo/logo.png" alt="Logo"></a>
             </div>
             <ul class="navbar-menu" id="navbar-menu">
                 <li><a href="/admin-panel/dashboard/admin-panel.php#infos">Dashboard</a></li>
@@ -420,7 +420,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php else: ?>
                         <?php foreach ($pending as $item): ?>
                             <div class="pending-item" data-status="pending">
-                                <img src="<?= htmlspecialchars($item['imageUrl']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
+                                <img src="<?= htmlspecialchars($item['imageUrl']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/database/images/logo/logo.png';">
                                 <div class="pending-info">
                                     <div class="pending-header">
                                         <span class="status-badge pending">Pending</span>
@@ -452,7 +452,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 }
                             ?>
                             <div class="pending-item" data-status="approved">
-                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
+                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/database/images/logo/logo.png';">
                                 <div class="pending-info">
                                     <div class="pending-header">
                                         <span class="status-badge approved">Approved</span>
@@ -485,7 +485,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php else: ?>
                         <?php foreach ($rejectedItems as $item): ?>
                             <div class="pending-item" data-status="rejected">
-                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
+                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/database/images/logo/logo.png';">
                                 <div class="pending-info">
                                     <div class="pending-header">
                                         <span class="status-badge rejected">Rejected</span>

@@ -9,16 +9,16 @@ require_once __DIR__ . '/../init.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Imprint & Privacy</title>
-        <link rel="icon" type="image/png" href="datenbank/bilder/logo/logo.png">
+        <link rel="icon" type="image/png" href="database/images/logo/logo.png">
 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="stil/index.css">
-        <link rel="stylesheet" href="!navebar/navbar.css">
+        <link rel="stylesheet" href="!navbar/navbar.css">
         <link rel="stylesheet" href="!footer/footer.css">
     </head>
     <body>
 
-        <?php include '!navebar/navbar.php'; ?>
+        <?php include '!navbar/navbar.php'; ?>
 
         <main style="max-width:900px;margin:120px auto 80px;padding:0 20px;font-family:'Poppins',sans-serif;line-height:1.7;">
             <h1>Imprint & Privacy Policy</h1>
@@ -69,6 +69,6 @@ require_once __DIR__ . '/../init.php';
 
         <?php include '!footer/footer.php'; ?>
 
-        <script src="!navebar/navbar.js"></script>
+        <script src="!navbar/navbar.js"></script>
     </body>
 </html>
