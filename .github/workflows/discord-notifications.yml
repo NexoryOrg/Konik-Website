@@ -68,38 +68,45 @@ jobs:
           
           # Build stats summary
           STATS="📊 +$ADDITIONS | -$DELETIONS | ~$MODIFICATIONS"
-          
-          # Create professional embed
-          EMBED=$(cat <<EOF
-          {
-            "content": "🔔 **GitHub Activity** | \`$REPO\`",
-            "embeds": [
-              {
-                "title": "📤 Push to $BRANCH",
-                "description": "\`$COMMIT_SHA\` $COMMIT_MSG",
-                "url": "$COMMIT_URL",
-                "color": 7506394,
-                "author": {
-                  "name": "$COMMIT_AUTHOR",
-                  "url": "https://github.com/$COMMIT_AUTHOR",
-                  "icon_url": "https://github.com/$COMMIT_AUTHOR.png"
-                },
-                "fields": [
-                  {
-                    "name": "📈 Changes",
-                    "value": "$STATS",
-                    "inline": false
-                  }
-                ],
-                "footer": {
-                  "text": "NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
-                },
-                "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-              }
-            ]
-          }
-          EOF
-          )
+
+          FOOTER_TEXT="NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+          TIMESTAMP="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+          EMBED=$(jq -n \
+            --arg repo "$REPO" \
+            --arg branch "$BRANCH" \
+            --arg sha "$COMMIT_SHA" \
+            --arg msg "$COMMIT_MSG" \
+            --arg url "$COMMIT_URL" \
+            --arg author "$COMMIT_AUTHOR" \
+            --arg stats "$STATS" \
+            --arg footer "$FOOTER_TEXT" \
+            --arg ts "$TIMESTAMP" \
+            '{
+              content: ("🔔 **GitHub Activity** | `" + $repo + "`"),
+              embeds: [
+                {
+                  title: ("📤 Push to " + $branch),
+                  description: ("`" + $sha + "` " + $msg),
+                  url: $url,
+                  color: 7506394,
+                  author: {
+                    name: $author,
+                    url: ("https://github.com/" + $author),
+                    icon_url: ("https://github.com/" + $author + ".png")
+                  },
+                  fields: [
+                    {
+                      name: "📈 Changes",
+                      value: $stats,
+                      inline: false
+                    }
+                  ],
+                  footer: { text: $footer },
+                  timestamp: $ts
+                }
+              ]
+            }')
 
           curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
@@ -138,46 +145,60 @@ jobs:
               ;;
           esac
 
-          EMBED=$(cat <<EOF
-          {
-            "content": "🔔 **GitHub Activity** | \`${{ github.repository }}\`",
-            "embeds": [
-              {
-                "title": "$ICON Pull Request #$PR_NUMBER",
-                "description": "$PR_TITLE",
-                "url": "$PR_URL",
-                "color": $COLOR,
-                "author": {
-                  "name": "$PR_USER",
-                  "url": "https://github.com/$PR_USER",
-                  "icon_url": "https://github.com/$PR_USER.png"
-                },
-                "fields": [
-                  {
-                    "name": "Branch",
-                    "value": "\`$PR_BRANCH\` → \`$PR_BASE\`",
-                    "inline": true
+          FOOTER_TEXT="NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+          TIMESTAMP="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          REPO="${{ github.repository }}"
+          CHANGES="+$PR_ADDITIONS | -$PR_DELETIONS"
+
+          EMBED=$(jq -n \
+            --arg repo "$REPO" \
+            --arg icon "$ICON" \
+            --arg number "$PR_NUMBER" \
+            --arg title "$PR_TITLE" \
+            --arg url "$PR_URL" \
+            --arg user "$PR_USER" \
+            --arg branch "$PR_BRANCH" \
+            --arg base "$PR_BASE" \
+            --arg action "$PR_ACTION" \
+            --arg changes "$CHANGES" \
+            --arg footer "$FOOTER_TEXT" \
+            --arg ts "$TIMESTAMP" \
+            --argjson color "$COLOR" \
+            '{
+              content: ("🔔 **GitHub Activity** | `" + $repo + "`"),
+              embeds: [
+                {
+                  title: ($icon + " Pull Request #" + $number),
+                  description: $title,
+                  url: $url,
+                  color: $color,
+                  author: {
+                    name: $user,
+                    url: ("https://github.com/" + $user),
+                    icon_url: ("https://github.com/" + $user + ".png")
                   },
-                  {
-                    "name": "Status",
-                    "value": "$PR_ACTION",
-                    "inline": true
-                  },
-                  {
-                    "name": "Changes",
-                    "value": "+$PR_ADDITIONS | -$PR_DELETIONS",
-                    "inline": false
-                  }
-                ],
-                "footer": {
-                  "text": "NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
-                },
-                "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-              }
-            ]
-          }
-          EOF
-          )
+                  fields: [
+                    {
+                      name: "Branch",
+                      value: ("`" + $branch + "` → `" + $base + "`"),
+                      inline: true
+                    },
+                    {
+                      name: "Status",
+                      value: $action,
+                      inline: true
+                    },
+                    {
+                      name: "Changes",
+                      value: $changes,
+                      inline: false
+                    }
+                  ],
+                  footer: { text: $footer },
+                  timestamp: $ts
+                }
+              ]
+            }')
 
           curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
@@ -216,41 +237,52 @@ jobs:
             ISSUE_LABELS="None"
           fi
 
-          EMBED=$(cat <<EOF
-          {
-            "content": "🔔 **GitHub Activity** | \`${{ github.repository }}\`",
-            "embeds": [
-              {
-                "title": "$ICON Issue #$ISSUE_NUMBER",
-                "description": "$ISSUE_TITLE",
-                "url": "$ISSUE_URL",
-                "color": $COLOR,
-                "author": {
-                  "name": "$ISSUE_USER",
-                  "url": "https://github.com/$ISSUE_USER",
-                  "icon_url": "https://github.com/$ISSUE_USER.png"
-                },
-                "fields": [
-                  {
-                    "name": "Status",
-                    "value": "$ISSUE_ACTION",
-                    "inline": true
+          FOOTER_TEXT="NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+          TIMESTAMP="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          REPO="${{ github.repository }}"
+
+          EMBED=$(jq -n \
+            --arg repo "$REPO" \
+            --arg icon "$ICON" \
+            --arg number "$ISSUE_NUMBER" \
+            --arg title "$ISSUE_TITLE" \
+            --arg url "$ISSUE_URL" \
+            --arg user "$ISSUE_USER" \
+            --arg action "$ISSUE_ACTION" \
+            --arg labels "$ISSUE_LABELS" \
+            --arg footer "$FOOTER_TEXT" \
+            --arg ts "$TIMESTAMP" \
+            --argjson color "$COLOR" \
+            '{
+              content: ("🔔 **GitHub Activity** | `" + $repo + "`"),
+              embeds: [
+                {
+                  title: ($icon + " Issue #" + $number),
+                  description: $title,
+                  url: $url,
+                  color: $color,
+                  author: {
+                    name: $user,
+                    url: ("https://github.com/" + $user),
+                    icon_url: ("https://github.com/" + $user + ".png")
                   },
-                  {
-                    "name": "Labels",
-                    "value": "$ISSUE_LABELS",
-                    "inline": true
-                  }
-                ],
-                "footer": {
-                  "text": "NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
-                },
-                "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-              }
-            ]
-          }
-          EOF
-          )
+                  fields: [
+                    {
+                      name: "Status",
+                      value: $action,
+                      inline: true
+                    },
+                    {
+                      name: "Labels",
+                      value: $labels,
+                      inline: true
+                    }
+                  ],
+                  footer: { text: $footer },
+                  timestamp: $ts
+                }
+              ]
+            }')
 
           curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
@@ -265,36 +297,44 @@ jobs:
           DISC_USER=$(jq -r '.discussion.user.login' $GITHUB_EVENT_PATH)
           DISC_ACTION=$(jq -r '.action' $GITHUB_EVENT_PATH)
 
-          EMBED=$(cat <<EOF
-          {
-            "content": "🔔 **GitHub Activity** | \`${{ github.repository }}\`",
-            "embeds": [
-              {
-                "title": "💬 Discussion #$DISC_NUMBER",
-                "description": "$DISC_TITLE",
-                "url": "$DISC_URL",
-                "color": 7506394,
-                "author": {
-                  "name": "$DISC_USER",
-                  "url": "https://github.com/$DISC_USER",
-                  "icon_url": "https://github.com/$DISC_USER.png"
-                },
-                "fields": [
-                  {
-                    "name": "Event",
-                    "value": "$DISC_ACTION",
-                    "inline": false
-                  }
-                ],
-                "footer": {
-                  "text": "NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
-                },
-                "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-              }
-            ]
-          }
-          EOF
-          )
+          FOOTER_TEXT="NexoryOrg • $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+          TIMESTAMP="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          REPO="${{ github.repository }}"
+
+          EMBED=$(jq -n \
+            --arg repo "$REPO" \
+            --arg number "$DISC_NUMBER" \
+            --arg title "$DISC_TITLE" \
+            --arg url "$DISC_URL" \
+            --arg user "$DISC_USER" \
+            --arg action "$DISC_ACTION" \
+            --arg footer "$FOOTER_TEXT" \
+            --arg ts "$TIMESTAMP" \
+            '{
+              content: ("🔔 **GitHub Activity** | `" + $repo + "`"),
+              embeds: [
+                {
+                  title: ("💬 Discussion #" + $number),
+                  description: $title,
+                  url: $url,
+                  color: 7506394,
+                  author: {
+                    name: $user,
+                    url: ("https://github.com/" + $user),
+                    icon_url: ("https://github.com/" + $user + ".png")
+                  },
+                  fields: [
+                    {
+                      name: "Event",
+                      value: $action,
+                      inline: false
+                    }
+                  ],
+                  footer: { text: $footer },
+                  timestamp: $ts
+                }
+              ]
+            }')
 
           curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
