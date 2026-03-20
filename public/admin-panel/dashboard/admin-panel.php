@@ -1,562 +1,509 @@
-<?php
-require_once __DIR__ . '/../../init.php';
+const toggle = document.getElementById('navbar-toggle');
+const menu = document.getElementById('navbar-menu');
 
-$userDataFile = __DIR__ . '/../../datenbank/data/user.json';
-
-function isHashedPassword($password) {
-    return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;
+if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
 }
 
-function parseUsersFromFile($file) {
-    $users = [];
-    if (!file_exists($file)) {
-        return $users;
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && menu) {
+        menu.classList.remove('active');
     }
-
-    $data = json_decode(file_get_contents($file), true);
-    if (json_last_error() !== JSON_ERROR_NONE || !isset($data['users']) || !is_array($data['users'])) {
-        return $users;
-    }
-
-    foreach ($data['users'] as $row) {
-        if (!empty($row['username']) && isset($row['password'])) {
-            $users[(string)$row['username']] = (string)$row['password'];
-        }
-    }
-
-    return $users;
-}
-
-function normalizeUsers($usersArray) {
-    $normalized = [];
-    foreach ($usersArray as $username => $password) {
-        $username = trim((string)$username);
-        if ($username === '') {
-            continue;
-        }
-        $stored = (string)$password;
-        if (!isHashedPassword($stored)) {
-            $stored = password_hash($stored, PASSWORD_DEFAULT);
-        }
-        $normalized[$username] = $stored;
-    }
-
-    return $normalized;
-}
-
-function verifyUserPassword($storedPassword, $plainPassword) {
-    $storedPassword = (string)$storedPassword;
-    if (isHashedPassword($storedPassword)) {
-        return password_verify($plainPassword, $storedPassword);
-    }
-
-    return hash_equals($storedPassword, $plainPassword);
-}
-
-function saveUsers($file, $usersArray) {
-    $safeUsers = normalizeUsers($usersArray);
-    $payload = ['users' => array_map(fn($k, $v) => ['username' => $k, 'password' => $v], array_keys($safeUsers), $safeUsers)];
-    file_put_contents($file, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-}
-
-$users = parseUsersFromFile($userDataFile);
-if (empty($users)) {
-    $users = ['admin' => password_hash('admin', PASSWORD_DEFAULT)];
-}
-
-$normalizedUsers = normalizeUsers($users);
-if ($normalizedUsers !== $users || !file_exists($userDataFile)) {
-    saveUsers($userDataFile, $normalizedUsers);
-}
-$users = $normalizedUsers;
-
-$csrfToken = csrf_token();
-
-if (isset($_GET['logout'])) {
-    if (!csrf_validate($_GET['csrf'] ?? '')) {
-        http_response_code(403);
-        exit('Invalid request token');
-    }
-    session_destroy();
-    header('Location: admin-panel.php');
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    if (!csrf_validate($_POST['csrf_token'] ?? '')) {
-        $error = 'Invalid request token';
-    }
-
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
-    if (!isset($error)) {
-        if ($username && isset($users[$username]) && verifyUserPassword($users[$username], $password)) {
-            if (password_needs_rehash($users[$username], PASSWORD_DEFAULT)) {
-                $users[$username] = password_hash($password, PASSWORD_DEFAULT);
-                saveUsers($userDataFile, $users);
-            }
-            session_regenerate_id(true);
-            $_SESSION['admin'] = $username;
-        } else {
-            $error = 'Invalid username or password';
-        }
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['saveSettings']) && isset($_SESSION['admin'])) {
-    if (!csrf_validate($_POST['csrf_token'] ?? '')) {
-        $message = 'Invalid request token';
-    } else {
-        $newUser = trim($_POST['new_user'] ?? '');
-        $newPass = trim($_POST['new_password'] ?? '');
-        $editUser = trim($_POST['edit_user'] ?? '');
-        $editPass = trim($_POST['edit_password'] ?? '');
-
-        if ($newUser && $newPass) {
-            $users[$newUser] = $newPass;
-        }
-        if ($editUser && $editPass && isset($users[$editUser])) {
-            $users[$editUser] = $editPass;
-        }
-
-        saveUsers($userDataFile, $users);
-        $message = 'Settings saved';
-    }
-}
-
-if (!isset($_SESSION['admin'])) {
-        ?>
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <base href="/">
-            <title>Admin Login</title>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="../admin-panel/password_managment/login.css">
-        </head>
-        <body>
-            <div class="login-box">
-                <h1>Admin Login</h1>
-                <?php if (isset($error)) echo "<p class='error'>" . e($error) . "</p>"; ?>
-                <form method="POST">
-                    <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit" name="login">Login</button>
-                </form>
-            </div>
-        </body>
-        </html>
-        <?php
-        exit;
-    }
-
-$pendingDir = __DIR__ . '/../../datenbank/bilder/uploads/pending/';
-$uploadsDir = __DIR__ . '/../../datenbank/bilder/uploads/';
-$rejectedDir = __DIR__ . '/../../datenbank/bilder/uploads/rejected/';
-$galleryJsonFile = __DIR__ . '/../../datenbank/json/gallery.json';
-$statsFile = __DIR__ . '/../../datenbank/data/stats.json';
-$stats = [
-    'approved' => 0,
-    'rejected' => 0,
-    'approved_items' => [],
-    'rejected_items' => []
-];
-
-if (!is_dir($rejectedDir)) {
-    mkdir($rejectedDir, 0755, true);
-}
-
-if (file_exists($statsFile)) {
-    $statsData = json_decode(file_get_contents($statsFile), true);
-    if (json_last_error() === JSON_ERROR_NONE && is_array($statsData)) {
-        $stats = array_merge($stats, array_intersect_key($statsData, ['approved' => 0, 'rejected' => 0, 'approved_items' => [], 'rejected_items' => []]));
-    }
-}
-
-function saveStats($file, $statsArray) {
-    file_put_contents($file, json_encode($statsArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-}
-
-if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET['csrf'] ?? '')) {
-    $filename = basename($_GET['approve']);
-    $jsonFile = $pendingDir . $filename . '.json';
-    
-    if (file_exists($jsonFile)) {
-        $metadata = json_decode(file_get_contents($jsonFile), true);
-        $source = $pendingDir . $filename;
-        $destination = $uploadsDir . $filename;
-        
-        if (rename($source, $destination)) {
-            $year = substr($metadata['date'], -4);
-            $galleryData = json_decode(file_get_contents($galleryJsonFile), true) ?: [];
-            
-            if (!isset($galleryData[$year])) {
-                $galleryData[$year] = [];
-            }
-            
-            $entry = [
-                'src' => '/datenbank/bilder/uploads/' . $filename,
-                'alt' => $metadata['title'],
-                'des' => $metadata['description']
-            ];
-            
-            $galleryData[$year][] = $entry;
-            
-            file_put_contents($galleryJsonFile, json_encode($galleryData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-            
-            $stats['approved'] = ($stats['approved'] ?? 0) + 1;
-            $stats['approved_items'][] = [
-                'filename' => $filename,
-                'title' => $metadata['title'] ?? '',
-                'date' => $metadata['date'] ?? '',
-                'description' => $metadata['description'] ?? '',
-                'email' => $metadata['email'] ?? '',
-                'img' => '/datenbank/bilder/uploads/' . $filename
-            ];
-            saveStats($statsFile, $stats);
-
-            unlink($jsonFile);
-            
-            header('Location: admin-panel.php');
-            exit;
-        }
-    }
-}
-
-if (isset($_GET['reject']) && isset($_SESSION['admin']) && csrf_validate($_GET['csrf'] ?? '')) {
-    $filename = basename($_GET['reject']);
-    $jsonFile = $pendingDir . $filename . '.json';
-    $imageFile = $pendingDir . $filename;
-    $metadata = [];
-
-    if (file_exists($jsonFile)) {
-        $metadata = json_decode(file_get_contents($jsonFile), true) ?? [];
-    }
-
-    $rejectImagePath = '/datenbank/bilder/uploads/rejected/' . $filename;
-
-    if (file_exists($imageFile)) {
-        rename($imageFile, $rejectedDir . $filename);
-    }
-    if (file_exists($jsonFile)) unlink($jsonFile);
-
-    $stats['rejected'] = ($stats['rejected'] ?? 0) + 1;
-    $stats['rejected_items'][] = [
-        'filename' => $filename,
-        'title' => $metadata['title'] ?? '',
-        'date' => $metadata['date'] ?? '',
-        'description' => $metadata['description'] ?? '',
-        'email' => $metadata['email'] ?? '',
-        'img' => $rejectImagePath
-    ];
-    saveStats($statsFile, $stats);
-    
-    header('Location: admin-panel.php');
-    exit;
-}
-
-$pending = [];
-if (is_dir($pendingDir)) {
-    $files = scandir($pendingDir);
-    foreach ($files as $file) {
-        if (substr($file, -5) === '.json') {
-            $baseFile = substr($file, 0, -5);
-            if (file_exists($pendingDir . $baseFile)) {
-                $metadata = json_decode(file_get_contents($pendingDir . $file), true);
-                $pending[] = [
-                    'filename' => $baseFile,
-                    'metadata' => $metadata,
-                    'imageUrl' => '/datenbank/bilder/uploads/pending/' . $baseFile
-                ];
-            }
-        }
-    }
-}
-
-usort($pending, function($a, $b) {
-    return $b['metadata']['timestamp'] - $a['metadata']['timestamp'];
 });
 
-$approvedItems = $stats['approved_items'] ?? [];
-$rejectedItems = $stats['rejected_items'] ?? [];
+function updateActiveNav() {
+    const links = document.querySelectorAll('.navbar-menu li a');
+    const hash = window.location.hash || '#infos';
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        const hrefHash = href ? (href.includes('#') ? href.substr(href.indexOf('#')) : '') : '';
+        if (hrefHash === hash) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+window.addEventListener('hashchange', updateActiveNav);
+window.addEventListener('load', updateActiveNav);
+
+const filterButtons = document.querySelectorAll('.filter-btn');
+const pendingView = document.querySelector('.pending-view');
+const approvedView = document.querySelector('.approved-view');
+const rejectedView = document.querySelector('.rejected-view');
+
+function setFilter(filter) {
+    filterButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === filter));
+    pendingView?.classList.toggle('hidden', filter !== 'pending');
+    approvedView?.classList.toggle('hidden', filter !== 'approved');
+    rejectedView?.classList.toggle('hidden', filter !== 'rejected');
+}
+
+if (filterButtons.length) {
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            setFilter(filter);
+        });
+    });
+    setFilter('pending');
+}
+
+const settingsOpenBtn = document.getElementById('settings-open');
+const passwordModal = document.getElementById('password-modal');
+const closeModalBtn = document.getElementById('close-modal');
+
+if (settingsOpenBtn && passwordModal) {
+    settingsOpenBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        passwordModal.classList.remove('hidden');
+        window.location.hash = '#settings';
+        updateActiveNav();
+    });
+}
+
+if (closeModalBtn && passwordModal) {
+    closeModalBtn.addEventListener('click', () => {
+        passwordModal.classList.add('hidden');
+    });
+}
+
+passwordModal?.addEventListener('click', (e) => {
+    if (e.target === passwordModal) {
+        passwordModal.classList.add('hidden');
+    }
+});
 
 
-$json_file = '' . __DIR__ . '/../../datenbank/json/history.json';
-$upload_dir = '' . __DIR__ . '/../../datenbank/json/history/';
+const list = document.getElementById("history-list");
+const addBtn = document.getElementById("add-event");
+const addEventModal = document.getElementById("add-event-modal");
+const addEventForm = document.getElementById("add-event-form");
+const eventImageInput = document.getElementById("event-image");
 
-if (!file_exists($json_file)) file_put_contents($json_file, json_encode([]));
-$events = json_decode(file_get_contents($json_file), true);
+let events = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'] ?? '';
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
 
-    if ($action !== '' && !csrf_validate($_POST['csrf_token'] ?? '')) {
-        http_response_code(403);
-        echo json_encode(['success' => false, 'message' => 'Invalid request token']);
-        exit;
+function safeImageSource(value) {
+    const src = String(value ?? "").trim();
+    if (src === "") {
+        return "";
+    }
+    if (src.startsWith("/") || src.startsWith("../") || src.startsWith("data:image/")) {
+        return src;
+    }
+    return "";
+}
+
+async function loadEvents() {
+    const res = await fetch("/datenbank/json/history.json");
+    if (!res.ok) {
+        console.error('Failed to load history', res.statusText);
+        events = [];
+    } else {
+        const loaded = await res.json();
+        events = Array.isArray(loaded) ? loaded : [];
     }
 
-    if ($action === 'add') {
-        $image_path = '';
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-            $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $image_name = time() . '.' . $ext;
-            $image_path = $upload_dir . $image_name;
-            move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+    render();
+}
+
+function render() {
+
+    list.innerHTML = "";
+
+    events.forEach(event => {
+
+        const li = document.createElement("li");
+
+        li.dataset.id = event.id;
+
+        const title = escapeHtml(event.title);
+        const date = escapeHtml(event.date);
+        const description = escapeHtml(event.description);
+        const imageSource = escapeHtml(safeImageSource(event.src));
+
+        li.innerHTML = `
+            <div class="event">
+
+            <div>
+
+            <input class="title" value="${title}" placeholder="Title">
+
+            <input class="date" type="date" value="${date}">
+
+            <textarea class="desc" placeholder="Description">${description}</textarea>
+
+            <input class="image-input" type="file">
+
+            <div class="event-actions">
+
+            <button class="save">save</button>
+
+            <button class="delete">Delete</button>
+            </div>
+
+            </div>
+
+            <div>
+
+            <img class="preview" src="${imageSource}">
+
+            </div>
+
+            </div>
+            `;
+
+        list.appendChild(li);
+
+    });
+
+}
+
+function openAddEventModal() {
+    if (!addEventModal) {
+        return;
+    }
+    addEventModal.classList.remove("hidden");
+}
+
+function closeAddEventModal() {
+    if (!addEventModal) {
+        return;
+    }
+    addEventModal.classList.add("hidden");
+}
+
+function showInfo(title, text) {
+    const infoMsg = document.getElementById("info-msg");
+    if (!infoMsg) {
+        return;
+    }
+    document.getElementById("succes-h1").textContent = title;
+    document.getElementById("succes-text").textContent = text;
+    infoMsg.hidden = false;
+    setTimeout(() => {
+        infoMsg.hidden = true;
+    }, 3000);
+}
+
+function showError(text) {
+    const errorMsg = document.getElementById("error-msg");
+    if (!errorMsg) {
+        return;
+    }
+    document.getElementById("error-text").textContent = text;
+    errorMsg.hidden = false;
+    setTimeout(() => {
+        errorMsg.hidden = true;
+    }, 3000);
+}
+
+async function uploadhistoryImage(file) {
+    const csrfToken = window.ADMIN_CSRF_TOKEN || "";
+    const payload = new FormData();
+    payload.append("image", file);
+
+    const res = await fetch("/admin-panel/dashboard/upload-history-image.php", {
+        method: "POST",
+        headers: {
+            "X-CSRF-Token": csrfToken
+        },
+        body: payload
+    });
+
+    let data = null;
+    try {
+        data = await res.json();
+    } catch (_err) {
+        data = null;
+    }
+
+    if (!res.ok || !data?.success || typeof data.src !== "string" || data.src.trim() === "") {
+        throw new Error(data?.message || "Image upload failed");
+    }
+
+    return data.src;
+}
+
+if (addBtn) {
+    addBtn.onclick = (e) => {
+        e.preventDefault();
+        openAddEventModal();
+    };
+}
+
+if (addEventModal) {
+    addEventModal.addEventListener("click", (e) => {
+        if (e.target === addEventModal) {
+            closeAddEventModal();
+        }
+    });
+}
+
+if (addEventForm) {
+    addEventForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const titleInput = document.getElementById("event-title");
+        const dateInput = document.getElementById("event-date");
+        const descriptionInput = document.getElementById("event-description");
+
+        const title = titleInput?.value?.trim() || "New Event";
+        const date = dateInput?.value?.trim() || "";
+        const description = descriptionInput?.value?.trim() || "";
+        const imageFile = eventImageInput?.files?.[0] || null;
+
+        if (!imageFile) {
+            showError("Bitte ein Bild auswaehlen.");
+            return;
         }
 
-        $new_event = [
-            'id' => time(),
-            'date' => $_POST['date'],
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
-            'src' => $image_path,
-            'alt' => $_POST['title']
-        ];
+        const submitButton = addEventForm.querySelector("button[type='submit']");
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
 
-        $events[] = $new_event;
-        file_put_contents($json_file, json_encode($events, JSON_PRETTY_PRINT));
-        echo json_encode($new_event);
-        exit;
-    }
+        try {
+            const src = await uploadhistoryImage(imageFile);
+            const id = getNextEventId();
 
-    if ($action === 'delete') {
-        $id = (int)$_POST['id'];
-        foreach ($events as $key => $e) {
-            if ($e['id'] === $id) {
-                if (!empty($e['src']) && file_exists($e['src'])) unlink($e['src']); // Bild löschen
-                unset($events[$key]);
+            events.push({
+                id,
+                title,
+                date,
+                description,
+                src,
+                alt: title
+            });
+
+            render();
+            await save();
+            addEventForm.reset();
+            closeAddEventModal();
+            showInfo("Added!", "Dein Event wurde hinzugefuegt.");
+        } catch (error) {
+            console.error("Add event failed:", error);
+            showError(error?.message || "Event konnte nicht hinzugefuegt werden.");
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
             }
         }
-        $events = array_values($events);
-        file_put_contents($json_file, json_encode($events, JSON_PRETTY_PRINT));
-        echo json_encode(['success' => true]);
-        exit;
+    });
+}
+
+function getNextEventId() {
+    if (!Array.isArray(events) || events.length === 0) {
+        return 1;
+    }
+
+    const lastEvent = events[events.length - 1];
+    const lastId = Number(lastEvent?.id);
+
+    if (Number.isFinite(lastId)) {
+        return lastId + 1;
+    }
+
+    const maxId = events.reduce((max, event) => {
+        const id = Number(event?.id);
+        return Number.isFinite(id) ? Math.max(max, id) : max;
+    }, 0);
+
+    return maxId + 1;
+}
+
+list.addEventListener("click", async e => {
+
+    if (e.target.classList.contains("save")) {
+
+        try {
+            const li = e.target.closest("li");
+            const id = li.dataset.id;
+
+            const event = events.find(ev => ev.id == id);
+
+            event.title = li.querySelector(".title").value;
+            event.date = li.querySelector(".date").value;
+            event.description = li.querySelector(".desc").value;
+
+            save();
+
+            const infoMsg = document.getElementById("info-msg");
+            if (infoMsg) {
+                document.getElementById("succes-h1").textContent = "Saved!";
+                document.getElementById("succes-text").textContent = "Your event has been saved.";
+                infoMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                infoMsg.hidden = true;
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+
+            const errorMsg = document.getElementById("error-msg");
+            if (errorMsg) {
+                document.getElementById("error-text").textContent = "Your event could not be saved. Please try again.";
+                errorMsg.hidden = false;
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                errorMsg.hidden = true;
+            }
+        }
+    }
+});
+
+const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+const cancelDeleteButton = document.getElementById('cancel-delete');
+const confirmDeleteButton = document.getElementById('confirm-delete');
+let deleteTargetId = null;
+
+list.addEventListener('click', e => {
+    if (e.target.classList.contains('delete')) {
+        e.preventDefault();
+
+        const li = e.target.closest('li');
+        deleteTargetId = li?.dataset?.id || null;
+
+        if (!deleteTargetId) {
+            return;
+        }
+
+        if (confirmDeleteModal) {
+            confirmDeleteModal.classList.remove('hidden');
+        }
+    }
+});
+
+if (cancelDeleteButton && confirmDeleteModal) {
+    cancelDeleteButton.addEventListener('click', () => {
+        deleteTargetId = null;
+        confirmDeleteModal.classList.add('hidden');
+    });
+}
+
+if (confirmDeleteButton && confirmDeleteModal) {
+    confirmDeleteButton.addEventListener('click', async () => {
+        if (!deleteTargetId) {
+            return;
+        }
+
+        events = events.filter(ev => ev.id != deleteTargetId);
+        deleteTargetId = null;
+
+        render();
+        await save();
+
+        if (confirmDeleteModal) {
+            confirmDeleteModal.classList.add('hidden');
+        }
+
+        const infoMsg = document.getElementById('info-msg');
+        if (infoMsg) {
+            document.getElementById('succes-h1').textContent = 'Deleted!';
+            document.getElementById('succes-text').textContent = 'The event has been deleted.';
+            infoMsg.hidden = false;
+            setTimeout(() => { infoMsg.hidden = true; }, 3000);
+        }
+    });
+}
+
+if (confirmDeleteModal) {
+    confirmDeleteModal.addEventListener('click', (e) => {
+        if (e.target === confirmDeleteModal) {
+            deleteTargetId = null;
+            confirmDeleteModal.classList.add('hidden');
+        }
+    });
+}
+
+list.addEventListener("change", async e => {
+
+    if (e.target.classList.contains("image-input")) {
+
+        const file = e.target.files[0];
+        if (!file) {
+            return;
+        }
+
+        const li = e.target.closest("li");
+        const img = li.querySelector(".preview");
+
+        const localPreview = URL.createObjectURL(file);
+        img.src = localPreview;
+
+        try {
+            const uploadedSrc = await uploadhistoryImage(file);
+            const id = li.dataset.id;
+            const event = events.find(item => item.id == id);
+            if (event) {
+                event.src = uploadedSrc;
+                event.alt = event.title || "history image";
+            }
+            URL.revokeObjectURL(localPreview);
+            img.src = uploadedSrc;
+        } catch (error) {
+            console.error("Image upload failed:", error);
+            URL.revokeObjectURL(localPreview);
+            showError(error?.message || "Bild konnte nicht hochgeladen werden.");
+        }
+
+    }
+
+});
+
+new Sortable(list, {
+
+    animation: 150,
+    handle: ".title",
+
+    onEnd() {
+
+        const newOrder = [];
+
+        document.querySelectorAll("#history-list li").forEach(li => {
+
+            const id = li.dataset.id;
+
+            const event = events.find(e => e.id == id);
+
+            newOrder.push(event);
+
+        });
+
+        events = newOrder;
+
+    }
+
+});
+
+async function save() {
+    console.log("Saving:", events);
+
+    const csrfToken = window.ADMIN_CSRF_TOKEN || '';
+
+    const res = await fetch("/admin-panel/dashboard/save-history.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify(events)
+    });
+
+    if (!res.ok) {
+        console.error('Save-history failed', res.statusText);
     }
 }
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/">
-    <title>Admin Managmant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/admin-panel/dashboard/admin-panel.css">
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="admin-panel.php"><img src="../datenbank/bilder/logo/logo.png" alt="Logo"></a>
-            </div>
-            <ul class="navbar-menu" id="navbar-menu">
-                <li><a href="/admin-panel/dashboard/admin-panel.php#infos">Dashboard</a></li>
-                <li><a href="/admin-panel/dashboard/admin-panel.php#gallery">Gallery</a></li>
-                <li><a href="/admin-panel/dashboard/admin-panel.php#timeline">Timeline</a></li>
-                <li><a href="#" id="settings-open">Settings</a></li>
-                <li><a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['logout' => 1, 'csrf' => $csrfToken]) ?>">Logout</a></li>
-            </ul>
-            <div class="navbar-toggle" id="navbar-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        <section class="section" id="infos">
-            <div class="container">
-                <h1>Welcome to the Admin Dashboard</h1>
-                <p class="centered-text">Use this panel to manage gallery uploads, timeline events, and user settings.</p>
-            </div>
-
-            <div class="dashboard-trends">
-                <div class="trend-card">
-                    <h3>Uptime checks (24 hours)</h3>
-                    <img src="/admin-panel/graph/graph_uptime.php" alt="Uptime chart" style="width:100%; height:auto; max-height:320px;">
-                </div>
-                <div class="trend-card">
-                    <h3>Visitors (24 hours)</h3>
-                    <img src="/admin-panel/graph/graph_visitors.php" alt="Visitors chart" style="width:100%; height:auto; max-height:320px;">
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <h3>Approved Uploads</h3>
-                    <div class="stat"><?= $stats['approved'] ?? 0 ?></div>
-                    <div><span class="increase">+<?= $stats['approved'] ?? 0 ?> </span> done</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>Rejected Uploads</h3>
-                    <div class="stat"><?= $stats['rejected'] ?? 0 ?></div>
-                    <div><span class="decrease">-<?= $stats['rejected'] ?? 0 ?> </span> blocked</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="gallery">
-            <div class="container">
-                <h2>Gallery Management</h2>
-
-                <div class="status-filter">
-                    <button class="filter-btn active" data-filter="pending">Pending</button>
-                    <button class="filter-btn" data-filter="approved">Approved</button>
-                    <button class="filter-btn" data-filter="rejected">Rejected</button>
-                </div>
-
-                <div class="pending-grid status-view pending-view">
-                    <?php if (empty($pending)): ?>
-                        <div class="empty">
-                            <p>No pending requests.</p>
-                        </div>
-                    <?php else: ?>
-                        <?php foreach ($pending as $item): ?>
-                            <div class="pending-item" data-status="pending">
-                                <img src="<?= htmlspecialchars($item['imageUrl']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
-                                <div class="pending-info">
-                                    <div class="pending-header">
-                                        <span class="status-badge pending">Pending</span>
-                                    </div>
-                                    <h3 class="approved-title"><?= htmlspecialchars($item['metadata']['title']) ?></h3>
-                                    <p class="center-date"><strong>Date:</strong> <?= htmlspecialchars($item['metadata']['date']) ?></p>
-                                    <p><strong>Description:</strong> <?= htmlspecialchars(substr($item['metadata']['description'], 0, 50)) ?>...</p>
-                                    <p><strong>Uploaded:</strong> <?= date('d.m.Y H:i', $item['metadata']['timestamp']) ?></p>
-                                    <p><strong>Uploader Email:</strong> <?= htmlspecialchars($item['metadata']['email']) ?></p>
-                                    <div class="pending-actions">
-                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['approve' => $item['filename'], 'csrf' => $csrfToken]) ?>" class="approve">✓ Approve</a>
-                                        <a href="<?= '/admin-panel/dashboard/admin-panel.php?' . http_build_query(['reject' => $item['filename'], 'csrf' => $csrfToken]) ?>" class="reject">✕ Reject</a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-
-                <div class="pending-grid status-view approved-view hidden">
-                    <?php if (empty($approvedItems)): ?>
-                        <div class="empty"><p>No approved requests.</p></div>
-                    <?php else: ?>
-                        <?php foreach ($approvedItems as $item): ?>
-                            <div class="pending-item" data-status="approved">
-                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
-                                <div class="pending-info">
-                                    <div class="pending-header">
-                                        <span class="status-badge approved">Approved</span>
-                                    </div>
-                                    <h3 class="approved-title"><?= htmlspecialchars($item['title']) ?></h3>
-                                    <p class="center-date"><strong>Date:</strong> <?= htmlspecialchars($item['date']) ?></p>
-                                    <p><?= htmlspecialchars(substr($item['description'], 0, 50)) ?>...</p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-
-                <div class="pending-grid status-view rejected-view hidden">
-                    <?php if (empty($rejectedItems)): ?>
-                        <div class="empty"><p>No rejected requests.</p></div>
-                    <?php else: ?>
-                        <?php foreach ($rejectedItems as $item): ?>
-                            <div class="pending-item" data-status="rejected">
-                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
-                                <div class="pending-info">
-                                    <div class="pending-header">
-                                        <span class="status-badge rejected">Rejected</span>
-                                    </div>
-                                    <h3 class="approved-title"><?= htmlspecialchars($item['title']) ?></h3>
-                                    <p class="center-date"><strong>Date:</strong> <?= htmlspecialchars($item['date']) ?></p>
-                                    <p><?= htmlspecialchars(substr($item['description'], 0, 50)) ?>...</p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-
-            </div>
-        </section>
-
-    <section class="section" id="timeline-admin">
-
-        <h2>Timeline Admin</h2>
-
-        <button id="add-event">+ Add Event</button>
-
-        <ul id="timeline-list"></ul>
-
-    </section>
-
-    </main>
-
-    <div class="info-msg" id="info-msg" hidden>
-        <h3 id="succes-h1">Success</h3>
-        <p id="succes-text">Your Event is done!</p>
-    </div>
-
-    <div class="error-msg" id="error-msg" hidden>
-        <h3>Error!</h3>
-        <p id="error-text">Something went wrong!</p>
-    </div>
-
-    <div id="password-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Change Password</h2>
-            <p>Click here to securely update your password on the external page.</p>
-            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Change Password</a>
-            <button id="close-modal" class="btn secondary">Close</button>
-        </div>
-    </div>
-
-    <div id="confirm-delete-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Delete Entry</h2>
-            <p>Are you sure you want to delete this event?</p>
-            <div class="modal-actions" style="margin-top: 1rem; text-align: right;">
-                <button id="cancel-delete" class="btn secondary">Cancel</button>
-                <button id="confirm-delete" class="btn danger">Delete</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="add-event-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Add Timeline Event</h2>
-            <form id="add-event-form">
-                <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
-                <div class="form-group">
-                    <label for="event-title">Title</label>
-                    <input type="text" id="event-title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="event-date">Date (YYYY-MM-DD)</label>
-                    <input type="date" id="event-date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="event-description">Description</label>
-                    <textarea id="event-description" name="description" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="event-image">Image</label>
-                    <input type="file" id="event-image" name="image" accept="image/*" required>
-                </div>
-                <button type="submit" class="btn">Add Event</button>
-            </form>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-    <script>
-        window.ADMIN_CSRF_TOKEN = <?= json_encode($csrfToken, JSON_UNESCAPED_SLASHES) ?>;
-    </script>
-    <script src="/admin-panel/dashboard/admin-panel.js"></script>
-
-</body>
-</html>
+loadEvents();
