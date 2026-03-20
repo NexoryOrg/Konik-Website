@@ -77,6 +77,237 @@ passwordModal?.addEventListener('click', (e) => {
     }
 });
 
+const approvedEditModal = document.getElementById('approved-edit-modal');
+const approvedEditForm = document.getElementById('approved-edit-form');
+const approvedEditCancel = document.getElementById('approved-edit-cancel');
+const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+const cancelDeleteButton = document.getElementById('cancel-delete');
+const confirmDeleteButton = document.getElementById('confirm-delete');
+const confirmDeleteTitle = document.getElementById('confirm-delete-title');
+const confirmDeleteText = document.getElementById('confirm-delete-text');
+
+let activeApprovedMenu = null;
+let pendingDeleteAction = null;
+
+function closeApprovedMenus() {
+    document.querySelectorAll('.approved-image-menu').forEach((menuEl) => {
+        menuEl.classList.remove('open');
+    });
+    activeApprovedMenu = null;
+}
+
+function closeApprovedEditModal() {
+    approvedEditModal?.classList.add('hidden');
+}
+
+function openDeleteModal(title, text, onConfirm) {
+    if (!confirmDeleteModal || !confirmDeleteButton || !cancelDeleteButton) {
+        return;
+    }
+
+    if (confirmDeleteTitle) {
+        confirmDeleteTitle.textContent = title;
+    }
+    if (confirmDeleteText) {
+        confirmDeleteText.textContent = text;
+    }
+
+    pendingDeleteAction = onConfirm;
+    confirmDeleteModal.classList.remove('hidden');
+}
+
+function closeDeleteModal() {
+    pendingDeleteAction = null;
+    confirmDeleteModal?.classList.add('hidden');
+}
+
+async function approvedImageActionRequest(payload) {
+    const csrfToken = window.ADMIN_CSRF_TOKEN || '';
+    const response = await fetch('/admin-panel/dashboard/manage-gallery-image.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
+        },
+        body: JSON.stringify(payload)
+    });
+
+    let data = null;
+    try {
+        data = await response.json();
+    } catch (_error) {
+        data = null;
+    }
+
+    if (!response.ok || !data || data.success !== true) {
+        throw new Error(data?.message || 'Action failed');
+    }
+
+    return data;
+}
+
+function fillApprovedEditForm(menuEl) {
+    const filenameInput = document.getElementById('approved-edit-filename');
+    const titleInput = document.getElementById('approved-edit-title');
+    const dateInput = document.getElementById('approved-edit-date');
+    const descriptionInput = document.getElementById('approved-edit-description');
+
+    if (!filenameInput || !titleInput || !dateInput || !descriptionInput || !menuEl) {
+        return;
+    }
+
+    filenameInput.value = menuEl.dataset.filename || '';
+    titleInput.value = menuEl.dataset.title || '';
+    dateInput.value = menuEl.dataset.date || '';
+    descriptionInput.value = menuEl.dataset.description || '';
+}
+
+window.adminToggleApprovedMenu = function adminToggleApprovedMenu(toggleButton, maybeEvent) {
+    const eventObject = maybeEvent || window.event;
+    eventObject?.preventDefault?.();
+    eventObject?.stopPropagation?.();
+
+    const menuEl = toggleButton?.closest('.approved-image-menu');
+    if (!menuEl) {
+        return false;
+    }
+
+    const shouldOpen = !menuEl.classList.contains('open');
+    closeApprovedMenus();
+    if (shouldOpen) {
+        menuEl.classList.add('open');
+        activeApprovedMenu = menuEl;
+    }
+
+    return false;
+};
+
+window.adminApprovedMenuEdit = function adminApprovedMenuEdit(actionButton, maybeEvent) {
+    const eventObject = maybeEvent || window.event;
+    eventObject?.preventDefault?.();
+    eventObject?.stopPropagation?.();
+
+    const menuEl = actionButton?.closest('.approved-image-menu');
+    if (!menuEl) {
+        return false;
+    }
+
+    fillApprovedEditForm(menuEl);
+    closeApprovedMenus();
+    approvedEditModal?.classList.remove('hidden');
+    return false;
+};
+
+window.adminApprovedMenuDelete = async function adminApprovedMenuDelete(actionButton, maybeEvent) {
+    const eventObject = maybeEvent || window.event;
+    eventObject?.preventDefault?.();
+    eventObject?.stopPropagation?.();
+
+    const menuEl = actionButton?.closest('.approved-image-menu');
+    const filename = menuEl?.dataset?.filename || '';
+    closeApprovedMenus();
+
+    if (!menuEl || filename === '') {
+        return false;
+    }
+
+    openDeleteModal(
+        'Delete Approved Image',
+        'Are you sure you want to delete this approved image?',
+        async () => {
+            try {
+                await approvedImageActionRequest({ action: 'delete', filename });
+                const card = menuEl.closest('.pending-item');
+                card?.remove();
+
+                const approvedGrid = document.querySelector('.approved-view');
+                if (approvedGrid && !approvedGrid.querySelector('.pending-item')) {
+                    approvedGrid.innerHTML = '<div class="empty"><p>No approved requests.</p></div>';
+                }
+
+                showInfo('Deleted!', 'Approved image has been deleted.');
+            } catch (error) {
+                showError(error?.message || 'Delete failed.');
+            }
+        }
+    );
+
+    return false;
+};
+
+document.addEventListener('click', (event) => {
+    if (activeApprovedMenu && !event.target.closest('.approved-image-menu')) {
+        closeApprovedMenus();
+    }
+}, true);
+
+approvedEditCancel?.addEventListener('click', () => {
+    closeApprovedEditModal();
+});
+
+approvedEditModal?.addEventListener('click', (event) => {
+    if (event.target === approvedEditModal) {
+        closeApprovedEditModal();
+    }
+});
+
+approvedEditForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const filename = document.getElementById('approved-edit-filename')?.value?.trim() || '';
+    const title = document.getElementById('approved-edit-title')?.value?.trim() || '';
+    const date = document.getElementById('approved-edit-date')?.value?.trim() || '';
+    const descriptionValue = document.getElementById('approved-edit-description')?.value?.trim() || '';
+
+    if (filename === '' || title === '' || date === '' || descriptionValue === '') {
+        showError('Bitte alle Felder ausfuellen.');
+        return;
+    }
+
+    try {
+        await approvedImageActionRequest({
+            action: 'edit',
+            filename,
+            title,
+            date,
+            description: descriptionValue
+        });
+
+        let menuEl = null;
+        document.querySelectorAll('.approved-image-menu').forEach((entry) => {
+            if (!menuEl && (entry.dataset.filename || '') === filename) {
+                menuEl = entry;
+            }
+        });
+        if (menuEl) {
+            menuEl.dataset.title = title;
+            menuEl.dataset.date = date;
+            menuEl.dataset.description = descriptionValue;
+
+            const card = menuEl.closest('.pending-item');
+            const titleNode = card?.querySelector('.approved-title');
+            const dateNode = card?.querySelector('.center-date');
+            const paragraphs = card?.querySelectorAll('p');
+
+            if (titleNode) {
+                titleNode.textContent = title;
+            }
+            if (dateNode) {
+                dateNode.innerHTML = `<strong>Date:</strong> ${escapeHtml(date)}`;
+            }
+            if (paragraphs && paragraphs.length > 1) {
+                const shortDescription = descriptionValue.length > 50 ? `${descriptionValue.slice(0, 50)}...` : descriptionValue;
+                paragraphs[1].textContent = shortDescription;
+            }
+        }
+
+        closeApprovedEditModal();
+        showInfo('Saved!', 'Approved image has been updated.');
+    } catch (error) {
+        showError(error?.message || 'Speichern fehlgeschlagen.');
+    }
+});
+
 
 const list = document.getElementById("history-list");
 const addBtn = document.getElementById("add-event");
@@ -363,9 +594,6 @@ list.addEventListener("click", async e => {
     }
 });
 
-const confirmDeleteModal = document.getElementById('confirm-delete-modal');
-const cancelDeleteButton = document.getElementById('cancel-delete');
-const confirmDeleteButton = document.getElementById('confirm-delete');
 let deleteTargetId = null;
 
 list.addEventListener('click', e => {
@@ -379,42 +607,48 @@ list.addEventListener('click', e => {
             return;
         }
 
-        if (confirmDeleteModal) {
-            confirmDeleteModal.classList.remove('hidden');
-        }
+        openDeleteModal(
+            'Delete Entry',
+            'Are you sure you want to delete this event?',
+            async () => {
+                if (!deleteTargetId) {
+                    return;
+                }
+
+                events = events.filter(ev => ev.id != deleteTargetId);
+                deleteTargetId = null;
+
+                render();
+                await save();
+
+                const infoMsg = document.getElementById('info-msg');
+                if (infoMsg) {
+                    document.getElementById('succes-h1').textContent = 'Deleted!';
+                    document.getElementById('succes-text').textContent = 'The event has been deleted.';
+                    infoMsg.hidden = false;
+                    setTimeout(() => { infoMsg.hidden = true; }, 3000);
+                }
+            }
+        );
     }
 });
 
 if (cancelDeleteButton && confirmDeleteModal) {
     cancelDeleteButton.addEventListener('click', () => {
         deleteTargetId = null;
-        confirmDeleteModal.classList.add('hidden');
+        closeDeleteModal();
     });
 }
 
 if (confirmDeleteButton && confirmDeleteModal) {
     confirmDeleteButton.addEventListener('click', async () => {
-        if (!deleteTargetId) {
+        if (!pendingDeleteAction) {
             return;
         }
 
-        events = events.filter(ev => ev.id != deleteTargetId);
-        deleteTargetId = null;
-
-        render();
-        await save();
-
-        if (confirmDeleteModal) {
-            confirmDeleteModal.classList.add('hidden');
-        }
-
-        const infoMsg = document.getElementById('info-msg');
-        if (infoMsg) {
-            document.getElementById('succes-h1').textContent = 'Deleted!';
-            document.getElementById('succes-text').textContent = 'The event has been deleted.';
-            infoMsg.hidden = false;
-            setTimeout(() => { infoMsg.hidden = true; }, 3000);
-        }
+        const action = pendingDeleteAction;
+        closeDeleteModal();
+        await action();
     });
 }
 
@@ -422,7 +656,7 @@ if (confirmDeleteModal) {
     confirmDeleteModal.addEventListener('click', (e) => {
         if (e.target === confirmDeleteModal) {
             deleteTargetId = null;
-            confirmDeleteModal.classList.add('hidden');
+            closeDeleteModal();
         }
     });
 }

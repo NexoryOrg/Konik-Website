@@ -445,15 +445,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="empty"><p>No approved requests.</p></div>
                     <?php else: ?>
                         <?php foreach ($approvedItems as $item): ?>
+                            <?php
+                                $approvedFilename = basename((string)($item['filename'] ?? ''));
+                                if ($approvedFilename === '') {
+                                    $approvedFilename = basename((string)($item['img'] ?? ''));
+                                }
+                            ?>
                             <div class="pending-item" data-status="approved">
                                 <img src="<?= htmlspecialchars($item['img']) ?>" alt="Preview" class="pending-img" onerror="this.onerror=null;this.src='/datenbank/bilder/logo/logo.png';">
                                 <div class="pending-info">
                                     <div class="pending-header">
                                         <span class="status-badge approved">Approved</span>
+                                        <?php if ($approvedFilename !== ''): ?>
+                                            <div class="approved-image-menu"
+                                                 data-filename="<?= htmlspecialchars($approvedFilename) ?>"
+                                                 data-title="<?= htmlspecialchars((string)($item['title'] ?? '')) ?>"
+                                                 data-date="<?= htmlspecialchars((string)($item['date'] ?? '')) ?>"
+                                                 data-description="<?= htmlspecialchars((string)($item['description'] ?? '')) ?>">
+                                                <button type="button" class="approved-menu-toggle" aria-label="Image actions" title="Image actions" onclick="return window.adminToggleApprovedMenu(this)">...</button>
+                                                <div class="approved-menu-dropdown" role="menu">
+                                                    <button type="button" class="approved-menu-action" data-action="edit" onclick="return window.adminApprovedMenuEdit(this)">Edit</button>
+                                                    <button type="button" class="approved-menu-action danger" data-action="delete" onclick="return window.adminApprovedMenuDelete(this)">Delete</button>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <h3 class="approved-title"><?= htmlspecialchars($item['title']) ?></h3>
                                     <p class="center-date"><strong>Date:</strong> <?= htmlspecialchars($item['date']) ?></p>
-                                    <p><?= htmlspecialchars(substr($item['description'], 0, 50)) ?>...</p>
+                                    <p><?= htmlspecialchars(substr((string)$item['description'], 0, 50)) ?>...</p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -529,12 +548,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div id="confirm-delete-modal" class="modal hidden">
         <div class="modal-content">
-            <h2>Delete Entry</h2>
-            <p>Are you sure you want to delete this event?</p>
+            <h2 id="confirm-delete-title">Delete Entry</h2>
+            <p id="confirm-delete-text">Are you sure you want to delete this event?</p>
             <div class="modal-actions" style="margin-top: 1rem; text-align: right;">
                 <button id="cancel-delete" class="btn secondary">Cancel</button>
                 <button id="confirm-delete" class="btn danger">Delete</button>
             </div>
+        </div>
+    </div>
+
+    <div id="approved-edit-modal" class="modal hidden">
+        <div class="modal-content approved-edit-content">
+            <h2>Edit Approved Image</h2>
+            <form id="approved-edit-form" class="approved-edit-form">
+                <input type="hidden" id="approved-edit-filename" name="filename">
+                <input type="text" id="approved-edit-title" name="title" placeholder="Title" maxlength="150" required>
+                <input type="text" id="approved-edit-date" name="date" pattern="\d{2}\.\d{2}\.\d{4}" placeholder="Date (TT.MM.JJJJ)" required>
+                <textarea id="approved-edit-description" name="description" placeholder="Description" maxlength="3000" required></textarea>
+                <div class="modal-actions" style="margin-top: 1rem; text-align: right;">
+                    <button type="button" id="approved-edit-cancel" class="btn secondary">Cancel</button>
+                    <button type="submit" id="approved-edit-save" class="btn">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 
