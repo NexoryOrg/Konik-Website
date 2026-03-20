@@ -19,6 +19,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check Discord webhook
+        run: |
+          if [ -z "${{ secrets.DISCORD_WEBHOOK }}" ]; then
+            echo "DISCORD_WEBHOOK is not available in this workflow context."
+            echo "For pull_request events from forks, GitHub does not expose repository secrets."
+            exit 1
+          fi
+
       - name: Build and Send Push Notification
         if: github.event_name == 'push'
         run: |
@@ -51,7 +59,7 @@ jobs:
                 "title": "📤 Push to $BRANCH",
                 "description": "\`$COMMIT_SHA\` $COMMIT_MSG",
                 "url": "$COMMIT_URL",
-                "color": 7289DA,
+                "color": 7506394,
                 "author": {
                   "name": "$COMMIT_AUTHOR",
                   "url": "https://github.com/$COMMIT_AUTHOR",
@@ -74,7 +82,7 @@ jobs:
           EOF
           )
 
-          curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -93,15 +101,15 @@ jobs:
 
           case "$PR_ACTION" in
             opened|reopened)
-              COLOR=7289DA
+              COLOR=7506394
               ICON="📝"
               ;;
             closed)
-              if jq -e '.pull_request.merged' $GITHUB_EVENT_PATH > /dev/null 2>&1 && $(jq -r '.pull_request.merged' $GITHUB_EVENT_PATH) == "true"; then
-                COLOR=43B581
+              if [ "$(jq -r '.pull_request.merged' "$GITHUB_EVENT_PATH")" = "true" ]; then
+                COLOR=4437377
                 ICON="✅"
               else
-                COLOR=F04747
+                COLOR=15746887
                 ICON="❌"
               fi
               ;;
@@ -152,7 +160,7 @@ jobs:
           EOF
           )
 
-          curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -168,15 +176,15 @@ jobs:
 
           case "$ISSUE_ACTION" in
             opened)
-              COLOR=7289DA
+              COLOR=7506394
               ICON="🆕"
               ;;
             closed)
-              COLOR=43B581
+              COLOR=4437377
               ICON="✅"
               ;;
             reopened)
-              COLOR=FAA61A
+              COLOR=16426522
               ICON="🔄"
               ;;
             *)
@@ -184,6 +192,10 @@ jobs:
               ICON="📌"
               ;;
           esac
+
+          if [ -z "$ISSUE_LABELS" ]; then
+            ISSUE_LABELS="None"
+          fi
 
           EMBED=$(cat <<EOF
           {
@@ -207,7 +219,7 @@ jobs:
                   },
                   {
                     "name": "Labels",
-                    "value": "$([ -z '$ISSUE_LABELS' ] && echo 'None' || echo '$ISSUE_LABELS')",
+                    "value": "$ISSUE_LABELS",
                     "inline": true
                   }
                 ],
@@ -221,7 +233,7 @@ jobs:
           EOF
           )
 
-          curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -242,7 +254,7 @@ jobs:
                 "title": "💬 Discussion #$DISC_NUMBER",
                 "description": "$DISC_TITLE",
                 "url": "$DISC_URL",
-                "color": 7289DA,
+                "color": 7506394,
                 "author": {
                   "name": "$DISC_USER",
                   "url": "https://github.com/$DISC_USER",
@@ -265,6 +277,6 @@ jobs:
           EOF
           )
 
-          curl -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          curl --fail-with-body -sS -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
