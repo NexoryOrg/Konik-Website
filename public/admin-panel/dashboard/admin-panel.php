@@ -384,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <img src="/admin-panel/graph/graph_uptime.php" alt="Uptime chart" style="width:100%; height:auto; max-height:320px;">
                 </div>
                 <div class="trend-card">
-                    <h3>Visits (7 points)</h3>
+                    <h3>Visitors (24 hours)</h3>
                     <img src="/admin-panel/graph/graph_visitors.php" alt="Visitors chart" style="width:100%; height:auto; max-height:320px;">
                 </div>
             </div>
