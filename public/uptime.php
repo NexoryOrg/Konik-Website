@@ -170,15 +170,48 @@ if (file_exists($file)) {
 }
 
 $now = new DateTimeImmutable('now', new DateTimeZone(date_default_timezone_get()));
-$sampleKey = $now->format('Y-m-d H:i');
 $hourKey = $now->format('Y-m-d H:00');
+
+$sampleIntervalMinutes = (int)getenv('UPTIME_SAMPLE_INTERVAL_MINUTES');
+if ($sampleIntervalMinutes <= 0) {
+    $sampleIntervalMinutes = 5;
+}
+
+$currentMinute = (int)$now->format('i');
+$roundedMinute = (int)(floor($currentMinute / $sampleIntervalMinutes) * $sampleIntervalMinutes);
+$sampleTime = $now->setTime((int)$now->format('H'), $roundedMinute, 0);
+$sampleKey = $sampleTime->format('Y-m-d H:i');
 
 $result = checkServer($checkUrl);
 $status = (int)$result['status'];
 $data[$sampleKey] = $status;
 
 $retentionHours = 24;
-$cutoffTs = $now->modify('-' . $retentionHours . ' hours')->getTimestamp();
+$maxFillMinutes = (int)getenv('UPTIME_MAX_FILL_MINUTES');
+if ($maxFillMinutes <= 0) {
+    $maxFillMinutes = 120;
+}
+
+$cutoff = $now->modify('-' . $retentionHours . ' hours');
+$fillStart = $now->modify('-' . min($retentionHours * 60, $maxFillMinutes) . ' minutes');
+if ($fillStart < $cutoff) {
+    $fillStart = $cutoff;
+}
+
+$fillStartMinute = (int)$fillStart->format('i');
+$fillStartRoundedMinute = (int)(floor($fillStartMinute / $sampleIntervalMinutes) * $sampleIntervalMinutes);
+$fillStart = $fillStart->setTime((int)$fillStart->format('H'), $fillStartRoundedMinute, 0);
+
+$cursor = $fillStart;
+while ($cursor <= $now) {
+    $minuteKey = $cursor->format('Y-m-d H:i');
+    if (!array_key_exists($minuteKey, $data)) {
+        $data[$minuteKey] = 0;
+    }
+    $cursor = $cursor->modify('+' . $sampleIntervalMinutes . ' minutes');
+}
+
+$cutoffTs = $cutoff->getTimestamp();
 foreach ($data as $timestamp => $value) {
     $ts = strtotime((string)$timestamp);
     if ($ts === false || $ts < $cutoffTs) {
