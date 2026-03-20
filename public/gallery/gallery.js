@@ -24,7 +24,21 @@ if ('IntersectionObserver' in window) {
         });
     }, { rootMargin: '200px' });
     lazyImages.forEach(img => io.observe(img));
+} else {const lazyImages = document.querySelectorAll('img[data-src]');
+if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                obs.unobserve(img);
+            }
+        });
+    }, { rootMargin: '200px' });
+    lazyImages.forEach(img => io.observe(img));
 } else {
+    lazyImages.forEach(img => img.src = img.dataset.src);
+}
     lazyImages.forEach(img => img.src = img.dataset.src);
 }
 
