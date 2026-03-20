@@ -100,7 +100,10 @@ if (($file['size'] ?? 0) > 10 * 1024 * 1024) {
 
 $allowedMimeToExt = [
     'image/jpeg' => 'jpg',
+    'image/jpg' => 'jpg',
+    'image/pjpeg' => 'jpg',
     'image/png' => 'png',
+    'image/x-png' => 'png',
     'image/gif' => 'gif',
     'image/webp' => 'webp',
 ];
@@ -112,16 +115,33 @@ if (class_exists('finfo')) {
 } elseif (function_exists('mime_content_type')) {
     $mime = (string)mime_content_type($file['tmp_name']);
 }
-if (!isset($allowedMimeToExt[$mime]) || @getimagesize($file['tmp_name']) === false) {
+
+$imageInfo = @getimagesize($file['tmp_name']);
+if ($imageInfo === false) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Only valid image files are allowed']);
+    exit;
+}
+
+$detectedType = (int)($imageInfo[2] ?? 0);
+$typeToExt = [
+    IMAGETYPE_JPEG => 'jpg',
+    IMAGETYPE_PNG => 'png',
+    IMAGETYPE_GIF => 'gif',
+    IMAGETYPE_WEBP => 'webp',
+];
+
+$extension = $allowedMimeToExt[$mime] ?? ($typeToExt[$detectedType] ?? '');
+if ($extension === '') {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Only valid image files are allowed']);
     exit;
 }
 
 try {
-    $filename = bin2hex(random_bytes(16)) . '.' . $allowedMimeToExt[$mime];
+    $filename = bin2hex(random_bytes(16)) . '.' . $extension;
 } catch (Exception $e) {
-    $filename = sha1(uniqid((string)mt_rand(), true)) . '.' . $allowedMimeToExt[$mime];
+    $filename = sha1(uniqid((string)mt_rand(), true)) . '.' . $extension;
 }
 
 $tempPath = $tempDir . $filename;
