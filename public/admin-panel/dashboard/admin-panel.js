@@ -338,7 +338,7 @@ function safeImageSource(value) {
 }
 
 async function loadEvents() {
-    const res = await fetch("/datenbank/json/history.json");
+    const res = await fetch("/database/json/history.json");
     if (!res.ok) {
         console.error('Failed to load history', res.statusText);
         events = [];

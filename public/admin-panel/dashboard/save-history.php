@@ -36,7 +36,7 @@ function normalizeTimelineImageSrc($src) {
 		return '';
 	}
 
-	if (!preg_match('#^/datenbank/bilder/history/[A-Za-z0-9._-]+$#', $src)) {
+	if (!preg_match('#^/database/images/history/[A-Za-z0-9._-]+$#', $src)) {
 		return '';
 	}
 
@@ -54,10 +54,10 @@ function timelineImageSrcToFile($src) {
 		return '';
 	}
 
-	return __DIR__ . '/../../datenbank/bilder/history/' . $filename;
+	return __DIR__ . '/../../database/images/history/' . $filename;
 }
 
-$file = __DIR__ . '/../../datenbank/json/history.json';
+$file = __DIR__ . '/../../database/json/history.json';
 $existingEvents = [];
 if (file_exists($file)) {
 	$existingDecoded = json_decode((string)file_get_contents($file), true);

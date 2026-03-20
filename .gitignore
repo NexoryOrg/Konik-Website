@@ -2,4 +2,4 @@
 logs/
 .vscode/
 __pycache__/
-public/datenbank/data/user.json
+public/database/data/user.json

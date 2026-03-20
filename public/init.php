@@ -59,8 +59,8 @@ function e($s) {
 
 function safe_src($s) {
     $s = trim((string)$s);
-    if ($s === '') return 'datenbank/bilder/error.jpg';
-    if (preg_match('#^\s*(?:[a-z0-9]+:|//)#i', $s)) return 'datenbank/bilder/error.jpg';
+    if ($s === '') return 'database/images/error.jpg';
+    if (preg_match('#^\s*(?:[a-z0-9]+:|//)#i', $s)) return 'database/images/error.jpg';
     $s = str_replace(['..\\','../','..'], '', $s);
     return e($s);
 }

@@ -8,7 +8,7 @@ if (!@date_default_timezone_set($configuredTimezone)) {
     date_default_timezone_set('UTC');
 }
 
-$file = __DIR__ . "/datenbank/data/visitors.json";
+$file = __DIR__ . "/database/data/visitors.json";
 
 $userAgent = strtolower((string)($_SERVER['HTTP_USER_AGENT'] ?? ''));
 $automatedSignatures = [

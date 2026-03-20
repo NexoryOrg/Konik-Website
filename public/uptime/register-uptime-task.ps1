@@ -36,4 +36,4 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Output "Task '$TaskName' created and started. Interval: every $IntervalMinutes minute(s)."
 Write-Output "Target URL: $Url"
-Write-Output "Output file: $PSScriptRoot/../datenbank/data/uptime.json"
+Write-Output "Output file: $PSScriptRoot/../database/data/uptime.json"

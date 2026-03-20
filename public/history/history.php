@@ -7,7 +7,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-$jsonFile = __DIR__ . '/../datenbank/json/history.json';
+$jsonFile = __DIR__ . '/../database/json/history.json';
 $events = [];
 
 function minify_output($buffer) {
@@ -53,10 +53,10 @@ if (file_exists($jsonFile)) {
 <meta charset="utf-8">
 <title>History</title>
 <base href="/">
-<link rel="icon" type="image/png" href="/datenbank/bilder/logo/logo.png">
+<link rel="icon" type="image/png" href="/database/images/logo/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="/history/history.css">
-<link rel="stylesheet" href="/navebar/navbar.css">
+<link rel="stylesheet" href="/navbar/navbar.css">
 <link rel="stylesheet" href="/footer/footer.css">
 <?php
 if (!empty($events) && !empty($events[0]['image'])) {
@@ -66,7 +66,7 @@ if (!empty($events) && !empty($events[0]['image'])) {
 ?>
 </head>
 <body>
-<?php include __DIR__. '/../navebar/navbar.php'; ?>
+<?php include __DIR__. '/../navbar/navbar.php'; ?>
 <div class="history-wrapper">
     <div class="history">
         <?php if(empty($events)): ?>
@@ -87,6 +87,6 @@ if (!empty($events) && !empty($events[0]['image'])) {
 </div>
 <?php include __DIR__. '/../footer/footer.php'; ?>
 <script defer src="/history/history.js"></script>
-<script defer src="/navebar/navbar.js"></script>
+<script defer src="/navbar/navbar.js"></script>
 </body>
 </html>

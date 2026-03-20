@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-$userDataFile = __DIR__ . '/../../datenbank/data/user.json';
+$userDataFile = __DIR__ . '/../../database/data/user.json';
 
 function isHashedPassword($password) {
     return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;

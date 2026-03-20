@@ -9,7 +9,7 @@ header('Vary: Accept-Encoding');
 header('Cache-Control: max-age=3600, public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+3600) . ' GMT');
 
-$jsonFile = __DIR__ . '/../datenbank/json/gallery.json';
+$jsonFile = __DIR__ . '/../database/json/gallery.json';
 
 if (!file_exists($jsonFile)) {
     die("JSON file not found!");
@@ -40,14 +40,14 @@ register_shutdown_function(function() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
     <title>Gallery</title>
-    <link rel="icon" type="image/png" href="../datenbank/bilder/logo/logo.png">
+    <link rel="icon" type="image/png" href="../database/images/logo/logo.png">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../gallery/gallery.css">
-    <link rel="stylesheet" href="../navebar/navbar.css">
+    <link rel="stylesheet" href="../navbar/navbar.css">
     <link rel="stylesheet" href="../footer/footer.css">
 <?php
 if (!empty($gallery)) {
@@ -61,7 +61,7 @@ if (!empty($gallery)) {
 </head>
 <body>
 
-<?php include __DIR__ . '/../navebar/navbar.php'; ?>
+<?php include __DIR__ . '/../navbar/navbar.php'; ?>
 
 <div class="gallery-container">
 
@@ -89,7 +89,7 @@ if (!empty($gallery)) {
                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" 
                                 alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES, 'UTF-8') ?>" 
                                 loading="lazy"
-                                onerror="this.src='../datenbank/bilder/error.jpg'"
+                                onerror="this.src='../database/images/error.jpg'"
                             >
                         <?php endforeach; ?>
                     </div>
@@ -132,7 +132,7 @@ if (!empty($gallery)) {
 
     <script defer src="../gallery/gallery.js"></script>
     <script defer src="../upload/upload.js"></script>
-    <script defer src="../navebar/navbar.js"></script>
+    <script defer src="../navbar/navbar.js"></script>
 
     </body>
 </html>

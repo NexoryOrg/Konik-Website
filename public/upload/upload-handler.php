@@ -45,8 +45,8 @@ if (!csrf_validate($_POST['csrf_token'] ?? '')) {
     exit;
 }
 
-$uploadDir = __DIR__ . '/../datenbank/bilder/uploads/';
-$tempDir = __DIR__ . '/../datenbank/bilder/uploads/pending/';
+$uploadDir = __DIR__ . '/../database/images/uploads/';
+$tempDir = __DIR__ . '/../database/images/uploads/pending/';
 
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);

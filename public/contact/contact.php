@@ -11,16 +11,16 @@ require_once __DIR__ . '/../init.php';
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
         <title>Contact</title>
-        <link rel="icon" type="image/png" href="../datenbank/bilder/logo/logo.png">
+        <link rel="icon" type="image/png" href="../database/images/logo/logo.png">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../footer/footer.css">
         <link rel="stylesheet" href="../contact/contact.css">
-        <link rel="stylesheet" href="../navebar/navbar.css">
+        <link rel="stylesheet" href="../navbar/navbar.css">
     </head>
     <body>
 
-        <?php include __DIR__ . '/../navebar/navbar.php'; ?>
+        <?php include __DIR__ . '/../navbar/navbar.php'; ?>
 
         <div class="info-msg" id="info-msg" hidden="true">
             <h3>Message sent!</h3>
@@ -105,7 +105,7 @@ require_once __DIR__ . '/../init.php';
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         <script src="../contact/contact.js"></script>
-        <script src="../navebar/navbar.js"></script>
+        <script src="../navbar/navbar.js"></script>
 
     </body>
 </html>

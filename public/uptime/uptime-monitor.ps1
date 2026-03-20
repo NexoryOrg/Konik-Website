@@ -1,6 +1,6 @@
 param(
     [string]$Url = "http://localhost:8000/home/index.php",
-    [string]$OutputFile = "$PSScriptRoot/../datenbank/data/uptime.json",
+    [string]$OutputFile = "$PSScriptRoot/../database/data/uptime.json",
     [int]$RetentionHours = 24,
     [int]$MaxFillMinutes = 120,
     [int]$SampleIntervalMinutes = 5,
