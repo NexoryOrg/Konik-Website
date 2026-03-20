@@ -80,6 +80,9 @@ passwordModal?.addEventListener('click', (e) => {
 
 const list = document.getElementById("timeline-list");
 const addBtn = document.getElementById("add-event");
+const addEventModal = document.getElementById("add-event-modal");
+const addEventForm = document.getElementById("add-event-form");
+const eventImageInput = document.getElementById("event-image");
 
 let events = [];
 
@@ -168,18 +171,158 @@ function render() {
 
 }
 
-addBtn.onclick = () => {
-    const id = Date.now();
-    events.push({
-        id,
-        title: "New Event",
-        date: "2024-01-01",
-        description: "",
-        src: "",
-        alt: ""
+function openAddEventModal() {
+    if (!addEventModal) {
+        return;
+    }
+    addEventModal.classList.remove("hidden");
+}
+
+function closeAddEventModal() {
+    if (!addEventModal) {
+        return;
+    }
+    addEventModal.classList.add("hidden");
+}
+
+function showInfo(title, text) {
+    const infoMsg = document.getElementById("info-msg");
+    if (!infoMsg) {
+        return;
+    }
+    document.getElementById("succes-h1").textContent = title;
+    document.getElementById("succes-text").textContent = text;
+    infoMsg.hidden = false;
+    setTimeout(() => {
+        infoMsg.hidden = true;
+    }, 3000);
+}
+
+function showError(text) {
+    const errorMsg = document.getElementById("error-msg");
+    if (!errorMsg) {
+        return;
+    }
+    document.getElementById("error-text").textContent = text;
+    errorMsg.hidden = false;
+    setTimeout(() => {
+        errorMsg.hidden = true;
+    }, 3000);
+}
+
+async function uploadTimelineImage(file) {
+    const csrfToken = window.ADMIN_CSRF_TOKEN || "";
+    const payload = new FormData();
+    payload.append("image", file);
+
+    const res = await fetch("/admin-panel/dashboard/upload-history-image.php", {
+        method: "POST",
+        headers: {
+            "X-CSRF-Token": csrfToken
+        },
+        body: payload
     });
-    render();
-};
+
+    let data = null;
+    try {
+        data = await res.json();
+    } catch (_err) {
+        data = null;
+    }
+
+    if (!res.ok || !data?.success || typeof data.src !== "string" || data.src.trim() === "") {
+        throw new Error(data?.message || "Image upload failed");
+    }
+
+    return data.src;
+}
+
+if (addBtn) {
+    addBtn.onclick = (e) => {
+        e.preventDefault();
+        openAddEventModal();
+    };
+}
+
+if (addEventModal) {
+    addEventModal.addEventListener("click", (e) => {
+        if (e.target === addEventModal) {
+            closeAddEventModal();
+        }
+    });
+}
+
+if (addEventForm) {
+    addEventForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const titleInput = document.getElementById("event-title");
+        const dateInput = document.getElementById("event-date");
+        const descriptionInput = document.getElementById("event-description");
+
+        const title = titleInput?.value?.trim() || "New Event";
+        const date = dateInput?.value?.trim() || "";
+        const description = descriptionInput?.value?.trim() || "";
+        const imageFile = eventImageInput?.files?.[0] || null;
+
+        if (!imageFile) {
+            showError("Bitte ein Bild auswaehlen.");
+            return;
+        }
+
+        const submitButton = addEventForm.querySelector("button[type='submit']");
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+
+        try {
+            const src = await uploadTimelineImage(imageFile);
+            const id = getNextEventId();
+
+            events.push({
+                id,
+                title,
+                date,
+                description,
+                src,
+                alt: title
+            });
+
+            render();
+            await save();
+            addEventForm.reset();
+            closeAddEventModal();
+            showInfo("Added!", "Dein Event wurde hinzugefuegt.");
+        } catch (error) {
+            console.error("Add event failed:", error);
+            showError(error?.message || "Event konnte nicht hinzugefuegt werden.");
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+    });
+}
+
+function getNextEventId() {
+    if (!Array.isArray(events) || events.length === 0) {
+        return 1;
+    }
+
+    const lastEvent = events[events.length - 1];
+    const lastId = Number(lastEvent?.id);
+
+    if (Number.isFinite(lastId)) {
+        return lastId + 1;
+    }
+
+    const maxId = events.reduce((max, event) => {
+        const id = Number(event?.id);
+        return Number.isFinite(id) ? Math.max(max, id) : max;
+    }, 0);
+
+    return maxId + 1;
+}
 
 list.addEventListener("click", async e => {
 
@@ -284,29 +427,36 @@ if (confirmDeleteModal) {
     });
 }
 
-list.addEventListener("change", e => {
+list.addEventListener("change", async e => {
 
     if (e.target.classList.contains("image-input")) {
 
         const file = e.target.files[0];
+        if (!file) {
+            return;
+        }
 
         const li = e.target.closest("li");
         const img = li.querySelector(".preview");
 
-        const reader = new FileReader();
+        const localPreview = URL.createObjectURL(file);
+        img.src = localPreview;
 
-        reader.onload = function(ev) {
-
-            img.src = ev.target.result;
-
+        try {
+            const uploadedSrc = await uploadTimelineImage(file);
             const id = li.dataset.id;
-            const event = events.find(e => e.id == id);
-
-            event.src = ev.target.result;
-
-        };
-
-        reader.readAsDataURL(file);
+            const event = events.find(item => item.id == id);
+            if (event) {
+                event.src = uploadedSrc;
+                event.alt = event.title || "Timeline image";
+            }
+            URL.revokeObjectURL(localPreview);
+            img.src = uploadedSrc;
+        } catch (error) {
+            console.error("Image upload failed:", error);
+            URL.revokeObjectURL(localPreview);
+            showError(error?.message || "Bild konnte nicht hochgeladen werden.");
+        }
 
     }
 
