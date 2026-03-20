@@ -134,37 +134,29 @@ jobs:
             ')
 
             if [ -n "$PREVIEW" ] && [ "$CHANGE_COUNT" -gt 2 ]; then
-              PREVIEW="$PREVIEW
-… $((CHANGE_COUNT - 2)) weitere Änderungen"
+              PREVIEW=$(printf '%s\n... %s weitere Aenderungen' "$PREVIEW" "$((CHANGE_COUNT - 2))")
             fi
 
             if [ -z "$PREVIEW" ]; then
-              PREVIEW="Keine Zeilen-Vorschau verfügbar"
+              PREVIEW="Keine Zeilen-Vorschau verfuegbar"
             fi
 
-            ENTRY="$ICON $DISPLAY_PATH
-$PREVIEW"
+            ENTRY=$(printf '%s %s\n%s' "$ICON" "$DISPLAY_PATH" "$PREVIEW")
 
             if [ -z "$FILES_SUMMARY" ]; then
               FILES_SUMMARY="$ENTRY"
             else
-              FILES_SUMMARY="$FILES_SUMMARY
-
-$ENTRY"
+              FILES_SUMMARY=$(printf '%s\n\n%s' "$FILES_SUMMARY" "$ENTRY")
             fi
           done <<< "$LAST_COMMIT_FILES"
 
           TOTAL_LAST_COMMIT_FILES=$(printf '%s\n' "$LAST_COMMIT_FILES" | sed '/^$/d' | wc -l | tr -d ' ')
           if [ "$TOTAL_LAST_COMMIT_FILES" -gt 5 ]; then
-            FILES_SUMMARY="$FILES_SUMMARY
-
-… $((TOTAL_LAST_COMMIT_FILES - 5)) weitere Dateien"
+            FILES_SUMMARY=$(printf '%s\n\n... %s weitere Dateien' "$FILES_SUMMARY" "$((TOTAL_LAST_COMMIT_FILES - 5))")
           fi
 
           if [ ${#FILES_SUMMARY} -gt 950 ]; then
-            FILES_SUMMARY="${FILES_SUMMARY:0:900}
-
-… Ausgabe gekuerzt"
+            FILES_SUMMARY=$(printf '%s\n\n... Ausgabe gekuerzt' "${FILES_SUMMARY:0:900}")
           fi
 
           STATS="📊 +$ADDITIONS | -$DELETIONS | ~$MODIFICATIONS"
