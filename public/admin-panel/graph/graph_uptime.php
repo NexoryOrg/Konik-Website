@@ -8,6 +8,12 @@ if (!@date_default_timezone_set($configuredTimezone)) {
 }
 
 $tz = new DateTimeZone(date_default_timezone_get());
+$sampleIntervalMinutes = (int)getenv('UPTIME_SAMPLE_INTERVAL_MINUTES');
+if ($sampleIntervalMinutes <= 0) {
+    $sampleIntervalMinutes = 5;
+}
+
+$maxTrustedGapSeconds = $sampleIntervalMinutes * 60;
 
 function addDurationToHours(int $startTs, int $endTs, int $status, DateTimeZone $tz, array &$hours): void
 {
@@ -82,13 +88,19 @@ $currentHourStart = $now->setTime((int)$now->format('H'), 0, 0);
 $windowStartHour = $currentHourStart->modify('-23 hours');
 $windowStartTs = $windowStartHour->getTimestamp();
 
-$statusAtWindowStart = $samples[0]['status'];
+$statusAtWindowStart = 0;
+$lastSampleBeforeWindowStartTs = null;
 foreach ($samples as $sample) {
     if ($sample['ts'] <= $windowStartTs) {
         $statusAtWindowStart = $sample['status'];
+        $lastSampleBeforeWindowStartTs = $sample['ts'];
         continue;
     }
     break;
+}
+
+if ($lastSampleBeforeWindowStartTs === null || ($windowStartTs - $lastSampleBeforeWindowStartTs) > $maxTrustedGapSeconds) {
+    $statusAtWindowStart = 0;
 }
 
 $timeline = [
@@ -116,9 +128,31 @@ if (empty($timeline)) {
     $timeline[] = ['ts' => $windowStartTs, 'status' => 0];
 }
 
-$lastStatus = $timeline[count($timeline) - 1]['status'];
-if ($timeline[count($timeline) - 1]['ts'] < $nowTs) {
-    $timeline[] = ['ts' => $nowTs, 'status' => $lastStatus];
+$boundedTimeline = [];
+for ($i = 0; $i < count($timeline); $i++) {
+    $currentSample = $timeline[$i];
+    $boundedTimeline[] = $currentSample;
+
+    if ($i === count($timeline) - 1) {
+        continue;
+    }
+
+    $nextSample = $timeline[$i + 1];
+    $trustedUntilTs = min($currentSample['ts'] + $maxTrustedGapSeconds, $nextSample['ts']);
+    if ($trustedUntilTs < $nextSample['ts']) {
+        $boundedTimeline[] = ['ts' => $trustedUntilTs, 'status' => 0];
+    }
+}
+
+$timeline = $boundedTimeline;
+$lastSample = $timeline[count($timeline) - 1];
+$trustedNowTs = min($lastSample['ts'] + $maxTrustedGapSeconds, $nowTs);
+if ($lastSample['ts'] < $trustedNowTs) {
+    $timeline[] = ['ts' => $trustedNowTs, 'status' => $lastSample['status']];
+}
+if ($trustedNowTs < $nowTs) {
+    $timeline[] = ['ts' => $trustedNowTs, 'status' => 0];
+    $timeline[] = ['ts' => $nowTs, 'status' => 0];
 }
 
 $hours = [];
