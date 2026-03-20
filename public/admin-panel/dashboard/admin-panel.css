@@ -351,7 +351,7 @@ h1 {
 .pending-item {
     background: white;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -366,6 +366,8 @@ h1 {
     height: 240px;
     object-fit: cover;
     border-bottom: 1px solid #dcecdc;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     transition: transform 0.3s ease;
 }
 
@@ -391,6 +393,68 @@ h1 {
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 8px;
+}
+
+.approved-image-menu {
+    position: relative;
+    margin-left: auto;
+}
+
+.approved-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.64);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.approved-menu-toggle:hover {
+    background: rgba(0, 0, 0, 0.82);
+}
+
+.approved-menu-dropdown {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    min-width: 120px;
+    border: 1px solid #d9e7d8;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    padding: 6px;
+    display: none;
+    z-index: 50;
+}
+
+.approved-image-menu.open .approved-menu-dropdown {
+    display: block;
+}
+
+.approved-menu-action {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.approved-menu-action:hover {
+    background: #eef7ee;
+}
+
+.approved-menu-action.danger {
+    color: #b52323;
 }
 
 .status-badge {
@@ -519,6 +583,29 @@ h1 {
     background: #e0f2e9;
     color: #2e7d32;
     margin-top: 12px;
+}
+
+.approved-edit-content {
+    text-align: left;
+}
+
+.approved-edit-form {
+    display: grid;
+    gap: 10px;
+}
+
+.approved-edit-form input,
+.approved-edit-form textarea {
+    width: 100%;
+    border: 1px solid #d6e6d6;
+    border-radius: 8px;
+    padding: 10px;
+    font: inherit;
+}
+
+.approved-edit-form textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 #history-admin {
