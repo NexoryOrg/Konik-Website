@@ -17,15 +17,39 @@ if (!file_exists($dataFile)) {
 
 $raw = file_get_contents($dataFile);
 $data = json_decode($raw, true);
-if (!is_array($data) || count($data) === 0) {
-    header('Content-Type: image/svg+xml; charset=UTF-8');
-    echo '<svg width="600" height="140" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="140" fill="#242933"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16">No visitor data available</text></svg>';
-    exit;
+if (!is_array($data)) {
+    $data = [];
 }
 
-ksort($data);
+// Normalize any source timestamps to hourly buckets.
+$hourlyData = [];
+foreach ($data as $label => $value) {
+    $parsed = DateTimeImmutable::createFromFormat('Y-m-d H:i', (string)$label, $tz);
+    if ($parsed === false) {
+        $ts = strtotime((string)$label);
+        if ($ts !== false) {
+            $parsed = (new DateTimeImmutable('@' . $ts))->setTimezone($tz);
+        }
+    }
 
-$last = array_slice($data, -7, 7, true);
+    if (!$parsed instanceof DateTimeImmutable) {
+        continue;
+    }
+
+    $hourKey = $parsed->setTime((int)$parsed->format('H'), 0, 0)->format('Y-m-d H:i');
+    $hourlyData[$hourKey] = ($hourlyData[$hourKey] ?? 0) + max((int)$value, 0);
+}
+
+$now = new DateTimeImmutable('now', $tz);
+$endHour = $now->setTime((int)$now->format('H'), 0, 0);
+
+$last = [];
+for ($i = 23; $i >= 0; $i--) {
+    $hour = $endHour->sub(new DateInterval('PT' . $i . 'H'));
+    $key = $hour->format('Y-m-d H:i');
+    $last[$key] = $hourlyData[$key] ?? 0;
+}
+
 $labels = array_keys($last);
 $values = array_values($last);
 $count = max(count($values), 1);
@@ -80,7 +104,13 @@ foreach ($points as $p) {
 }
 
 $labelMarks = '';
+$targetTicks = 7;
+$tickStep = max(1, (int)ceil(max($count - 1, 1) / ($targetTicks - 1)));
 foreach ($labels as $i => $label) {
+    if ($i % $tickStep !== 0 && $i !== $count - 1) {
+        continue;
+    }
+
     $x = $padding + ($count === 1 ? $plotW / 2 : $i * ($plotW / max($count - 1, 1)));
     $labelDate = DateTimeImmutable::createFromFormat('Y-m-d H:i', (string)$label, $tz);
     if ($labelDate === false) {
@@ -94,7 +124,7 @@ foreach ($labels as $i => $label) {
         ? $labelDate->format('H:i')
         : substr((string)$label, 11, 5);
 
-    $labelMarks .= '<text x="' . $x . '" y="' . ($h - $padding + 24) . '" fill="#364F5C" font-family="Arial" font-size="12" text-anchor="middle">' . htmlspecialchars($labelText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</text>';
+    $labelMarks .= '<text x="' . $x . '" y="' . ($h - $padding + 24) . '" fill="#364F5C" font-family="Arial" font-size="11" text-anchor="middle">' . htmlspecialchars($labelText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</text>';
 }
 
 header('Content-Type: image/svg+xml; charset=UTF-8');
