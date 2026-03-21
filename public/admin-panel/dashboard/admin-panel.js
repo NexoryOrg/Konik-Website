@@ -740,4 +740,36 @@ async function save() {
     }
 }
 
+async function processAdminEmailQueue() {
+    const queue = Array.isArray(window.ADMIN_EMAIL_QUEUE) ? window.ADMIN_EMAIL_QUEUE : [];
+    if (!queue.length || !window.emailjs) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/database/data/user.json', { cache: 'no-store' });
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+        const cfg = data?.emailjs?.emailjs_data?.[0];
+        if (!cfg?.service_id || !cfg?.public_key || !cfg?.upload_template_id) {
+            return;
+        }
+
+        emailjs.init(cfg.public_key);
+        for (const params of queue) {
+            const toEmail = String(params?.to_email || '').trim();
+            if (!toEmail) {
+                continue;
+            }
+
+            await emailjs.send(cfg.service_id, cfg.upload_template_id, params);
+        }
+    } catch (_error) {
+    }
+}
+
+processAdminEmailQueue();
 loadEvents();

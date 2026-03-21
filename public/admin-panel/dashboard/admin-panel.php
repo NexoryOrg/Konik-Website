@@ -141,6 +141,7 @@ $csrfToken = csrf_token();
 $settingsMessage = '';
 $settingsMessageType = '';
 $openSettingsModal = false;
+$adminEmailQueue = [];
 
 if (isset($_GET['logout'])) {
     if (!csrf_validate($_GET['csrf'] ?? '')) {
@@ -322,6 +323,106 @@ function saveStats($file, $statsArray) {
     file_put_contents($file, json_encode($statsArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
+function sendUploadEmailNotification($userDataFile, $templateKey, $templateParams) {
+    $raw = @file_get_contents($userDataFile);
+    if ($raw === false) {
+        return false;
+    }
+
+    $data = json_decode($raw, true);
+    $cfg  = $data['emailjs']['emailjs_data'][0] ?? null;
+    if (!$cfg || empty($cfg[$templateKey]) || empty($cfg['service_id']) || empty($cfg['public_key'])) {
+        return false;
+    }
+
+    $toEmail = $templateParams['to_email'] ?? '';
+    if ($toEmail === '' || !filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+
+    $logFile = __DIR__ . '/../../../logs/emailjs-upload.log';
+
+    $payload = json_encode([
+        'service_id'      => $cfg['service_id'],
+        'template_id'     => $cfg[$templateKey],
+        'public_key'      => $cfg['public_key'],
+        'user_id'         => $cfg['public_key'],
+        'template_params' => $templateParams,
+    ]);
+
+    if ($payload === false) {
+        return false;
+    }
+
+    $url = 'https://api.emailjs.com/api/v1.0/email/send';
+    $ok = false;
+    $statusCode = 0;
+    $responseBody = '';
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        if ($ch !== false) {
+            curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+                CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_TIMEOUT => 8,
+            ]);
+
+            $response = curl_exec($ch);
+            if ($response !== false) {
+                $responseBody = (string)$response;
+            }
+
+            $statusCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            $ok = ($statusCode >= 200 && $statusCode < 300);
+        }
+    } else {
+        $ctx = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-Type: application/json\r\n",
+                'content' => $payload,
+                'timeout' => 8,
+                'ignore_errors' => true,
+            ],
+        ]);
+
+        $response = @file_get_contents($url, false, $ctx);
+        if ($response !== false) {
+            $responseBody = (string)$response;
+        }
+
+        $headers = $http_response_header ?? [];
+        foreach ($headers as $headerLine) {
+            if (preg_match('/HTTP\/\d(?:\.\d)?\s+(\d{3})/', $headerLine, $match)) {
+                $statusCode = (int)$match[1];
+                break;
+            }
+        }
+
+        $ok = ($statusCode >= 200 && $statusCode < 300);
+    }
+
+    $shouldLogFailure = (!$ok) && ($statusCode > 0 || $responseBody !== '');
+    if ($shouldLogFailure) {
+        $line = sprintf(
+            "%s status=%s email=%s template=%s response=%s\n",
+            gmdate('c'),
+            (string)$statusCode,
+            $toEmail,
+            (string)$cfg[$templateKey],
+            str_replace(["\r", "\n"], ' ', substr((string)$responseBody, 0, 1000))
+        );
+        @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
+    }
+
+    return $ok;
+}
+
 if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET['csrf'] ?? '')) {
     $filename = basename($_GET['approve']);
     $jsonFile = $pendingDir . $filename . '.json';
@@ -360,6 +461,27 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
             ];
             saveStats($statsFile, $stats);
 
+            $uploaderEmail = $metadata['email'] ?? '';
+            if ($uploaderEmail !== '') {
+                $emailPayload = [
+                    'to_email'     => $uploaderEmail,
+                    'title'        => $metadata['title'] ?? '',
+                    'date'         => $metadata['date'] ?? '',
+                    'icon'         => '✅',
+                    'header_color' => '#22c55e',
+                    'heading'      => 'Photo Approved',
+                    'body_text'    => 'Great news! Your photo has been reviewed and approved. It is now visible in the gallery.',
+                ];
+
+                $emailSent = sendUploadEmailNotification($userDataFile, 'upload_template_id', $emailPayload);
+                if (!$emailSent) {
+                    if (!isset($_SESSION['admin_email_queue']) || !is_array($_SESSION['admin_email_queue'])) {
+                        $_SESSION['admin_email_queue'] = [];
+                    }
+                    $_SESSION['admin_email_queue'][] = $emailPayload;
+                }
+            }
+
             unlink($jsonFile);
             
             header('Location: admin-panel.php');
@@ -395,7 +517,28 @@ if (isset($_GET['reject']) && isset($_SESSION['admin']) && csrf_validate($_GET['
         'img' => $rejectImagePath
     ];
     saveStats($statsFile, $stats);
-    
+
+    $uploaderEmail = $metadata['email'] ?? '';
+    if ($uploaderEmail !== '') {
+        $emailPayload = [
+            'to_email'     => $uploaderEmail,
+            'title'        => $metadata['title'] ?? '',
+            'date'         => $metadata['date'] ?? '',
+            'icon'         => '❌',
+            'header_color' => '#ef4444',
+            'heading'      => 'Photo Rejected',
+            'body_text'    => 'Unfortunately, your photo could not be accepted. It did not meet our current gallery guidelines.',
+        ];
+
+        $emailSent = sendUploadEmailNotification($userDataFile, 'upload_template_id', $emailPayload);
+        if (!$emailSent) {
+            if (!isset($_SESSION['admin_email_queue']) || !is_array($_SESSION['admin_email_queue'])) {
+                $_SESSION['admin_email_queue'] = [];
+            }
+            $_SESSION['admin_email_queue'][] = $emailPayload;
+        }
+    }
+
     header('Location: admin-panel.php');
     exit;
 }
@@ -477,6 +620,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true]);
         exit;
     }
+}
+
+if (isset($_SESSION['admin_email_queue']) && is_array($_SESSION['admin_email_queue'])) {
+    $adminEmailQueue = array_values($_SESSION['admin_email_queue']);
+    unset($_SESSION['admin_email_queue']);
 }
 ?>
 
@@ -738,8 +886,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         window.ADMIN_CSRF_TOKEN = <?= json_encode($csrfToken, JSON_UNESCAPED_SLASHES) ?>;
+        window.ADMIN_EMAIL_QUEUE = <?= json_encode($adminEmailQueue, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="/admin-panel/dashboard/admin-panel.js"></script>
 
