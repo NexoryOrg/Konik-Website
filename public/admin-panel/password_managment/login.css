@@ -23,6 +23,12 @@ body {
     font-size: 1.8rem;
 }
 
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .login-box input {
     width: 100%;
     padding: 12px 14px;
@@ -31,6 +37,45 @@ body {
     border-radius: 10px;
     background: #f7fdf7;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.password-field {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.password-field input {
+    padding-right: 44px;
+    margin: 0;
+}
+
+.login-box .password-field .password-eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #2e7d32;
+    padding: 4px;
+    width: auto;
+    margin: 0;
+    z-index: 2;
+}
+
+.login-box .password-field .password-eye:hover {
+    background: transparent;
+    transform: translateY(-50%);
+}
+
+.login-box .password-field .password-eye:focus {
+    outline: 2px solid rgba(46, 125, 50, 0.3);
+    border-radius: 6px;
 }
 
 .login-box input:focus {
@@ -39,7 +84,7 @@ body {
     box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.16);
 }
 
-.login-box button {
+.login-box button[type="submit"] {
     width: 100%;
     padding: 12px;
     background: #2e7d32;
@@ -52,7 +97,7 @@ body {
     transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.login-box button:hover {
+.login-box button[type="submit"]:hover {
     background: #1f5a1f;
     transform: translateY(-1px);
 }
@@ -61,6 +106,24 @@ body {
     color: #c62828;
     margin-bottom: 10px;
     text-align: center;
+}
+
+.success {
+    color: #1d6a1d;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.helper-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.helper-link:hover {
+    text-decoration: underline;
 }
 
 /* --- change-password --- */
