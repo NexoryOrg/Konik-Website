@@ -37,6 +37,10 @@ The project focuses on clear information architecture, easy navigation, and a ma
 - A local web server (for example Apache via XAMPP/WAMP)
 - Write permissions for required data and log directories
 
+### Full Setup Guide
+
+For a complete clone-to-run setup (folders, env vars, EmailJS, smoke tests), see `SETUP.md`.
+
 ## Security Notes
 
 - Never store production secrets (for example webhooks or tokens) in the repository.
