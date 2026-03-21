@@ -131,6 +131,7 @@ if (!empty($gallery)) {
     <?php include __DIR__ . '/../footer/footer.php'; ?>
 
     <script defer src="../gallery/gallery.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script defer src="../upload/upload.js"></script>
     <script defer src="../navbar/navbar.js"></script>
 
