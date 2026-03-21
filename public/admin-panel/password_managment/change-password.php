@@ -8,18 +8,28 @@ if (!isset($_SESSION['admin'])) {
 
 $userDataFile = __DIR__ . '/../../database/data/user.json';
 
+function loadUserPayload($file) {
+    if (!file_exists($file)) {
+        return [];
+    }
+
+    $userData = json_decode(file_get_contents($file), true);
+    if (json_last_error() !== JSON_ERROR_NONE || !is_array($userData)) {
+        return [];
+    }
+
+    return $userData;
+}
+
 function isHashedPassword($password) {
     return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;
 }
 
 function parseUsersFromFile($file) {
     $users = [];
-    if (!file_exists($file)) {
-        return $users;
-    }
 
-    $userData = json_decode(file_get_contents($file), true);
-    if (json_last_error() !== JSON_ERROR_NONE || !isset($userData['users']) || !is_array($userData['users'])) {
+    $userData = loadUserPayload($file);
+    if (!isset($userData['users']) || !is_array($userData['users'])) {
         return $users;
     }
 
@@ -52,7 +62,32 @@ function normalizeUsers($usersArray) {
 
 function saveUsers($file, $usersArray) {
     $safeUsers = normalizeUsers($usersArray);
-    $payload = ['users' => array_map(fn($k, $v) => ['username' => $k, 'password' => $v], array_keys($safeUsers), $safeUsers)];
+
+    $payload = loadUserPayload($file);
+    $existingEmails = [];
+    if (isset($payload['users']) && is_array($payload['users'])) {
+        foreach ($payload['users'] as $row) {
+            if (!is_array($row) || empty($row['username'])) {
+                continue;
+            }
+            $username = trim((string)$row['username']);
+            $email = strtolower(trim((string)($row['email'] ?? '')));
+            if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $existingEmails[$username] = $email;
+            }
+        }
+    }
+
+    $serializedUsers = [];
+    foreach ($safeUsers as $username => $password) {
+        $row = ['username' => $username, 'password' => $password];
+        if (isset($existingEmails[$username])) {
+            $row['email'] = $existingEmails[$username];
+        }
+        $serializedUsers[] = $row;
+    }
+
+    $payload['users'] = $serializedUsers;
     file_put_contents($file, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
 }
 
