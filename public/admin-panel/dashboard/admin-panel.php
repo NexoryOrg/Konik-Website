@@ -3,28 +3,45 @@ require_once __DIR__ . '/../../init.php';
 
 $userDataFile = __DIR__ . '/../../database/data/user.json';
 
+function loadUserPayload($file) {
+    if (!file_exists($file)) {
+        return [];
+    }
+
+    $data = json_decode(file_get_contents($file), true);
+    if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+        return [];
+    }
+
+    return $data;
+}
+
 function isHashedPassword($password) {
     return is_string($password) && preg_match('/^\$(2y|argon2)/', $password) === 1;
 }
 
 function parseUsersFromFile($file) {
     $users = [];
-    if (!file_exists($file)) {
-        return $users;
-    }
+    $emails = [];
 
-    $data = json_decode(file_get_contents($file), true);
-    if (json_last_error() !== JSON_ERROR_NONE || !isset($data['users']) || !is_array($data['users'])) {
-        return $users;
+    $data = loadUserPayload($file);
+    if (!isset($data['users']) || !is_array($data['users'])) {
+        return ['users' => $users, 'emails' => $emails];
     }
 
     foreach ($data['users'] as $row) {
         if (!empty($row['username']) && isset($row['password'])) {
-            $users[(string)$row['username']] = (string)$row['password'];
+            $username = trim((string)$row['username']);
+            $users[$username] = (string)$row['password'];
+
+            $email = strtolower(trim((string)($row['email'] ?? '')));
+            if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emails[$username] = $email;
+            }
         }
     }
 
-    return $users;
+    return ['users' => $users, 'emails' => $emails];
 }
 
 function normalizeUsers($usersArray) {
@@ -53,24 +70,77 @@ function verifyUserPassword($storedPassword, $plainPassword) {
     return hash_equals($storedPassword, $plainPassword);
 }
 
-function saveUsers($file, $usersArray) {
+function saveUsers($file, $usersArray, $emailsArray = []) {
     $safeUsers = normalizeUsers($usersArray);
-    $payload = ['users' => array_map(fn($k, $v) => ['username' => $k, 'password' => $v], array_keys($safeUsers), $safeUsers)];
+
+    $payload = loadUserPayload($file);
+    $existingEmails = [];
+    if (isset($payload['users']) && is_array($payload['users'])) {
+        foreach ($payload['users'] as $row) {
+            if (!is_array($row) || empty($row['username'])) {
+                continue;
+            }
+            $username = trim((string)$row['username']);
+            $email = strtolower(trim((string)($row['email'] ?? '')));
+            if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $existingEmails[$username] = $email;
+            }
+        }
+    }
+
+    foreach ($emailsArray as $username => $email) {
+        $username = trim((string)$username);
+        $email = strtolower(trim((string)$email));
+        if ($username !== '' && $email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $existingEmails[$username] = $email;
+        }
+    }
+
+    $serializedUsers = [];
+    foreach ($safeUsers as $username => $password) {
+        $row = ['username' => $username, 'password' => $password];
+        if (isset($existingEmails[$username])) {
+            $row['email'] = $existingEmails[$username];
+        }
+        $serializedUsers[] = $row;
+    }
+
+    $payload['users'] = $serializedUsers;
     file_put_contents($file, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
 }
 
-$users = parseUsersFromFile($userDataFile);
+function findUsernameByLogin(string $login, array $users, array $emails): string {
+    if ($login !== '' && isset($users[$login])) {
+        return $login;
+    }
+
+    $lookupEmail = strtolower($login);
+    foreach ($emails as $username => $email) {
+        if (hash_equals($email, $lookupEmail)) {
+            return (string)$username;
+        }
+    }
+
+    return '';
+}
+
+$store = parseUsersFromFile($userDataFile);
+$users = $store['users'];
+$userEmails = $store['emails'];
 if (empty($users)) {
     $users = ['admin' => password_hash('admin', PASSWORD_DEFAULT)];
 }
 
 $normalizedUsers = normalizeUsers($users);
 if ($normalizedUsers !== $users || !file_exists($userDataFile)) {
-    saveUsers($userDataFile, $normalizedUsers);
+    saveUsers($userDataFile, $normalizedUsers, $userEmails);
 }
 $users = $normalizedUsers;
 
 $csrfToken = csrf_token();
+$settingsMessage = '';
+$settingsMessageType = '';
+$openSettingsModal = false;
 
 if (isset($_GET['logout'])) {
     if (!csrf_validate($_GET['csrf'] ?? '')) {
@@ -87,13 +157,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         $error = 'Invalid request token';
     }
 
-    $username = trim($_POST['username'] ?? '');
+    $login = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
+
     if (!isset($error)) {
-        if ($username && isset($users[$username]) && verifyUserPassword($users[$username], $password)) {
+        $username = findUsernameByLogin($login, $users, $userEmails);
+        if ($username !== '' && isset($users[$username]) && verifyUserPassword($users[$username], $password)) {
             if (password_needs_rehash($users[$username], PASSWORD_DEFAULT)) {
                 $users[$username] = password_hash($password, PASSWORD_DEFAULT);
-                saveUsers($userDataFile, $users);
+                saveUsers($userDataFile, $users, $userEmails);
             }
             session_regenerate_id(true);
             $_SESSION['admin'] = $username;
@@ -104,23 +176,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['saveSettings']) && isset($_SESSION['admin'])) {
+    $openSettingsModal = true;
+
     if (!csrf_validate($_POST['csrf_token'] ?? '')) {
-        $message = 'Invalid request token';
+        $settingsMessage = 'Invalid request token';
+        $settingsMessageType = 'error';
     } else {
         $newUser = trim($_POST['new_user'] ?? '');
         $newPass = trim($_POST['new_password'] ?? '');
+        $newEmail = strtolower(trim($_POST['new_email'] ?? ''));
         $editUser = trim($_POST['edit_user'] ?? '');
         $editPass = trim($_POST['edit_password'] ?? '');
+        $editEmail = strtolower(trim($_POST['edit_email'] ?? ''));
 
-        if ($newUser && $newPass) {
-            $users[$newUser] = $newPass;
-        }
-        if ($editUser && $editPass && isset($users[$editUser])) {
-            $users[$editUser] = $editPass;
+        $hasChanges = false;
+
+        if ($newUser !== '' || $newPass !== '' || $newEmail !== '') {
+            if ($newUser === '' || $newPass === '' || $newEmail === '') {
+                $settingsMessage = 'New user requires username, email and password.';
+                $settingsMessageType = 'error';
+            } elseif (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+                $settingsMessage = 'New user email is invalid.';
+                $settingsMessageType = 'error';
+            } else {
+                $users[$newUser] = $newPass;
+                $userEmails[$newUser] = $newEmail;
+                $hasChanges = true;
+            }
         }
 
-        saveUsers($userDataFile, $users);
-        $message = 'Settings saved';
+        if (($editUser !== '' || $editPass !== '' || $editEmail !== '') && $settingsMessage === '') {
+            if ($editUser === '' || !isset($users[$editUser])) {
+                $settingsMessage = 'Edit user does not exist.';
+                $settingsMessageType = 'error';
+            } else {
+                if ($editPass !== '') {
+                    $users[$editUser] = $editPass;
+                    $hasChanges = true;
+                }
+
+                if ($editEmail !== '') {
+                    if (!filter_var($editEmail, FILTER_VALIDATE_EMAIL)) {
+                        $settingsMessage = 'Edit email is invalid.';
+                        $settingsMessageType = 'error';
+                    } else {
+                        $userEmails[$editUser] = $editEmail;
+                        $hasChanges = true;
+                    }
+                }
+            }
+        }
+
+        if ($settingsMessage === '' && $hasChanges) {
+            saveUsers($userDataFile, $users, $userEmails);
+            $settingsMessage = 'Settings saved successfully.';
+            $settingsMessageType = 'success';
+        } elseif ($settingsMessage === '') {
+            $settingsMessage = 'No changes to save.';
+            $settingsMessageType = 'error';
+        }
     }
 }
 
@@ -142,11 +256,39 @@ if (!isset($_SESSION['admin'])) {
                 <?php if (isset($error)) echo "<p class='error'>" . e($error) . "</p>"; ?>
                 <form method="POST">
                     <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="text" name="username" placeholder="Username or email" autocomplete="username" required>
+                    <div class="password-field">
+                        <input id="admin-login-password" type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                        <button type="button" class="password-eye" id="password-eye" aria-label="Show password while pressed" title="Hold to show password">👁</button>
+                    </div>
                     <button type="submit" name="login">Login</button>
                 </form>
+                <a class="helper-link" href="../admin-panel/password_managment/forgot-password.php">Forgot password?</a>
             </div>
+
+            <script>
+                (function () {
+                    const passwordInput = document.getElementById('admin-login-password');
+                    const eyeButton = document.getElementById('password-eye');
+                    if (!passwordInput || !eyeButton) {
+                        return;
+                    }
+
+                    const reveal = () => {
+                        passwordInput.type = 'text';
+                    };
+
+                    const hide = () => {
+                        passwordInput.type = 'password';
+                    };
+
+                    eyeButton.addEventListener('pointerdown', reveal);
+                    eyeButton.addEventListener('pointerup', hide);
+                    eyeButton.addEventListener('pointerleave', hide);
+                    eyeButton.addEventListener('pointercancel', hide);
+                    eyeButton.addEventListener('blur', hide);
+                })();
+            </script>
         </body>
         </html>
         <?php
@@ -524,11 +666,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </main>
 
-    <div id="password-modal" class="modal hidden">
+    <div id="password-modal" class="modal<?= $openSettingsModal ? '' : ' hidden' ?>">
         <div class="modal-content">
-            <h2>Change Password</h2>
-            <p>Click here to securely update your password on the external page.</p>
-            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Change Password</a>
+            <h2>Security Settings</h2>
+            <p>Manage admin password and account emails for secure password reset.</p>
+
+            <?php if ($settingsMessage !== ''): ?>
+                <p class="settings-feedback <?= e($settingsMessageType ?: 'success') ?>"><?= e($settingsMessage) ?></p>
+            <?php endif; ?>
+
+            <a href="/admin-panel/password_managment/change-password.php" target="_blank" rel="noopener noreferrer" class="btn">Change Own Password</a>
+
+            <form method="POST" class="settings-form">
+                <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+
+                <h3>Create User</h3>
+                <input type="text" name="new_user" placeholder="New username">
+                <input type="email" name="new_email" placeholder="New user email">
+                <input type="password" name="new_password" placeholder="New user password">
+
+                <h3>Edit User</h3>
+                <input type="text" name="edit_user" placeholder="Existing username">
+                <input type="email" name="edit_email" placeholder="New email (optional)">
+                <input type="password" name="edit_password" placeholder="New password (optional)">
+
+                <button type="submit" name="saveSettings" class="btn">Save User Settings</button>
+            </form>
+
             <button id="close-modal" class="btn secondary">Close</button>
         </div>
     </div>
