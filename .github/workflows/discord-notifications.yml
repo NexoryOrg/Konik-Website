@@ -218,7 +218,12 @@ jobs:
             THREAD_PARAM="thread_id=$DISCORD_THREAD_ID_PUSH"
           fi
 
-          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK?$THREAD_PARAM" \
+          WEBHOOK_SEP="?"
+          case "$DISCORD_WEBHOOK" in
+            *\?*) WEBHOOK_SEP="&" ;;
+          esac
+
+          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK${WEBHOOK_SEP}$THREAD_PARAM" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -287,7 +292,12 @@ jobs:
             THREAD_PARAM="thread_id=$DISCORD_THREAD_ID_PR"
           fi
 
-          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK?$THREAD_PARAM" \
+          WEBHOOK_SEP="?"
+          case "$DISCORD_WEBHOOK" in
+            *\?*) WEBHOOK_SEP="&" ;;
+          esac
+
+          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK${WEBHOOK_SEP}$THREAD_PARAM" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -365,7 +375,12 @@ jobs:
             THREAD_PARAM="thread_id=$DISCORD_THREAD_ID_ISSUES"
           fi
 
-          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK?$THREAD_PARAM" \
+          WEBHOOK_SEP="?"
+          case "$DISCORD_WEBHOOK" in
+            *\?*) WEBHOOK_SEP="&" ;;
+          esac
+
+          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK${WEBHOOK_SEP}$THREAD_PARAM" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
 
@@ -414,6 +429,11 @@ jobs:
             THREAD_PARAM="thread_id=$DISCORD_THREAD_ID_DISCUSSIONS"
           fi
 
-          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK?$THREAD_PARAM" \
+          WEBHOOK_SEP="?"
+          case "$DISCORD_WEBHOOK" in
+            *\?*) WEBHOOK_SEP="&" ;;
+          esac
+
+          curl --fail-with-body -sS -X POST "$DISCORD_WEBHOOK${WEBHOOK_SEP}$THREAD_PARAM" \
             -H "Content-Type: application/json" \
             -d "$EMBED"
