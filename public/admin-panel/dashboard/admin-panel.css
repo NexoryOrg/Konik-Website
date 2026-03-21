@@ -585,6 +585,39 @@ h1 {
     margin-top: 12px;
 }
 
+#password-modal .settings-form {
+    text-align: left;
+    margin-top: 18px;
+}
+
+#password-modal .settings-form h3 {
+    margin-top: 8px;
+    color: var(--primary-strong);
+}
+
+#password-modal .settings-form .btn {
+    margin-top: 6px;
+}
+
+.settings-feedback {
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 10px 0 14px;
+    font-weight: 600;
+}
+
+.settings-feedback.success {
+    background: #e8f7e9;
+    color: #1f6a24;
+    border: 1px solid #9dd6a2;
+}
+
+.settings-feedback.error {
+    background: #ffefef;
+    color: #9d1c1c;
+    border: 1px solid #f2b8b8;
+}
+
 .approved-edit-content {
     text-align: left;
 }
