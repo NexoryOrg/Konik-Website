@@ -62,7 +62,3 @@ Workflows in `.github/workflows/` support tasks such as:
 2. Commit your updates with clear commit messages.
 3. Open a pull request.
 4. Review workflow results and address feedback.
-
-## License
-
-Unless stated otherwise, the license stored in this repository applies.
