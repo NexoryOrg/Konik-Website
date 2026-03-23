@@ -15,7 +15,12 @@ if (!file_exists($jsonFile)) {
     die("JSON file not found!");
 }
 
-$gallery = json_decode(file_get_contents($jsonFile), true);
+$galleryRaw = (string)file_get_contents($jsonFile);
+$galleryRaw = preg_replace('/^\xEF\xBB\xBF/', '', $galleryRaw);
+$gallery = json_decode($galleryRaw, true);
+if (!is_array($gallery)) {
+    $gallery = [];
+}
 krsort($gallery);
 
 function minify_output($buffer) {
@@ -34,12 +39,12 @@ register_shutdown_function(function() {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= e(current_lang()) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
-    <title>Gallery</title>
+    <title><?= e(t('gallery.title')) ?></title>
     <link rel="icon" type="image/png" href="../database/images/logo/logo.png">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -84,10 +89,15 @@ if (!empty($gallery)) {
                     <h2><?= htmlspecialchars($year, ENT_QUOTES, 'UTF-8') ?></h2>
                     <div class="images">
                         <?php foreach($images as $image): ?>
+                            <?php
+                                $altText = localized_field($image, 'alt');
+                                $descriptionText = localized_field($image, 'des');
+                            ?>
                             <img 
                                 data-src="<?= htmlspecialchars($image['src'], ENT_QUOTES, 'UTF-8') ?>" 
+                                data-description="<?= htmlspecialchars($descriptionText, ENT_QUOTES, 'UTF-8') ?>"
                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" 
-                                alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES, 'UTF-8') ?>" 
+                                alt="<?= htmlspecialchars($altText, ENT_QUOTES, 'UTF-8') ?>" 
                                 loading="lazy"
                                 onerror="this.src='../database/images/error.jpg'"
                             >
@@ -102,7 +112,7 @@ if (!empty($gallery)) {
 
     <!-- LIGHTBOX -->
     <div id="lightbox">
-        <button class="nav prev" aria-label="Previous image">&#10094;</button>
+        <button class="nav prev" aria-label="<?= e(t('gallery.lightbox.prev')) ?>">&#10094;</button>
         <figure>
             <img id="lightbox-image" alt="">
             <div class="lightbox-info">
@@ -110,20 +120,26 @@ if (!empty($gallery)) {
                 <span id="image-year"></span>
             </div>
         </figure>
-        <button class="nav next" aria-label="Next image">&#10095;</button>
-        <span id="close" aria-label="Close">&times;</span>
+        <button class="nav next" aria-label="<?= e(t('gallery.lightbox.next')) ?>">&#10095;</button>
+        <span id="close" aria-label="<?= e(t('gallery.lightbox.close')) ?>">&times;</span>
     </div>
 
     <div class="upload-section">
-        <h3>📸 Add New Photos</h3>
-        <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
+        <h3><?= e(t('gallery.upload.title')) ?></h3>
+        <form
+            class="upload-form"
+            id="uploadForm"
+            enctype="multipart/form-data"
+            data-error-prefix="<?= e(t('gallery.upload.error_prefix')) ?>"
+            data-token-missing="<?= e(t('gallery.upload.token_missing')) ?>"
+        >
             <input type="hidden" id="csrf_token" name="csrf_token" value="<?= e(csrf_token()) ?>">
             <input type="date" id="eventDate" name="eventDate" required>
-            <input type="email" id="uploaderEmail" name="uploaderEmail" placeholder="Your email (for follow-up questions)" required>
-            <input type="text" id="eventTitle" name="eventTitle" placeholder="Title (e.g. 'Snowy day in the forest')" required>
-            <textarea id="eventDes" name="eventDes" placeholder="Event description..." required></textarea>
+            <input type="email" id="uploaderEmail" name="uploaderEmail" placeholder="<?= e(t('gallery.upload.email')) ?>" required>
+            <input type="text" id="eventTitle" name="eventTitle" placeholder="<?= e(t('gallery.upload.event_title')) ?>" required>
+            <textarea id="eventDes" name="eventDes" placeholder="<?= e(t('gallery.upload.description')) ?>" required></textarea>
             <input type="file" id="eventImage" name="eventImage" accept="image/*" required>
-            <button type="submit">Upload photo & send for review</button>
+            <button type="submit"><?= e(t('gallery.upload.submit')) ?></button>
         </form>
         <div id="uploadMessage"></div>
     </div>
