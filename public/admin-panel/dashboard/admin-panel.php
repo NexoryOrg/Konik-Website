@@ -435,6 +435,16 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
         if (rename($source, $destination)) {
             $year = substr($metadata['date'], -4);
             $galleryData = json_decode(file_get_contents($galleryJsonFile), true) ?: [];
+
+            $sourceLang = normalize_language($metadata['source_lang'] ?? '') ?: 'de';
+            $titleRaw = trim((string)($metadata['title'] ?? ''));
+            $descriptionRaw = trim((string)($metadata['description'] ?? ''));
+            $titleI18n = isset($metadata['title_i18n']) && is_array($metadata['title_i18n'])
+                ? $metadata['title_i18n']
+                : build_i18n_text_map($titleRaw, $sourceLang, 150);
+            $descriptionI18n = isset($metadata['description_i18n']) && is_array($metadata['description_i18n'])
+                ? $metadata['description_i18n']
+                : build_i18n_text_map($descriptionRaw, $sourceLang, 3000);
             
             if (!isset($galleryData[$year])) {
                 $galleryData[$year] = [];
@@ -442,8 +452,10 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
             
             $entry = [
                 'src' => '/database/images/uploads/' . $filename,
-                'alt' => $metadata['title'],
-                'des' => $metadata['description']
+                'alt' => (string)($titleI18n['de'] ?? $titleRaw),
+                'des' => (string)($descriptionI18n['de'] ?? $descriptionRaw),
+                'alt_i18n' => $titleI18n,
+                'des_i18n' => $descriptionI18n
             ];
             
             $galleryData[$year][] = $entry;
@@ -453,9 +465,9 @@ if (isset($_GET['approve']) && isset($_SESSION['admin']) && csrf_validate($_GET[
             $stats['approved'] = ($stats['approved'] ?? 0) + 1;
             $stats['approved_items'][] = [
                 'filename' => $filename,
-                'title' => $metadata['title'] ?? '',
+                'title' => (string)($titleI18n['de'] ?? $titleRaw),
                 'date' => $metadata['date'] ?? '',
-                'description' => $metadata['description'] ?? '',
+                'description' => (string)($descriptionI18n['de'] ?? $descriptionRaw),
                 'email' => $metadata['email'] ?? '',
                 'img' => '/database/images/uploads/' . $filename
             ];
