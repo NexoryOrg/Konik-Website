@@ -40,6 +40,9 @@ if (session_status() === PHP_SESSION_NONE) {
     }
 }
 
+require_once __DIR__ . '/language.php';
+bootstrap_language();
+
 if (empty($_SESSION['csrf_token'])) {
     try {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
