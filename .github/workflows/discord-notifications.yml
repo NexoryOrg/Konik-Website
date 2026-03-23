@@ -201,7 +201,7 @@ jobs:
                     },
                     {
                       name: "Files (last commit)",
-                      value: ("`" + $filesSummary + "\n`"),
+                      value: ("" + $filesSummary + "\n"),
                       inline: false
                     }
                   ],
