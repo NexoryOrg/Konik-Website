@@ -30,7 +30,7 @@ if (!is_array($decoded)) {
 	exit;
 }
 
-function normalizeTimelineImageSrc($src) {
+function normalizehistoryImageSrc($src) {
 	$src = trim((string)$src);
 	if ($src === '') {
 		return '';
@@ -43,8 +43,8 @@ function normalizeTimelineImageSrc($src) {
 	return $src;
 }
 
-function timelineImageSrcToFile($src) {
-	$normalizedSrc = normalizeTimelineImageSrc($src);
+function historyImageSrcToFile($src) {
+	$normalizedSrc = normalizehistoryImageSrc($src);
 	if ($normalizedSrc === '') {
 		return '';
 	}
@@ -67,6 +67,7 @@ if (file_exists($file)) {
 }
 
 $safeEvents = [];
+$sourceLang = current_lang();
 foreach ($decoded as $item) {
 	if (!is_array($item)) {
 		continue;
@@ -88,13 +89,19 @@ foreach ($decoded as $item) {
 		$src = '';
 	}
 
+	$titleI18n = build_i18n_text_map($title, $sourceLang, 120);
+	$descriptionI18n = build_i18n_text_map($description, $sourceLang, 5000);
+
 	$safeEvents[] = [
 		'id' => $id,
-		'title' => function_exists('mb_substr') ? mb_substr($title, 0, 120) : substr($title, 0, 120),
+		'title' => (string)($titleI18n['de'] ?? $title),
 		'date' => $date,
-		'description' => function_exists('mb_substr') ? mb_substr($description, 0, 5000) : substr($description, 0, 5000),
+		'description' => (string)($descriptionI18n['de'] ?? $description),
 		'src' => $src,
-		'alt' => function_exists('mb_substr') ? mb_substr($title, 0, 120) : substr($title, 0, 120)
+		'alt' => (string)($titleI18n['de'] ?? $title),
+		'title_i18n' => $titleI18n,
+		'description_i18n' => $descriptionI18n,
+		'alt_i18n' => $titleI18n
 	];
 }
 
@@ -103,7 +110,7 @@ foreach ($existingEvents as $event) {
 	if (!is_array($event)) {
 		continue;
 	}
-	$src = normalizeTimelineImageSrc($event['src'] ?? '');
+	$src = normalizehistoryImageSrc($event['src'] ?? '');
 	if ($src !== '') {
 		$existingSrcSet[$src] = true;
 	}
@@ -111,7 +118,7 @@ foreach ($existingEvents as $event) {
 
 $newSrcSet = [];
 foreach ($safeEvents as $event) {
-	$src = normalizeTimelineImageSrc($event['src'] ?? '');
+	$src = normalizehistoryImageSrc($event['src'] ?? '');
 	if ($src !== '') {
 		$newSrcSet[$src] = true;
 	}
@@ -119,7 +126,7 @@ foreach ($safeEvents as $event) {
 
 $removedSrc = array_diff_key($existingSrcSet, $newSrcSet);
 foreach (array_keys($removedSrc) as $src) {
-	$path = timelineImageSrcToFile($src);
+	$path = historyImageSrcToFile($src);
 	if ($path !== '' && is_file($path)) {
 		@unlink($path);
 	}
