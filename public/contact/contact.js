@@ -24,6 +24,12 @@ window.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    const labelSending = btn.dataset.labelSending || 'Sending...';
+    const labelSent = btn.dataset.labelSent || 'Message sent!';
+    const labelSend = btn.dataset.labelSend || 'Send';
+    const configMissingText = btn.dataset.configMissing || 'Email service configuration missing. Please try again later.';
+    const sendFailedText = btn.dataset.sendFailed || 'The email could not be sent. Please try again later.';
+
     if (!window.emailjs) {
         console.error("EmailJS not loaded!");
         return;
@@ -36,7 +42,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching emailjs data:', error);
         const errorMsg = document.getElementById('error-msg');
         if (errorMsg) {
-            document.getElementById('error-text').textContent = 'Email service configuration missing. Please try again later.';
+            document.getElementById('error-text').textContent = configMissingText;
             errorMsg.hidden = false;
         }
         btn.disabled = true;
@@ -56,7 +62,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         event.preventDefault();
 
         btn.disabled = true;
-        btn.textContent = "Sending...";
+        btn.textContent = labelSending;
 
         const templateParams = {
             name: document.getElementById("name").value,
@@ -68,7 +74,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         try {
             await emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams);
             form.reset();
-            btn.textContent = "Message sent!";
+            btn.textContent = labelSent;
             
             const infoMsg = document.getElementById("info-msg");
             if (infoMsg) {
@@ -78,19 +84,19 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
 
             btn.disabled = false;
-            btn.textContent = "Send";
+            btn.textContent = labelSend;
         } catch (error) {
             console.error("Error sending email:", error);
             
             const errorMsg = document.getElementById("error-msg");
             if (errorMsg) {
-                document.getElementById("error-text").textContent = "The email could not be sent. Please try again later.";
+                document.getElementById("error-text").textContent = sendFailedText;
                 errorMsg.hidden = false;
                 await new Promise(resolve => setTimeout(resolve, 3000));
                 errorMsg.hidden = true;
             }
             
-            btn.textContent = "Send";
+            btn.textContent = labelSend;
             btn.disabled = false;
         }
     });
