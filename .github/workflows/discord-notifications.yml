@@ -102,49 +102,13 @@ jobs:
                 ;;
             esac
 
-            PREVIEW=$(git diff --unified=0 "$AFTER_SHA^!" -- "$DIFF_TARGET" | awk '
-              BEGIN { count = 0; oldLine = 0; newLine = 0 }
-              /^@@ / {
-                if (match($0, /-([0-9]+)/, oldMatch)) {
-                  oldLine = oldMatch[1]
-                }
-                if (match($0, /\+([0-9]+)/, newMatch)) {
-                  newLine = newMatch[1]
-                }
-                next
-              }
-              /^\+\+\+/ || /^---/ { next }
-              /^\+/ {
-                print "+ Line " newLine ": " substr($0, 2)
-                newLine++
-                count++
-                if (count >= 2) {
-                  exit
-                }
-                next
-              }
-              /^-/ {
-                print "- Line " oldLine ": " substr($0, 2)
-                oldLine++
-                count++
-                if (count >= 2) {
-                  exit
-                }
-              }
-            ')
-
-            CHANGE_COUNT=$(git diff --unified=0 "$AFTER_SHA^!" -- "$DIFF_TARGET" | awk '
-              /^\+\+\+/ || /^---/ { next }
-              /^[+-]/ { count++ }
-              END { print count + 0 }
-            ')
-
-            if [ -n "$PREVIEW" ] && [ "$CHANGE_COUNT" -gt 2 ]; then
-              PREVIEW=$(printf '%s\n• ... +%s weitere Aenderungen' "$PREVIEW" "$((CHANGE_COUNT - 2))")
-            fi
-
-            if [ -z "$PREVIEW" ]; then
-              PREVIEW="• Keine Zeilen-Vorschau verfuegbar"
+            NUMSTAT=$(git diff --numstat "$AFTER_SHA^!" -- "$DIFF_TARGET" | head -n 1)
+            if [ -z "$NUMSTAT" ]; then
+              PREVIEW="• Keine Aenderungsstatistik verfuegbar"
+            else
+              FILE_ADDITIONS=$(printf '%s\n' "$NUMSTAT" | awk '{ if ($1 == "-") print 0; else print $1 + 0 }')
+              FILE_DELETIONS=$(printf '%s\n' "$NUMSTAT" | awk '{ if ($2 == "-") print 0; else print $2 + 0 }')
+              PREVIEW=$(printf '• +%s / -%s Zeilen' "$FILE_ADDITIONS" "$FILE_DELETIONS")
             fi
 
             ENTRY=$(printf '%s %s\n%s' "$ICON" "$DISPLAY_PATH" "$PREVIEW")
