@@ -146,8 +146,14 @@ if ($action === 'edit') {
         $entry = [];
     }
 
-    $entry['alt'] = function_exists('mb_substr') ? mb_substr($title, 0, 150) : substr($title, 0, 150);
-    $entry['des'] = function_exists('mb_substr') ? mb_substr($description, 0, 3000) : substr($description, 0, 3000);
+    $sourceLang = current_lang();
+    $titleI18n = build_i18n_text_map($title, $sourceLang, 150);
+    $descriptionI18n = build_i18n_text_map($description, $sourceLang, 3000);
+
+    $entry['alt'] = (string)($titleI18n['de'] ?? $title);
+    $entry['des'] = (string)($descriptionI18n['de'] ?? $description);
+    $entry['alt_i18n'] = $titleI18n;
+    $entry['des_i18n'] = $descriptionI18n;
 
     if ($targetYear !== $foundYear) {
         unset($galleryData[$foundYear][$foundIndex]);
@@ -175,8 +181,8 @@ if ($action === 'edit') {
         }
 
         if ($itemFilename === $filename) {
-            $stats['approved_items'][$idx]['title'] = $entry['alt'];
-            $stats['approved_items'][$idx]['description'] = $entry['des'];
+            $stats['approved_items'][$idx]['title'] = (string)($titleI18n['de'] ?? $entry['alt']);
+            $stats['approved_items'][$idx]['description'] = (string)($descriptionI18n['de'] ?? $entry['des']);
             $stats['approved_items'][$idx]['date'] = $date;
             break;
         }
