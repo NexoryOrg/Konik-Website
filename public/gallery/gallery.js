@@ -58,7 +58,7 @@ if (images.length && lightbox && lightboxImage) {
 
         setTimeout(() => {
             lightboxImage.src = images[currentIndex].src;
-            description.textContent = images[currentIndex].alt || "";
+            description.textContent = images[currentIndex].dataset.description || images[currentIndex].alt || "";
 
             const section = images[currentIndex].closest('.year-section');
             const year = section ? section.querySelector('h2').textContent : "";
