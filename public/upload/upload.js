@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!uploadForm) return;
 
+    const errorPrefix = uploadForm.dataset.errorPrefix || 'Error:';
+    const tokenMissingText = uploadForm.dataset.tokenMissing || 'Error: Security token is missing. Please reload the page.';
+
     async function loadUploadEmailConfig() {
         try {
             const response = await fetch('/database/data/user.json', { cache: 'no-store' });
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new FormData(uploadForm);
         if (!formData.get('csrf_token')) {
-            uploadMessage.textContent = 'Error: Security token is missing. Please reload the page.';
+            uploadMessage.textContent = tokenMissingText;
             uploadMessage.className = 'error';
             uploadMessage.style.display = 'block';
             return;
@@ -75,12 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     uploadMessage.style.display = 'none';
                 }, 5000);
             } else {
-                uploadMessage.textContent = 'Error: ' + data.message;
+                uploadMessage.textContent = errorPrefix + ' ' + data.message;
                 uploadMessage.className = 'error';
                 uploadMessage.style.display = 'block';
             }
         } catch (error) {
-            uploadMessage.textContent = 'Error: ' + error.message;
+            uploadMessage.textContent = errorPrefix + ' ' + error.message;
             uploadMessage.className = 'error';
             uploadMessage.style.display = 'block';
             console.error('Upload error:', error);
