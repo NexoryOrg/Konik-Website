@@ -67,6 +67,10 @@ $eventTitle = trim((string)$_POST['eventTitle']);
 $eventDes = trim((string)($_POST['eventDes'] ?? ''));
 $file = $_FILES['eventImage'];
 
+$sourceLang = current_lang();
+$titleI18n = build_i18n_text_map($eventTitle, $sourceLang, 150);
+$descriptionI18n = build_i18n_text_map($eventDes, $sourceLang, 3000);
+
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $eventDate)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Invalid date format']);
@@ -157,8 +161,12 @@ $metadata = [
     'originalName' => basename((string)($file['name'] ?? '')),
     'email' => $eventEmail,
     'date' => $formattedDate,
-    'title' => function_exists('mb_substr') ? mb_substr($eventTitle, 0, 150) : substr($eventTitle, 0, 150),
-    'description' => function_exists('mb_substr') ? mb_substr($eventDes, 0, 3000) : substr($eventDes, 0, 3000),
+    'source_lang' => $sourceLang,
+    'title' => (string)($titleI18n['de'] ?? $eventTitle),
+    'description' => (string)($descriptionI18n['de'] ?? $eventDes),
+    'title_i18n' => $titleI18n,
+    'description_i18n' => $descriptionI18n,
+    'alt_i18n' => $titleI18n,
     'timestamp' => time(),
     'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown'
 ];

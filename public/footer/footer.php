@@ -29,7 +29,7 @@
             </div>
 
             <p class="copyright">Konik-Website © 2025</p>
-            <a class="link" href="../imprint/imprint.php">Imprint & Privacy Policy</a>
+            <a class="link" href="<?= e(with_lang('/imprint/imprint.php')) ?>"><?= e(t('footer.imprint')) ?></a>
         </div>
     </div>
 </footer>

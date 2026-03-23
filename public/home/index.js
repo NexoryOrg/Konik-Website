@@ -35,6 +35,10 @@ if (boxes.length) {
 
 const loadMapBtn = document.getElementById("load-map");
 if (loadMapBtn) {
+    const popupTitle = loadMapBtn.dataset.popupTitle || 'Black Forest National Park Center';
+    const popupSubtitle = loadMapBtn.dataset.popupSubtitle || 'Bad Liebenzell-Unterreichenbach';
+    const markerTitle = loadMapBtn.dataset.markerTitle || popupTitle;
+
     loadMapBtn.addEventListener("click", function() {
         const mapDiv = document.getElementById("map");
         const placeholder = document.getElementById("map-placeholder");
@@ -53,13 +57,12 @@ if (loadMapBtn) {
                 const popup = L.popup({
                     closeButton: true,
                     className: 'map-popup'
-                }).setContent('<div style="font-size: 1.1rem; font-weight: 600; color: #2e7d32; text-align: center; padding: 5px;"><b>Black Forest National Park Center</b><br><span style="font-size: 0.9rem; color: #666;">Bad Liebenzell-Unterreichenbach</span></div>');
+                }).setContent(`<div style="font-size: 1.1rem; font-weight: 600; color: #2e7d32; text-align: center; padding: 5px;"><b>${popupTitle}</b><br><span style="font-size: 0.9rem; color: #666;">${popupSubtitle}</span></div>`);
                 
                 L.marker([48.5606575, 8.2220008], {
-                    title: 'Nationalparkzentrum Schwarzwald'
+                    title: markerTitle
                 }).addTo(map).bindPopup(popup).openPopup();
                 
-                // Resize is important for hidden containers
                 map.invalidateSize();
                 map.flyTo([48.5606575, 8.2220008], 15, { duration: 2 });
             }, 50);

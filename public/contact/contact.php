@@ -3,14 +3,14 @@ require_once __DIR__ . '/../init.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= e(current_lang()) ?>">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="/">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <title>Contact</title>
+        <title><?= e(t('contact.title')) ?></title>
         <link rel="icon" type="image/png" href="../database/images/logo/logo.png">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,29 +23,37 @@ require_once __DIR__ . '/../init.php';
         <?php include __DIR__ . '/../navbar/navbar.php'; ?>
 
         <div class="info-msg" id="info-msg" hidden="true">
-            <h3>Message sent!</h3>
-            <p>Your message has been sent successfully. <br>We will get back to you as soon as possible.</p>
+            <h3><?= e(t('contact.info.title')) ?></h3>
+            <p><?= e(t('contact.info.text')) ?></p>
         </div>
 
         <div class="error-msg" id="error-msg" hidden="true">
-            <h3>Error!</h3>
-            <p id="error-text">Your message was not sent!</p>
+            <h3><?= e(t('contact.error.title')) ?></h3>
+            <p id="error-text"><?= e(t('contact.error.default')) ?></p>
         </div>
 
         <div class="contact-wrapper">
             <div class="contact-container">
-                <h2>Contact Form</h2>
+                <h2><?= e(t('contact.form.title')) ?></h2>
                 <form id="contactForm">
-                    <label>Name</label>
+                    <label><?= e(t('contact.form.name')) ?></label>
                     <input type="text" id="name" required>
 
-                    <label>E-Mail</label>
+                    <label><?= e(t('contact.form.email')) ?></label>
                     <input type="email" id="email" required>
 
-                    <label>Message</label>
+                    <label><?= e(t('contact.form.message')) ?></label>
                     <textarea id="message" required></textarea>
 
-                    <button type="submit" id="contact_button">Send</button>
+                    <button
+                        type="submit"
+                        id="contact_button"
+                        data-label-sending="<?= e(t('contact.js.sending')) ?>"
+                        data-label-sent="<?= e(t('contact.js.sent')) ?>"
+                        data-label-send="<?= e(t('contact.js.send')) ?>"
+                        data-config-missing="<?= e(t('contact.js.config_missing')) ?>"
+                        data-send-failed="<?= e(t('contact.js.send_failed')) ?>"
+                    ><?= e(t('contact.form.send')) ?></button>
                 </form>
             </div>
         </div>
@@ -54,44 +62,40 @@ require_once __DIR__ . '/../init.php';
 
         <div class="faq-wrapper">
             <div class="faq-container">
-                <h2>Frequently Asked Questions</h2>
+                <h2><?= e(t('contact.faq.title')) ?></h2>
 
                 <div class="faq-item" data-id="1">
                     <div class="faq-question">
-                        <h3>Can visitors enter the paddock with the Koniks?</h3>
+                        <h3><?= e(t('contact.faq.q1')) ?></h3>
                         <span class="arrow">+</span>
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>No, entering the pasture is strictly forbidden!<br>
-                            You are welcome to watch the animals from behind the fence, but do not go under the fence or feed them.
-                            </p>
+                            <p><?= e(t('contact.faq.a1')) ?></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" data-id="2">
                     <div class="faq-question">
-                        <h3>Are the Koniks really wild horses?</h3>
+                        <h3><?= e(t('contact.faq.q2')) ?></h3>
                         <span class="arrow">+</span>
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>The horses in the national park are semi–wild. In summer they are mostly left to themselves; only for medical checks and when food becomes scarce in autumn does someone check on them and care for them. In winter they are moved to a pasture with plenty of grass and other food sources. Someone also looks after them there.
-                            </p>
+                            <p><?= e(t('contact.faq.a2')) ?></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" data-id="3">
                     <div class="faq-question">
-                        <h3>What breed of horse are they?</h3>
+                        <h3><?= e(t('contact.faq.q3')) ?></h3>
                         <span class="arrow">+</span>
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>The Konik (Polish: Konik polski) is a robust horse breed originating from Poland that resembles the extinct Tarpan. It is known for its hardiness and frugality and is often used in conservation projects for landscape maintenance.
-                            </p>
+                            <p><?= e(t('contact.faq.a3')) ?></p>
                         </div>
                     </div>
                 </div>
