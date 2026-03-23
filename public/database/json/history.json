@@ -1,26 +1,71 @@
 [
     {
-        "id": 3,
-        "title": "Buran",
-        "date": "2020-03-03",
-        "description": "...",
-        "src": "\/database\/images\/history\/0583584ac0adfd802d097f504bf79f51.jpg",
-        "alt": "Buran"
+        "id":  3,
+        "title":  "Buran zum Testen",
+        "date":  "2020-03-03",
+        "description":  "in bearbeitung",
+        "src":  "/database/images/history/0583584ac0adfd802d097f504bf79f51.jpg",
+        "alt":  "Buran zum Testen",
+        "title_i18n":  {
+                           "de":  "Buran zum Testen",
+                           "en":  "Buran for test",
+                           "es":  "Buran para prueba"
+                       },
+        "description_i18n":  {
+                                 "de":  "in bearbeitung",
+                                 "en":  "In Progress",
+                                 "es":  "En curso"
+                             },
+        "alt_i18n":  {
+                         "de":  "Buran zum Testen",
+                         "en":  "Buran for test",
+                         "es":  "Buran para prueba"
+                     }
     },
     {
-        "id": 4,
-        "title": "Brunhilde",
-        "date": "2020-01-01",
-        "description": "...",
-        "src": "\/database\/images\/history\/756ac7adec3671e257ca002ed25bd71b.jpg",
-        "alt": "Brunhilde"
+        "id":  4,
+        "title":  "Brunhilde",
+        "date":  "2020-01-01",
+        "description":  "...",
+        "src":  "/database/images/history/756ac7adec3671e257ca002ed25bd71b.jpg",
+        "alt":  "Brunhilde",
+        "title_i18n":  {
+                           "de":  "Brunhilde",
+                           "en":  "Brunhilde",
+                           "es":  "brunilda"
+                       },
+        "description_i18n":  {
+                                 "de":  "...",
+                                 "en":  "...",
+                                 "es":  "..."
+                             },
+        "alt_i18n":  {
+                         "de":  "Brunhilde",
+                         "en":  "Brunhilde",
+                         "es":  "brunilda"
+                     }
     },
     {
-        "id": 5,
-        "title": "Ronda",
-        "date": "2020-02-02",
-        "description": "...",
-        "src": "\/database\/images\/history\/511b0a9b80188f32cf3c3d46bc2b0aff.jpg",
-        "alt": "Ronda"
+        "id":  5,
+        "title":  "Ronda",
+        "date":  "2020-02-02",
+        "description":  "...",
+        "src":  "/database/images/history/511b0a9b80188f32cf3c3d46bc2b0aff.jpg",
+        "alt":  "Ronda",
+        "title_i18n":  {
+                           "de":  "Ronda",
+                           "en":  "Ronda",
+                           "es":  "Ronda"
+                       },
+        "description_i18n":  {
+                                 "de":  "...",
+                                 "en":  "...",
+                                 "es":  "..."
+                             },
+        "alt_i18n":  {
+                         "de":  "Ronda",
+                         "en":  "Ronda",
+                         "es":  "Ronda"
+                     }
     }
 ]
