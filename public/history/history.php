@@ -25,16 +25,21 @@ register_shutdown_function(function() {
 });
 
 if (file_exists($jsonFile)) {
-    $data = file_get_contents($jsonFile);
+    $data = (string)file_get_contents($jsonFile);
+    $data = preg_replace('/^\xEF\xBB\xBF/', '', $data);
     $eventsData = json_decode($data, true);
 
     if ($eventsData) {
         foreach ($eventsData as $entry) {
             $imgPath = '/' . ltrim(str_replace('../', '', $entry['src'] ?? ''), '/');
+            $title = localized_field(is_array($entry) ? $entry : [], 'title');
+            $description = localized_field(is_array($entry) ? $entry : [], 'description');
+            $alt = localized_field(is_array($entry) ? $entry : [], 'alt');
             $events[] = [
                 'date' => $entry['date'] ?? '',
-                'title' => $entry['title'] ?? '',
-                'des' => $entry['description'] ?? '',
+                'title' => $title,
+                'des' => $description,
+                'alt' => $alt !== '' ? $alt : $title,
                 'image' => $imgPath
             ];
         }
@@ -48,10 +53,10 @@ if (file_exists($jsonFile)) {
 }
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= e(current_lang()) ?>">
 <head>
 <meta charset="utf-8">
-<title>History</title>
+<title><?= e(t('history.title')) ?></title>
 <base href="/">
 <link rel="icon" type="image/png" href="/database/images/logo/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -70,13 +75,13 @@ if (!empty($events) && !empty($events[0]['image'])) {
 <div class="history-wrapper">
     <div class="history">
         <?php if(empty($events)): ?>
-            <p>No entries available in the history.</p>
+            <p><?= e(t('history.empty')) ?></p>
         <?php else: ?>
             <?php foreach($events as $index => $event): ?>
                 <div class="history-item <?= $index % 2 == 0 ? 'left' : 'right' ?>">
                     <div class="history-date"><?= htmlspecialchars($event['date']) ?></div>
                     <div class="history-content">
-                        <img class="history-img" data-src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>">
+                        <img class="history-img" data-src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['alt']) ?>">
                         <h3 class="history-title"><?= htmlspecialchars($event['title']) ?></h3>
                         <p><?= htmlspecialchars($event['des']) ?></p>
                     </div>
