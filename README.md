@@ -39,7 +39,7 @@ The project focuses on clear information architecture, easy navigation, and a ma
 
 ### Full Setup Guide
 
-For a complete clone-to-run setup (folders, env vars, EmailJS, smoke tests), see `SETUP.md`.
+For a complete clone-to-run setup (folders, env vars, EmailJS, smoke tests), see [SETUP.md](SETUP.md).
 
 ## Security Notes
 
