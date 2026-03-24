@@ -1,30 +1,30 @@
-# Konik Website - Setup nach Git Clone
+# Konik Website - Setup after Git Clone
 
-Diese Anleitung beschreibt die Schritte, damit die Website lokal nach einem frischen Clone stabil laeuft.
+This guide describes the steps to get the website running locally after a fresh clone.
 
-## 1) Voraussetzungen
+## 1. Requirements
 
-- PHP 8.1 oder neuer
+- PHP 8.1 or newer
 - Git
-- Ein lokaler Webserver
-  - Option A: eingebauter PHP-Server
+- A local web server
+  - Option A: PHP built-in server
   - Option B: Apache (XAMPP/WAMP)
 
-Optional, aber empfohlen:
+Optional, but recommended:
 
-- Ein Mail-Setup fuer PHP (fuer Passwort-Reset per `mail()`)
-- HTTPS in produktionsnahen Umgebungen
+- A mail setup for PHP (for password reset via `mail()`)
+- HTTPS in production-like environments
 
-## 2) Repository clonen
+## 2. Clone the repository
 
 ```bash
-git clone <DEIN_REPO_URL>
-cd Konik-Website-main
+git clone https://github.com/NexoryOrg/Konik-Website.git
+cd Konik-Website
 ```
 
-## 3) Wichtige Ordner anlegen/pruefen
+## 3. Create/verify required directories
 
-Die folgenden Pfade muessen existieren und beschreibbar sein:
+The following paths must exist and be writable:
 
 - `logs/`
 - `public/database/data/`
@@ -34,7 +34,7 @@ Die folgenden Pfade muessen existieren und beschreibbar sein:
 - `public/database/images/uploads/rejected/`
 - `public/database/json/history/`
 
-Falls etwas fehlt, anlegen:
+If anything is missing, create the directories:
 
 ```powershell
 New-Item -ItemType Directory -Force logs | Out-Null
@@ -46,9 +46,9 @@ New-Item -ItemType Directory -Force public/database/images/uploads/rejected | Ou
 New-Item -ItemType Directory -Force public/database/json/history | Out-Null
 ```
 
-## 4) Basis-Daten pruefen
+## 4. Verify base data files
 
-Diese Dateien sollten vorhanden und gueltiges JSON sein:
+The following files must exist and contain valid JSON:
 
 - `public/database/data/user.json`
 - `public/database/data/stats.json`
@@ -57,7 +57,7 @@ Diese Dateien sollten vorhanden und gueltiges JSON sein:
 - `public/database/json/gallery.json`
 - `public/database/json/history.json`
 
-Wenn Dateien fehlen, leere Defaults anlegen:
+If any files are missing, create empty defaults:
 
 ```powershell
 if (!(Test-Path public/database/data/stats.json)) { '{"approved":0,"rejected":0,"approved_items":[],"rejected_items":[]}' | Out-File public/database/data/stats.json -Encoding utf8 }
@@ -67,13 +67,13 @@ if (!(Test-Path public/database/json/gallery.json)) { '{}' | Out-File public/dat
 if (!(Test-Path public/database/json/history.json)) { '[]' | Out-File public/database/json/history.json -Encoding utf8 }
 ```
 
-## 5) Pflicht-Umgebungsvariable fuer Passwort-Reset
+## 5. Required environment variable for password reset
 
-Ohne diese Variable ist Web-Passwort-Reset deaktiviert:
+Without this variable, web-based password reset is disabled:
 
-- `KONIK_PASSWORD_RESET_SECRET` (mindestens 32 Zeichen)
+- `KONIK_PASSWORD_RESET_SECRET` (at least 32 characters)
 
-PowerShell (nur aktuelle Session):
+PowerShell (current session only):
 
 ```powershell
 $env:KONIK_PASSWORD_RESET_SECRET = "replace-with-a-long-random-secret-at-least-32-chars"
@@ -81,70 +81,70 @@ $env:KONIK_PASSWORD_RESET_SECRET = "replace-with-a-long-random-secret-at-least-3
 
 Optional:
 
-- `APP_TIMEZONE` (z. B. `Europe/Berlin`)
+- `APP_TIMEZONE` (e.g. `Europe/Berlin`)
 
 ```powershell
 $env:APP_TIMEZONE = "Europe/Berlin"
 ```
 
-## 6) EmailJS Konfiguration
+## 6. EmailJS configuration
 
-Die Website liest EmailJS-Daten aus:
+The website reads EmailJS settings from:
 
 - `public/database/data/user.json`
 
-Erforderliche Felder unter `emailjs.emailjs_data[0]`:
+Required fields under `emailjs.emailjs_data[0]`:
 
 - `service_id`
 - `public_key`
-- `template_id` (Kontaktformular)
-- `upload_template_id` (Upload-Status-Mail)
+- `template_id` (contact form)
+- `upload_template_id` (upload status email)
 
-Hinweis:
+Notes:
 
-- Upload-Bestaetigung geht clientseitig (Browser + EmailJS SDK).
-- Approve/Reject nutzt serverseitigen Versuch und Browser-Fallback im Admin-Panel.
+- Upload confirmation is handled client-side (browser + EmailJS SDK).
+- Approve/Reject uses a server-side attempt with a browser fallback in the admin panel.
 
-## 7) Lokalen Server starten
+## 7. Start the local server
 
-Wichtig: Document Root muss `public/` sein.
+Important: the document root must be `public/`.
 
-Option A (PHP Built-in Server):
+Option A (PHP built-in server):
 
 ```bash
 php -S localhost:8000 -t public
 ```
 
-Danach im Browser:
+Then open in your browser:
 
 - `http://localhost:8000/home/index.php`
 - Admin: `http://localhost:8000/admin-panel/dashboard/admin-panel.php`
 
 Option B (Apache/XAMPP):
 
-- Projekt so einbinden, dass `public/` als Webroot dient.
+- Configure the project so that `public/` is used as the web root.
 
-## 8) Funktionstest (Smoke Test)
+## 8. Smoke test
 
-- Seite laedt ohne PHP Fatal Errors.
-- Login im Admin-Bereich funktioniert.
-- Gallery Upload legt Bild in `public/database/images/uploads/pending/` ab.
-- Approve verschiebt Bild nach `public/database/images/uploads/`.
-- Reject verschiebt Bild nach `public/database/images/uploads/rejected/`.
-- EmailJS-Mails kommen fuer Upload/Approve/Reject.
-- Passwort-Reset erzeugt Link in `logs/password-reset-links.log`.
+- Page loads without PHP fatal errors.
+- Login in the admin area works.
+- Gallery upload places the image in `public/database/images/uploads/pending/`.
+- Approve moves the image to `public/database/images/uploads/`.
+- Reject moves the image to `public/database/images/uploads/rejected/`.
+- EmailJS emails are sent for upload/approve/reject.
+- Password reset creates a link in `logs/password-reset-links.log`.
 
-## 9) Typische Fehler und schnelle Loesung
+## 9. Common errors and quick fixes
 
-- 403 bei Formularen: CSRF Token fehlt oder Session/Cookies nicht stabil.
-- Upload failt: Ordnerrechte auf `public/database/images/uploads/*` pruefen.
-- Passwort-Reset deaktiviert: `KONIK_PASSWORD_RESET_SECRET` nicht gesetzt/zu kurz.
-- Keine Reset-Mail: PHP `mail()` lokal nicht konfiguriert.
-- Discord Forum Webhook Fehler 220001: Workflow muss mit `thread_id` oder `thread_name` posten.
+- 403 on forms: CSRF token missing or session/cookies not stable.
+- Upload fails: check folder permissions for `public/database/images/uploads/*`.
+- Password reset disabled: `KONIK_PASSWORD_RESET_SECRET` not set or too short.
+- No reset email: PHP `mail()` not configured locally.
+- Discord forum webhook error 220001: workflow must post with `thread_id` or `thread_name`.
 
-## 10) Optional fuer Produktion
+## 10. Optional for production
 
-- Webserver so konfigurieren, dass nur `public/` direkt erreichbar ist.
-- Schreibrechte so restriktiv wie moeglich setzen.
-- Logs rotieren.
-- GitHub Secrets fuer Workflows setzen (`DISCORD_WEBHOOK`, optionale `DISCORD_THREAD_ID_*`).
+- Configure the web server so that only `public/` is directly accessible.
+- Set write permissions as restrictively as possible.
+- Rotate logs regularly.
+- Set GitHub Secrets for workflows (`DISCORD_WEBHOOK`, optional `DISCORD_THREAD_ID_*`).
