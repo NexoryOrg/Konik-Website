@@ -1,4 +1,4 @@
-# Konik Website
+# The Konik Horses
 
 Konik Website is a multi-page PHP website about the wild horses in Germany's Black Forest National Park.
 The project focuses on clear information architecture, easy navigation, and a maintainable structure with separate modules for content, uploads, uptime monitoring, and admin features.
@@ -17,13 +17,13 @@ The project focuses on clear information architecture, easy navigation, and a ma
 - JSON files for selected application data
 - GitHub Actions for quality checks, notifications, and release workflows
 
-## Project Structure (Excerpt)
+## Project Structure
 
-- `public/home/` Homepage
-- `public/gallery/` Gallery
-- `public/history/` History section
-- `public/contact/` Contact form
-- `public/admin-panel/` Admin area including charts and password management
+- `public/home/` Homepage, information and location of the horses
+- `public/gallery/` Gallery, upload function for new Konik images
+- `public/history/` History, a linear timeline of important events in the national park
+- `public/contact/` Contact form, for questions or other concerns
+- `public/admin-panel/` Admin area, including charts and password management
 - `public/upload/` Upload logic
 - `public/database/` Data and file storage
 - `logs/` Runtime and monitoring logs
@@ -39,7 +39,7 @@ The project focuses on clear information architecture, easy navigation, and a ma
 
 ### Full Setup Guide
 
-For a complete clone-to-run setup (folders, env vars, EmailJS, smoke tests), see `SETUP.md`.
+For a complete clone-to-run setup (folders, env vars, EmailJS, smoke tests), see [SETUP.md](SETUP.md).
 
 ## Security Notes
 
